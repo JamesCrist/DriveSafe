@@ -1,0 +1,10 @@
+{
+  "firebase": "test-02-23-2015",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ],
+  "rules": "rules.json"
+}
