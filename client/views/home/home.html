@@ -1,3 +1,11 @@
 <template name="home">
-    Hello boilerplate world!
+    {{#if currentUser}}
+        {{> dashboard }}
+    {{else}}
+        <div class="ui center aligned three column stackable page grid form">
+            <div class="at-left eight wide column">
+                {{> atForm}}
+            </div>
+        </div>
+    {{/if}}
 </template>

@@ -16,10 +16,11 @@ audit-argument-checks
 fastclick
 zimme:iron-router-active
 manuelschoebel:ms-seo
-browser-policy
-useraccounts:semantic-ui
 natestrauser:animate-css
 dburles:collection-helpers
 meteorhacks:fast-render
 
 nooitaf:semantic-ui
+semantic:ui-css
+email
+useraccounts:semantic-ui
