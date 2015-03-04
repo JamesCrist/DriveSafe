@@ -8,11 +8,12 @@
 			<div class="alert alert-warning">
 				{{errorMessage}}
 			</div>
-			{{/if}}
-            {{#if successMessage}}
-                <div class="alert alert-warning">
-                    {{successMessage}}
-                </div>
+			{{else}}
+                {{#if successMessage}}
+                    <div class="alert alert-success">
+                        {{successMessage}}
+                    </div>
+                {{/if}}
             {{/if}}
 			<input id="register_name" type="text" class="form-control" placeholder="Your full name" required autofocus>
 			<input id="register_email" type="text" class="form-control" placeholder="Email address" required>

@@ -26,10 +26,10 @@ if(Meteor.isClient) {
 		});
 
 		if(grantedRoute == "") {
-			if(routeGranted("home_private")) {
-				return "home_private";				
+			if(routeGranted("dashboard")) {
+				return "dashboard";
 			} else {
-				return "home_public";
+				return "login";
 			}
 		}
 
@@ -76,7 +76,7 @@ if(Meteor.isClient) {
 
 		if(!Meteor.userId()) {
 			// user is not logged in - redirect to public home
-			this.redirect("home_public");
+			this.redirect("login");
 		} else {
 			// user is logged in - check role
 			if(!routeGranted(this.route.getName())) {
@@ -121,7 +121,7 @@ if(Meteor.isClient) {
 
 Router.map(function () {
 	
-	this.route("login", {path: "/login/:home_public", controller: "LoginController"});
+	this.route("login", {path: "/", controller: "LoginController"});
 	this.route("register", {path: "/register", controller: "RegisterController"});
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});

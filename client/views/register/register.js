@@ -1,6 +1,7 @@
 var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
+pageSession.set("successMessage", "");
 
 Template.Register.rendered = function() {
 	
@@ -8,7 +9,8 @@ Template.Register.rendered = function() {
 };
 
 Template.Register.created = function() {
-	pageSession.set("errorMessage", "");	
+	pageSession.set("errorMessage", "");
+  pageSession.set("successMessage", "");
 };
 
 Template.Register.events({
@@ -19,7 +21,6 @@ Template.Register.events({
 
 		var register_name = t.find('#register_name').value.trim();
 		var register_email = t.find('#register_email').value.trim();
-		var register_password = t.find('#register_password').value;
 
 		// check name
 		if(register_name == "")
@@ -37,22 +38,14 @@ Template.Register.events({
 			return false;			
 		}
 
-		// check password
-		var min_password_len = 6;
-		if(!isValidPassword(register_password, min_password_len))
-		{
-			pageSession.set("errorMessage", "Your password must be at least " + min_password_len + " characters long.");
-			t.find('#register_password').focus();
-			return false;						
-		}
-
 		submit_button.button("loading");
-		Accounts.createUser({email: register_email, password : register_password, profile: { name: register_name }}, function(err) {
+		Meteor.call("createNewUser", register_email, register_name, function(err) {
 			submit_button.button("reset");
 			if(err)
 				pageSession.set("errorMessage", err.message);
 			else
 				pageSession.set("errorMessage", "");
+        pageSession.set("successMessage", "Success! Please check your email for your password");
 		});
 		return false;
 	}
@@ -62,6 +55,9 @@ Template.Register.events({
 Template.Register.helpers({
 	errorMessage: function() {
 		return pageSession.get("errorMessage");
-	}
+	},
+  successMessage: function() {
+    return pageSession.get("successMessage");
+  }
 	
 });
