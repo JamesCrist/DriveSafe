@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Template.dashboard.helpers({
 });
 
@@ -6,4 +7,16 @@ Template.dashboard.events({
     event.preventDefault();
     Meteor.logout();
   }
+=======
+Template.Dashboard.rendered = function() {
+	
+};
+
+Template.Dashboard.events({
+	
+});
+
+Template.Dashboard.helpers({
+	
+>>>>>>> new_layout
 });

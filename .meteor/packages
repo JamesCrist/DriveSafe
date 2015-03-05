@@ -1,9 +1,14 @@
 # Meteor packages used by this project, one per line.
+<<<<<<< HEAD
+=======
+# Check this file (and the other files in this directory) into your repository.
+>>>>>>> new_layout
 #
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
 meteor-platform
+<<<<<<< HEAD
 less
 jquery
 underscore
@@ -24,3 +29,17 @@ nooitaf:semantic-ui
 semantic:ui-css
 email
 useraccounts:semantic-ui
+=======
+insecure
+standard-app-packages
+less
+accounts-base
+email
+spiderable
+iron:router
+natestrauser:font-awesome
+matb33:collection-hooks
+perak:user-roles
+reactive-dict
+accounts-password
+>>>>>>> new_layout
