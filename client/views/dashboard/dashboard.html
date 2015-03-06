@@ -1,7 +1,17 @@
 <template name="Dashboard">
-    Hey There!
-    <div class="map-container">
-        {{> googleMap name="dashboardMap" options=dashboardMapOptions}}
-    </div>
+    {{#if errorMessage}}
+        <div class="alert alert-danger" role="alert">
+            {{errorMessage}}
+        </div>
+    {{/if}}
+    {{#if mapIsLoaded}}
+        <div class="map-container">
+            {{> googleMap name="dashboardMap" options=dashboardMapOptions}}
+        </div>
+    {{else}}
+        <div class="loading">
+            {{> loading }}
+        </div>
+    {{/if}}
 </template>
 

@@ -1,5 +1,8 @@
+var pageSession = new ReactiveDict();
+
+pageSession.set("errorMessage", "");
+
 Template.Dashboard.rendered = function() {
-	
 };
 
 Template.Dashboard.created = function() {
@@ -8,26 +11,32 @@ Template.Dashboard.created = function() {
     // Add a marker to the map once it's ready
     var marker = new google.maps.Marker({
       position: map.options.center,
-      map: map.instance
+      map: map.instance,
+      title: "Your Location",
+      animation: google.maps.Animation.DROP
     });
   });
 };
 
 Template.Dashboard.events({
-	
 });
 
 Template.Dashboard.helpers({
   dashboardMapOptions: function() {
-    // Make sure the maps API has loaded
-    if (GoogleMaps.loaded()) {
-      // Map initialization options
-      var position = Geolocation.latLng();
-      return {
-        center: new google.maps.LatLng(position.lat, position.lng),
-        zoom: 12
-      };
+     // Map initialization options
+    var position = Geolocation.latLng() || { lat : 0 , lng : 0 };
+    if(Geolocation.error()) {
+      pageSession.set("errorMessage" , Geolocation.error().message);
     }
+    return {
+      center : new google.maps.LatLng(position.lat , position.lng) ,
+      zoom : 15
+    };
+  },
+  errorMessage: function() {
+    return pageSession.get("errorMessage");
+  },
+  mapIsLoaded: function() {
+    return GoogleMaps.loaded();
   }
-	
 });
