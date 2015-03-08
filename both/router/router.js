@@ -117,12 +117,6 @@ if(Meteor.isClient) {
 
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
-
-  // Load the google maps api only on the dashboard.
-  Router.onBeforeAction(function() {
-    GoogleMaps.load();
-    this.next();
-  }, { only: ['dashboard'] });
 }
 
 Router.map(function () {

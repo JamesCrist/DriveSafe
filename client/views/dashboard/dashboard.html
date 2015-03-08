@@ -5,9 +5,7 @@
         </div>
     {{/if}}
     {{#if mapIsLoaded}}
-        <div class="map-container">
-            {{> googleMap name="dashboardMap" options=dashboardMapOptions}}
-        </div>
+            {{> mapCanvas}}
     {{else}}
         <div class="loading">
             {{> loading }}
@@ -15,3 +13,6 @@
     {{/if}}
 </template>
 
+<template name="mapCanvas">
+    <div id="map-canvas" class="map-canvas"></div>
+</template>

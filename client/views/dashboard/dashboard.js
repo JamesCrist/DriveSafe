@@ -1,42 +1,49 @@
 var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
+pageSession.set("location", null);
 
-Template.Dashboard.rendered = function() {
+Template.mapCanvas.rendered = function() {
+  var map = this;
+  var location = pageSession.get("location");
+
+  VazcoMaps.init({}, function() {
+
+    map.mapEngine = VazcoMaps.gMaps();
+
+    map.Map = new map.mapEngine({
+      div : '#map-canvas' ,
+      lat : location.lat,
+      lng : location.lng
+    });
+
+    map.Map.addMarker({
+      lat : location.lat,
+      lng : location.lng,
+      draggable : false
+    });
+  });
+  // Update the user's location in the database.
+  Meteor.call("updateUserLocation", location.lat, location.lng, function(err) {
+    if (err) {
+      alert(err);
+      pageSession.set("errorMessage", err.message);
+    }
+  });
 };
 
 Template.Dashboard.created = function() {
-  // We can use the `ready` callback to interact with the map API once the map is ready.
-  GoogleMaps.ready('dashboardMap', function(map) {
-    // Add a marker to the map once it's ready
-    var marker = new google.maps.Marker({
-      position: map.options.center,
-      map: map.instance,
-      title: "Your Location",
-      animation: google.maps.Animation.DROP
-    });
-  });
 };
 
 Template.Dashboard.events({
 });
 
 Template.Dashboard.helpers({
-  dashboardMapOptions: function() {
-     // Map initialization options
-    var position = Geolocation.latLng() || { lat : 0 , lng : 0 };
-    if(Geolocation.error()) {
-      pageSession.set("errorMessage" , Geolocation.error().message);
-    }
-    return {
-      center : new google.maps.LatLng(position.lat , position.lng) ,
-      zoom : 15
-    };
-  },
   errorMessage: function() {
     return pageSession.get("errorMessage");
   },
   mapIsLoaded: function() {
-    return GoogleMaps.loaded();
+    pageSession.set("location", Geolocation.latLng());
+    return pageSession.get("location") != null;
   }
 });
