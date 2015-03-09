@@ -1,5 +1,13 @@
 <template name="loading">
-	<div class="container">
-		<h2>Loading...</h2>
-	</div>
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="index"}}
+    {{/contentFor}}
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Loading</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+        {{/ionContent}}
+    {{/ionView}}
 </template>

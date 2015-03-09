@@ -56,5 +56,5 @@ Template.Login.helpers({
 	errorMessage: function() {
 		return pageSession.get("errorMessage");
 	}
-	
+
 });
