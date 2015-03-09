@@ -1,3 +1,18 @@
 <template name="Dashboard">
+    {{#if errorMessage}}
+        <div class="alert alert-danger" role="alert">
+            {{errorMessage}}
+        </div>
+    {{/if}}
+    {{#if mapIsLoaded}}
+            {{> mapCanvas}}
+    {{else}}
+        <div class="loading">
+            {{> loading }}
+        </div>
+    {{/if}}
 </template>
 
+<template name="mapCanvas">
+        <div id="map-canvas" class="map-canvas"></div>
+</template>

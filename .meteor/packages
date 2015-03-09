@@ -17,3 +17,5 @@ matb33:collection-hooks
 perak:user-roles
 reactive-dict
 accounts-password
+mdg:geolocation
+vazco:maps

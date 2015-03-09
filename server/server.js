@@ -24,6 +24,7 @@ Meteor.methods({
 	"updateUserAccount": function(userId, options) {
 		// only admin or users own profile
 		if(!(Users.isAdmin(Meteor.userId()) || userId == Meteor.userId())) {
+      console.log("ACCESS DENIED");
 			throw new Meteor.Error(403, "Access denied.");
 		}
 
@@ -31,6 +32,7 @@ Meteor.methods({
 		if(!Users.isAdmin(Meteor.userId())) {
 			var keys = Object.keys(options);
 			if(keys.length !== 1 || !options.profile) {
+        console.log("ACCESS DENIED");
 				throw new Meteor.Error(403, "Access denied.");
 			}
 		}
@@ -79,8 +81,6 @@ Accounts.onCreateUser(function (options, user) {
 		user.profile = options.profile;
 	}
 
-	
-
 	return user;
 });
 
@@ -109,7 +109,6 @@ Users.before.update(function(userId, doc, fieldNames, modifier, options) {
 });
 
 Accounts.onLogin(function (info) {
-	
 });
 
 Accounts.urls.resetPassword = function (token) {
