@@ -2,7 +2,6 @@ this.App = {};
 this.Helpers = {};
 
 Meteor.startup(function() {
-  AutoForm.setDefaultTemplate('ionic');
 });
 
 App.logout = function() {
