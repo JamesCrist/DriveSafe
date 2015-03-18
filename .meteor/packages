@@ -19,3 +19,7 @@ reactive-dict
 accounts-password
 mdg:geolocation
 vazco:maps
+fourseven:scss
+meteoric:ionic-sass
+meteoric:ionicons-sass
+meteoric:ionic

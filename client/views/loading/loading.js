@@ -1,11 +1,9 @@
 Template.loading.rendered = function() {
-	/*TEMPLATE_RENDERED_CODE*/
+  IonLoading.show({
+    backdrop: true
+  });
 };
 
-Template.loading.events({
-
-});
-
-Template.loading.helpers({
-
-});
+Template.loading.destroyed = function() {
+  IonLoading.hide();
+};
