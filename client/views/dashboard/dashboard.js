@@ -36,6 +36,9 @@ Template.Dashboard.created = function() {
 };
 
 Template.Dashboard.events({
+  "click .requestRide": function() {
+    alert("Ride Requested!");
+  }
 });
 
 Template.Dashboard.helpers({
