@@ -14,6 +14,6 @@ Meteor.methods({
       admin: this.userId
     }, function(error){
       console.log("Group "+error);
-    })
+    });
   }
 });
