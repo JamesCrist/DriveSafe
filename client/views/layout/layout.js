@@ -7,12 +7,25 @@ Template.layout.events({
     Router.go("/logout");
   },
   'click #createGroupButton': function(event, template) {
-    IonPopup.prompt({
+    var prompt = IonPopup.prompt({
       title: 'Create Group',
       template: 'Please enter group name',
       okText: 'Create',
       inputType: 'text',
-      inputPlaceholder: 'group name'
+      inputPlaceholder: 'group name',
+      onOk: function(event, response){
+        alert(response);
+        // Groups.insert({
+        //     name  : response,
+        //     admin : Meteor.userId()
+        //   }, function(error,id){
+        //     console.log("Group "+error);
+        //   })
+
+        Meteor.call("createNewGroup",response,function(error){
+          console.log(error.message);
+        });
+      }
     });
   }
 });
