@@ -1,20 +1,19 @@
-Template.layout.rendered = function() {
+Template.layout.rendered = function () {
   Session.set('currentTab' , 'dashboard');
 };
 
 Template.layout.events({
-  "click #logoutButton": function() {
+  "click #logoutButton" : function () {
     Router.go("/logout");
-  },
-  'click #createGroupButton': function(event, template) {
-    var prompt = IonPopup.prompt({
-      title: 'Create Group',
-      template: 'Please enter group name',
-      okText: 'Create',
-      inputType: 'text',
-      inputPlaceholder: 'group name',
-      onOk: function(event, response){
-        alert(response);
+  } ,
+  'click #createGroupButton' : function (event , template) {
+    IonPopup.prompt({
+      title : 'Create Group' ,
+      template : 'Please enter group name' ,
+      okText : 'Create' ,
+      inputType : 'text' ,
+      inputPlaceholder : 'group name' ,
+      onOk : function (event , response) {
         // Groups.insert({
         //     name  : response,
         //     admin : Meteor.userId()
@@ -22,7 +21,7 @@ Template.layout.events({
         //     console.log("Group "+error);
         //   })
 
-        Meteor.call("createNewGroup",response,function(error){
+        Meteor.call("createNewGroup" , response , function (error) {
           console.log(error.message);
         });
       }
