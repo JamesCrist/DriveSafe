@@ -1,16 +1,43 @@
 <template name="Dashboard">
-    {{#if errorMessage}}
-        <div class="alert alert-danger" role="alert">
-            {{errorMessage}}
-        </div>
-    {{/if}}
-    {{#if mapIsLoaded}}
-            {{> mapCanvas}}
-    {{else}}
-        <div class="loading">
-            {{> loading }}
-        </div>
-    {{/if}}
+    {{#contentFor "headerButtonLeft"}}
+        <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-more-vertical'}}
+            {{else}}
+                {{> ionIcon icon='navicon'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-settings'}}
+            {{else}}
+                {{> ionIcon icon='ios-gear'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">DriveSafe</h1>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#if errorMessage}}
+                <div class="alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+            {{/if}}
+            {{#if mapIsLoaded}}
+                {{> mapCanvas}}
+            {{else}}
+                <div class="loading">
+                    {{> loading }}
+                </div>
+            {{/if}}
+        {{/ionContent}}
+    {{/ionView}}
 </template>
 
 <template name="mapCanvas">

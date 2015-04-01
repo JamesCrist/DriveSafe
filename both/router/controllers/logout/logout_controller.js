@@ -10,7 +10,7 @@ this.LogoutController = RouteController.extend({
       title: 'Are you sure?',
       template: 'Do you <strong>really</strong> want to logout?',
       onOk: function() {
-        this.next();
+        Meteor.logout();
       },
       onCancel: function() {
         return;
