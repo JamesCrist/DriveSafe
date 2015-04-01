@@ -2,6 +2,7 @@ this.App = {};
 this.Helpers = {};
 
 Meteor.startup(function() {
+  Meteor.subscribe("groups");
 });
 
 App.logout = function() {
