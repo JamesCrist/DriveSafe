@@ -1,10 +1,73 @@
 <template name="layout">
     {{#ionBody}}
-        {{#ionView}}
-            {{> yield}}
-            {{#if currentUser}}
-                {{> _tabs}}
+        {{# if currentUser}}
+            {{#ionSideMenuContainer}}
+
+                {{#ionSideMenus}}
+
+                    {{#ionSideMenu}}
+                        <div class="bar bar-header bar-dark">
+                            <h1 class="title">Menu</h1>
+                        </div>
+                        <div class="content has-header">
+                            <div class="list">
+                                <div id="logoutButton" class="item item-icon-right">
+                                    Logout {{> ionIcon icon="log-out"}}
+                                </div>
+
+                                <div id="createGroupButton" class="item item-icon-right">
+                                    Create Group {{> ionIcon icon="plus-circled"}}
+                                </div>
+
+                                <div class="item item-icon-right" data-ion-menu-close>
+                                    Close Me {{> ionIcon icon="ios-arrow-right"}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/ionSideMenu}}
+
+                    {{#ionSideMenu side="right"}}
+                        <div class="bar bar-header bar-dark">
+                            <h1 class="title">Settings</h1>
+                        </div>
+                        <div class="content has-header">
+                            <div class="list">
+                                <div class="item item-icon-left" data-ion-menu-close>
+                                    {{> ionIcon icon="ios-arrow-left"}} Close Me
+                                </div>
+                            </div>
+                        </div>
+                    {{/ionSideMenu}}
+
+                {{/ionSideMenus}}
+
+                {{#ionSideMenuContent}}
+
+                    {{> ionNavBar class="bar-positive"}}
+
+                    {{#ionNavView}}
+                        {{> yield}}
+                    {{/ionNavView}}
+
+                {{/ionSideMenuContent}}
+
+            {{/ionSideMenuContainer}}
+        {{else}}
+            {{> ionNavBar class="bar-positive has-tabs-top"}}
+            {{#if isAndroid}}
+                {{#ionTabs style="android" class="tabs-striped tabs-top tabs-background-positive tabs-color-light"}}
+                    {{> ionTab title="Login" path="login" icon="android-home"}}
+                    {{> ionTab title="Register" path="register" icon="android-star"}}
+                    {{> ionTab title="Forgot Password" path="forgot_password" icon="heart"}}
+                {{/ionTabs}}
+            {{else}}
+                {{#ionTabs style="ios" class="tabs-striped tabs-top tabs-background-positive tabs-color-light"}}
+                    {{> ionTab title="Login" path="login" iconOff="ios-home-outline" iconOn="ios-home"}}
+                    {{> ionTab title="Register" path="register" iconOff="ios-star-outline" iconOn="ios-star"}}
+                    {{> ionTab title="Forgot Password" path="forgot_password" iconOff="ios-heart-outline" iconOn="ios-heart"}}
+                {{/ionTabs}}
             {{/if}}
-        {{/ionView}}
+            {{>yield}}
+        {{/if}}
     {{/ionBody}}
 </template>
