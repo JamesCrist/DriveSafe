@@ -13,6 +13,7 @@ this.LogoutController = RouteController.extend({
         Meteor.logout();
       },
       onCancel: function() {
+        Router.go("/dashboard");
         return;
       }
     });

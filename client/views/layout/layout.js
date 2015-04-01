@@ -14,12 +14,6 @@ Template.layout.events({
       inputType : 'text' ,
       inputPlaceholder : 'group name' ,
       onOk : function (event , response) {
-        // Groups.insert({
-        //     name  : response,
-        //     admin : Meteor.userId()
-        //   }, function(error,id){
-        //     console.log("Group "+error);
-        //   })
 
         Meteor.call("createNewGroup" , response , function (error) {
           console.log(error.message);
