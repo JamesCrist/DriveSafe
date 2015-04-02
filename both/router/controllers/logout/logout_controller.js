@@ -6,7 +6,6 @@ this.LogoutController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
-    /*
     IonPopup.confirm({
       title: 'Are you sure?',
       template: 'Do you <strong>really</strong> want to logout?',
@@ -17,7 +16,6 @@ this.LogoutController = RouteController.extend({
         Router.go("/dashboard");
       }
     });
-    */
     this.next();
 	},
 
