@@ -8,7 +8,7 @@ Router.configure({
 
 if(Meteor.isClient) {
 	var publicRoutes = ["login", "register", "forgot_password", "reset_password"];
-	var privateRoutes = ["dashboard", "user_settings", "user_settings.change_pass", "logout"];
+	var privateRoutes = ["dashboard", "user_settings", "group_settings", "logout"];
 	var zonelessRoutes = [];
 
 	var roleMap = [
@@ -70,10 +70,6 @@ if(Meteor.isClient) {
 	};
 	
 	Router.ensureLogged = function() {
-		if(Meteor.userId() && (!Meteor.user() || !Meteor.user().roles)) {
-			return;
-		}
-
 		if(!Meteor.userId()) {
 			// user is not logged in - redirect to public home
 			this.redirect("login");
@@ -83,25 +79,19 @@ if(Meteor.isClient) {
 				// user is not in allowedRoles - redirect to private home
 				var redirectRoute = firstGrantedRoute();
 				this.redirect(redirectRoute);
-			} else {
-				this.next();
 			}
+      this.next();
 		}
 	};
 
 	Router.ensureNotLogged = function() {
-		if(Meteor.userId() && (!Meteor.user() || !Meteor.user().roles)) {
-			return;
-		}
 
-		if(Meteor.userId()) {
-			var redirectRoute = firstGrantedRoute();
-			this.redirect(redirectRoute);
-		}
-		else {
-			this.next();
-		}
-	};
+    if(Meteor.userId()) {
+      var redirectRoute = firstGrantedRoute();
+      this.redirect(redirectRoute);
+    }
+    this.next();
+  };
 
 	Meteor.subscribe("current_user_data");
 
@@ -111,8 +101,8 @@ if(Meteor.isClient) {
 			$("body").addClass("wait");
 		} else {
 			$("body").removeClass("wait");
-			this.next();
 		}
+    this.next();
 	});
 
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
@@ -127,6 +117,6 @@ Router.map(function () {
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("dashboard", {path: "/dashboard", controller: "DashboardController"});
 	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-	this.route("user_settings.change_pass", {path: "/user_settings/change_pass", controller: "UserSettingsChangePassController"});
+  this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
 	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
 });

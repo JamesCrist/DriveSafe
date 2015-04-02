@@ -39,13 +39,16 @@ Template.Register.events({
 		}
 
 		submit_button.button("loading");
-		Meteor.call("createNewUser", register_email, register_name, function(err) {
+		Meteor.call("createNewUser", register_email, register_name, function(err, password) {
 			submit_button.button("reset");
-			if(err)
-				pageSession.set("errorMessage", err.message);
-			else
-				pageSession.set("errorMessage", "");
-        pageSession.set("successMessage", "Success! Please check your email for your password");
+			if(err) {
+        pageSession.set("errorMessage" , err.message);
+      } else {
+        pageSession.set("errorMessage" , "");
+        pageSession.set("successMessage" , "Success! Please check your email for your password");
+        // FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION
+        alert("Your password is: " + password + "\n**FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION");
+      }
 		});
 		return false;
 	}

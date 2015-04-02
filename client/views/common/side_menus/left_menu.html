@@ -4,25 +4,20 @@
     </div>
     <div class="content has-header">
         <div class="list">
-            {{#if currentUser.profile.admin }}
-                <div class="item item-divider">
-                    THE GROUP KEY FOR {{currentUser.profile.group}} IS <br/>
-                    <strong>{{groupKey}}</strong>
-                </div>
-            {{/if}}
+            <div class="item item-icon-right" data-ion-menu-close>
+                Close {{> ionIcon icon="ios-arrow-right"}}
+            </div>
 
             <div id="dashboardButton" class="item item-icon-right" data-ion-menu-close>
                 Dashboard {{> ionIcon icon="map"}}
             </div>
 
-            <div id="logoutButton" class="item item-icon-right" data-ion-menu-close>
-                Logout {{> ionIcon icon="log-out"}}
-            </div>
-
             {{#if currentUser.profile.group}}
-                <div id="leaveGroup" class="item item-icon-right">
-                    Leave {{currentUser.profile.group}} {{> ionIcon icon="minus-circled"}}
-                </div>
+                {{#unless currentUser.profile.admin}}
+                    <div id="leaveGroup" class="item item-icon-right">
+                        Leave {{currentUser.profile.group}} {{> ionIcon icon="minus-circled"}}
+                    </div>
+                {{/unless}}
             {{else}}
                 <div id="joinGroupButton" class="item item-icon-right">
                     Join Group {{> ionIcon icon="android-people"}}
@@ -32,9 +27,10 @@
                 </div>
             {{/if}}
 
-            <div class="item item-icon-right" data-ion-menu-close>
-                Close Me {{> ionIcon icon="ios-arrow-right"}}
+            <div id="logoutButton" class="item item-icon-right" data-ion-menu-close>
+                Logout {{> ionIcon icon="log-out"}}
             </div>
+
         </div>
     </div>
 </template>

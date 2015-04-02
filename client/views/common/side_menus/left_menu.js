@@ -1,17 +1,3 @@
-Session.set("groupKey", "Loading...");
-
-Template.leftMenu.rendered = function() {
-  if (Meteor.user().profile.admin) {
-    Meteor.call("getGroupKey", function(error, key) {
-      if(error) {
-        console.log(error.message);
-      } else {
-        Session.set("groupKey" , key);
-      }
-    });
-  }
-};
-
 Template.leftMenu.events({
   "click #logoutButton" : function () {
     Router.go("/logout");
@@ -53,14 +39,14 @@ Template.leftMenu.events({
       title: 'Are you sure?',
       template: 'You will no longer have access to drivers for this group',
       onOk: function() {
-        Meteor.call("leaveGroup");
+        Meteor.call("leaveGroup", function(err) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            Router.go("/dashboard");
+          }
+        });
       }
     });
-  }
-});
-
-Template.leftMenu.helpers({
-  groupKey: function() {
-    return Session.get("groupKey");
   }
 });

@@ -30,15 +30,15 @@
             {{> ionNavBar class="bar-positive has-tabs-top"}}
             {{#if isAndroid}}
                 {{#ionTabs style="android" class="tabs-striped tabs-top tabs-background-positive tabs-color-light"}}
-                    {{> ionTab title="Login" path="login" icon="android-home"}}
-                    {{> ionTab title="Register" path="register" icon="android-star"}}
-                    {{> ionTab title="Forgot Password" path="forgot_password" icon="heart"}}
+                    {{> ionTab title="Login" path="login" icon="log-in"}}
+                    {{> ionTab title="Register" path="register" icon="person-add"}}
+                    {{> ionTab title="Forgot Password" path="forgot_password" icon="key"}}
                 {{/ionTabs}}
             {{else}}
                 {{#ionTabs style="ios" class="tabs-striped tabs-top tabs-background-positive tabs-color-light"}}
-                    {{> ionTab title="Login" path="login" iconOff="ios-home-outline" iconOn="ios-home"}}
-                    {{> ionTab title="Register" path="register" iconOff="ios-star-outline" iconOn="ios-star"}}
-                    {{> ionTab title="Forgot Password" path="forgot_password" iconOff="ios-heart-outline" iconOn="ios-heart"}}
+                    {{> ionTab title="Login" path="login" icon="log-in"}}
+                    {{> ionTab title="Register" path="register" icon="person-add"}}
+                    {{> ionTab title="Forgot Password" path="forgot_password" icon="key"}}
                 {{/ionTabs}}
             {{/if}}
             {{>yield}}

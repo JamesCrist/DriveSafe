@@ -7,23 +7,15 @@
     {{#ionView}}
         {{#ionContent}}
             <div class="container tabs-content">
-                <form id="login_form" class="form" role="form">
+                <form id="login_form" class="account-form" role="form">
+                    <h2>Please sign in</h2>
                     {{#if errorMessage}}
                         <div class="alert alert-warning">
                             {{errorMessage}}
                         </div>
                     {{/if}}
-                    <div class="list">
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Email</span>
-                            <input id="login_email" type="text" placeholder="Email address" required>
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Password</span>
-                            <input id="login_password" type="password" placeholder="Password" required>
-                        </label>
-                    </div>
-
+                    <input id="login_email" type="text" class="form-control" placeholder="Email address" required autofocus>
+                    <input id="login_password" type="password" class="form-control" placeholder="Password" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
                         Sign in
                     </button>

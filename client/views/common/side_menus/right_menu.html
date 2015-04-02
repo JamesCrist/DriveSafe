@@ -10,6 +10,11 @@
             <div class="item item-icon-left" id="accountSettings" data-ion-menu-close>
                 {{> ionIcon icon="settings"}} Account Settings
             </div>
+            {{#if currentUser.profile.admin}}
+                <div class="item item-icon-left" id="groupSettings" data-ion-menu-close>
+                    {{> ionIcon icon="gear-b"}} Group Settings
+                </div>
+            {{/if}}
         </div>
     </div>
 </template>

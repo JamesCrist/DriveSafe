@@ -1,4 +1,4 @@
-<template name="UserSettings">
+<template name="GroupSettings">
     {{#contentFor "headerButtonLeft"}}
         <button class="button button-clear pull-left" data-ion-menu-toggle="left">
             {{#if isAndroid}}
@@ -19,7 +19,7 @@
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-        <h1 class="title">Account Settings</h1>
+        <h1 class="title">{{currentUser.profile.group}} Settings</h1>
     {{/contentFor}}
 
     {{#ionView}}
@@ -27,14 +27,27 @@
             <div class="page-container container">
                 <div class="list">
                     <div class="item item-divider">
-                        Change Password
+                        Invite Others
                     </div>
                     <div class="item">
-                        {{> UserSettingsChangePass }}
+                        <p>Your group key is: <strong>{{groupKey}}</strong> <br/>
+                            Give this key to other users so that they may join your group
+                        </p>
+                    </div>
+                    <div class="item item-divider">
+                        Manage Members
+                    </div>
+                    <div class="item">
+                        {{> GroupSettingsManageMembers }}
+                    </div>
+                    <div class="item item-divider">
+                        Delete Group (Cannot be undone)
+                    </div>
+                    <div class='item'>
+                        {{> GroupSettingsDeleteGroup }}
                     </div>
                 </div>
             </div>
         {{/ionContent}}
     {{/ionView}}
 </template>
-

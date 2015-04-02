@@ -21,11 +21,12 @@ Meteor.methods({
       subject: "Your DriveSafe Temporary Password",
       text: "Your temporary password is: " + password
     });
+    return password; // FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION
   },
   updateUserLocation: function(lat, lng) {
     Users.update(this.userId, { $set: {'profile.lat': lat, 'profile.lng': lng}});
   },
-  updateUserGroup: function(groupName) {
-    Users.update(this.userId, { $set: {'profile.group': groupName}});
+  updateUserGroup: function(user, groupName) {
+    Users.update(user._id, { $set: {'profile.group': groupName}});
   }
 });
