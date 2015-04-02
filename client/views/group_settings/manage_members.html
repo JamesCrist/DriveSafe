@@ -1,0 +1,27 @@
+<template name="GroupSettingsManageMembers">
+    {{#if members}}
+        {{#each members}}
+            <div class="item" id="{{this.email}}">
+                <div class="row">
+                    <div class="col col-50">
+                        {{ this.name }} <br/> {{this.email}}
+                    </div>
+                    <div class="col">
+                        <button class="button button-outline button-positive makeAdmin">
+                            Make Admin
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-outline button-assertive removeMember">
+                            Remove User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <h1>
+            No Members Found
+        </h1>
+    {{/if}}
+</template>

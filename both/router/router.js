@@ -8,7 +8,7 @@ Router.configure({
 
 if(Meteor.isClient) {
 	var publicRoutes = ["login", "register", "forgot_password", "reset_password"];
-	var privateRoutes = ["dashboard", "user_settings", "user_settings.change_pass", "logout"];
+	var privateRoutes = ["dashboard", "user_settings", "group_settings", "logout"];
 	var zonelessRoutes = [];
 
 	var roleMap = [
@@ -127,6 +127,6 @@ Router.map(function () {
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
 	this.route("dashboard", {path: "/dashboard", controller: "DashboardController"});
 	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-	this.route("user_settings.change_pass", {path: "/user_settings/change_pass", controller: "UserSettingsChangePassController"});
+  this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
 	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
 });

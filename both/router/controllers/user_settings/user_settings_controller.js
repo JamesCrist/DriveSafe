@@ -11,7 +11,7 @@ this.UserSettingsController = RouteController.extend({
 	},
 
 	action: function() {
-		this.redirect('user_settings.change_pass', this.params || {});
+    if(this.isReady()) { this.render(); } else { this.render("loading"); }
 		/*ACTION_FUNCTION*/
 	},
 

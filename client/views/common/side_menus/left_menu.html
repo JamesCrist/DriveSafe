@@ -4,13 +4,6 @@
     </div>
     <div class="content has-header">
         <div class="list">
-            {{#if currentUser.profile.admin }}
-                <div class="item item-divider">
-                    THE GROUP KEY FOR {{currentUser.profile.group}} IS <br/>
-                    <strong>{{groupKey}}</strong>
-                </div>
-            {{/if}}
-
             <div id="dashboardButton" class="item item-icon-right" data-ion-menu-close>
                 Dashboard {{> ionIcon icon="map"}}
             </div>
