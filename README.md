@@ -10,3 +10,11 @@ git clone https://github.com/michael-han/DriveSafe.git
 cd DriveSafe
 meteor
 ```
+
+##Demo
+
+---
+
+Demo can be seen here: http://lucsilva.meteor.com
+
+---
