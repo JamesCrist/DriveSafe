@@ -16,7 +16,6 @@ this.LogoutController = RouteController.extend({
         Router.go("/dashboard");
       }
     });
-    this.next();
 	},
 
 	action: function() {

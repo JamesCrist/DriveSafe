@@ -22,11 +22,17 @@ Template.GroupSettingsManageMembers.events({
   },
   'click .makeAdmin': function(event) {
     var userEmail = $(event.target).closest(".item").attr('id');
-    Meteor.call("changeAdmin", userEmail, function(err) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        Router.go("/dashboard");
+    IonPopup.confirm({
+      title: 'Warning!',
+      template: 'This feature does not yet work completely. Results are undefined. Continue?',
+      onOk: function() {
+        Meteor.call("changeAdmin", userEmail, function(err) {
+          if (err) {
+            console.log(err.message);
+          } else {
+            Router.go("/dashboard");
+          }
+        });
       }
     });
   }
