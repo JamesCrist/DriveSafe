@@ -32,16 +32,16 @@ Template.mapCanvas.rendered = function() {
   });
 };
 
-Template.Dashboard.created = function() {
+Template.riderDashboard.created = function() {
 };
 
-Template.Dashboard.events({
+Template.riderDashboard.events({
   "click .requestRide": function() {
     alert("Ride Requested!");
   }
 });
 
-Template.Dashboard.helpers({
+Template.riderDashboard.helpers({
   errorMessage: function() {
     return pageSession.get("errorMessage");
   },
