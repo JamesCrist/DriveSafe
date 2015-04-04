@@ -36,7 +36,7 @@ Template.Dashboard.created = function() {
 };
 
 Template.Dashboard.events({
-  "click .requestRide": function() {
+  "click #button": function() {
     alert("Ride Requested!");
   }
 });

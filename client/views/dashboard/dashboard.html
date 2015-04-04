@@ -49,9 +49,12 @@
         {{/ionContent}}
     {{/ionView}}
     {{#if currentUser.profile.group }}
-        {{#ionFooterBar class="bar-dark requestRide"}}
+        {{#ionFooterBar class="bar-energized requestRide" data-ion-modal="request_modal" }}
+            
             <h1 class="title">Request Ride!</h1>
+            <button id="request_button" class="button button-large button-stable" data-ion-modal="request_modal">Open Modal</button>
         {{/ionFooterBar}}
+
     {{/if}}
 </template>
 
