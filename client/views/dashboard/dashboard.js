@@ -8,7 +8,6 @@ Template.mapCanvas.rendered = function() {
   var location = pageSession.get("location");
 
   VazcoMaps.init({}, function() {
-
     map.mapEngine = VazcoMaps.gMaps();
 
     map.Map = new map.mapEngine({
@@ -47,6 +46,6 @@ Template.Dashboard.helpers({
   },
   mapIsLoaded: function() {
     pageSession.set("location", Geolocation.latLng());
-    return pageSession.get("location") != null;
+    return pageSession.get("location") !== null;
   }
 });
