@@ -39,13 +39,13 @@ matb33:collection-hooks@0.7.11
 mdg:geolocation@1.0.2
 meteor@1.1.6
 meteor-platform@1.2.2
-meteoric:ionic@0.1.17
 meteoric:ionic-sass@0.1.9
 meteoric:ionicons-sass@0.1.6
 minifiers@1.1.5
 minimongo@1.0.8
 mobile-status-bar@1.0.3
 mongo@1.1.0
+mrt-local:ionic@0.1.17
 natestrauser:font-awesome@4.3.0
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
