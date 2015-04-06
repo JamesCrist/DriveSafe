@@ -13,7 +13,8 @@ Meteor.methods({
     Groups.insert({
       name : groupName ,
       admin : this.userId ,
-      members : [ this.userId ]
+      members : [ this.userId ],
+      drivers : []
     });
     var user = Meteor.users.findOne(this.userId);
     // Update the current user's group and set the user as the admin for this group.
@@ -149,6 +150,7 @@ Meteor.methods({
     Meteor.call("removeFromGroup" , Meteor.users.findOne(this.userId).profile.email);
   },
   changeAdmin: function(newAdminEmail) {
+    var user = Meteor.users.findOne(this.userId);
     var group = Groups.findOne({ name : user.profile.group });
 
     var newAdmin = Meteor.users.find({"profile.email": newAdminEmail});
@@ -160,5 +162,30 @@ Meteor.methods({
     Users.update(this.userId , { $set : { 'profile.admin' : false } });
     Groups.update(group._id, {$set : {admin: newAdmin._id}});
     Users.update(newAdmin._id , { $set : { 'profile.admin' : true } });
+  },
+  addDriverToGroup: function(driver) {
+    // Get the driver's group.
+    var group = Groups.findOne({ name : driver.profile.group });
+
+    var drivers = group.drivers;
+    drivers.push(driver._id);
+
+    Groups.update(group._id , { $set : { drivers : drivers } });
+  },
+  removeDriverFromGroup: function(driver) {
+    // Get the driver's group.
+    var group = Groups.findOne({ name : driver.profile.group });
+
+    var drivers = group.drivers;
+
+    // Remove user from list of members for this group.
+    var index = drivers.indexOf(driver._id);
+    if(index >= 0) {
+      drivers.splice(index , 1);
+    } else {
+      throw new Meteor.Error('could not find driver in list of group drivers');
+    }
+
+    Groups.update(group._id , { $set : { drivers : drivers } });
   }
 });
