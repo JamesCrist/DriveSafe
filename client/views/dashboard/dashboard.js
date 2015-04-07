@@ -1,7 +1,8 @@
-var pageSession = new ReactiveDict();
+pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
 pageSession.set("location", null);
+pageSession.set("group", null);
 
 Template.mapCanvas.rendered = function() {
   var map = this;
@@ -47,5 +48,9 @@ Template.Dashboard.helpers({
   mapIsLoaded: function() {
     pageSession.set("location", Geolocation.latLng());
     return pageSession.get("location") !== null;
+  },
+  userGroup: function() {
+    pageSession.set("group", Groups.findOne({members: Meteor.userId()}));
+    return pageSession.get("group");
   }
 });
