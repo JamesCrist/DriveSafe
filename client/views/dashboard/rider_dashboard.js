@@ -1,8 +1,7 @@
-pageSession = new ReactiveDict();
+var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
 pageSession.set("location", null);
-pageSession.set("group", null);
 
 Template.mapCanvas.rendered = function() {
   var map = this;
@@ -32,25 +31,21 @@ Template.mapCanvas.rendered = function() {
   });
 };
 
-Template.Dashboard.created = function() {
+Template.riderDashboard.created = function() {
 };
 
-Template.Dashboard.events({
+Template.riderDashboard.events({
   "click .requestRide": function() {
     alert("Ride Requested!");
   }
 });
 
-Template.Dashboard.helpers({
+Template.riderDashboard.helpers({
   errorMessage: function() {
     return pageSession.get("errorMessage");
   },
   mapIsLoaded: function() {
     pageSession.set("location", Geolocation.latLng());
     return pageSession.get("location") !== null;
-  },
-  userGroup: function() {
-    pageSession.set("group", Groups.findOne({members: Meteor.userId()}));
-    return pageSession.get("group");
   }
 });

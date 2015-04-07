@@ -48,5 +48,12 @@ Template.leftMenu.events({
         });
       }
     });
+  },
+  'click #becomeDriverButton': function(event, template) {
+    Meteor.call("becomeDriver", function(err) {
+      if (err) {
+        console.log(err.message);
+      }
+    });
   }
 });
