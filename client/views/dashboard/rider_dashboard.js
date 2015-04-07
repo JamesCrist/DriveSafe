@@ -27,17 +27,25 @@ Template.riderDashboard.rendered = function() {
           map,
           [ {
             cursor : Users.find({ "profile.group" : Group.getGroup()._id , "profile.isDriver" : true }) ,
-            onClick : function () {
-              console.log('Document id = ' + this.id);
-            } ,
             transform : function (document) {
               return {
                 title : document.profile.name ,
                 position : new google.maps.LatLng(document.profile.lat , document.profile.lng),
-                icon: "/images/sportscar.png"
+                icon: "/images/car.png"
               };
             }
-          } ]
+          },
+            {
+              cursor : Users.find(Meteor.userId()) ,
+              transform : function (document) {
+                return {
+                  title : document.profile.name ,
+                  position : new google.maps.LatLng(document.profile.lat , document.profile.lng),
+                  icon: "/images/person.png"
+                };
+              }
+            }
+          ]
         );
       }
     }
