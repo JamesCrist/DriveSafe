@@ -6,22 +6,16 @@
                     {{errorMessage}}
                 </div>
             {{/if}}
-            {{# if currentUser.profile.group }}
-                {{#if mapIsLoaded}}
-                    {{> mapCanvas}}
-                {{else}}
-                    {{> loading }}
-                {{/if}}
-            {{else}}
-                <div class="no-group">
-                    You must join a group to request a ride.
-                </div>
-            {{/if}}
+            {{> mapCanvas}}
         {{/ionContent}}
     {{/ionView}}
-    {{#if currentUser.profile.group }}
+    {{#if group }}
         {{#ionFooterBar class="bar-dark requestRide"}}
-            <h1 class="title">Request Ride!</h1>
+            <h1 class="title">Request Ride</h1>
+        {{/ionFooterBar}}
+    {{else}}
+        {{#ionFooterBar class="bar-assertive"}}
+            <h1 class="title">You must join a group to request a ride</h1>
         {{/ionFooterBar}}
     {{/if}}
 </template>

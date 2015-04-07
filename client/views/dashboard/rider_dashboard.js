@@ -1,11 +1,10 @@
 var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage", "");
-pageSession.set("location", null);
 
 Template.mapCanvas.rendered = function() {
   var map = this;
-  var location = pageSession.get("location");
+  var location = Geolocation.latLng();
 
   VazcoMaps.init({}, function() {
     map.mapEngine = VazcoMaps.gMaps();
@@ -22,13 +21,6 @@ Template.mapCanvas.rendered = function() {
       draggable : false
     });
   });
-  // Update the user's location in the database.
-  Meteor.call("updateUserLocation", location.lat, location.lng, function(err) {
-    if (err) {
-      alert(err);
-      pageSession.set("errorMessage", err.message);
-    }
-  });
 };
 
 Template.riderDashboard.created = function() {
@@ -44,8 +36,7 @@ Template.riderDashboard.helpers({
   errorMessage: function() {
     return pageSession.get("errorMessage");
   },
-  mapIsLoaded: function() {
-    pageSession.set("location", Geolocation.latLng());
-    return pageSession.get("location") !== null;
+  group: function() {
+    return Group.getGroup();
   }
 });

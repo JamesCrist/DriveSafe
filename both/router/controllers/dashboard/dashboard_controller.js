@@ -14,18 +14,9 @@ this.DashboardController = RouteController.extend({
 		if(this.isReady()) { this.render(); } else { this.render("loading"); }
 		/*ACTION_FUNCTION*/
 	},
-
+  // Make sure that the geolocation API is loaded before rendering the dashboard.
 	isReady: function() {
-		
-
-		var subs = [
-		];
-		var ready = true;
-		_.each(subs, function(sub) {
-			if(!sub.ready())
-				ready = false;
-		});
-		return ready;
+		return Geolocation.latLng() != null;
 	},
 
 	data: function() {

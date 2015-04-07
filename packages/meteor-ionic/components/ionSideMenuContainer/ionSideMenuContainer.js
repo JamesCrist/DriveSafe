@@ -5,7 +5,7 @@ IonSideMenu = {
 Template.ionSideMenuContainer.created = function () {
   this.data = this.data || {};
   this.side = this.data.side || 'both';
-  this.dragContent = true;
+  this.dragContent = false;
   if (typeof this.data.dragContent != 'undefined') {
     this.dragContent = this.data.dragContent
   }

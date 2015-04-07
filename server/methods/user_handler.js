@@ -27,8 +27,8 @@ Meteor.methods({
   updateUserLocation: function(lat, lng) {
     Users.update(this.userId, { $set: {'profile.lat': lat, 'profile.lng': lng}});
   },
-  updateUserGroup: function(user, groupName) {
-    Users.update(user._id, { $set: {'profile.group': groupName}});
+  updateUserGroup: function(user, group) {
+    Users.update(user._id, { $set: {'profile.group': group}});
   },
   becomeDriver: function() {
     var user = Meteor.users.findOne(this.userId);

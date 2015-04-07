@@ -12,16 +12,18 @@
                 Dashboard {{> ionIcon icon="map"}}
             </div>
 
-            {{#if currentUser.profile.group}}
-                {{#unless currentUser.profile.admin}}
+            {{#if group}}
+                {{#unless isAdmin}}
                     <div id="leaveGroup" class="item item-icon-right">
-                        Leave {{currentUser.profile.group}} {{> ionIcon icon="minus-circled"}}
+                        Leave {{group.name}} {{> ionIcon icon="minus-circled"}}
                     </div>
                 {{/unless}}
 
-                <div id="becomeDriverButton" class="item item-icon-right" data-ion-menu-close>
-                    Become Driver {{> ionIcon icon="model-s"}}
-                </div>
+                {{#unless isDriver}}
+                    <div id="becomeDriverButton" class="item item-icon-right" data-ion-menu-close>
+                        Become Driver {{> ionIcon icon="model-s"}}
+                    </div>
+                {{/unless}}
             {{else}}
                 <div id="joinGroupButton" class="item item-icon-right">
                     Join Group {{> ionIcon icon="android-people"}}
