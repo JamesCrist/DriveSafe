@@ -14,9 +14,11 @@
 
             {{#if group}}
                 {{#unless isAdmin}}
-                    <div id="leaveGroup" class="item item-icon-right">
-                        Leave {{group.name}} {{> ionIcon icon="minus-circled"}}
-                    </div>
+                    {{#unless isDriver}}
+                        <div id="leaveGroup" class="item item-icon-right">
+                            Leave {{group.name}} {{> ionIcon icon="minus-circled"}}
+                        </div>
+                    {{/unless}}
                 {{/unless}}
 
                 {{#unless isDriver}}
