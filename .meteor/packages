@@ -22,5 +22,6 @@ fourseven:scss
 meteoric:ionic-sass
 meteoric:ionicons-sass
 mrt-local:ionic
-dburles:google-maps
 mrt:live-maps
+mizzao:bootstrap-3
+dburles:google-maps

@@ -4,14 +4,8 @@ pageSession.set("errorMessage", "");
 
 Template.riderDashboard.rendered = function() {
   // Once the map is ready, add current user's marker and driver markers to it.
+  /*
   GoogleMaps.ready('dashboardMap', function(map) {
-    // Add a marker to the map once it's ready
-    var marker = new google.maps.Marker({
-      position: map.options.center,
-      map: map.instance,
-      animation: google.maps.Animation.DROP,
-      icon: "/images/person.png"
-    });
     if (Group.getGroup()) {
       var liveMarkers = LiveMaps.addMarkersToMap(
         map.instance ,
@@ -31,6 +25,7 @@ Template.riderDashboard.rendered = function() {
       );
     }
   });
+  */
 };
 
 Template.riderDashboard.events({
@@ -48,7 +43,7 @@ Template.riderDashboard.helpers({
     if (GoogleMaps.loaded()) {
       // Map initialization options
       return {
-        center: new google.maps.LatLng(Geolocation.latLng().lat, Geolocation.latLng().lng),
+        center: new google.maps.LatLng(-37.8136, 144.9631),
         zoom: 15,
         // Disable all controls from the map, to make it look nicer on mobile.
         panControl: false,
