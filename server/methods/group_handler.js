@@ -10,7 +10,7 @@ Meteor.methods({
       throw new Meteor.Error('this user has already created a group');
     }
     // Create the new group in the database.
-    Groups.insert({
+    var group = Groups.insert({
       name : groupName ,
       admin : this.userId ,
       members : [ this.userId ],
@@ -18,7 +18,7 @@ Meteor.methods({
     });
     var user = Meteor.users.findOne(this.userId);
     // Update the current user's group and set the user as the admin for this group.
-    Meteor.call("updateUserGroup" , user , groupName);
+    Meteor.call("updateUserGroup" , user , group);
     Users.update(this.userId , { $set : { 'profile.admin' : true } });
 
   } ,
@@ -31,19 +31,17 @@ Meteor.methods({
     }
 
     // Add current logged in user to the list of members for this group.
-    var members = group.members;
-    members.push(this.userId);
-    Groups.update(group._id , { $set : { members : members } });
+    Groups.update(group._id , {$push: { members : this.userId } });
 
     // Update current user's group field
     var user = Meteor.users.findOne(this.userId);
-    Meteor.call("updateUserGroup" , user , group.name);
+    Meteor.call("updateUserGroup" , user , group._id);
   } ,
   // Remove current user from his/her group.
   leaveGroup : function () {
     // Get the current user and the group he/she belongs to.
     var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ name : user.profile.group });
+    var group = Groups.findOne({members: this.userId});
 
     // Call helper function.
     Meteor.call("removeMemberFromGroup" , user , group);
@@ -95,7 +93,7 @@ Meteor.methods({
     // Get the current logged-in user.
     var user = Meteor.users.findOne(this.userId);
     // Get the current user's group.
-    var group = Groups.findOne({ name : user.profile.group });
+    var group = Groups.findOne({members: this.userId });
 
     // Make sure the user trying to access members list is an admin.
     if (group.admin != this.userId) {
@@ -119,35 +117,20 @@ Meteor.methods({
     // Return the list of members.
     return members;
   } ,
-  // Remove a user from a group by email.
-  removeFromGroup : function (userEmail) {
-    // Get the current user and his/her group.
-    var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ name : user.profile.group });
-
-    // Get the member to remove from the group.
-    var memberToRemove = Meteor.users.findOne({ "profile.email" : userEmail });
-    if(!memberToRemove) {
-      throw new Meteor.Error('could not find member to remove');
-    }
-
-    // Call helper to remove the member from the group.
-    Meteor.call("removeMemberFromGroup" , memberToRemove , group);
-  } ,
   deleteGroup : function () {
     // Get the current user and his/her group.
     var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ name : user.profile.group });
+    var group = Groups.findOne({ members: this.userId });
 
     // Loop through all members of this group, and delete them all.
     group.members.forEach(function (member) {
       if(member != user._id) {
-        Meteor.call("removeFromGroup" , Meteor.users.findOne(user._id).profile.email);
+        Meteor.call("removeMemberFromGroup", member, group);
       }
     });
 
     // Finally, remove the admin from the group. This will also delete the group.
-    Meteor.call("removeFromGroup" , Meteor.users.findOne(this.userId).profile.email);
+    Meteor.call("removeMemberFromGroup", user, group);
   },
   changeAdmin: function(newAdminEmail) {
     var user = Meteor.users.findOne(this.userId);
@@ -165,7 +148,8 @@ Meteor.methods({
   },
   addDriverToGroup: function(driver) {
     // Get the driver's group.
-    var group = Groups.findOne({ name : driver.profile.group });
+
+    var group = Groups.findOne({ members: this.userId });
 
     var drivers = group.drivers;
     drivers.push(driver._id);
@@ -174,7 +158,7 @@ Meteor.methods({
   },
   removeDriverFromGroup: function(driver) {
     // Get the driver's group.
-    var group = Groups.findOne({ name : driver.profile.group });
+    var group = Groups.findOne({drivers: driver._id});
 
     var drivers = group.drivers;
 

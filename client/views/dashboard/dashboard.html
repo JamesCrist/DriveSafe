@@ -19,15 +19,16 @@
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-        {{#if currentUser.profile.group }}
-            <h1 class="title">DriveSafe - {{currentUser.profile.group}} </h1>
+        {{#if group}}
+            <h1 class="title"> {{group.name}} </h1>
         {{else}}
             <h1 class="title"> DriveSafe </h1>
         {{/if}}
     {{/contentFor}}
 
 
-    {{#if currentUser.profile.isDriver }}
+
+    {{#if isDriver}}
         {{> driverDashboard }}
     {{else}}
         {{> riderDashboard }}
