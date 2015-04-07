@@ -6,7 +6,7 @@
                     {{errorMessage}}
                 </div>
             {{/if}}
-            {{> mapCanvas}}
+            {{> googleMap name="dashboardMap" options=dashboardMapOptions}}
         {{/ionContent}}
     {{/ionView}}
     {{#if group }}
@@ -18,8 +18,4 @@
             <h1 class="title">You must join a group to request a ride</h1>
         {{/ionFooterBar}}
     {{/if}}
-</template>
-
-<template name="mapCanvas">
-    <div id="map-canvas" class="map-canvas"></div>
 </template>

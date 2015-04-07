@@ -15,6 +15,11 @@ if(Meteor.isClient) {
 		
 	];
 
+	Router.onBeforeAction(function() {
+		GoogleMaps.load();
+		this.next();
+	}, { only: ['dashboard'] });
+
 	this.firstGrantedRoute = function() {
 		var grantedRoute = "";
 		_.every(privateRoutes, function(route) {
