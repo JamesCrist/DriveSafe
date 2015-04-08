@@ -148,7 +148,6 @@ Meteor.methods({
   },
   addDriverToGroup: function(driver) {
     // Get the driver's group.
-
     var group = Groups.findOne({ members: this.userId });
 
     var drivers = group.drivers;
