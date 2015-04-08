@@ -11,7 +11,8 @@ Meteor.methods({
         lat: 0,
         lng: 0,
         group: null,
-        admin: false
+        admin: false,
+        isDriver: false
       }
     });
     // Send the user an email with the password.
@@ -26,7 +27,20 @@ Meteor.methods({
   updateUserLocation: function(lat, lng) {
     Users.update(this.userId, { $set: {'profile.lat': lat, 'profile.lng': lng}});
   },
-  updateUserGroup: function(user, groupName) {
-    Users.update(user._id, { $set: {'profile.group': groupName}});
+  updateUserGroup: function(user, group) {
+    Users.update(user._id, { $set: {'profile.group': group}});
+  },
+  becomeDriver: function() {
+    var user = Meteor.users.findOne(this.userId);
+    if (!user.profile.group) {
+      throw new Meteor.Error("user must be in a group to be a driver")
+    }
+    Users.update(this.userId, {$set: {'profile.isDriver': true}});
+    Meteor.call("addDriverToGroup", user);
+  },
+  stopDriving: function() {
+    Users.update(this.userId, {$set: {'profile.isDriver': false}});
+    var user = Meteor.users.findOne(this.userId);
+    Meteor.call("removeDriverFromGroup", user);
   }
 });

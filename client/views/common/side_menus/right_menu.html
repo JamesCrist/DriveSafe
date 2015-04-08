@@ -5,12 +5,12 @@
     <div class="content has-header">
         <div class="list">
             <div class="item item-icon-left" data-ion-menu-close>
-                {{> ionIcon icon="ios-arrow-left"}} Close Me
+                {{> ionIcon icon="ios-arrow-left"}} Close
             </div>
             <div class="item item-icon-left" id="accountSettings" data-ion-menu-close>
                 {{> ionIcon icon="settings"}} Account Settings
             </div>
-            {{#if currentUser.profile.admin}}
+            {{#if isAdmin}}
                 <div class="item item-icon-left" id="groupSettings" data-ion-menu-close>
                     {{> ionIcon icon="gear-b"}} Group Settings
                 </div>

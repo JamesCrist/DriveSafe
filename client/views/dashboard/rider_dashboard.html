@@ -1,0 +1,21 @@
+<template name = "riderDashboard">
+    {{#ionView}}
+        {{#ionContent}}
+            {{#if errorMessage}}
+                <div class="alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+            {{/if}}
+            <div id="map-canvas" class="map-canvas"></div>
+        {{/ionContent}}
+    {{/ionView}}
+    {{#if group }}
+        {{#ionFooterBar class="bar-dark requestRide"}}
+            <h1 class="title">Request Ride</h1>
+        {{/ionFooterBar}}
+    {{else}}
+        {{#ionFooterBar class="bar-assertive"}}
+            <h1 class="title">You must join a group to request a ride</h1>
+        {{/ionFooterBar}}
+    {{/if}}
+</template>

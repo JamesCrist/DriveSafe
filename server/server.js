@@ -1,14 +1,3 @@
-Meteor.startup(function() {
-	// read environment variables from Meteor.settings
-	if(Meteor.settings && Meteor.settings.env && _.isObject(Meteor.settings.env)) {
-		for(var variableName in Meteor.settings.env) {
-			process.env[variableName] = Meteor.settings.env[variableName];
-		}
-	}
-
-	
-});
-
 Meteor.methods({
 	"createUserAccount": function(options) {
 
@@ -22,22 +11,7 @@ Meteor.methods({
 		Accounts.createUser(userOptions);
 	},
 	"updateUserAccount": function(userId, options) {
-		// only admin or users own profile
-		if(!(Users.isAdmin(Meteor.userId()) || userId == Meteor.userId())) {
-      console.log("ACCESS DENIED");
-			throw new Meteor.Error(403, "Access denied.");
-		}
-
-		// non-admin user can change only profile
-		if(!Users.isAdmin(Meteor.userId())) {
-			var keys = Object.keys(options);
-			if(keys.length !== 1 || !options.profile) {
-        console.log("ACCESS DENIED");
-				throw new Meteor.Error(403, "Access denied.");
-			}
-		}
-
-		var userOptions = {};		
+		var userOptions = {};
 		if(options.username) userOptions.username = options.username;
 		if(options.email) userOptions.email = options.email;
 		if(options.password) userOptions.password = options.password;

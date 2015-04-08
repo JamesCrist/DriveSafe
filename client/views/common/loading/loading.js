@@ -1,6 +1,6 @@
 Template.loading.rendered = function() {
   IonLoading.show({
-    backdrop: true
+    backdrop: false
   });
 };
 

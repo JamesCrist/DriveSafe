@@ -18,8 +18,10 @@ perak:user-roles
 reactive-dict
 accounts-password
 mdg:geolocation
-vazco:maps
 fourseven:scss
 meteoric:ionic-sass
 meteoric:ionicons-sass
-meteoric:ionic
+mrt-local:ionic
+mrt:live-maps
+mizzao:bootstrap-3
+mrt:googlemaps
