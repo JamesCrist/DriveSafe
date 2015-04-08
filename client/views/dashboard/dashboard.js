@@ -47,11 +47,11 @@ Template.Dashboard.helpers({
   }
 });
 
-/*Template.request_modal.events({
+Template.request_modal.events({
   "focus #pac-input": function() {
-   //src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
     function initialize() {
-      var input = /** @type {HTMLInputElement} (
+      var input = /** @type {HTMLInputElement} */(
           document.getElementById('pac-input'));
 
       var autocomplete = new google.maps.places.Autocomplete(input);
@@ -73,4 +73,4 @@ Template.Dashboard.helpers({
     }
     google.maps.event.addDomListener(window, 'load', initialize);
   }
-});*/
+});
