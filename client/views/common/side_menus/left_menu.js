@@ -31,8 +31,10 @@ Template.leftMenu.events({
           // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
           var inputVal =  $(template.firstNode).find('[name=prompt]').val();
           Meteor.call("createNewGroup" , inputVal, function (error) {
+            //TODO: deal with different error differently
             if(error){
-              console.log($(template.firstNode).find("#inputDirections").append(error.message));
+              // $(template.firstNode).find("#inputDirections").append(error.message);
+              $(template.firstNode).find("#inputDirections").html(error.message);
               console.log(error.message);
               e.preventDefault();
             }
@@ -51,64 +53,6 @@ Template.leftMenu.events({
     });
   },
 
-  // 'click #createGroupButton' : function (event , template) {
-  //   IonPopup.prompt({
-  //     title : 'Create Group' ,
-  //     // template : 'Please enter group name' ,
-  //     template :'<span>' + 'Please enter group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >',
-  //     okText : 'Create' ,
-  //     inputType : 'text' ,
-  //     inputPlaceholder : 'group name' ,
-  //     onOk : function (event , response) {
-  //       event.preventDefault();
-        // Meteor.call("createNewGroup" , response , function (error) {
-        //   console.log(error.message);
-        //   console.log(event);
-        //   return true
-        // });
-  //     }
-
-
-  //   });
-  // },
-
-
-  // $ionicPopup.show({
-  //   templateUrl: 'popup-template.html',
-  //   title: 'Enter Wi-Fi Password',
-  //   scope: $scope,
-  //   buttons: [
-  //     { text: 'Cancel', onTap: function(e) { return true; } },
-  //     {
-  //       text: '<b>Save</b>',
-  //       type: 'button-positive',
-  //       onTap: function(e) {
-  //         return $scope.data.wifi;
-  //       }
-  //     },
-  //   ]
-  //   }).then(function(password) {
-  //     console.log('Got wifi password', password);
-  //   });
-
-  // 'click #createGroupButton' : function (event , template) {
-  //   IonPopup.show({
-  //     title : 'Create Group' ,
-  //     template : 'Please enter group name' ,
-  //     okText : 'Create' ,
-  //     inputType : 'text' ,
-  //     inputPlaceholder : 'group name' ,
-  //     onTap : function (event , response) {
-
-
-  //       Meteor.call("createNewGroup" , response , function (error) {
-  //         console.log(error.message);
-
-  //       });
-  //     }
-
-  //   });
-  // },
 
   'click #leaveGroup' : function(event, template) {
     IonPopup.confirm({
@@ -128,10 +72,3 @@ Template.leftMenu.events({
 });
 
 
-var showError = function(error) {
-    IonPopup.alert({
-      title: 'An Alert',
-      template: 'This is an alert!',
-      okText: 'Got It.'
-    });
-}
