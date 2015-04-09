@@ -33,6 +33,41 @@ var group = {
       drivers.push(Users.findOne(this.drivers[i]));
     }
     return drivers;
+  },
+  getDriversIds: function() {
+    return this.drivers;
+  },
+  addDriver: function(driverId) {
+    // Check to make sure the driver is already a member of the group.
+    var index = this.getMembersIds().indexOf(driverId);
+    if (index < 0) {
+      return false;
+    }
+
+    // Remove user from list of members for this group.
+    index = this.getDriversIds().indexOf(driverId);
+    if(index < 0) {
+      this.getDriversIds().push(driverId);
+      Groups.update(this.getId() , {
+        $set : {
+          drivers : this.getDriversIds()
+        }
+      });
+      return true;
+    }
+    return false;
+  },
+  removeDriver: function(driverId) {
+    // Remove user from list of members for this group.
+    var index = this.getDriversIds().indexOf(driverId);
+    if(index >= 0) {
+      this.getDriversIds().splice(index , 1);
+      Groups.update(this.getId() , {
+        $set : {
+          drivers : this.getDriversIds()
+        }
+      });
+    }
   }
 };
 
@@ -62,7 +97,7 @@ if (Meteor.isServer) {
     // If the member to remove is the admin of the group, make sure
     // that there is no one else left in the group. An admin can only leave
     // the group if it is empty.
-    if(this.getAdmin().getId() == memberToRemove._id && this.getNumMembers() > 1) {
+    if(this.getAdmin()._id == memberToRemove._id && this.getNumMembers() > 1) {
       throw new Meteor.Error('admins cannot leave a group while there are still other members in the group');
     }
 
@@ -87,6 +122,15 @@ if (Meteor.isServer) {
       memberToRemove.profile.admin = false;
       Users.update(memberToRemove._id , { $set : { 'profile.admin' : false } });
     }
+  };
+  group.addMember = function(newMemberId) {
+    var index = this.getMembersIds().indexOf(newMemberId);
+    if (!newMemberId || index >= 0) {
+      return false;
+    }
+    // Add current logged in user to the list of members for this group.
+    Groups.update(this.getId() , {$push: { members : newMemberId } });
+    return true;
   };
   group.delete = function() {
     // Loop through all members of this group, and delete them all.

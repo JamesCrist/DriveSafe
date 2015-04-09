@@ -13,10 +13,12 @@ Template.leftMenu.events({
       inputType : 'text' ,
       inputPlaceholder : 'group key' ,
       onOk : function (event , response) {
-        Meteor.call("joinGroup", response, function (error) {
+        Meteor.user().joinGroup(response, function (error) {
           if (error) {
             console.log(error);
           } else {
+            // Reload the dashboard to fix bug
+            // of map position icon not showing up.
             Meteor._reload.reload();
           }
         });
@@ -31,11 +33,12 @@ Template.leftMenu.events({
       inputType : 'text' ,
       inputPlaceholder : 'group name' ,
       onOk : function (event , response) {
-
-        Meteor.call("createNewGroup" , response , function (error) {
-          if (error) {
-            console.log(error);
+        Meteor.user().createGroup(response, function(err) {
+          if (err) {
+            console.log(err);
           } else {
+            // Reload the dashboard to fix bug
+            // of map position icon not showing up.
             Meteor._reload.reload();
           }
         });
@@ -47,7 +50,7 @@ Template.leftMenu.events({
       title: 'Are you sure?',
       template: 'You will no longer have access to drivers for this group',
       onOk: function() {
-        Meteor.call("leaveGroup", function(err) {
+        Meteor.user().leaveGroup(function(err) {
           if (err) {
             console.log(err.message);
           } else {
@@ -58,7 +61,7 @@ Template.leftMenu.events({
     });
   },
   'click #becomeDriverButton': function(event, template) {
-    Meteor.call("becomeDriver", function(err) {
+    Meteor.user().becomeDriver(function(err) {
       if (err) {
         console.log(err.message);
       }

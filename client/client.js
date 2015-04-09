@@ -36,7 +36,7 @@ Handlebars.registerHelper('group', function() {
 Meteor.setInterval(function() {
   if(Meteor.user()) {
     var location = Geolocation.latLng() || {lat: 0, lng: 0};
-    Meteor.call("updateUserLocation", location.lat, location.lng);
+    Meteor.user().updateLocation(location.lat, location.lng);
   }
 }, 1000);
 
