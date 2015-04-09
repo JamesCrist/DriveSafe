@@ -14,7 +14,11 @@ Template.leftMenu.events({
       inputPlaceholder : 'group key' ,
       onOk : function (event , response) {
         Meteor.call("joinGroup", response, function (error) {
-          console.log(error);
+          if (error) {
+            console.log(error);
+          } else {
+            Meteor._reload.reload();
+          }
         });
       }
     });
@@ -29,7 +33,11 @@ Template.leftMenu.events({
       onOk : function (event , response) {
 
         Meteor.call("createNewGroup" , response , function (error) {
-          console.log(error);
+          if (error) {
+            console.log(error);
+          } else {
+            Meteor._reload.reload();
+          }
         });
       }
     });

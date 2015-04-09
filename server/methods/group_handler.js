@@ -18,8 +18,11 @@ Meteor.methods({
     });
     var user = Meteor.users.findOne(this.userId);
     // Update the current user's group and set the user as the admin for this group.
-    Meteor.call("updateUserGroup" , user , group);
-    Users.update(this.userId , { $set : { 'profile.admin' : true } });
+    Users.update(this.userId , { $set : {
+      'profile.admin' : true,
+      'profile.group' : group
+      }
+    });
 
   } ,
   // Join a group, given the group key.
@@ -76,75 +79,12 @@ Meteor.methods({
       Groups.remove(group._id);
       Users.update(this.userId , { $set : { 'profile.admin' : false } });
     }
-  } ,
-  // Get the secret key for a group.
-  getGroupKey : function () {
-    var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ name : user.profile.group });
-
-    if(group.admin != this.userId) {
-      throw new Meteor.Error('only admins can see group key');
-    }
-
-    return group._id;
-  } ,
-  // Get a list of members the current group.
-  getMembersForGroup : function () {
-    // Get the current logged-in user.
-    var user = Meteor.users.findOne(this.userId);
-    // Get the current user's group.
-    var group = Groups.findOne({members: this.userId });
-
-    // Make sure the user trying to access members list is an admin.
-    if (group.admin != this.userId) {
-      throw new Meteor.Error('only admins can see list of members');
-    }
-
-    // Get all the members of this group, excluding the current user, who is the admin.
-    var members = [];
-    for(var memberIndex = 0 ; memberIndex < group.members.length ; memberIndex++) {
-      if(group.members[ memberIndex ] == this.userId) {
-        continue;
-      }
-      var member = Meteor.users.findOne(group.members[ memberIndex ]);
-      if(!member) {
-        throw new Meteor.Error('group members could not be found');
-      }
-
-      members.push(member.profile);
-    }
-
-    // Return the list of members.
-    return members;
-  } ,
-  deleteGroup : function () {
-    // Get the current user and his/her group.
-    var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ members: this.userId });
-
-    // Loop through all members of this group, and delete them all.
-    group.members.forEach(function (member) {
-      if(member != user._id) {
-        Meteor.call("removeMemberFromGroup", member, group);
-      }
-    });
-
-    // Finally, remove the admin from the group. This will also delete the group.
-    Meteor.call("removeMemberFromGroup", user, group);
   },
-  changeAdmin: function(newAdminEmail) {
-    var user = Meteor.users.findOne(this.userId);
-    var group = Groups.findOne({ name : user.profile.group });
-
-    var newAdmin = Meteor.users.find({"profile.email": newAdminEmail});
-    if (!newAdmin) {
-      throw new Meteor.Error('cannot find new admin');
-    }
-
-    //TODO:FINISH IMPLEMENTING CHANGE ADMIN
-    Users.update(this.userId , { $set : { 'profile.admin' : false } });
-    Groups.update(group._id, {$set : {admin: newAdmin._id}});
-    Users.update(newAdmin._id , { $set : { 'profile.admin' : true } });
+  deleteGroup : function () {
+    Groups.findOne({members: this.userId}).delete();
+  },
+  changeAdmin: function(newAdmin) {
+    Groups.findOne({members: this.userId}).changeAdmin(newAdmin);
   },
   addDriverToGroup: function(driver) {
     // Get the driver's group.
@@ -170,5 +110,8 @@ Meteor.methods({
     }
 
     Groups.update(group._id , { $set : { drivers : drivers } });
+  },
+  removeMember: function(memberToRemove, group) {
+    Groups.findOne(group._id).removeMember(memberToRemove);
   }
 });

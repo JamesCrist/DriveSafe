@@ -9,6 +9,7 @@ Router.configure({
 if(Meteor.isClient) {
 	var publicRoutes = ["login", "register", "forgot_password", "reset_password"];
 	var privateRoutes = ["dashboard", "user_settings", "group_settings", "logout"];
+	var adminRoutes = ["group_settings"];
 	var zonelessRoutes = [];
 
 	var roleMap = [
@@ -93,6 +94,14 @@ if(Meteor.isClient) {
     this.next();
   };
 
+	Router.ensureAdmin = function() {
+		if (!Meteor.user() || !Meteor.user().isAdmin()) {
+			var redirectRoute = firstGrantedRoute();
+			this.redirect(redirectRoute);
+		}
+		this.next();
+	};
+
 	Meteor.subscribe("current_user_data");
 
 	Router.onBeforeAction(function() {
@@ -107,6 +116,7 @@ if(Meteor.isClient) {
 
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
+	Router.onBeforeAction(Router.ensureAdmin, {only: adminRoutes});
 }
 
 Router.map(function () {

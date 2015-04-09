@@ -1,17 +1,20 @@
 this.App = {};
 
-Meteor.startup(function() {
-  Meteor.subscribe("groups");
-});
-
 App.logout = function() {
 	Meteor.logout(function(err) {
 	});
 };
 
+// Subscribe to the groups collection on the client.
+Meteor.startup(function() {
+  Meteor.subscribe("groups");
+});
+
+
+// Register Handlebars helpers to use on the views.
 Handlebars.registerHelper('isAdmin', function() {
   if (Meteor.user()) {
-    return Meteor.user().profile.admin;
+    return Meteor.user().isAdmin();
   } else {
     return false;
   }
@@ -19,14 +22,14 @@ Handlebars.registerHelper('isAdmin', function() {
 
 Handlebars.registerHelper('isDriver', function() {
   if (Meteor.user()) {
-    return Meteor.user().profile.isDriver;
+    return Meteor.user().isDriver();
   } else {
     return false;
   }
 });
 
 Handlebars.registerHelper('group', function() {
-  return Group.getGroup();
+  return Groups.findOne();
 });
 
 // Update the user's location every second.
