@@ -13,45 +13,53 @@ Template.leftMenu.events({
       inputType : 'text' ,
       inputPlaceholder : 'group key' ,
       onOk : function (event , response) {
-        Meteor.call("joinGroup", response, function (error) {
-          console.log(error);
+        Meteor.user().joinGroup(response, function (error) {
+          if (error) {
+            console.log(error);
+          } else {
+            // Reload the dashboard to fix bug
+            // of map position icon not showing up.
+            Meteor._reload.reload();
+          }
         });
       }
     });
   } ,
-  'click #createGroupButton' : function (event , template) {
-    IonPopup.show({
-      title : 'Create Group' ,
-      template :'<span id="inputDirections">' + 'Please enter group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >',
-      buttons: [{
-        text: 'Create',
-        type: 'button-positive',
-        onTap: function(e,template){
-
-          // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
-          var inputVal =  $(template.firstNode).find('[name=prompt]').val();
-          Meteor.call("createNewGroup" , inputVal, function (error) {
-            //TODO: deal with different error differently
-            if(error){
-              // $(template.firstNode).find("#inputDirections").append(error.message);
-              $(template.firstNode).find("#inputDirections").html(error.message);
-              console.log(error.message);
-              e.preventDefault();
-            }
-            else{
-              IonPopup.close();
-            }
-          });
-        }
-      },{
-        text: 'Cancel',
-        type: 'button-positive',
-        onTap: function(e){
-          IonPopup.close();
-        }
-      }]
-    });
-  },
+    'click #createGroupButton' : function (event , template) {
+        IonPopup.show({
+            title : 'Create Group' ,
+            template :'<span id="inputDirections">' + 'Please enter group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >',
+            buttons: [
+            {
+                text: 'Create',
+                type: 'button-positive',
+                onTap: function(e,template){
+                    // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
+                    var inputVal = $(template.firstNode).find('[name=prompt]').val();
+                    Meteor.user().createGroup(inputVal, function(err) {
+                        if (err) {
+                            // $(template.firstNode).find("#inputDirections").append(error.message);
+                            $(template.firstNode).find("#inputDirections").html(err.message);
+                            console.log(err.message);
+                            e.preventDefault();
+                        } else {
+                            // Reload the dashboard to fix bug
+                            // of map position icon not showing up.
+                            IonPopup.close();
+                            Meteor._reload.reload();
+                        }
+                    });
+                }
+            },
+            {
+                text: 'Cancel',
+                type: 'button-positive',
+                onTap: function(e){
+                    IonPopup.close();
+                }
+            }]
+        });
+    },
 
 
   'click #leaveGroup' : function(event, template) {
@@ -59,7 +67,7 @@ Template.leftMenu.events({
       title: 'Are you sure?',
       template: 'You will no longer have access to drivers for this group',
       onOk: function() {
-        Meteor.call("leaveGroup", function(err) {
+        Meteor.user().leaveGroup(function(err) {
           if (err) {
             console.log(err.message);
           } else {
@@ -70,12 +78,10 @@ Template.leftMenu.events({
     });
   },
   'click #becomeDriverButton': function(event, template) {
-    Meteor.call("becomeDriver", function(err) {
+    Meteor.user().becomeDriver(function(err) {
       if (err) {
         console.log(err.message);
       }
     });
   }
 });
-
-

@@ -23,24 +23,5 @@ Meteor.methods({
       text: "Your temporary password is: " + password
     });
     return password; // FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION
-  },
-  updateUserLocation: function(lat, lng) {
-    Users.update(this.userId, { $set: {'profile.lat': lat, 'profile.lng': lng}});
-  },
-  updateUserGroup: function(user, group) {
-    Users.update(user._id, { $set: {'profile.group': group}});
-  },
-  becomeDriver: function() {
-    var user = Meteor.users.findOne(this.userId);
-    if (!user.profile.group) {
-      throw new Meteor.Error("user must be in a group to be a driver")
-    }
-    Users.update(this.userId, {$set: {'profile.isDriver': true}});
-    Meteor.call("addDriverToGroup", user);
-  },
-  stopDriving: function() {
-    Users.update(this.userId, {$set: {'profile.isDriver': false}});
-    var user = Meteor.users.findOne(this.userId);
-    Meteor.call("removeDriverFromGroup", user);
   }
 });
