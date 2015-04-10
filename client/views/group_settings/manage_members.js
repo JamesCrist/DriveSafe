@@ -1,33 +1,27 @@
 var pageSession = new ReactiveDict();
 
-pageSession.set("members", null);
-
-Template.GroupSettingsManageMembers.rendered = function() {
-  setMembers();
-};
-
 Template.GroupSettingsManageMembers.events({
   'click .removeMember': function(event) {
-    var userEmail = $(event.target).closest(".item").attr('id');
-    var user = Meteor.users.findOne({"profile.email": userEmail});
-    Meteor.call("removeMemberFromGroup", user, Group.getGroup(), function(err) {
+    var userId = $(event.target).closest(".item").attr('id');
+    var user = Users.findOne(userId);
+    Meteor.call("removeMember", user, Groups.findOne(), function(err) {
       if (err) {
         console.log(err.message);
       } else {
         $(event.target).closest(".item").fadeOut("slow" , function () {
           this.remove();
-          setMembers();
         })
       }
     });
   },
   'click .makeAdmin': function(event) {
-    var userEmail = $(event.target).closest(".item").attr('id');
+    var userId = $(event.target).closest(".item").attr('id');
+    var newAdmin = Users.findOne(userId);
     IonPopup.confirm({
       title: 'Warning!',
       template: 'This feature does not yet work completely. Results are undefined. Continue?',
       onOk: function() {
-        Meteor.call("changeAdmin", userEmail, function(err) {
+        Meteor.call("changeAdmin", newAdmin, function(err) {
           if (err) {
             console.log(err.message);
           } else {
@@ -41,16 +35,10 @@ Template.GroupSettingsManageMembers.events({
 
 Template.GroupSettingsManageMembers.helpers({
   members: function() {
-    return pageSession.get("members");
+    if (Groups && Groups.findOne()) {
+      // Get all members for this group, passing in false
+      // to not include the admin him/herself.
+      return Groups.findOne().getMembers(false);
+    }
   }
 });
-
-var setMembers = function() {
-  Meteor.call("getMembersForGroup", function(err, members) {
-    if (err) {
-      console.log(err.message);
-    } else {
-      pageSession.set("members" , members);
-    }
-  });
-};

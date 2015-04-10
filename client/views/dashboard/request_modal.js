@@ -1,11 +1,14 @@
 Template.request_modal.rendered = function() {
-	var defaultBounds = new google.maps.LatLngBounds(
+	/*var defaultBounds = new google.maps.LatLngBounds(
 	  new google.maps.LatLng(-33.8902, 151.1759),
 	  new google.maps.LatLng(-33.8474, 151.2631));
-
+*/
 	var pickupInput = document.getElementById('pickup-input');
 	var destInput = document.getElementById('dest-input');
-	var options = {
+
+	input_autocomplete = new google.maps.places.Autocomplete(pickupInput);
+	dest_autocomplete = new google.maps.places.Autocomplete(destInput);
+	/*var options = {
 	  bounds: defaultBounds,
 	  types: ['establishment']
 	};
@@ -28,6 +31,7 @@ Template.request_modal.rendered = function() {
 	    });
 	  }
 	}
+	*/
 };
 /*
 Template.request_modal.events({
