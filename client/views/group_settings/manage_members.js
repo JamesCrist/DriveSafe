@@ -9,7 +9,8 @@ Template.GroupSettingsManageMembers.rendered = function() {
 Template.GroupSettingsManageMembers.events({
   'click .removeMember': function(event) {
     var userEmail = $(event.target).closest(".item").attr('id');
-    Meteor.call("removeFromGroup", userEmail, function(err) {
+    var user = Meteor.users.findOne({"profile.email": userEmail});
+    Meteor.call("removeMemberFromGroup", user, Group.getGroup(), function(err) {
       if (err) {
         console.log(err.message);
       } else {
