@@ -17,7 +17,12 @@ Template.GroupSettings.events({
   },
   'click .makeAdmin': function(event) {
     var userId = $(event.target).closest(".item").attr('id');
-    this.changeAdmin(userId);
+    console.log(userId);
+    this.getGroup().changeAdmin(Users.findOne(userId), function(err, res) {
+      if (err) {
+        console.log(err.message);
+      }
+    });
   },
   'click #deleteGroupButton': function() {
     var that = this;

@@ -26,7 +26,7 @@ Template.riderDashboard.rendered = function () {
       // Create a new array to hold the cursors.
       var cursorsArray = [];
       // If user is in a group, then display all the drivers for that group also.
-      // TODO: Change the cursor below after Drivers class is implemeted.
+      // TODO: Change the cursor below after Drivers class is implemented.
       cursorsArray.push({
         cursor : Meteor.user().getDriversCursorForGroup() ,
         transform : function (document) {

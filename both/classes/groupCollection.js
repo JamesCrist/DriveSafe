@@ -148,7 +148,9 @@ Group.prototype = {
   },
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
-      throw new Meteor.Error('Admin cannot leave while there are still others in a group!');
+      var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
+      callback.call(this, error, null);
+      return;
     }
 
     // Remove user from list of members for this group.
@@ -158,7 +160,9 @@ Group.prototype = {
       newMembers.splice(index , 1);
       this._members = newMembers;
     } else {
-      throw new Meteor.Error('Could not find member to remove!');
+      var error = new Meteor.Error("Could not find member to remove!");
+      callback.call(this, error, null);
+      return;
     }
 
     // If there are still members in the group, then just update it, else
@@ -171,10 +175,14 @@ Group.prototype = {
   },
   addMember: function(memberId, callback) {
     if (!memberId) {
-      throw new Meteor.Error("MemberId to add cannot be null!");
+      var error = new Meteor.Error("MemberId to add cannot be null!");
+      callback.call(this, error, null);
+      return;
     }
     if (this.members.indexOf(memberId) >= 0) {
-      throw new Meteor.Error("User is already in the group!");
+      var error = new Meteor.Error("User is already in the group!");
+      callback.call(this, error, null);
+      return;
     }
     var newMembers = this.members;
     newMembers.push(memberId);
@@ -184,10 +192,14 @@ Group.prototype = {
   },
   changeAdmin: function(newAdmin, callback) {
     if (!newAdmin) {
-      throw new Meteor.Error("New admin must be defined!");
+      var error = new Meteor.Error("New admin must be defined!");
+      callback.call(this, error, null);
+      return;
     }
     if (this.members.indexOf(newAdmin.getId()) < 0 ) {
-      throw new Meteor.Error("User must be in group already to be made admin!");
+      var error = new Meteor.Error("User must be in group already to be made admin!");
+      callback.call(this, error, null);
+      return;
     }
     this._admin = newAdmin.getId();
     this.save(callback);

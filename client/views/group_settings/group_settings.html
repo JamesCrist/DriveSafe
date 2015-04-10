@@ -41,12 +41,12 @@
                             <div class="item">
                                 {{#if members}}
                                     {{#each groupMembers}}
-                                            <div class="item" id="{{id}}">
+                                            <div class="item" id="{{_id}}">
                                                 <div class="row">
                                                     <div class="col col-50">
                                                         {{ profile.name }} <br/> {{ profile.email }}
                                                     </div>
-                                                    {{#unless profile.admin}}
+                                                    {{#unless profile.isAdmin}}
                                                         <div class="col">
                                                             <button class="button button-outline button-positive makeAdmin">
                                                                 Make Admin
