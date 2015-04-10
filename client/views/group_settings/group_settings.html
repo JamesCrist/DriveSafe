@@ -1,53 +1,84 @@
 <template name="GroupSettings">
-    {{#contentFor "headerButtonLeft"}}
-        <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-            {{#if isAndroid}}
-                {{> ionIcon icon='android-more-vertical'}}
-            {{else}}
-                {{> ionIcon icon='navicon'}}
-            {{/if}}
-        </button>
-    {{/contentFor}}
-    {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-right" data-ion-menu-toggle="right">
-            {{#if isAndroid}}
-                {{> ionIcon icon='android-settings'}}
-            {{else}}
-                {{> ionIcon icon='ios-gear'}}
-            {{/if}}
-        </button>
-    {{/contentFor}}
+    {{#with groupModel}}
+        {{#contentFor "headerButtonLeft"}}
+            <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+                {{#if isAndroid}}
+                    {{> ionIcon icon='android-more-vertical'}}
+                {{else}}
+                    {{> ionIcon icon='navicon'}}
+                {{/if}}
+            </button>
+        {{/contentFor}}
+        {{#contentFor "headerButtonRight"}}
+            <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+                {{#if isAndroid}}
+                    {{> ionIcon icon='android-settings'}}
+                {{else}}
+                    {{> ionIcon icon='ios-gear'}}
+                {{/if}}
+            </button>
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">{{groupName}} Settings</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">{{name}} Settings</h1>
+        {{/contentFor}}
 
-    {{#ionView}}
-        {{#ionContent}}
-            <div class="page-container container">
-                <div class="list">
-                    <div class="item item-divider">
-                        Invite Others
+        {{#ionView}}
+            {{#ionContent}}
+                    <div class="page-container container">
+                        <div class="list">
+                            <div class="item item-divider">
+                                Invite Others
+                            </div>
+                            <div class="item">
+                                <p>Your group key is: <strong>{{id}}</strong> <br/>
+                                    Give this key to other users so that they may join your group
+                                </p>
+                            </div>
+                            <div class="item item-divider">
+                                Manage Members
+                            </div>
+                            <div class="item">
+                                {{#if members}}
+                                    {{#each groupMembers}}
+                                            <div class="item" id="{{id}}">
+                                                <div class="row">
+                                                    <div class="col col-50">
+                                                        {{ profile.name }} <br/> {{ profile.email }}
+                                                    </div>
+                                                    {{#unless profile.admin}}
+                                                        <div class="col">
+                                                            <button class="button button-outline button-positive makeAdmin">
+                                                                Make Admin
+                                                            </button>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button class="button button-outline button-assertive removeMember">
+                                                                Remove User
+                                                            </button>
+                                                        </div>
+                                                    {{/unless}}
+                                                </div>
+                                            </div>
+                                    {{/each}}
+                                {{else}}
+                                    <p>
+                                        No Members Found
+                                    </p>
+                                {{/if}}
+                            </div>
+                            <div class="item item-divider">
+                                Delete Group (Cannot be undone)
+                            </div>
+                            <div class='item'>
+                                <button class="button button-full button-assertive" id="deleteGroupButton">
+                                    Delete Group
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="item">
-                        <p>Your group key is: <strong>{{groupKey}}</strong> <br/>
-                            Give this key to other users so that they may join your group
-                        </p>
-                    </div>
-                    <div class="item item-divider">
-                        Manage Members
-                    </div>
-                    <div class="item">
-                        {{> GroupSettingsManageMembers }}
-                    </div>
-                    <div class="item item-divider">
-                        Delete Group (Cannot be undone)
-                    </div>
-                    <div class='item'>
-                        {{> GroupSettingsDeleteGroup }}
-                    </div>
-                </div>
-            </div>
-        {{/ionContent}}
-    {{/ionView}}
+
+            {{/ionContent}}
+        {{/ionView}}
+    {{/with}}
 </template>

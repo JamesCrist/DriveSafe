@@ -25,3 +25,5 @@ mrt-local:ionic
 mrt:live-maps
 mizzao:bootstrap-3
 mrt:googlemaps
+sanjo:jasmine
+velocity:html-reporter@=0.4.0

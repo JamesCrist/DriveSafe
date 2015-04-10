@@ -27,14 +27,11 @@ this.GroupSettingsController = RouteController.extend({
     });
     return ready;
   },
-
+  waitOn: function() {
+    return Meteor.subscribe("groups", {admin: Meteor.userId()});
+  },
   data: function() {
-
-
-    return {
-      params: this.params || {}
-    };
-    /*DATA_FUNCTION*/
+    return Groups.findOne();
   },
 
   onAfterAction: function() {
