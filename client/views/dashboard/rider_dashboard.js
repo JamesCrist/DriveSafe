@@ -4,7 +4,7 @@ pageSession.set("errorMessage", "");
 
 Template.riderDashboard.rendered = function() {
     GoogleMaps.init(
-      {} ,
+      {libraries: 'places'} ,
       function () {
         var mapOptions = {
           center : new google.maps.LatLng(Meteor.user().profile.lat , Meteor.user().profile.lng) ,
@@ -51,12 +51,6 @@ Template.riderDashboard.rendered = function() {
       }
     );
 };
-
-Template.riderDashboard.events({
-  "click .requestRide": function() {
-    alert("Ride Requested!");
-  }
-});
 
 Template.riderDashboard.helpers({
   errorMessage: function() {
