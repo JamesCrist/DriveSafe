@@ -9,7 +9,6 @@ Template.GroupSettings.helpers({
 
 Template.GroupSettings.events({
   'click .removeMember': function(event) {
-    var userId = $(event.target).closest(".item").attr('id');
     this.leaveGroup(function(err, res) {
       if (err) {
         console.log(err.message);
@@ -21,15 +20,14 @@ Template.GroupSettings.events({
     this.changeAdmin(userId);
   },
   'click #deleteGroupButton': function() {
+    var that = this;
     IonPopup.confirm({
       title: 'Are you sure?',
       template: 'This is permanent! All members will be removed from this group and the group permanently deleted.',
       onOk: function() {
-        this.delete(function(err) {
+        that.forceDelete(function(err) {
           if (err) {
             console.log(err.message);
-          } else {
-            Router.go("/dashboard");
           }
         });
       }

@@ -3,9 +3,6 @@ var pageSession = new ReactiveDict();
 pageSession.set("errorMessage" , "");
 
 Template.riderDashboard.rendered = function () {
-  console.log(this.data.group);
-  console.log(this.data.user);
-
   var that = this;
 
   GoogleMaps.init(
@@ -29,6 +26,7 @@ Template.riderDashboard.rendered = function () {
       // Create a new array to hold the cursors.
       var cursorsArray = [];
       // If user is in a group, then display all the drivers for that group also.
+      // TODO: Change the cursor below after Drivers class is implemeted.
       cursorsArray.push({
         cursor : Meteor.user().getDriversCursorForGroup() ,
         transform : function (document) {

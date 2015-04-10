@@ -1,5 +1,5 @@
-this.DashboardController = RouteController.extend({
-	template: "Dashboard",
+this.RiderDashboardController = RouteController.extend({
+	template: "riderDashboard",
 
 	yieldTemplates: {
 		/*YIELD_TEMPLATES*/

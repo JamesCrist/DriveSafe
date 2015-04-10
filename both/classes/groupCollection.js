@@ -118,6 +118,27 @@ Group.prototype = {
     }
     Groups.remove(this.id, callback);
   },
+  forceDelete: function(callback) {
+    var that = this;
+    for (var member in this.members) {
+      if (this.members[member] == this.admin) {
+        continue;
+      }
+      Users.findOne(this.members[member]).leaveGroup(function(err, res) {
+        if (err) {
+          callback.call(that, err, res);
+          return;
+        }
+      });
+    }
+    Users.findOne(this.admin).leaveGroup(function(err, res) {
+      if (err) {
+        callback.call(that, err, res);
+        return;
+      }
+    });
+    this.delete(callback);
+  },
   membersModel: function() {
     var members = [];
     for (var member in this.members) {
@@ -170,6 +191,42 @@ Group.prototype = {
     }
     this._admin = newAdmin.getId();
     this.save(callback);
+  },
+  addDriver: function(driver, callback) {
+    if (!driver) {
+      throw Meteor.Error("Driver is not defined!");
+    }
+    // Check to make sure the driver is already a member of the group.
+    var index = this.members.indexOf(driver.getId());
+    if (index < 0) {
+      throw Meteor.Error("User must already be a member to become a driver!");
+    }
+
+    // Add user to list of drivers for this group.
+    index = this.drivers.indexOf(driver.getId());
+    var newDrivers = this.drivers;
+    if(index < 0) {
+      newDrivers.push(driver.getId());
+      this._drivers = newDrivers;
+      this.save(callback);
+    } else {
+      Meteor.call("User is already a driver for this group!");
+    }
+  },
+  removeDriver: function(driver, callback) {
+    if (!driver) {
+      throw Meteor.Error("Driver is not defined!");
+    }
+    // Remove user from list of members for this group.
+    var index = this.drivers.indexOf(driver.getId());
+    var newDrivers = this.drivers;
+    if(index >= 0) {
+      newDrivers.splice(index , 1);
+      this._drivers = newDrivers;
+      this.save(callback);
+    } else {
+      throw Meteor.Error("User is not a driver of this group!");
+    }
   }
 };
 

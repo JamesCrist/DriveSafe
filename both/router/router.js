@@ -8,7 +8,7 @@ Router.configure({
 
 if(Meteor.isClient) {
 	var publicRoutes = ["login", "register", "forgot_password", "reset_password"];
-	var privateRoutes = ["dashboard", "user_settings", "group_settings", "logout"];
+	var privateRoutes = ["rider_dashboard", "user_settings", "group_settings", "logout"];
 	var adminRoutes = ["group_settings"];
 	var zonelessRoutes = [];
 
@@ -27,8 +27,8 @@ if(Meteor.isClient) {
 		});
 
 		if(grantedRoute == "") {
-			if(routeGranted("dashboard")) {
-				return "dashboard";
+			if(routeGranted("rider_dashboard")) {
+				return "rider_dashboard";
 			} else {
 				return "login";
 			}
@@ -102,6 +102,20 @@ if(Meteor.isClient) {
 		this.next();
 	};
 
+	Router.ensureRider = function() {
+		if (Meteor.user().isDriver()) {
+			this.redirect("driver_dashboard");
+		}
+		this.next();
+	};
+
+	Router.ensureDriver = function() {
+		if (!Meteor.user().isDriver()) {
+			this.redirect("rider_dashboard");
+		}
+		this.next();
+	};
+
 	Meteor.subscribe("current_user_data");
 
 	Router.onBeforeAction(function() {
@@ -117,6 +131,8 @@ if(Meteor.isClient) {
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 	Router.onBeforeAction(Router.ensureAdmin, {only: adminRoutes});
+	Router.onBeforeAction(Router.ensureRider, {only: ["rider_dashboard"]});
+	Router.onBeforeAction(Router.ensureDriver, {only: ["driver_dashboard"]});
 }
 
 Router.map(function () {
@@ -125,7 +141,8 @@ Router.map(function () {
 	this.route("register", {path: "/register", controller: "RegisterController"});
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
-	this.route("dashboard", {path: "/dashboard", controller: "DashboardController"});
+	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
+	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
 	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
   this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
 	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
