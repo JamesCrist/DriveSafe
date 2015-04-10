@@ -5,6 +5,8 @@ Groups = new Meteor.Collection("groups", {
   }
 });
 
+//TODO: finish implementation
+
 // A Group class that takes a document in its constructor
 Group = function (id, name, admin, members, drivers) {
   this._id = id;
@@ -51,6 +53,15 @@ Group.prototype = {
   get drivers() {
     return this._drivers;
   },
+  set admin(value) {
+    this._admin = value;
+  },
+  set members(value) {
+    this._members = value;
+  },
+  set drivers(value) {
+    this._drivers = value;
+  },
   save: function(callback) {
     if (!this.name) {
       throw new Meteor.Error("Name is not defined!");
@@ -96,11 +107,11 @@ Group.prototype = {
     }
   },
   delete: function(callback) {
-    if (!Meteor.user().admin) {
+    if (!Meteor.user().profile.admin) {
       throw new Meteor.Error("Access Denied!");
     }
 
-    if (this.members() && this.members.length > 0) {
+    if (this.members && this.members.length > 0) {
       throw new Meteor.Error("Group has members!");
     }
     Groups.remove(this.id, callback);
@@ -111,6 +122,32 @@ Group.prototype = {
       members.push(Users.findOne(this.members[member]));
     }
     return members;
+  },
+  removeMember: function(member, callback) {
+    if (this.admin == member._id && this.members.length > 1) {
+      throw new Meteor.Error('Admin cannot leave while there are still others in a group!');
+    }
+
+    // Remove user from list of members for this group.
+    var newMembers = this.members;
+    var index = newMembers.indexOf(member._id);
+    if(index >= 0) {
+      newMembers.splice(index , 1);
+      this._members = newMembers;
+    } else {
+      throw new Meteor.Error('Could not find member to remove!');
+    }
+
+    // If there are still members in the group, then just update it, else
+    // if there are no members left then delete the group.
+    if (this.members.length > 0) {
+      this.save(callback);
+    } else {
+      this.delete(callback);
+    }
+  },
+  addMember: function(member, callback) {
+
   }
 };
 

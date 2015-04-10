@@ -26,7 +26,7 @@ Template.riderDashboard.rendered = function() {
           LiveMaps.addMarkersToMap(
             map ,
             [ {
-              cursor : Users.find({ "profile.group" : Groups.findOne().getId() , "profile.isDriver" : true }) ,
+              cursor : Users.find({ "profile.group" : Groups.findOne().id , "profile.isDriver" : true }) ,
               transform : function (document) {
                 return {
                   title : document.profile.name ,
