@@ -18,14 +18,11 @@ this.DashboardController = RouteController.extend({
 	isReady: function() {
 		return Geolocation.latLng() != null;
 	},
-
+	waitOn: function() {
+		return Meteor.subscribe("groups", {members: Meteor.userId()});
+	},
 	data: function() {
-		
-
-		return {
-			params: this.params || {}
-		};
-		/*DATA_FUNCTION*/
+		return Groups.findOne();
 	},
 
 	onAfterAction: function() {

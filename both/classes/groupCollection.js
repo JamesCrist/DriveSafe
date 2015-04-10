@@ -1,4 +1,122 @@
-// create an object with the desired methods to use as prototype
+// Create Groups MongoDB collection
+Groups = new Meteor.Collection("groups", {
+  transform: function(doc) {
+    return new Group(doc._id, doc.name, doc.admin, doc.members, doc.drivers);
+  }
+});
+
+// A Group class that takes a document in its constructor
+Group = function (id, name, admin, members, drivers) {
+  this._id = id;
+  this._name = name;
+  // If admin is not defined, define admin to be the current
+  // user.
+  if (!admin) {
+    admin = Meteor.userId();
+  }
+  this._admin = admin;
+  // Check to see if members is undefined or null,
+  // if so then make into empty array.
+  if (!members) {
+    members = [];
+  }
+  // If members is empty or admin is not in members, add admin.
+  if (members.length === 0 || members.indexOf(admin) < 0) {
+    members.push(admin);
+  }
+  this._members = members;
+  // If drivers is null or undefined, make it an empty array.
+  if (!drivers) {
+    drivers = [];
+  }
+  this._drivers = drivers;
+};
+
+Group.prototype = {
+  get id() {
+    // readonly
+    return this._id;
+  },
+  get name() {
+    // readonly
+    return this._name;
+  },
+  get admin() {
+    // readonly
+    return this._admin;
+  },
+  get members() {
+    return this._members;
+  },
+  get drivers() {
+    return this._drivers;
+  },
+  save: function(callback) {
+    if (!this.name) {
+      throw new Meteor.Error("Name is not defined!");
+    }
+
+    if (!this.admin) {
+      throw new Meteor.Error("Admin is not defined!");
+    }
+
+    if (!this.members || this.members.length === 0) {
+      throw new Meteor.Error("Members must be defined or have at least one member!");
+    }
+
+    if (!this.drivers) {
+      throw new Meteor.Error("Drivers must be defined!");
+    }
+
+    var doc = {
+      admin: this.admin,
+      members: this.members,
+      drivers: this.drivers
+    };
+
+    // If this group already exists, then modify it.
+    if (this.id) {
+      Groups.update(this.id, {$set: doc}, callback);
+      // Else, create a new group.
+    } else {
+      doc.name = this.name;
+      if (Groups.findOne({name: this.name})) {
+        throw new Meteor.Error("Group with name " + name + " already exists!");
+      }
+
+      // remember the context, since in callback it's changed
+      var that = this;
+      Groups.insert(doc, function(error, result) {
+        that._id = result;
+
+        if (callback != null) {
+          callback.call(that, error, result);
+        }
+      });
+    }
+  },
+  delete: function(callback) {
+    if (!Meteor.user().admin) {
+      throw new Meteor.Error("Access Denied!");
+    }
+
+    if (this.members() && this.members.length > 0) {
+      throw new Meteor.Error("Group has members!");
+    }
+    Groups.remove(this.id, callback);
+  },
+  membersModel: function() {
+    var members = [];
+    for (var member in this.members) {
+      members.push(Users.findOne(this.members[member]));
+    }
+    return members;
+  }
+};
+
+
+
+/*
 var group = {
   getName: function () {
     return this.name;
@@ -151,3 +269,4 @@ Groups = new Meteor.Collection("groups", {
     return  _.extend(newInstance, doc);
   }
 });
+*/

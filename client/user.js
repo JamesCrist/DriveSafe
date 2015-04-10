@@ -1,6 +1,8 @@
 // Definition of the user class. Due to Meteor restrictions, this class
 // is only defined on the client and cannot be used on the server. On the client,
 // it is instantiated whenever a call to Meteor.user() or Users.findOne() is made.
+
+/*
 var user  = {
   getName: function () {
     return this.profile.name;
@@ -98,3 +100,4 @@ Meteor.users._transform = function(doc) {
 
   return _.extend(newInstance, doc);
 };
+*/
