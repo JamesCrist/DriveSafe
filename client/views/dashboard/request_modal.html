@@ -1,0 +1,46 @@
+<template name="request_modal">
+  {{#ionModal title="Request Ride"}}
+    <div class="padding">
+      Pick Up Location:
+      <input id="pickup-input" class="controls" type="text"
+        placeholder="Your location">
+        Drop Off Location:
+      <input id="dest-input" class="controls" type="text"
+        placeholder="Enter a destination">
+    </div>
+    <!--
+   <div class="padding">
+      <button id="submit_button" class="button button-stable">Request Ride!</button>
+    </div> -->
+  {{/ionModal}}
+  <style>
+    #pickup-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pickup-input:focus {
+        border-color: #4d90fe;
+      }
+       #dest-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #dest-input:focus {
+        border-color: #4d90fe;
+      }
+  </style>
+</template>
