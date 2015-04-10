@@ -10,12 +10,15 @@ Template.GroupSettings.helpers({
 Template.GroupSettings.events({
   'click .removeMember': function(event) {
     var userId = $(event.target).closest(".item").attr('id');
-    console.log(this);
-    this.removeMember(userId);
+    this.leaveGroup(function(err, res) {
+      if (err) {
+        console.log(err.message);
+      }
+    });
   },
   'click .makeAdmin': function(event) {
     var userId = $(event.target).closest(".item").attr('id');
-    this.makeAdmin(userId);
+    this.changeAdmin(userId);
   },
   'click #deleteGroupButton': function() {
     IonPopup.confirm({

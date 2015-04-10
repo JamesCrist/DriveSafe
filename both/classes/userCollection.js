@@ -1,88 +1,122 @@
-// Update Users MongoDB collection.
-/*
-Meteor.users._transform = function(doc) {
-  var newInstance = new User(null, null);
+Meteor.users._transform = function (doc) {
+  var newInstance = new User();
 
-  return _.extend(newInstance, doc);
+  return _.extend(newInstance , doc);
 };
 
-//TODO: finish implementation
 
-// A User class that takes a document in its constructor
-User = function (name, email) {
-  if (!this._id) {
-    this._id = null;
-    this.email = email;
-    // New user's get a random password.
-    this.password = (Math.floor(Math.random() * 999999) + 100000).toString();
-    this.profile = {
-      name: name,
-      lat: 0,
-      lng: 0,
-      group: null,
-      isAdmin: false,
-      isDriver: false
-    }
-  }
+User = function () {
 };
 
 User.prototype = {
-  get id() {
-    // readonly
-    return this._id;
-  },
-  get name() {
-    // readonly
+  getName : function () {
     return this.profile.name;
-  },
-  get isAdmin() {
-    // readonly
-    return this.profile.isAdmin;
-  },
-  get group() {
-    return this.profile.group;
-  },
-  get isDriver() {
-    return this.profile.isDriver;
-  },
-  get lat() {
-    return this.profile.lat;
-  },
-  get lng() {
-    return this.profile.lng;
-  },
+  } ,
+  getId : function () {
+    return this._id;
+  } ,
   getGroup: function() {
-    return Groups.findOne(this.group);
+    return Groups.findOne(this.profile.group);
   },
-  save: function(callback) {
-    if (!this.name) {
-      throw new Meteor.Error("Name is not defined!");
+  isAdmin : function () {
+    return this.profile.isAdmin;
+  } ,
+  isDriver : function () {
+    return this.profile.isDriver;
+  } ,
+  setIsDriver : function (isDriver) {
+    this.profile.isDriver = true;
+    Users.update(this.getId() , { $set : { 'profile.isDriver' : isDriver } });
+  } ,
+  setIsAdmin : function (isAdmin) {
+    this.profile.isAdmin = isAdmin;
+    Users.update(this.getId() , { $set : { 'profile.isAdmin' : isAdmin } });
+  } ,
+  setGroup : function (newGroupId) {
+    this.profile.group = newGroupId;
+    Users.update(this.getId() , { $set : { 'profile.group' : newGroupId } });
+  } ,
+  leaveGroup : function (callback) {
+    // Call the group's remove member function
+    var that = this;
+    // If user does not have a group already, then just update the user in the database.
+    if (!this.getGroup()) {
+      Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false}}, callback);
+      return;
     }
-
-    var doc = {
-      profile: this.profile,
-    };
-
-    // If this group already exists, then modify it.
-    if (this.id) {
-      Users.update(this.id, {$set: {profile: doc}, callback);
-      // Else, create a new group.
-    } else {
-      doc.name = this.name;
-      if (Groups.findOne({name: this.name})) {
-        throw new Meteor.Error("Group with name " + name + " already exists!");
+    this.getGroup().removeMember(this.getId(), function(err, res) {
+      if (err && callback) {
+        callback.call(that, err, res);
+      } else {
+        // No error, so update this user's current group.
+        that.setGroup(null);
+        Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false}}, callback);
       }
-
-      // remember the context, since in callback it's changed
-      var that = this;
-      Groups.insert(doc, function(error, result) {
-        that._id = result;
-
-        if (callback != null) {
-          callback.call(that, error, result);
-        }
-      });
+    });
+  } ,
+  createGroup : function (newGroupName , callback) {
+    // Create a new group object
+    var newGroup = new Group(null, newGroupName, null, null, null);
+    var that = this;
+    newGroup.save(function(err, groupId) {
+      if (!err) {
+        that.setGroup(groupId);
+        that.setIsAdmin(true);
+      }
+      callback.call(that, err, groupId);
+    });
+  } ,
+  joinGroup : function (groupKey , callback) {
+    // Call the server side function to add the current user to a group.
+    // This is done server side to improve efficiency and security.
+    Meteor.call("joinGroup" , groupKey , function (err) {
+      if(!err) {
+        this.setGroup(groupKey);
+      }
+      callback(err);
+    }.bind(this));
+  } ,
+  getGroup : function () {
+    return Groups.findOne(this.profile.group);
+  } ,
+  becomeDriver : function (callback) {
+    if(!this.getGroup()) {
+      callback({ message : "user must be in a group to become a driver" });
+      return;
     }
+    if(!Groups.findOne().addDriver(this.getId())) {
+      callback({ message : "user is already a driver!" });
+    } else {
+      this.setIsDriver(true);
+    }
+    callback(null);
+  } ,
+  stopDriving : function (callback) {
+    this.setIsDriver(false);
+    if(!this.getGroup()) {
+      callback({ message : "user's group could not be found" });
+      return;
+    }
+    Groups.findOne().removeDriver(this.getId());
+    callback(null);
+  } ,
+  updateLocation : function (lat , lng) {
+    Users.update(this.getId() , {
+      $set : {
+        'profile.location' : {lat: lat, lng: lng}
+      }
+    });
+  },
+  getDriversCursorForGroup: function() {
+    if (!this.getGroup()) {
+      return Users.find({"profile.group": null,  "profile.isDriver": true});
+    }
+    return Users.find({"profile.group": this.getGroup().id, "profile.isDriver": true});
+  },
+  getLat : function() {
+    return Users.findOne(this.getId()).profile.location.lat;
+  },
+  getLng : function() {
+    return Users.findOne(this.getId()).profile.location.lng;
   }
 };
-  */

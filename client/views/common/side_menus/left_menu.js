@@ -6,6 +6,8 @@ Template.leftMenu.events({
     Router.go("/dashboard");
   },
   'click #joinGroupButton' : function (event, template) {
+    var that = this;
+    console.log(that);
     IonPopup.prompt({
       title : 'Join Group' ,
       template : 'Please enter secret group key. Group admins can give these to you.' ,
@@ -13,7 +15,7 @@ Template.leftMenu.events({
       inputType : 'text' ,
       inputPlaceholder : 'group key' ,
       onOk : function (event , response) {
-        Meteor.user().joinGroup(response, function (error) {
+        that.user.joinGroup(response, function(error) {
           if (error) {
             console.log(error);
           } else {

@@ -22,7 +22,7 @@ this.DashboardController = RouteController.extend({
 		return Meteor.subscribe("groups", {members: Meteor.userId()});
 	},
 	data: function() {
-		return Groups.findOne();
+		return {group: Groups.findOne(), user: Meteor.user()};
 	},
 
 	onAfterAction: function() {

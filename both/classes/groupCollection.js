@@ -5,8 +5,6 @@ Groups = new Meteor.Collection("groups", {
   }
 });
 
-//TODO: finish implementation
-
 // A Group class that takes a document in its constructor
 Group = function (id, name, admin, members, drivers) {
   this._id = id;
@@ -91,23 +89,27 @@ Group.prototype = {
       // Else, create a new group.
     } else {
       doc.name = this.name;
-      if (Groups.findOne({name: this.name})) {
-        throw new Meteor.Error("Group with name " + name + " already exists!");
-      }
 
       // remember the context, since in callback it's changed
       var that = this;
-      Groups.insert(doc, function(error, result) {
-        that._id = result;
 
-        if (callback != null) {
-          callback.call(that, error, result);
+      Meteor.call("nameIsAvailable", this.name, function(availabilityError) {
+        if (availabilityError) {
+          callback.call(that , new Meteor.Error("Name is not available!") , null);
+        } else {
+          Groups.insert(doc , function (error , result) {
+            that._id = result;
+
+            if(callback != null) {
+              callback.call(that , error , result);
+            }
+          });
         }
       });
     }
   },
   delete: function(callback) {
-    if (!Meteor.user().profile.admin) {
+    if (!Meteor.user().isAdmin()) {
       throw new Meteor.Error("Access Denied!");
     }
 
@@ -123,14 +125,14 @@ Group.prototype = {
     }
     return members;
   },
-  removeMember: function(member, callback) {
-    if (this.admin == member._id && this.members.length > 1) {
+  removeMember: function(memberId, callback) {
+    if (this.admin == memberId && this.members.length > 1) {
       throw new Meteor.Error('Admin cannot leave while there are still others in a group!');
     }
 
     // Remove user from list of members for this group.
     var newMembers = this.members;
-    var index = newMembers.indexOf(member._id);
+    var index = newMembers.indexOf(memberId);
     if(index >= 0) {
       newMembers.splice(index , 1);
       this._members = newMembers;
@@ -146,10 +148,40 @@ Group.prototype = {
       this.delete(callback);
     }
   },
-  addMember: function(member, callback) {
+  addMember: function(memberId, callback) {
+    if (!memberId) {
+      throw new Meteor.Error("MemberId to add cannot be null!");
+    }
+    if (this.members.indexOf(memberId) >= 0) {
+      throw new Meteor.Error("User is already in the group!");
+    }
+    var newMembers = this.members;
+    newMembers.push(memberId);
+    this._members = newMembers;
 
+    this.save(callback);
+  },
+  changeAdmin: function(newAdmin, callback) {
+    if (!newAdmin) {
+      throw new Meteor.Error("New admin must be defined!");
+    }
+    if (this.members.indexOf(newAdmin.getId()) < 0 ) {
+      throw new Meteor.Error("User must be in group already to be made admin!");
+    }
+    this._admin = newAdmin.getId();
+    this.save(callback);
   }
 };
+
+if (Meteor.isServer) {
+  Meteor.methods({
+    'nameIsAvailable' : function (name) {
+      if(Groups.findOne({ name : name })) {
+       throw Meteor.Error("Name is not available!");
+      }
+    }
+  });
+}
 
 
 
