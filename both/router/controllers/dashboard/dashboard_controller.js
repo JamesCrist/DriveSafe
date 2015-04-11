@@ -1,37 +1,4 @@
-<<<<<<< HEAD
-this.DashboardController = RouteController.extend({
-	template: "Dashboard",
 
-	yieldTemplates: {
-		/*YIELD_TEMPLATES*/
-	},
-
-	onBeforeAction: function() {
-		/*BEFORE_FUNCTION*/
-		this.next();
-	},
-
-	action: function() {
-		if(this.isReady()) { this.render(); } else { this.render("loading"); }
-		/*ACTION_FUNCTION*/
-	},
-  // Make sure that the geolocation API is loaded before rendering the dashboard.
-	isReady: function() {
-		return Geolocation.latLng() != null;
-	},
-
-	data: function() {
-		
-
-		return {
-			params: this.params || {}
-		};
-		/*DATA_FUNCTION*/
-	},
-
-	onAfterAction: function() {
-	}
-=======
 this.DashboardController = RouteController.extend({
 	template: "Dashboard",
 
@@ -61,5 +28,4 @@ this.DashboardController = RouteController.extend({
 
 	onAfterAction: function() {
 	}
->>>>>>> dcc19c8737484ae74567be006bfb4a37a8bd3900
 });

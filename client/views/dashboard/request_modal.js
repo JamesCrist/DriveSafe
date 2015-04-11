@@ -31,12 +31,12 @@ Template.request_modal.rendered = function() {
 	}
 	
 };
-/*
+
 Template.request_modal.events({
 	'change #pickup-input': function(){
 		var userPickupLocation;
 		if(pickupInput === ''){
-			userPickupLocation = new google.maps.LatLng(Meteor.user().profile.lat, Meteor.user().profile.lng);
+			userPickupLocation = new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng);
 		}
 		else{
 			userPickupLocation = (pickup_autocomplete.getPlace()).geometry.location;
@@ -46,7 +46,7 @@ Template.request_modal.events({
 		var userDestLocation = (dest_autocomplete.getPlace()).geometry.location;
 	},
 	'click #submit_button': function(){
-		//CHECK IF LOCATIONS VALID
+		//TODO CHECK IF LOCATIONS VALID
 		alert("Ride Requested!");
 		var pickup_marker = new google.maps.Marker({
 		    map: map,
@@ -60,6 +60,6 @@ Template.request_modal.events({
 		});
 	}
 });
-*/
+
 
 
