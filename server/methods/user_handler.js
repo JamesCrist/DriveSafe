@@ -8,7 +8,7 @@ Meteor.methods({
       password : password,
       profile: {
         name: name,
-        position: {lat: 0, lng: 0},
+        location: {lat: 0, lng: 0},
         group: null,
         isAdmin: false,
         isDriver: false

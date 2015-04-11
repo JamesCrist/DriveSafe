@@ -1,4 +1,31 @@
 <template name = "riderDashboard">
+    {{#contentFor "headerButtonLeft"}}
+        <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-more-vertical'}}
+            {{else}}
+                {{> ionIcon icon='navicon'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-settings'}}
+            {{else}}
+                {{> ionIcon icon='ios-gear'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        {{#if group}}
+            <h1 class="title"> {{group.name}} </h1>
+        {{else}}
+            <h1 class="title"> DriveSafe </h1>
+        {{/if}}
+    {{/contentFor}}
+
     {{#ionView}}
         {{#ionContent}}
             {{#if errorMessage}}
@@ -10,7 +37,7 @@
         {{/ionContent}}
     {{/ionView}}
     {{#if group }}
-         {{#ionFooterBar class="bar-energized requestRide"}}
+        {{#ionFooterBar class="bar-energized requestRide"}}
             
             <h1 class="title">Request Ride!</h1>
             <button id="request_button" class="button button-large button-stable" data-ion-modal="request_modal">Open Modal</button>

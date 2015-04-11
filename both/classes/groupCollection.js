@@ -113,10 +113,35 @@ Group.prototype = {
       throw new Meteor.Error("Access Denied!");
     }
 
-    if (this.members && this.members.length > 0) {
+    if (this.members && this.members.length > 1) {
       throw new Meteor.Error("Group has members!");
     }
     Groups.remove(this.id, callback);
+  },
+  forceDelete: function(callback) {
+    var that = this;
+
+    for (var member in this.members) {
+      if (this.members[member] == this.admin) {
+        continue;
+      }
+      Users.findOne(this.members[member]).leaveGroup(function(err, res) {
+        if(err) {
+          console.log(err);
+          callback.call(that , err , res);
+          return;
+        }
+      });
+    }
+    Users.findOne(this.admin).leaveGroup(function(err, res) {
+      if(err) {
+        console.log(err);
+        callback.call(that , err , res);
+        return;
+      } else {
+        that.delete(callback);
+      }
+    });
   },
   membersModel: function() {
     var members = [];
@@ -127,7 +152,10 @@ Group.prototype = {
   },
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
-      throw new Meteor.Error('Admin cannot leave while there are still others in a group!');
+      var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
+      console.log(error);
+      callback.call(this, error, null);
+      return;
     }
 
     // Remove user from list of members for this group.
@@ -137,7 +165,10 @@ Group.prototype = {
       newMembers.splice(index , 1);
       this._members = newMembers;
     } else {
-      throw new Meteor.Error('Could not find member to remove!');
+      var error = new Meteor.Error("Could not find member to remove!");
+      console.log(error);
+      callback.call(this, error, null);
+      return;
     }
 
     // If there are still members in the group, then just update it, else
@@ -150,10 +181,14 @@ Group.prototype = {
   },
   addMember: function(memberId, callback) {
     if (!memberId) {
-      throw new Meteor.Error("MemberId to add cannot be null!");
+      var error = new Meteor.Error("MemberId to add cannot be null!");
+      callback.call(this, error, null);
+      return;
     }
     if (this.members.indexOf(memberId) >= 0) {
-      throw new Meteor.Error("User is already in the group!");
+      var error = new Meteor.Error("User is already in the group!");
+      callback.call(this, error, null);
+      return;
     }
     var newMembers = this.members;
     newMembers.push(memberId);
@@ -163,13 +198,53 @@ Group.prototype = {
   },
   changeAdmin: function(newAdmin, callback) {
     if (!newAdmin) {
-      throw new Meteor.Error("New admin must be defined!");
+      var error = new Meteor.Error("New admin must be defined!");
+      callback.call(this, error, null);
+      return;
     }
     if (this.members.indexOf(newAdmin.getId()) < 0 ) {
-      throw new Meteor.Error("User must be in group already to be made admin!");
+      var error = new Meteor.Error("User must be in group already to be made admin!");
+      callback.call(this, error, null);
+      return;
     }
     this._admin = newAdmin.getId();
     this.save(callback);
+  },
+  addDriver: function(driver, callback) {
+    if (!driver) {
+      throw Meteor.Error("Driver is not defined!");
+    }
+    // Check to make sure the driver is already a member of the group.
+    var index = this.members.indexOf(driver.getId());
+    if (index < 0) {
+      throw Meteor.Error("User must already be a member to become a driver!");
+    }
+
+    // Add user to list of drivers for this group.
+    index = this.drivers.indexOf(driver.getId());
+    var newDrivers = this.drivers;
+    if(index < 0) {
+      newDrivers.push(driver.getId());
+      this._drivers = newDrivers;
+      this.save(callback);
+    } else {
+      Meteor.call("User is already a driver for this group!");
+    }
+  },
+  removeDriver: function(driver, callback) {
+    if (!driver) {
+      throw Meteor.Error("Driver is not defined!");
+    }
+    // Remove user from list of members for this group.
+    var index = this.drivers.indexOf(driver.getId());
+    var newDrivers = this.drivers;
+    if(index >= 0) {
+      newDrivers.splice(index , 1);
+      this._drivers = newDrivers;
+      this.save(callback);
+    } else {
+      throw Meteor.Error("User is not a driver of this group!");
+    }
   }
 };
 

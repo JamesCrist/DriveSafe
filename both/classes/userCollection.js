@@ -50,7 +50,7 @@ User.prototype = {
       } else {
         // No error, so update this user's current group.
         that.setGroup(null);
-        Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false}}, callback);
+        that.setIsAdmin(false);
       }
     });
   } ,
@@ -79,26 +79,45 @@ User.prototype = {
   getGroup : function () {
     return Groups.findOne(this.profile.group);
   } ,
+  becomeAdmin: function (callback) {
+    var oldAdmin = Users.findOne(this.getGroup().admin);
+    var that = this;
+    this.getGroup().changeAdmin(this, function(err, res) {
+      if (!err) {
+        oldAdmin.setIsAdmin(false);
+        that.setIsAdmin(true);
+      }
+      callback.call(that, err, res);
+    })
+  } ,
   becomeDriver : function (callback) {
     if(!this.getGroup()) {
-      callback({ message : "user must be in a group to become a driver" });
+      var error = new Meteor.Error("User must be in a group to become a driver!");
+      callback.call(this, error, null);
       return;
     }
-    if(!Groups.findOne().addDriver(this.getId())) {
-      callback({ message : "user is already a driver!" });
-    } else {
-      this.setIsDriver(true);
-    }
-    callback(null);
+    var that = this;
+    this.getGroup().addDriver(this, function(err, res) {
+      if (!err) {
+        that.setIsDriver((true));
+        callback.call(that, err, res);
+      }
+      callback.call(that, err, res);
+    });
   } ,
   stopDriving : function (callback) {
-    this.setIsDriver(false);
     if(!this.getGroup()) {
-      callback({ message : "user's group could not be found" });
+      var error = new Meteor.Error("User's group could not be found!");
+      callback.call(this, error, null);
       return;
     }
-    Groups.findOne().removeDriver(this.getId());
-    callback(null);
+    var that = this;
+    this.getGroup().removeDriver(this, function(err, res) {
+      if (!err) {
+        that.setIsDriver(false);
+      }
+      callback.call(that, err, res);
+    });
   } ,
   updateLocation : function (lat , lng) {
     Users.update(this.getId() , {
@@ -120,3 +139,20 @@ User.prototype = {
     return Users.findOne(this.getId()).profile.location.lng;
   }
 };
+
+if(Meteor.isServer) {
+
+  Users.allow({
+    'insert': function (userId,doc) {
+      //TODO: do checks here.
+      /* user and doc checks ,
+       return true to allow insert */
+      return true;
+    },
+    'update': function(userId, doc) {
+      //TODO: do checks here.
+      return true;
+    }
+  });
+
+}
