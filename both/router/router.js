@@ -103,14 +103,18 @@ if(Meteor.isClient) {
 	};
 
 	Router.ensureRider = function() {
-		if (Meteor.user().isDriver()) {
+		if (!Meteor.user()) {
+			this.redirect("login");
+		} else if (Meteor.user().isDriver()) {
 			this.redirect("driver_dashboard");
 		}
 		this.next();
 	};
 
 	Router.ensureDriver = function() {
-		if (!Meteor.user().isDriver()) {
+		if (!Meteor.user()) {
+			this.redirect("login");
+		} else if (!Meteor.user().isDriver()) {
 			this.redirect("rider_dashboard");
 		}
 		this.next();

@@ -3,14 +3,13 @@ Template.leftMenu.events({
     Router.go("/logout");
   } ,
   "click #dashboardButton" : function () {
-    if (this.user.isDriver()) {
+    if (Meteor.user().isDriver()) {
       Router.go("/driver_dashboard");
     } else {
       Router.go("/rider_dashboard");
     }
   } ,
   'click #joinGroupButton' : function (event , template) {
-    var that = this;
     IonPopup.prompt({
       title : 'Join Group' ,
       template : 'Please enter secret group key. Group admins can give these to you.' ,
@@ -18,7 +17,7 @@ Template.leftMenu.events({
       inputType : 'text' ,
       inputPlaceholder : 'group key' ,
       onOk : function (event , response) {
-        that.user.joinGroup(response , function (error) {
+        Meteor.user().joinGroup(response , function (error) {
           if(error) {
             console.log(error);
           } else {
@@ -29,7 +28,6 @@ Template.leftMenu.events({
     });
   } ,
   'click #createGroupButton' : function (event , template) {
-    var that = this;
     IonPopup.show({
       title : 'Create Group' ,
       template : '<span id="inputDirections">' + 'Please enter group name' + '</span>' + '<input type="text" placeholder="group name" name="prompt" >' ,
@@ -41,7 +39,7 @@ Template.leftMenu.events({
             // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
             var inputVal = $(template.firstNode).find('[name=prompt]').val();
 
-            that.user.createGroup(inputVal , function (err) {
+            Meteor.user().createGroup(inputVal , function (err) {
               if(err) {
                 // $(template.firstNode).find("#inputDirections").append(error.message);
                 $(template.firstNode).find("#inputDirections").html(err.message);
@@ -67,12 +65,11 @@ Template.leftMenu.events({
 
 
   'click #leaveGroup' : function (event , template) {
-    var that = this;
     IonPopup.confirm({
       title : 'Are you sure?' ,
       template : 'You will no longer have access to drivers for this group' ,
       onOk : function () {
-        that.user.leaveGroup(function (err) {
+        Meteor.user().leaveGroup(function (err) {
           if(err) {
             console.log(err.message);
           } else {
@@ -83,7 +80,7 @@ Template.leftMenu.events({
     });
   } ,
   'click #becomeDriverButton' : function (event , template) {
-    this.user.becomeDriver(function (err) {
+    Meteor.user().becomeDriver(function (err) {
       if(err) {
         console.log(err.message);
       }
