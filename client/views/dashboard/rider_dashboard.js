@@ -6,7 +6,7 @@ Template.riderDashboard.rendered = function () {
   var that = this;
 
   GoogleMaps.init(
-    {} ,
+    {libraries: 'places'} ,
     function () {
       var mapOptions = {
         center : new google.maps.LatLng(that.data.user.getLat() , that.data.user.getLng()) ,
@@ -52,14 +52,9 @@ Template.riderDashboard.rendered = function () {
   );
 };
 
-Template.riderDashboard.events({
-  "click .requestRide" : function () {
-    alert("Ride Requested!");
-  }
-});
-
 Template.riderDashboard.helpers({
   errorMessage : function () {
     return pageSession.get("errorMessage");
   }
 });
+

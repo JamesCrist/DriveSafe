@@ -1,3 +1,4 @@
+
 this.RiderDashboardController = RouteController.extend({
 	template: "riderDashboard",
 
