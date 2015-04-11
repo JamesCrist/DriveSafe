@@ -31,7 +31,7 @@ Template.GroupSettings.events({
       title: 'Are you sure?',
       template: 'This is permanent! All members will be removed from this group and the group permanently deleted.',
       onOk: function() {
-        that.forceDelete(function(err) {
+        that.forceDelete(function(err, res) {
           if (err) {
             console.log(err.message);
           }
