@@ -113,31 +113,35 @@ Group.prototype = {
       throw new Meteor.Error("Access Denied!");
     }
 
-    if (this.members && this.members.length > 0) {
+    if (this.members && this.members.length > 1) {
       throw new Meteor.Error("Group has members!");
     }
     Groups.remove(this.id, callback);
   },
   forceDelete: function(callback) {
     var that = this;
+
     for (var member in this.members) {
       if (this.members[member] == this.admin) {
         continue;
       }
       Users.findOne(this.members[member]).leaveGroup(function(err, res) {
-        if (err) {
-          callback.call(that, err, res);
+        if(err) {
+          console.log(err);
+          callback.call(that , err , res);
           return;
         }
       });
     }
     Users.findOne(this.admin).leaveGroup(function(err, res) {
-      if (err) {
-        callback.call(that, err, res);
+      if(err) {
+        console.log(err);
+        callback.call(that , err , res);
         return;
+      } else {
+        that.delete(callback);
       }
     });
-    this.delete(callback);
   },
   membersModel: function() {
     var members = [];
@@ -149,6 +153,7 @@ Group.prototype = {
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
       var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
+      console.log(error);
       callback.call(this, error, null);
       return;
     }
@@ -161,6 +166,7 @@ Group.prototype = {
       this._members = newMembers;
     } else {
       var error = new Meteor.Error("Could not find member to remove!");
+      console.log(error);
       callback.call(this, error, null);
       return;
     }

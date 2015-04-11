@@ -50,7 +50,7 @@ User.prototype = {
       } else {
         // No error, so update this user's current group.
         that.setGroup(null);
-        Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false}}, callback);
+        that.setIsAdmin(false);
       }
     });
   } ,
