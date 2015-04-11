@@ -79,6 +79,17 @@ User.prototype = {
   getGroup : function () {
     return Groups.findOne(this.profile.group);
   } ,
+  becomeAdmin: function (callback) {
+    var oldAdmin = Users.findOne(this.getGroup().admin);
+    var that = this;
+    this.getGroup().changeAdmin(this, function(err, res) {
+      if (!err) {
+        oldAdmin.setIsAdmin(false);
+        that.setIsAdmin(true);
+      }
+      callback.call(that, err, res);
+    })
+  } ,
   becomeDriver : function (callback) {
     if(!this.getGroup()) {
       var error = new Meteor.Error("User must be in a group to become a driver!");
@@ -128,3 +139,20 @@ User.prototype = {
     return Users.findOne(this.getId()).profile.location.lng;
   }
 };
+
+if(Meteor.isServer) {
+
+  Users.allow({
+    'insert': function (userId,doc) {
+      //TODO: do checks here.
+      /* user and doc checks ,
+       return true to allow insert */
+      return true;
+    },
+    'update': function(userId, doc) {
+      //TODO: do checks here.
+      return true;
+    }
+  });
+
+}

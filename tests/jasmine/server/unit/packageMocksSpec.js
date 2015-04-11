@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "6ed593d00091c3e8c0642cb58c217ec0064790de"
+                  "value": "763cb5a39c7e8495f3f82b4aa179e6a5b6619646"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "178a0da8d2fc74f554c015d47174338f6258a044"
+                  "value": "bd2a9c65c8893cc8678dcdfdee704bc88c61cf08"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7225,7 +7225,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 0
+              "value": 1
             },
             "timeout": {
               "type": "constant",
@@ -7869,7 +7869,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "uTQDwBYZGyhkjY3oy"
+          "value": "EyK7s9TbvFkdzWD9w"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7877,7 +7877,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "178a0da8d2fc74f554c015d47174338f6258a044"
+          "value": "bd2a9c65c8893cc8678dcdfdee704bc88c61cf08"
         },
         "appId": {
           "type": "constant",
@@ -10698,11 +10698,11 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 18910
+                  "value": 20741
                 },
                 "fout": {
                   "type": "constant",
-                  "value": 27
+                  "value": 28
                 },
                 "child": {
                   "type": "object",
@@ -10721,7 +10721,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 18910
+                      "value": 20741
                     },
                     "stdin": {
                       "type": "null",

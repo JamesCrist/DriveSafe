@@ -120,8 +120,6 @@ if(Meteor.isClient) {
 		this.next();
 	};
 
-	Meteor.subscribe("current_user_data");
-
 	Router.onBeforeAction(function() {
 		// loading indicator here
 		if(!this.ready()) {
