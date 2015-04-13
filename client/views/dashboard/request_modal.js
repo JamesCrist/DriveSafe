@@ -47,7 +47,7 @@ Template.request_modal.events({
 	},
 	'click #submit_button': function(){
 		//TODO CHECK IF LOCATIONS VALID
-		alert("Ride Requested!");
+		var ride = new Ride(Meteor.user().getId(), Meteor.getName(), userPickupLocation, userDestLocation);
 		map = new google.maps.Map(document.getElementById("map-canvas") , mapOptions);
 		var pickup_marker = new google.maps.Marker({
 		    map: map,

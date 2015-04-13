@@ -23,7 +23,7 @@ Template.Register.events({
 		var register_email = t.find('#register_email').value.trim();
 
 		// check name
-		if(register_name == "")
+		if(register_name === "")
 		{
 			pageSession.set("errorMessage", "Please enter your name.");
 			t.find('#register_name').focus();
