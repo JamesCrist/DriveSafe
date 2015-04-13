@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "ee2afd72593176c162007ede60aaba92dceb3fbe"
+                  "value": "e477ad8b1f32bbf71b7aca098e92fdf11d837751"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "ff682694a4e346d7efdea27cf6cde933207e65ed"
+                  "value": "885a4c1989b0749a4b96434825e9cc1164ed7f09"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7816,6 +7816,12 @@ var packageMetadata = {
                 }
               }
             },
+            "get": {
+              "type": "function"
+            },
+            "getAll": {
+              "type": "function"
+            },
             "prototype": {
               "type": "object",
               "members": {
@@ -7868,15 +7874,15 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "n4WxshoSFqhDdQfXE"
+          "value": "KyKMPLWzBF5C5KFsi"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "e65040f9cbcac79491e5a0a5ec4e29bfeb3383ad"
+          "value": "906d4bd004047a34ef8465ceba2fdb8da3377dc7"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "ff682694a4e346d7efdea27cf6cde933207e65ed"
+          "value": "885a4c1989b0749a4b96434825e9cc1164ed7f09"
         },
         "appId": {
           "type": "constant",
@@ -9460,6 +9466,16 @@ var packageMetadata = {
   "mrt:live-maps": {},
   "mizzao:bootstrap-3": {},
   "mrt:googlemaps": {},
+  "velocity:html-reporter": {},
+  "lai:collection-extensions": {},
+  "dburles:mongo-collection-instances": {},
+  "babrahams:editable-json": {},
+  "meteortoys:toykit": {
+    "MeteorToys_Data": {
+      "type": "undefined"
+    }
+  },
+  "msavin:mongol": {},
   "coffeescript": {},
   "practicalmeteor:loglevel": {
     "loglevel": {
@@ -10697,7 +10713,84 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 24297
+                  "value": 28987
+                },
+                "fout": {
+                  "type": "constant",
+                  "value": 28
+                },
+                "child": {
+                  "type": "object",
+                  "members": {
+                    "domain": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "signalCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "exitCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "pid": {
+                      "type": "constant",
+                      "value": 28987
+                    },
+                    "stdin": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdout": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stderr": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdio": {
+                      "type": "array"
+                    },
+                    "spawn": {
+                      "type": "function"
+                    },
+                    "kill": {
+                      "type": "function"
+                    },
+                    "ref": {
+                      "type": "function"
+                    },
+                    "unref": {
+                      "type": "function"
+                    },
+                    "setMaxListeners": {
+                      "type": "function"
+                    },
+                    "emit": {
+                      "type": "function"
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 17
+                    },
+                    "on": {
+                      "ref": 17
+                    },
+                    "once": {
+                      "type": "function"
+                    },
+                    "removeListener": {
+                      "type": "function"
+                    },
+                    "removeAllListeners": {
+                      "type": "function"
+                    },
+                    "listeners": {
+                      "type": "function"
+                    }
+                  }
                 },
                 "getTaskName": {
                   "type": "function"
@@ -10767,7 +10860,6 @@ var packageMetadata = {
       }
     }
   },
-  "velocity:html-reporter": {},
   "session": {},
   "livedata": {
     "DDP": {

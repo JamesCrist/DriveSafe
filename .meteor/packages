@@ -26,3 +26,5 @@ mrt:live-maps
 mizzao:bootstrap-3
 mrt:googlemaps
 velocity:html-reporter@=0.4.0
+msavin:mongol
+sanjo:jasmine
