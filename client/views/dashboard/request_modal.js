@@ -48,6 +48,7 @@ Template.request_modal.events({
 	'click #submit_button': function(){
 		//TODO CHECK IF LOCATIONS VALID
 		alert("Ride Requested!");
+		map = new google.maps.Map(document.getElementById("map-canvas") , mapOptions);
 		var pickup_marker = new google.maps.Marker({
 		    map: map,
 		    title: 'Pickup',
