@@ -11,4 +11,4 @@ cd DriveSafe
 meteor
 ```
 
-A demo of the current master build can be seen here: http://lucsilva.meteor.com
+A demo of the current master build can be seen here: http://drivesafe.meteor.com

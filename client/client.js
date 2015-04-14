@@ -34,8 +34,8 @@ Handlebars.registerHelper('group', function() {
 
 // Update the user's location every second.
 Meteor.setInterval(function() {
-  if(Meteor.user()) {
-    var location = Geolocation.latLng() || {lat: 0, lng: 0};
+  if(Meteor.user() && Geolocation.latLng()) {
+    var location = Geolocation.latLng();
     Meteor.user().updateLocation(location.lat, location.lng);
   }
 }, 1000);
