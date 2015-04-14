@@ -1,64 +1,44 @@
 Template.request_modal.rendered = function() {
-	var defaultBounds = new google.maps.LatLngBounds(
-	  new google.maps.LatLng(-33.8902, 151.1759),
-	  new google.maps.LatLng(-33.8474, 151.2631));
 
 	var pickupInput = document.getElementById('pickup-input');
 	var destInput = document.getElementById('dest-input');
 
-	var options = {
-	  bounds: defaultBounds,
-	  types: ['establishment']
-	};
-
-	var input_autocomplete = new google.maps.places.Autocomplete(pickupInput, options);
-	var dest_autocomplete = new google.maps.places.Autocomplete(destInput, options);
-	// Bias the autocomplete object to the user's geographical location,
-	// as supplied by the browser's 'navigator.geolocation' object.
-	function geolocate() {
-	  if (navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      var geolocation = new google.maps.LatLng(
-	          position.coords.latitude, position.coords.longitude);
-	      var circle = new google.maps.Circle({
-	        center: geolocation,
-	        radius: position.coords.accuracy
-	      });
-	      input_autocomplete.setBounds(circle.getBounds());
-	      dest_autocomplete.setBounds(circle.getBounds());
-	    });
-	  }
-	}
-	
+	pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
+	dest_autocomplete = new google.maps.places.Autocomplete(destInput);	
+	pickup_autocomplete.bindTo('bounds', map);
+	dest_autocomplete.bindTo('bounds', map);
 };
 
 Template.request_modal.events({
-	'change #pickup-input': function(){
-		var userPickupLocation;
-		if(pickupInput === ''){
-			userPickupLocation = new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng);
-		}
-		else{
-			userPickupLocation = (pickup_autocomplete.getPlace()).geometry.location;
-		}
-	},
-	'change #dest-input': function(){
-		var userDestLocation = (dest_autocomplete.getPlace()).geometry.location;
-	},
 	'click #submit_button': function(){
 		//TODO CHECK IF LOCATIONS VALID
-		var ride = new Ride(Meteor.user().getId(), Meteor.getName(), userPickupLocation, userDestLocation);
-		map = new google.maps.Map(document.getElementById("map-canvas") , mapOptions);
-		var pickup_marker = new google.maps.Marker({
-		    map: map,
-		    title: 'Pickup',
-		    position: userPickupLocation
-		});
-		var dest_marker = new google.maps.Marker({
-		    map: map,
-		    title: 'Destination',
-		    position: userDestLocation
-		});
+		var userPickupLocation, userDestLocation;
+		var value=$.trim($("#pickup-input").val());
+		if(value.length>0){
+			userPickupLocation = (pickup_autocomplete.getPlace()).geometry.location;
+		}
+		else{
+			userPickupLocation = new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng());
+		}
+		var value1=$.trim($("#dest-input").val());
+		if(value1.length>0){
+			userDestLocation = (dest_autocomplete.getPlace()).geometry.location;
+			var ride = new Ride(Meteor.user().getId(), Meteor.user().getName(), userPickupLocation, userDestLocation);
+			console.log(ride);
+			
+			pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat(), userPickupLocation.lng()));
+			destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat(), userDestLocation.lng()));
+			pickupMarker.setVisible(true);
+			destMarker.setVisible(true);
+			
+			var bounds = new google.maps.LatLngBounds();
+		    bounds.extend(pickupMarker.getPosition());
+		    bounds.extend(destMarker.getPosition());
+		    map.fitBounds(bounds);
+		}
+		else{
+			alert('Please input a drop off location to request a ride!');
+		}
 	}
 });
 

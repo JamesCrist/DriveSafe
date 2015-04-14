@@ -23,6 +23,18 @@ Template.riderDashboard.rendered = function () {
       Tracker.autorun(function () {
         map.setCenter(new google.maps.LatLng(that.data.user.getLat() , that.data.user.getLng()));
       });
+      pickupMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng()),
+        map: map,
+        title: 'Pick Up'
+      });
+      destMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng()),
+        map: map,
+        title: 'Drop off'
+      });
+      pickupMarker.setVisible(false);
+      destMarker.setVisible(false);
       // Create a new array to hold the cursors.
       var cursorsArray = [];
       // If user is in a group, then display all the drivers for that group also.
