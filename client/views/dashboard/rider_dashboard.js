@@ -28,11 +28,12 @@ Template.riderDashboard.rendered = function () {
       // If user is in a group, then display all the drivers for that group also.
       // TODO: Change the cursor below after Drivers class is implemented.
       cursorsArray.push({
-        cursor : Meteor.user().getDriversCursorForGroup() ,
+        cursor : Drivers.find({}) ,
         transform : function (document) {
+          var user = Users.findOne(document.user);
           return {
-            title : document.profile.name ,
-            position : new google.maps.LatLng(document.getLat() , document.getLng()) ,
+            title : user.getName() ,
+            position : new google.maps.LatLng(user.getLat() , user.getLng()) ,
             icon : "/images/car.png"
           };
         }

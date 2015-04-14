@@ -9,7 +9,6 @@ Template.GroupSettings.helpers({
 
 Template.GroupSettings.events({
   'click .removeMember': function(event) {
-    console.log(this);
     this.leaveGroup(function(err, res) {
       if (err) {
         console.log(err.message);

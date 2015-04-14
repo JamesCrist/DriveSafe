@@ -45,6 +45,10 @@
                                                 <div class="row">
                                                     <div class="col col-50">
                                                         {{ profile.name }} <br/> {{ profile.email }}
+                                                        {{#if profile.isDriver }}
+                                                            <br/> DRIVER
+                                                        {{/if}}
+
                                                     </div>
                                                     {{#unless profile.isAdmin}}
                                                         <div class="col">
