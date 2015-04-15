@@ -8,6 +8,7 @@ App.logout = function() {
 // Subscribe to the groups collection on the client.
 Meteor.startup(function() {
   Meteor.subscribe("groups");
+  Meteor.subscribe("drivers");
 });
 
 

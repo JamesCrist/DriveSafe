@@ -22,7 +22,7 @@ this.DriverDashboardController = RouteController.extend({
     return Meteor.subscribe("groups", {members: Meteor.userId()});
   },
   data: function() {
-    return {group: Groups.findOne(), user: Meteor.user()};
+    return {group: Groups.findOne(), driver: Drivers.findOne({user: Meteor.userId()})};
   },
 
   onAfterAction: function() {

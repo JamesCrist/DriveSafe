@@ -100,9 +100,12 @@ User.prototype = {
     this.getGroup().addDriver(this, function(err, res) {
       if (!err) {
         that.setIsDriver((true));
-        callback.call(that, err, res);
+        var driver = new Driver(null, null, null, null);
+        driver.save(callback);
+      } else {
+        console.log(err.message);
+        callback.call(that , err , res);
       }
-      callback.call(that, err, res);
     });
   } ,
   stopDriving : function (callback) {
@@ -126,12 +129,6 @@ User.prototype = {
       }
     });
   },
-  getDriversCursorForGroup: function() {
-    if (!this.getGroup()) {
-      return Users.find({"profile.group": null,  "profile.isDriver": true});
-    }
-    return Users.find({"profile.group": this.getGroup().id, "profile.isDriver": true});
-  },
   getLat : function() {
     return Users.findOne(this.getId()).profile.location.lat;
   },
@@ -144,14 +141,10 @@ if(Meteor.isServer) {
 
   Users.allow({
     'insert': function (userId,doc) {
-      //TODO: do checks here.
-      /* user and doc checks ,
-       return true to allow insert */
-      return true;
+      return !(userId === doc._id || Users.findOne(userId).isAdmin());
     },
     'update': function(userId, doc) {
-      //TODO: do checks here.
-      return true;
+      return !(userId === doc._id || Users.findOne(userId).isAdmin());
     }
   });
 
