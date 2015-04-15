@@ -99,9 +99,13 @@ User.prototype = {
     var that = this;
     this.getGroup().addDriver(this, function(err, res) {
       if (!err) {
-        that.setIsDriver((true));
         var driver = new Driver(null, null, null, null);
-        driver.save(callback);
+        driver.save(function(err, res) {
+          if (!err) {
+            that.setIsDriver(true);
+          }
+          callback.call(that, err, res);
+        });
       } else {
         console.log(err.message);
         callback.call(that , err , res);

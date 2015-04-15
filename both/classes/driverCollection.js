@@ -99,7 +99,6 @@ if(Meteor.isServer) {
   Drivers.allow({
     'insert' : function (userId , doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
-
     } ,
     'update' : function (userId , doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());

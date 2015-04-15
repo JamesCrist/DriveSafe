@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "edbf952babe042a83b4f00445f8defedbcf83441"
+                  "value": "a18e0bf298c7cfc7c66b8b8a29276a7b78d315be"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "53e0b91a70727f4eb2ed7d491f309cd4a76a6da4"
+                  "value": "d00ef977fbd963c6a2dff887b110d6af0c6120d1"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7224,7 +7224,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 0
+              "value": 1
             },
             "timeout": {
               "type": "constant",
@@ -7874,7 +7874,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "Rt8uaHJ5HxCwymrBC"
+          "value": "1726e3504194ecee287c6134d554daa378b8d5eb"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7882,7 +7882,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "53e0b91a70727f4eb2ed7d491f309cd4a76a6da4"
+          "value": "d00ef977fbd963c6a2dff887b110d6af0c6120d1"
         },
         "appId": {
           "type": "constant",
@@ -9493,6 +9493,482 @@ var packageMetadata = {
       }
     }
   },
+  "velocity:chokidar": {
+    "chokidar": {
+      "type": "object",
+      "members": {
+        "isBinaryPath": {
+          "type": "function"
+        },
+        "FSWatcher": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "add": {
+                  "type": "function"
+                },
+                "close": {
+                  "type": "function"
+                },
+                "setMaxListeners": {
+                  "type": "function"
+                },
+                "emit": {
+                  "type": "function"
+                },
+                "addListener": {
+                  "type": "function",
+                  "refID": 13
+                },
+                "on": {
+                  "ref": 13
+                },
+                "once": {
+                  "type": "function"
+                },
+                "removeListener": {
+                  "type": "function"
+                },
+                "removeAllListeners": {
+                  "type": "function"
+                },
+                "listeners": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "watch": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "velocity:meteor-internals": {
+    "VelocityMeteorInternals": {
+      "type": "object",
+      "members": {
+        "parseStack": {
+          "type": "object",
+          "members": {
+            "markBottom": {
+              "type": "function"
+            }
+          }
+        },
+        "buildmessage": {
+          "type": "object",
+          "members": {
+            "markBoundary": {
+              "type": "function"
+            }
+          }
+        },
+        "files": {
+          "type": "object",
+          "members": {
+            "cwd": {
+              "type": "function"
+            },
+            "findAppDir": {
+              "type": "function"
+            },
+            "findPackageDir": {
+              "type": "function"
+            },
+            "statOrNull": {
+              "type": "function"
+            },
+            "runJavaScript": {
+              "type": "function"
+            },
+            "FancySyntaxError": {
+              "type": "function"
+            },
+            "writeFile": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "writeFile"
+                }
+              }
+            },
+            "appendFile": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "appendFile"
+                }
+              }
+            },
+            "readFile": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "readFile"
+                }
+              }
+            },
+            "stat": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "stat"
+                }
+              }
+            },
+            "lstat": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "lstat"
+                }
+              }
+            },
+            "exists": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "exists"
+                }
+              }
+            },
+            "rename": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "rename"
+                }
+              }
+            },
+            "realpath": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "realpath"
+                }
+              }
+            },
+            "readdir": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "readdir"
+                }
+              }
+            },
+            "rmdir": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "rmdir"
+                }
+              }
+            },
+            "mkdir": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "mkdir"
+                }
+              }
+            },
+            "unlink": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "unlink"
+                }
+              }
+            },
+            "chmod": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "chmod"
+                }
+              }
+            },
+            "open": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "open"
+                }
+              }
+            },
+            "read": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "read"
+                }
+              }
+            },
+            "write": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "write"
+                }
+              }
+            },
+            "close": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "close"
+                }
+              }
+            },
+            "symlink": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "symlink"
+                }
+              }
+            },
+            "readlink": {
+              "type": "function",
+              "members": {
+                "displayName": {
+                  "type": "constant",
+                  "value": "readlink"
+                }
+              }
+            },
+            "createReadStream": {
+              "type": "function"
+            },
+            "createWriteStream": {
+              "type": "function"
+            },
+            "watchFile": {
+              "type": "function"
+            },
+            "unwatchFile": {
+              "type": "function"
+            },
+            "pathJoin": {
+              "type": "function"
+            },
+            "pathNormalize": {
+              "type": "function"
+            },
+            "pathRelative": {
+              "type": "function"
+            },
+            "pathResolve": {
+              "type": "function"
+            },
+            "pathDirname": {
+              "type": "function"
+            },
+            "pathBasename": {
+              "type": "function"
+            },
+            "pathExtname": {
+              "type": "function"
+            },
+            "pathSep": {
+              "type": "constant",
+              "value": "/"
+            },
+            "pathDelimiter": {
+              "type": "constant",
+              "value": ":"
+            },
+            "pathOsDelimiter": {
+              "type": "constant",
+              "value": ":"
+            },
+            "convertToStandardPath": {
+              "type": "function"
+            },
+            "convertToOSPath": {
+              "type": "function"
+            },
+            "convertToWindowsPath": {
+              "type": "function"
+            },
+            "convertToPosixPath": {
+              "type": "function"
+            },
+            "convertToStandardLineEndings": {
+              "type": "function"
+            },
+            "convertToOSLineEndings": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sanjo:long-running-child-process": {
+    "LongRunningChildProcess": {
+      "type": "function",
+      "members": {
+        "prototype": {
+          "type": "object",
+          "members": {
+            "taskName": {
+              "type": "null",
+              "value": null
+            },
+            "child": {
+              "type": "null",
+              "value": null
+            },
+            "pid": {
+              "type": "null",
+              "value": null
+            },
+            "getTaskName": {
+              "type": "function"
+            },
+            "getChild": {
+              "type": "function"
+            },
+            "getPid": {
+              "type": "function"
+            },
+            "isDead": {
+              "type": "function"
+            },
+            "isRunning": {
+              "type": "function"
+            },
+            "readPid": {
+              "type": "function"
+            },
+            "spawn": {
+              "type": "function"
+            },
+            "kill": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sanjo:meteor-version": {
+    "MeteorVersion": {
+      "type": "object",
+      "members": {
+        "getSemanticVersion": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "package-version-parser": {
+    "PackageVersion": {
+      "type": "function",
+      "members": {
+        "parse": {
+          "type": "function"
+        },
+        "versionMagnitude": {
+          "type": "function"
+        },
+        "lessThan": {
+          "type": "function"
+        },
+        "majorVersion": {
+          "type": "function"
+        },
+        "compare": {
+          "type": "function"
+        },
+        "getValidServerVersion": {
+          "type": "function"
+        },
+        "VersionConstraint": {
+          "type": "function"
+        },
+        "parseVersionConstraint": {
+          "type": "function"
+        },
+        "PackageConstraint": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "toString": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "parsePackageConstraint": {
+          "type": "function"
+        },
+        "validatePackageName": {
+          "type": "function"
+        },
+        "invalidFirstFormatConstraint": {
+          "type": "function"
+        },
+        "removeBuildID": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "sanjo:meteor-files-helpers": {
+    "MeteorFilesHelpers": {
+      "type": "object",
+      "members": {
+        "getAppPath": {
+          "type": "function"
+        },
+        "getMeteorToolPath": {
+          "type": "function"
+        },
+        "getMeteorInstallationPath": {
+          "type": "function"
+        },
+        "getNodeModulePath": {
+          "type": "function"
+        },
+        "getPackageVersions": {
+          "type": "function"
+        },
+        "getPackageVersion": {
+          "type": "function"
+        },
+        "isPackageInstalled": {
+          "type": "function"
+        }
+      }
+    }
+  },
   "velocity:core": {
     "Velocity": {
       "type": "object",
@@ -9504,6 +9980,12 @@ var packageMetadata = {
           "type": "function"
         },
         "getTestsPath": {
+          "type": "function"
+        },
+        "getPackagesPath": {
+          "type": "function"
+        },
+        "getPackagePath": {
           "type": "function"
         },
         "postProcessors": {
@@ -9521,21 +10003,38 @@ var packageMetadata = {
         "onTest": {
           "type": "function"
         },
-        "Mirror": {
-          "type": "object",
-          "members": {
-            "start": {
-              "type": "function"
-            }
-          }
+        "setOption": {
+          "type": "function"
         },
-        "ProxyPackageSync": {
-          "type": "object",
-          "members": {
-            "regeneratePackageJs": {
-              "type": "function"
-            }
-          }
+        "setOptions": {
+          "type": "function"
+        },
+        "getOption": {
+          "type": "function"
+        },
+        "mirrorMeteorReleaseName": {
+          "type": "constant",
+          "value": "velocity:METEOR"
+        },
+        "mirrorMeteorVersion": {
+          "type": "constant",
+          "value": "1.1.0.2_1"
+        },
+        "mirrorMeteorRelease": {
+          "type": "constant",
+          "value": "velocity:METEOR@1.1.0.2_1"
+        },
+        "mirrorMeteorToolReleaseName": {
+          "type": "constant",
+          "value": "velocity:meteor-tool"
+        },
+        "mirrorMeteorToolVersion": {
+          "type": "constant",
+          "value": "1.1.3_2"
+        },
+        "mirrorMeteorToolRelease": {
+          "type": "constant",
+          "value": "velocity:meteor-tool@1.1.3_2"
         }
       }
     },
@@ -10552,6 +11051,175 @@ var packageMetadata = {
           "type": "function"
         }
       }
+    },
+    "VelocityOptions": {
+      "type": "object",
+      "members": {
+        "before": {
+          "type": "object",
+          "members": {
+            "insert": {
+              "type": "function"
+            },
+            "update": {
+              "type": "function"
+            },
+            "remove": {
+              "type": "function"
+            },
+            "find": {
+              "type": "function"
+            },
+            "findOne": {
+              "type": "function"
+            }
+          }
+        },
+        "after": {
+          "type": "object",
+          "members": {
+            "insert": {
+              "type": "function"
+            },
+            "update": {
+              "type": "function"
+            },
+            "remove": {
+              "type": "function"
+            },
+            "find": {
+              "type": "function"
+            },
+            "findOne": {
+              "type": "function"
+            }
+          }
+        },
+        "hookOptions": {
+          "type": "object",
+          "members": {
+            "before": {
+              "type": "object",
+              "members": {
+                "insert": {
+                  "type": "object"
+                },
+                "update": {
+                  "type": "object"
+                },
+                "remove": {
+                  "type": "object"
+                },
+                "find": {
+                  "type": "object"
+                },
+                "findOne": {
+                  "type": "object"
+                },
+                "all": {
+                  "type": "object"
+                }
+              }
+            },
+            "after": {
+              "type": "object",
+              "members": {
+                "insert": {
+                  "type": "object"
+                },
+                "update": {
+                  "type": "object"
+                },
+                "remove": {
+                  "type": "object"
+                },
+                "find": {
+                  "type": "object"
+                },
+                "findOne": {
+                  "type": "object"
+                },
+                "all": {
+                  "type": "object"
+                }
+              }
+            },
+            "all": {
+              "type": "object",
+              "members": {
+                "insert": {
+                  "type": "object"
+                },
+                "update": {
+                  "type": "object"
+                },
+                "remove": {
+                  "type": "object"
+                },
+                "find": {
+                  "type": "object"
+                },
+                "findOne": {
+                  "type": "object"
+                },
+                "all": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "direct": {
+          "type": "object",
+          "members": {
+            "insert": {
+              "type": "function"
+            },
+            "update": {
+              "type": "function"
+            },
+            "remove": {
+              "type": "function"
+            },
+            "find": {
+              "type": "function"
+            },
+            "findOne": {
+              "type": "function"
+            }
+          }
+        },
+        "find": {
+          "type": "function"
+        },
+        "findOne": {
+          "type": "function"
+        },
+        "insert": {
+          "type": "function"
+        },
+        "update": {
+          "type": "function"
+        },
+        "remove": {
+          "type": "function"
+        },
+        "upsert": {
+          "type": "function"
+        },
+        "rawCollection": {
+          "type": "function"
+        },
+        "rawDatabase": {
+          "type": "function"
+        },
+        "allow": {
+          "type": "function"
+        },
+        "deny": {
+          "type": "function"
+        }
+      }
     }
   },
   "velocity:shim": {},
@@ -10563,120 +11231,6 @@ var packageMetadata = {
           "type": "function"
         },
         "uninstall": {
-          "type": "function"
-        }
-      }
-    }
-  },
-  "sanjo:meteor-version": {
-    "MeteorVersion": {
-      "type": "object",
-      "members": {
-        "getSemanticVersion": {
-          "type": "function"
-        }
-      }
-    }
-  },
-  "sanjo:long-running-child-process": {
-    "LongRunningChildProcess": {
-      "type": "function",
-      "members": {
-        "prototype": {
-          "type": "object",
-          "members": {
-            "taskName": {
-              "type": "null",
-              "value": null
-            },
-            "child": {
-              "type": "null",
-              "value": null
-            },
-            "pid": {
-              "type": "null",
-              "value": null
-            },
-            "getTaskName": {
-              "type": "function"
-            },
-            "getChild": {
-              "type": "function"
-            },
-            "getPid": {
-              "type": "function"
-            },
-            "isDead": {
-              "type": "function"
-            },
-            "isRunning": {
-              "type": "function"
-            },
-            "readPid": {
-              "type": "function"
-            },
-            "spawn": {
-              "type": "function"
-            },
-            "kill": {
-              "type": "function"
-            }
-          }
-        }
-      }
-    }
-  },
-  "package-version-parser": {
-    "PackageVersion": {
-      "type": "function",
-      "members": {
-        "parse": {
-          "type": "function"
-        },
-        "versionMagnitude": {
-          "type": "function"
-        },
-        "lessThan": {
-          "type": "function"
-        },
-        "majorVersion": {
-          "type": "function"
-        },
-        "compare": {
-          "type": "function"
-        },
-        "getValidServerVersion": {
-          "type": "function"
-        },
-        "VersionConstraint": {
-          "type": "function"
-        },
-        "parseVersionConstraint": {
-          "type": "function"
-        },
-        "PackageConstraint": {
-          "type": "function",
-          "members": {
-            "prototype": {
-              "type": "object",
-              "members": {
-                "toString": {
-                  "type": "function"
-                }
-              }
-            }
-          }
-        },
-        "parsePackageConstraint": {
-          "type": "function"
-        },
-        "validatePackageName": {
-          "type": "function"
-        },
-        "invalidFirstFormatConstraint": {
-          "type": "function"
-        },
-        "removeBuildID": {
           "type": "function"
         }
       }
@@ -10713,84 +11267,7 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 17106
-                },
-                "fout": {
-                  "type": "constant",
-                  "value": 27
-                },
-                "child": {
-                  "type": "object",
-                  "members": {
-                    "domain": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "signalCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "exitCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "pid": {
-                      "type": "constant",
-                      "value": 17106
-                    },
-                    "stdin": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdout": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stderr": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdio": {
-                      "type": "array"
-                    },
-                    "spawn": {
-                      "type": "function"
-                    },
-                    "kill": {
-                      "type": "function"
-                    },
-                    "ref": {
-                      "type": "function"
-                    },
-                    "unref": {
-                      "type": "function"
-                    },
-                    "setMaxListeners": {
-                      "type": "function"
-                    },
-                    "emit": {
-                      "type": "function"
-                    },
-                    "addListener": {
-                      "type": "function",
-                      "refID": 17
-                    },
-                    "on": {
-                      "ref": 17
-                    },
-                    "once": {
-                      "type": "function"
-                    },
-                    "removeListener": {
-                      "type": "function"
-                    },
-                    "removeAllListeners": {
-                      "type": "function"
-                    },
-                    "listeners": {
-                      "type": "function"
-                    }
-                  }
+                  "value": 27183
                 },
                 "getTaskName": {
                   "type": "function"
@@ -10839,9 +11316,6 @@ var packageMetadata = {
           "type": "function"
         },
         "getConfigPath": {
-          "type": "function"
-        },
-        "getAppPath": {
           "type": "function"
         },
         "getKarmaPath": {
@@ -11108,9 +11582,7 @@ var packageMetadata = {
         }
       }
     }
-  },
-  "velocity:test-proxy": {},
-  "velocity:node-soft-mirror": {}
+  }
 }
 var globalContext = (typeof global !== 'undefined') ? global : window
 
