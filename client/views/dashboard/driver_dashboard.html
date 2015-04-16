@@ -28,7 +28,40 @@
 
     {{#ionView}}
         {{#ionContent}}
-            <p>I'm a driver!</p>
+            {{#each rides}}
+                {{#with rideModel}}
+                    <div class="list card">
+                        <div class="item">
+                            <h2>{{getRideUser}}</h2>
+                        </div>
+
+                        <div class="item item-body">
+                            <p>
+                                RIDE INFO GOES HERE!
+                            </p>
+                            <p>
+                                <a href="#" class="subdued">{{getRideCreatedTime}}</a>
+                            </p>
+                        </div>
+
+                        <div class="item tabs tabs-secondary tabs-icon-left">
+                            <a class="tab-item" href="#">
+                                <i class="icon ion-thumbsdown"></i>
+                                Deny Ride
+                            </a>
+                            <a class="tab-item" href="#">
+                                <i class="icon ion-map"></i>
+                                Navigate To Pickup Location
+
+                            </a>
+                            <a class="tab-item" href="#">
+                                <i class="icon ion-thumbsup"></i>
+                                Picked Up!
+                            </a>
+                        </div>
+                    </div>
+                {{/with}}
+            {{/each}}
         {{/ionContent}}
     {{/ionView}}
     {{#ionFooterBar class="bar-assertive stopDriving"}}
