@@ -6,8 +6,10 @@ Template.driverDashboard.helpers({
     return Users.findOne(this.user).getName();
   },
   getRideCreatedTime: function() {
-    console.log(this);
     return moment(this.createdAt).fromNow();
+  },
+  ridesAvailable: function() {
+    return this.rides.count() > 0;
   }
 });
 

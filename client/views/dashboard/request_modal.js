@@ -1,13 +1,23 @@
 Template.request_modal.rendered = function () {
+  Deps.autorun(function() {
+    if(Drivers.find().count()) {
 
-  var pickupInput = document.getElementById('pickup-input');
-  var destInput = document.getElementById('dest-input');
+      var pickupInput = document.getElementById('pickup-input');
+      var destInput = document.getElementById('dest-input');
 
-  pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
-  dest_autocomplete = new google.maps.places.Autocomplete(destInput);
-  pickup_autocomplete.bindTo('bounds' , map);
-  dest_autocomplete.bindTo('bounds' , map);
+      pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
+      dest_autocomplete = new google.maps.places.Autocomplete(destInput);
+      pickup_autocomplete.bindTo('bounds' , map);
+      dest_autocomplete.bindTo('bounds' , map)
+    }
+  });
 };
+
+Template.request_modal.helpers({
+  driversAvailable: function() {
+    return Drivers.find().count();
+  }
+});
 
 Template.request_modal.events({
   'click #submit_button' : function () {
