@@ -1,17 +1,17 @@
 // Create Drivers MongoDB collection
-Drivers = new Meteor.Collection("drivers", {
-  transform: function(doc) {
-    return new Driver(doc._id, doc.group, doc.user, doc.currentRide);
+Drivers = new Meteor.Collection("drivers" , {
+  transform : function (doc) {
+    return new Driver(doc._id , doc.group , doc.user , doc.currentRide);
   }
 });
 
 // A Driver class that takes a document in its constructor
-Driver = function (id, group, user, currentRide) {
+Driver = function (id , group , user , currentRide) {
   this._id = id;
-  if (!user) {
+  if(!user) {
     user = Meteor.userId();
   }
-  if (!group && Meteor.user()) {
+  if(!group && Meteor.user()) {
     group = Meteor.user().profile.group;
   }
   this._group = group;
@@ -23,33 +23,36 @@ Driver.prototype = {
   get id() {
     // readonly
     return this._id;
-  },
+  } ,
   get user() {
     // readonly
     return this._user;
-  },
+  } ,
   get group() {
     return this._group;
-  },
+  } ,
   get currentRide() {
     return this._currentRide;
-  },
-  save: function(callback) {
-    if (!this.user) {
+  } ,
+  set currentRide(value) {
+    this._currentRide = value;
+  } ,
+  save : function (callback) {
+    if(!this.user) {
       throw new Meteor.Error("Driver must be attached to a user!");
     }
 
-    if (!this.group) {
+    if(!this.group) {
       throw new Meteor.Error("Driver must be attached to a group!");
     }
 
     var doc = {
-      currentRide: this.currentRide
+      currentRide : this.currentRide
     };
 
     // If this group already exists, then modify it.
-    if (this.id) {
-      Drivers.update(this.id, {$set: doc}, callback);
+    if(this.id) {
+      Drivers.update(this.id , { $set : doc } , callback);
       // Else, create a new group.
     } else {
       doc.user = this.user;
@@ -58,37 +61,37 @@ Driver.prototype = {
       // remember the context, since in callback it's changed
       var that = this;
 
-      Drivers.insert(doc, function(error, result) {
+      Drivers.insert(doc , function (error , result) {
         that._id = result;
 
-        if (callback != null) {
-          callback.call(that, error, result);
+        if(callback != null) {
+          callback.call(that , error , result);
         }
       });
     }
-  },
-  delete: function(callback) {
+  } ,
+  delete : function (callback) {
     // Only the user that this driver represents or admins can delete drivers.
-    if (this.user != Meteor.userId() && !Meteor.user().isAdmin()) {
+    if(this.user != Meteor.userId() && !Meteor.user().isAdmin()) {
       throw new Meteor.Error("Access Denied!");
     }
 
-    if (this.currentRide) {
+    if(this.currentRide) {
       throw new Meteor.Error("Driver is currently giving a ride!");
     }
 
-    Drivers.remove(this.id, callback);
-  },
-  stopDriving: function(callback) {
-    if (this.currentRide) {
+    Drivers.remove(this.id , callback);
+  } ,
+  stopDriving : function (callback) {
+    if(this.currentRide) {
       throw new Meteor.Error("Cannot stop driving while ride is in progress!");
     }
     var that = this;
-    Users.findOne(this.user).stopDriving(function(err, res) {
-      if (!err) {
+    Users.findOne(this.user).stopDriving(function (err , res) {
+      if(!err) {
         that.delete(callback);
       } else {
-        callback.call(that, err, res);
+        callback.call(that , err , res);
       }
     });
   }
@@ -102,7 +105,7 @@ if(Meteor.isServer) {
     } ,
     'update' : function (userId , doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
-    },
+    } ,
     'remove' : function (userId , doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
     }

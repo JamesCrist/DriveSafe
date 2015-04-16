@@ -151,5 +151,4 @@ if(Meteor.isServer) {
       return !(userId === doc._id || Users.findOne(userId).isAdmin());
     }
   });
-
 }
