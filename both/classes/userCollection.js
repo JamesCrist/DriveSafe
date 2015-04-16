@@ -56,7 +56,7 @@ User.prototype = {
   } ,
   createGroup : function (newGroupName , callback) {
     // Create a new group object
-    var newGroup = new Group(null, newGroupName, null, null, null);
+    var newGroup = new Group(null, newGroupName, null, null, null, null);
     var that = this;
     newGroup.save(function(err, groupId) {
       if (!err) {
@@ -151,5 +151,4 @@ if(Meteor.isServer) {
       return !(userId === doc._id || Users.findOne(userId).isAdmin());
     }
   });
-
 }

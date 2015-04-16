@@ -1,12 +1,12 @@
 // Create Groups MongoDB collection
 Groups = new Meteor.Collection("groups", {
   transform: function(doc) {
-    return new Group(doc._id, doc.name, doc.admin, doc.members, doc.drivers);
+    return new Group(doc._id, doc.name, doc.admin, doc.members, doc.drivers, doc.queue);
   }
 });
 
 // A Group class that takes a document in its constructor
-Group = function (id, name, admin, members, drivers) {
+Group = function (id, name, admin, members, drivers, queue) {
   this._id = id;
   this._name = name;
   // If admin is not defined, define admin to be the current
@@ -30,6 +30,10 @@ Group = function (id, name, admin, members, drivers) {
     drivers = [];
   }
   this._drivers = drivers;
+  if (!queue) {
+    queue = [];
+  }
+  this._queue = queue;
 };
 
 Group.prototype = {
@@ -50,6 +54,9 @@ Group.prototype = {
   },
   get drivers() {
     return this._drivers;
+  },
+  get queue() {
+    return this._queue;
   },
   set admin(value) {
     this._admin = value;
@@ -80,7 +87,8 @@ Group.prototype = {
     var doc = {
       admin: this.admin,
       members: this.members,
-      drivers: this.drivers
+      drivers: this.drivers,
+      queue: this.queue
     };
 
     // If this group already exists, then modify it.
@@ -245,6 +253,21 @@ Group.prototype = {
     } else {
       throw new Meteor.Error("User is not a driver of this group!");
     }
+  },
+  addRideToQueue: function(ride, callback) {
+    if (!ride) {
+      throw new Meteor.Error("Ride is not defined!");
+    }
+    if (!ride.id) {
+      throw new Meteor.Error("Ride id is not defined!");
+    }
+
+    var index = this.queue.indexOf(ride.id);
+    if (index >= 0) {
+      throw new Meteor.Error("Ride is already in queue!");
+    }
+    this.queue.push(ride.id);
+    this.save(callback);
   }
 };
 

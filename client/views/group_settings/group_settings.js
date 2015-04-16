@@ -1,6 +1,6 @@
 Template.GroupSettings.helpers({
   groupModel: function() {
-    return new Group(this._id, this.name, this.admin, this.members, this.drivers);
+    return new Group(this._id, this.name, this.admin, this.members, this.drivers, this.queue);
   },
   groupMembers: function() {
     return this.membersModel();

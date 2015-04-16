@@ -9,6 +9,7 @@ App.logout = function() {
 Meteor.startup(function() {
   Meteor.subscribe("groups");
   Meteor.subscribe("drivers");
+  Meteor.subscribe("rides");
 });
 
 

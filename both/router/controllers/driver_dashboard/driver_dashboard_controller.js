@@ -19,10 +19,10 @@ this.DriverDashboardController = RouteController.extend({
     return Geolocation.latLng() != null;
   },
   waitOn: function() {
-    return [Meteor.subscribe("groups", {members: Meteor.userId()}), Meteor.subscribe("drivers")];
+    return [Meteor.subscribe("rides"), Meteor.subscribe("drivers")];
   },
   data: function() {
-    return {group: Groups.findOne(), driver: Drivers.findOne({user: Meteor.userId()})};
+    return {rides: Rides.find(), driver: Drivers.findOne({user: Meteor.userId()})};
   },
 
   onAfterAction: function() {
