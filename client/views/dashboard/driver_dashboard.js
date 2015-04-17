@@ -21,5 +21,21 @@ Template.driverDashboard.events({
         console.log(err.message);
       }
     });
+  } ,
+  'click .navigation-button': function(event, template) {
+    if (Meteor.isCordova) {
+      launchnavigator.navigate(
+        [ this.pickupLoc.k , this.pickupLoc.D ] ,
+        null ,
+        function () {
+          // Do stuff here if opening is successful!
+        } ,
+        function (error) {
+          // Do stuff here if error happens!
+          alert("Plugin error: " + error);
+        });
+    } else {
+      alert("This only works on phones!");
+    }
   }
 });

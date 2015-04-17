@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "decdda0152ddff02e82653ff10ed88c6b555ddf9"
+                  "value": "0c3ad25f3554191ca531af6c5c7cbb75013d0e64"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "ad6c3d7fe5e5e4409d19190cfd0f4ad7db3d175f"
+                  "value": "b03813bd7e74ce22626e0f12a495d8249530f648"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7875,7 +7875,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "94e113aca46ae9984fe43e0d25f7dbdecb98ab21"
+          "value": "86f654459f1cb5fccd4fc68fd3b65468c97a6cf7"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7883,7 +7883,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "ad6c3d7fe5e5e4409d19190cfd0f4ad7db3d175f"
+          "value": "b03813bd7e74ce22626e0f12a495d8249530f648"
         },
         "appId": {
           "type": "constant",
@@ -8192,30 +8192,6 @@ var packageMetadata = {
     },
     "AccountsTest": {
       "type": "undefined"
-    }
-  },
-  "email": {
-    "Email": {
-      "type": "object",
-      "members": {
-        "send": {
-          "type": "function"
-        }
-      }
-    },
-    "EmailTest": {
-      "type": "object",
-      "members": {
-        "overrideOutputStream": {
-          "type": "function"
-        },
-        "restoreOutputStream": {
-          "type": "function"
-        },
-        "hookSend": {
-          "type": "function"
-        }
-      }
     }
   },
   "spiderable": {
@@ -9420,6 +9396,30 @@ var packageMetadata = {
               "ref": 4
             }
           }
+        }
+      }
+    }
+  },
+  "email": {
+    "Email": {
+      "type": "object",
+      "members": {
+        "send": {
+          "type": "function"
+        }
+      }
+    },
+    "EmailTest": {
+      "type": "object",
+      "members": {
+        "overrideOutputStream": {
+          "type": "function"
+        },
+        "restoreOutputStream": {
+          "type": "function"
+        },
+        "hookSend": {
+          "type": "function"
         }
       }
     }
@@ -11262,7 +11262,7 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 9060
+                  "value": 6996
                 },
                 "fout": {
                   "type": "constant",
@@ -11285,7 +11285,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 9060
+                      "value": 6996
                     },
                     "stdin": {
                       "type": "null",

@@ -9,7 +9,6 @@ insecure
 standard-app-packages
 less
 accounts-base
-email
 spiderable
 iron:router
 natestrauser:font-awesome
@@ -30,3 +29,5 @@ msavin:mongol
 sanjo:jasmine
 momentjs:moment
 zeroasterisk:cordova-geolocation-background
+email
+
