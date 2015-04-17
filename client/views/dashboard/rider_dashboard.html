@@ -37,9 +37,15 @@
         {{/ionContent}}
     {{/ionView}}
     {{#if group }}
-        {{#ionFooterBar class="bar-energized requestRide"}}
-            <h1 class="title" data-ion-modal="request_modal">Request Ride!</h1>
-        {{/ionFooterBar}}
+        {{#if ridePending}}
+            {{#ionFooterBar class="bar-assertive cancelRide"}}
+                <h1 class="title">Cancel Ride</h1>
+            {{/ionFooterBar}}
+        {{else}}
+            {{#ionFooterBar class="bar-energized requestRide"}}
+                <h1 class="title" data-ion-modal="request_modal">Request Ride!</h1>
+            {{/ionFooterBar}}
+        {{/if}}
     {{else}}
         {{#ionFooterBar class="bar-assertive"}}
             <h1 class="title">You must join a group to request a ride</h1>

@@ -29,3 +29,4 @@ velocity:html-reporter@=0.4.0
 msavin:mongol
 sanjo:jasmine
 momentjs:moment
+zeroasterisk:cordova-geolocation-background

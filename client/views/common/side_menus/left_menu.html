@@ -22,9 +22,11 @@
                 {{/unless}}
 
                 {{#unless isDriver}}
-                    <div id="becomeDriverButton" class="item item-icon-right" data-ion-menu-close>
-                        Become Driver {{> ionIcon icon="model-s"}}
-                    </div>
+                    {{#unless ridePending}}
+                        <div id="becomeDriverButton" class="item item-icon-right" data-ion-menu-close>
+                            Become Driver {{> ionIcon icon="model-s"}}
+                        </div>
+                    {{/unless}}
                 {{/unless}}
             {{else}}
                 <div id="joinGroupButton" class="item item-icon-right">

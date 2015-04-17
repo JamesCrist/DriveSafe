@@ -85,5 +85,12 @@ Template.leftMenu.events({
         console.log(err.message);
       }
     });
+    GeolocationBG.start();
+  }
+});
+
+Template.leftMenu.helpers({
+  ridePending: function() {
+    return Rides.findOne({user: Meteor.userId()});
   }
 });

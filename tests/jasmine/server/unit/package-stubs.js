@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "485eb3306384c4b0db083b10819812f80d7fa006"
+                  "value": "decdda0152ddff02e82653ff10ed88c6b555ddf9"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "fb009652a4848b0f2b8b73051fd5afef4365e158"
+                  "value": "ad6c3d7fe5e5e4409d19190cfd0f4ad7db3d175f"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7224,7 +7224,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 3
+              "value": 0
             },
             "timeout": {
               "type": "constant",
@@ -7874,15 +7874,15 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "f924e5348d49ca4979ecc49ee20c55f2ec9d467e"
+          "value": "94e113aca46ae9984fe43e0d25f7dbdecb98ab21"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "906d4bd004047a34ef8465ceba2fdb8da3377dc7"
+          "value": "e8ce631f65cac771d1eea40d1b6f8f832293f345"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "fb009652a4848b0f2b8b73051fd5afef4365e158"
+          "value": "ad6c3d7fe5e5e4409d19190cfd0f4ad7db3d175f"
         },
         "appId": {
           "type": "constant",
@@ -9643,13 +9643,7 @@ var packageMetadata = {
               }
             },
             "rename": {
-              "type": "function",
-              "members": {
-                "displayName": {
-                  "type": "constant",
-                  "value": "rename"
-                }
-              }
+              "type": "function"
             },
             "realpath": {
               "type": "function",
@@ -9802,7 +9796,7 @@ var packageMetadata = {
             },
             "pathOsDelimiter": {
               "type": "constant",
-              "value": ":"
+              "value": ";"
             },
             "convertToStandardPath": {
               "type": "function"
@@ -11263,11 +11257,88 @@ var packageMetadata = {
                 },
                 "appPath": {
                   "type": "constant",
-                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe"
+                  "value": "C:\\Users\\taboak\\DriveSafe\\DriveSafe"
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 8193
+                  "value": 9060
+                },
+                "fout": {
+                  "type": "constant",
+                  "value": 4
+                },
+                "child": {
+                  "type": "object",
+                  "members": {
+                    "domain": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "signalCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "exitCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "pid": {
+                      "type": "constant",
+                      "value": 9060
+                    },
+                    "stdin": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdout": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stderr": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdio": {
+                      "type": "array"
+                    },
+                    "spawn": {
+                      "type": "function"
+                    },
+                    "kill": {
+                      "type": "function"
+                    },
+                    "ref": {
+                      "type": "function"
+                    },
+                    "unref": {
+                      "type": "function"
+                    },
+                    "setMaxListeners": {
+                      "type": "function"
+                    },
+                    "emit": {
+                      "type": "function"
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 17
+                    },
+                    "on": {
+                      "ref": 17
+                    },
+                    "once": {
+                      "type": "function"
+                    },
+                    "removeListener": {
+                      "type": "function"
+                    },
+                    "removeAllListeners": {
+                      "type": "function"
+                    },
+                    "listeners": {
+                      "type": "function"
+                    }
+                  }
                 },
                 "getTaskName": {
                   "type": "function"
@@ -11334,6 +11405,7 @@ var packageMetadata = {
       }
     }
   },
+  "zeroasterisk:cordova-geolocation-background": {},
   "session": {},
   "livedata": {
     "DDP": {
