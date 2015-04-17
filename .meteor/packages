@@ -9,7 +9,6 @@ insecure
 standard-app-packages
 less
 accounts-base
-email
 spiderable
 iron:router
 natestrauser:font-awesome
@@ -29,3 +28,4 @@ velocity:html-reporter@=0.4.0
 msavin:mongol
 sanjo:jasmine
 momentjs:moment
+email

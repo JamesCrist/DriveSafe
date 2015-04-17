@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "485eb3306384c4b0db083b10819812f80d7fa006"
+                  "value": "5505e0944f6bec6b2947e9ac9870d4de03e228a5"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "fb009652a4848b0f2b8b73051fd5afef4365e158"
+                  "value": "fcdc455f1ca7a9d322cb1cd9f433f675e65079b1"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7224,7 +7224,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 3
+              "value": 1
             },
             "timeout": {
               "type": "constant",
@@ -7874,7 +7874,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "f924e5348d49ca4979ecc49ee20c55f2ec9d467e"
+          "value": "4d045d9d5e04629e37bf29745b31a99fc68a5f69"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7882,7 +7882,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "fb009652a4848b0f2b8b73051fd5afef4365e158"
+          "value": "fcdc455f1ca7a9d322cb1cd9f433f675e65079b1"
         },
         "appId": {
           "type": "constant",
@@ -8191,30 +8191,6 @@ var packageMetadata = {
     },
     "AccountsTest": {
       "type": "undefined"
-    }
-  },
-  "email": {
-    "Email": {
-      "type": "object",
-      "members": {
-        "send": {
-          "type": "function"
-        }
-      }
-    },
-    "EmailTest": {
-      "type": "object",
-      "members": {
-        "overrideOutputStream": {
-          "type": "function"
-        },
-        "restoreOutputStream": {
-          "type": "function"
-        },
-        "hookSend": {
-          "type": "function"
-        }
-      }
     }
   },
   "spiderable": {
@@ -9419,6 +9395,30 @@ var packageMetadata = {
               "ref": 4
             }
           }
+        }
+      }
+    }
+  },
+  "email": {
+    "Email": {
+      "type": "object",
+      "members": {
+        "send": {
+          "type": "function"
+        }
+      }
+    },
+    "EmailTest": {
+      "type": "object",
+      "members": {
+        "overrideOutputStream": {
+          "type": "function"
+        },
+        "restoreOutputStream": {
+          "type": "function"
+        },
+        "hookSend": {
+          "type": "function"
         }
       }
     }
@@ -11267,7 +11267,84 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 8193
+                  "value": 21419
+                },
+                "fout": {
+                  "type": "constant",
+                  "value": 29
+                },
+                "child": {
+                  "type": "object",
+                  "members": {
+                    "domain": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "signalCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "exitCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "pid": {
+                      "type": "constant",
+                      "value": 21419
+                    },
+                    "stdin": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdout": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stderr": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdio": {
+                      "type": "array"
+                    },
+                    "spawn": {
+                      "type": "function"
+                    },
+                    "kill": {
+                      "type": "function"
+                    },
+                    "ref": {
+                      "type": "function"
+                    },
+                    "unref": {
+                      "type": "function"
+                    },
+                    "setMaxListeners": {
+                      "type": "function"
+                    },
+                    "emit": {
+                      "type": "function"
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 17
+                    },
+                    "on": {
+                      "ref": 17
+                    },
+                    "once": {
+                      "type": "function"
+                    },
+                    "removeListener": {
+                      "type": "function"
+                    },
+                    "removeAllListeners": {
+                      "type": "function"
+                    },
+                    "listeners": {
+                      "type": "function"
+                    }
+                  }
                 },
                 "getTaskName": {
                   "type": "function"
