@@ -1,0 +1,666 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'meteor-jsdoc' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 silly cache add args [ 'meteor-jsdoc', null ]
+5 verbose cache add spec meteor-jsdoc
+6 silly cache add parsed spec { raw: 'meteor-jsdoc',
+6 silly cache add   scope: null,
+6 silly cache add   name: 'meteor-jsdoc',
+6 silly cache add   rawSpec: '',
+6 silly cache add   spec: '*',
+6 silly cache add   type: 'range' }
+7 verbose addNamed meteor-jsdoc@*
+8 silly addNamed semver.valid null
+9 silly addNamed semver.validRange *
+10 silly addNameRange { name: 'meteor-jsdoc', range: '*', hasData: false }
+11 silly mapToRegistry name meteor-jsdoc
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/meteor-jsdoc
+15 verbose addNameRange registry:https://registry.npmjs.org/meteor-jsdoc not in flight; fetching
+16 verbose request uri https://registry.npmjs.org/meteor-jsdoc
+17 verbose request no auth needed
+18 info attempt registry request try #1 at 17:18:51
+19 verbose request id f69b64070502a53e
+20 http request GET https://registry.npmjs.org/meteor-jsdoc
+21 http 200 https://registry.npmjs.org/meteor-jsdoc
+22 silly get cb [ 200,
+22 silly get   { date: 'Fri, 10 Apr 2015 21:18:51 GMT',
+22 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 silly get     etag: '"34QWEZPEVCWHTZMU9E8CZ9AA8"',
+22 silly get     'content-type': 'application/json',
+22 silly get     'cache-control': 'max-age=60',
+22 silly get     'content-length': '15990',
+22 silly get     'accept-ranges': 'bytes',
+22 silly get     via: '1.1 varnish',
+22 silly get     age: '0',
+22 silly get     'x-served-by': 'cache-iad2146-IAD',
+22 silly get     'x-cache': 'MISS',
+22 silly get     'x-cache-hits': '0',
+22 silly get     'x-timer': 'S1428700731.818588,VS0,VE20',
+22 silly get     vary: 'Accept',
+22 silly get     'keep-alive': 'timeout=10, max=50',
+22 silly get     connection: 'Keep-Alive' } ]
+23 verbose get saving meteor-jsdoc to /home/parene/.npm/registry.npmjs.org/meteor-jsdoc/.cache.json
+24 silly addNameRange number 2 { name: 'meteor-jsdoc', range: '*', hasData: true }
+25 silly addNameRange versions [ 'meteor-jsdoc',
+25 silly addNameRange   [ '0.1.0',
+25 silly addNameRange     '0.1.1',
+25 silly addNameRange     '0.1.2',
+25 silly addNameRange     '0.1.3',
+25 silly addNameRange     '0.2.0',
+25 silly addNameRange     '0.2.1',
+25 silly addNameRange     '0.2.2',
+25 silly addNameRange     '0.2.3' ] ]
+26 verbose addNamed meteor-jsdoc@0.2.3
+27 silly addNamed semver.valid 0.2.3
+28 silly addNamed semver.validRange 0.2.3
+29 silly mapToRegistry name meteor-jsdoc
+30 silly mapToRegistry using default registry
+31 silly mapToRegistry registry https://registry.npmjs.org/
+32 silly mapToRegistry uri https://registry.npmjs.org/meteor-jsdoc
+33 verbose addRemoteTarball https://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz not in flight; adding
+34 verbose addRemoteTarball [ 'https://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz',
+34 verbose addRemoteTarball   '3b06bdd8f0c0ed144a7da99dffac0fb3c44fb941' ]
+35 info retry fetch attempt 1 at 17:18:51
+36 info attempt registry request try #1 at 17:18:51
+37 http fetch GET https://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz
+38 http fetch 200 https://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz
+39 silly fetchAndShaCheck shasum 3b06bdd8f0c0ed144a7da99dffac0fb3c44fb941
+40 verbose addTmpTarball /tmp/npm-10097-8450c0f8/registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz not in flight; adding
+41 verbose addTmpTarball already have metadata; skipping unpack for meteor-jsdoc@0.2.3
+42 silly cache afterAdd meteor-jsdoc@0.2.3
+43 verbose afterAdd /home/parene/.npm/meteor-jsdoc/0.2.3/package/package.json not in flight; writing
+44 verbose afterAdd /home/parene/.npm/meteor-jsdoc/0.2.3/package/package.json written
+45 silly install resolved [ { name: 'meteor-jsdoc',
+45 silly install resolved     version: '0.2.3',
+45 silly install resolved     description: 'Automated JSDoc generation for Meteor projects with a Meteor server to output the docs.',
+45 silly install resolved     dependencies:
+45 silly install resolved      { ejs: '0.8.x',
+45 silly install resolved        cjson: '0.3.x',
+45 silly install resolved        colors: '0.6.x',
+45 silly install resolved        jsdoc: '3.3.x',
+45 silly install resolved        'canonical-json': '0.0.x',
+45 silly install resolved        underscore: '1.8.x' },
+45 silly install resolved     bin: { 'meteor-jsdoc': './bin/meteor-jsdoc' },
+45 silly install resolved     author: { name: 'Fabien Blanchard', email: 'fabienb4.b4soft@gmail.com' },
+45 silly install resolved     repository:
+45 silly install resolved      { type: 'git',
+45 silly install resolved        url: 'git://github.com/fabienb4/meteor-jsdoc.git' },
+45 silly install resolved     license: 'MIT',
+45 silly install resolved     bugs: { url: 'https://github.com/fabienb4/meteor-jsdoc/issues' },
+45 silly install resolved     homepage: 'https://github.com/fabienb4/meteor-jsdoc',
+45 silly install resolved     gitHead: 'eb29cf6f951cbf4aab26b32a7e70245052cb8998',
+45 silly install resolved     _id: 'meteor-jsdoc@0.2.3',
+45 silly install resolved     scripts: {},
+45 silly install resolved     _shasum: '3b06bdd8f0c0ed144a7da99dffac0fb3c44fb941',
+45 silly install resolved     _from: 'meteor-jsdoc@*',
+45 silly install resolved     _npmVersion: '2.7.4',
+45 silly install resolved     _nodeVersion: '0.10.38',
+45 silly install resolved     _npmUser: { name: 'fabienb4', email: 'fabienb4.b4soft@gmail.com' },
+45 silly install resolved     maintainers: [ [Object] ],
+45 silly install resolved     dist:
+45 silly install resolved      { shasum: '3b06bdd8f0c0ed144a7da99dffac0fb3c44fb941',
+45 silly install resolved        tarball: 'http://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz' },
+45 silly install resolved     directories: {},
+45 silly install resolved     _resolved: 'https://registry.npmjs.org/meteor-jsdoc/-/meteor-jsdoc-0.2.3.tgz' } ]
+46 info install meteor-jsdoc@0.2.3 into /usr/local/lib
+47 info installOne meteor-jsdoc@0.2.3
+48 verbose installOne of meteor-jsdoc to /usr/local/lib not in flight; installing
+49 verbose lock using /home/parene/.npm/_locks/meteor-jsdoc-d5770bc65862f6d6.lock for /usr/local/lib/node_modules/meteor-jsdoc
+50 silly install write writing meteor-jsdoc 0.2.3 to /usr/local/lib/node_modules/meteor-jsdoc
+51 silly cache addNamed cb meteor-jsdoc@0.2.3
+52 verbose unbuild lib/node_modules/meteor-jsdoc
+53 verbose gentlyRm vacuuming /usr/local/lib/node_modules/meteor-jsdoc
+54 verbose tar unpack /home/parene/.npm/meteor-jsdoc/0.2.3/package.tgz
+55 verbose tar unpacking to /usr/local/lib/node_modules/meteor-jsdoc
+56 verbose gentlyRm vacuuming /usr/local/lib/node_modules/meteor-jsdoc
+57 silly gunzTarPerm modes [ '755', '644' ]
+58 silly gunzTarPerm extractEntry package.json
+59 silly gunzTarPerm extractEntry .npmignore
+60 silly gunzTarPerm extractEntry README.md
+61 silly gunzTarPerm extractEntry LICENSE
+62 silly gunzTarPerm extractEntry jsdoc-conf.json
+63 silly gunzTarPerm extractEntry example/jsdoc.json
+64 silly gunzTarPerm extractEntry example/meteor/.meteor/.npmignore
+65 silly gunzTarPerm extractEntry example/meteor/.meteor/.finished-upgraders
+66 silly gunzTarPerm extractEntry example/meteor/.meteor/.id
+67 silly gunzTarPerm extractEntry example/meteor/.meteor/packages
+68 silly gunzTarPerm extractEntry example/meteor/.meteor/platforms
+69 silly gunzTarPerm extractEntry example/meteor/.meteor/release
+70 silly gunzTarPerm extractEntry example/meteor/.meteor/versions
+71 silly gunzTarPerm extractEntry example/meteor/client/helpers.js
+72 silly gunzTarPerm extractEntry example/meteor/client/init.js
+73 silly gunzTarPerm extractEntry example/meteor/client/head.html
+74 silly gunzTarPerm extractEntry example/meteor/client/templates/api-box.js
+75 silly gunzTarPerm extractEntry example/meteor/client/templates/docs.js
+76 silly gunzTarPerm extractEntry example/meteor/client/templates/tableOfContents.js
+77 silly gunzTarPerm extractEntry example/meteor/client/templates/api-box.html
+78 silly gunzTarPerm extractEntry example/meteor/client/templates/docs.html
+79 silly gunzTarPerm extractEntry example/meteor/client/templates/docs.less
+80 silly gunzTarPerm extractEntry example/meteor/client/templates/tableOfContents.html
+81 silly gunzTarPerm extractEntry lib/actions.js
+82 silly gunzTarPerm extractEntry lib/config.js
+83 silly gunzTarPerm extractEntry lib/helpers.js
+84 silly gunzTarPerm extractEntry scripts/build_docs.sh
+85 silly gunzTarPerm extractEntry scripts/init_meteor.sh
+86 silly gunzTarPerm extractEntry scripts/start_meteor.sh
+87 silly gunzTarPerm extractEntry scripts/stop_meteor.sh
+88 silly gunzTarPerm extractEntry bin/meteor-jsdoc
+89 silly gunzTarPerm extractEntry template/publish.js
+90 info preinstall meteor-jsdoc@0.2.3
+91 silly prepareForInstallMany adding ejs@0.8.x from meteor-jsdoc dependencies
+92 silly prepareForInstallMany adding cjson@0.3.x from meteor-jsdoc dependencies
+93 silly prepareForInstallMany adding colors@0.6.x from meteor-jsdoc dependencies
+94 silly prepareForInstallMany adding jsdoc@3.3.x from meteor-jsdoc dependencies
+95 silly prepareForInstallMany adding canonical-json@0.0.x from meteor-jsdoc dependencies
+96 silly prepareForInstallMany adding underscore@1.8.x from meteor-jsdoc dependencies
+97 silly cache add args [ 'cjson@0.3.x', null ]
+98 verbose cache add spec cjson@0.3.x
+99 silly cache add parsed spec { raw: 'cjson@0.3.x',
+99 silly cache add   scope: null,
+99 silly cache add   name: 'cjson',
+99 silly cache add   rawSpec: '0.3.x',
+99 silly cache add   spec: '>=0.3.0 <0.4.0',
+99 silly cache add   type: 'range' }
+100 verbose addNamed cjson@>=0.3.0 <0.4.0
+101 silly addNamed semver.valid null
+102 silly addNamed semver.validRange >=0.3.0 <0.4.0
+103 silly addNameRange { name: 'cjson', range: '>=0.3.0 <0.4.0', hasData: false }
+104 silly mapToRegistry name cjson
+105 silly mapToRegistry using default registry
+106 silly mapToRegistry registry https://registry.npmjs.org/
+107 silly mapToRegistry uri https://registry.npmjs.org/cjson
+108 verbose addNameRange registry:https://registry.npmjs.org/cjson not in flight; fetching
+109 silly cache add args [ 'colors@0.6.x', null ]
+110 verbose cache add spec colors@0.6.x
+111 silly cache add parsed spec { raw: 'colors@0.6.x',
+111 silly cache add   scope: null,
+111 silly cache add   name: 'colors',
+111 silly cache add   rawSpec: '0.6.x',
+111 silly cache add   spec: '>=0.6.0 <0.7.0',
+111 silly cache add   type: 'range' }
+112 verbose addNamed colors@>=0.6.0 <0.7.0
+113 silly addNamed semver.valid null
+114 silly addNamed semver.validRange >=0.6.0 <0.7.0
+115 silly addNameRange { name: 'colors', range: '>=0.6.0 <0.7.0', hasData: false }
+116 silly mapToRegistry name colors
+117 silly mapToRegistry using default registry
+118 silly mapToRegistry registry https://registry.npmjs.org/
+119 silly mapToRegistry uri https://registry.npmjs.org/colors
+120 verbose addNameRange registry:https://registry.npmjs.org/colors not in flight; fetching
+121 silly cache add args [ 'jsdoc@3.3.x', null ]
+122 verbose cache add spec jsdoc@3.3.x
+123 silly cache add parsed spec { raw: 'jsdoc@3.3.x',
+123 silly cache add   scope: null,
+123 silly cache add   name: 'jsdoc',
+123 silly cache add   rawSpec: '3.3.x',
+123 silly cache add   spec: '>=3.3.0 <3.4.0',
+123 silly cache add   type: 'range' }
+124 verbose addNamed jsdoc@>=3.3.0 <3.4.0
+125 silly addNamed semver.valid null
+126 silly addNamed semver.validRange >=3.3.0 <3.4.0
+127 silly addNameRange { name: 'jsdoc', range: '>=3.3.0 <3.4.0', hasData: false }
+128 silly mapToRegistry name jsdoc
+129 silly mapToRegistry using default registry
+130 silly mapToRegistry registry https://registry.npmjs.org/
+131 silly mapToRegistry uri https://registry.npmjs.org/jsdoc
+132 verbose addNameRange registry:https://registry.npmjs.org/jsdoc not in flight; fetching
+133 silly cache add args [ 'canonical-json@0.0.x', null ]
+134 verbose cache add spec canonical-json@0.0.x
+135 silly cache add parsed spec { raw: 'canonical-json@0.0.x',
+135 silly cache add   scope: null,
+135 silly cache add   name: 'canonical-json',
+135 silly cache add   rawSpec: '0.0.x',
+135 silly cache add   spec: '>=0.0.0 <0.1.0',
+135 silly cache add   type: 'range' }
+136 verbose addNamed canonical-json@>=0.0.0 <0.1.0
+137 silly addNamed semver.valid null
+138 silly addNamed semver.validRange >=0.0.0 <0.1.0
+139 silly addNameRange { name: 'canonical-json',
+139 silly addNameRange   range: '>=0.0.0 <0.1.0',
+139 silly addNameRange   hasData: false }
+140 silly mapToRegistry name canonical-json
+141 silly mapToRegistry using default registry
+142 silly mapToRegistry registry https://registry.npmjs.org/
+143 silly mapToRegistry uri https://registry.npmjs.org/canonical-json
+144 verbose addNameRange registry:https://registry.npmjs.org/canonical-json not in flight; fetching
+145 silly cache add args [ 'underscore@1.8.x', null ]
+146 verbose cache add spec underscore@1.8.x
+147 silly cache add parsed spec { raw: 'underscore@1.8.x',
+147 silly cache add   scope: null,
+147 silly cache add   name: 'underscore',
+147 silly cache add   rawSpec: '1.8.x',
+147 silly cache add   spec: '>=1.8.0 <1.9.0',
+147 silly cache add   type: 'range' }
+148 verbose addNamed underscore@>=1.8.0 <1.9.0
+149 silly addNamed semver.valid null
+150 silly addNamed semver.validRange >=1.8.0 <1.9.0
+151 silly addNameRange { name: 'underscore', range: '>=1.8.0 <1.9.0', hasData: false }
+152 silly mapToRegistry name underscore
+153 silly mapToRegistry using default registry
+154 silly mapToRegistry registry https://registry.npmjs.org/
+155 silly mapToRegistry uri https://registry.npmjs.org/underscore
+156 verbose addNameRange registry:https://registry.npmjs.org/underscore not in flight; fetching
+157 silly cache add args [ 'ejs@0.8.x', null ]
+158 verbose cache add spec ejs@0.8.x
+159 silly cache add parsed spec { raw: 'ejs@0.8.x',
+159 silly cache add   scope: null,
+159 silly cache add   name: 'ejs',
+159 silly cache add   rawSpec: '0.8.x',
+159 silly cache add   spec: '>=0.8.0 <0.9.0',
+159 silly cache add   type: 'range' }
+160 verbose addNamed ejs@>=0.8.0 <0.9.0
+161 silly addNamed semver.valid null
+162 silly addNamed semver.validRange >=0.8.0 <0.9.0
+163 silly addNameRange { name: 'ejs', range: '>=0.8.0 <0.9.0', hasData: false }
+164 silly mapToRegistry name ejs
+165 silly mapToRegistry using default registry
+166 silly mapToRegistry registry https://registry.npmjs.org/
+167 silly mapToRegistry uri https://registry.npmjs.org/ejs
+168 verbose addNameRange registry:https://registry.npmjs.org/ejs not in flight; fetching
+169 verbose request uri https://registry.npmjs.org/cjson
+170 verbose request no auth needed
+171 info attempt registry request try #1 at 17:18:52
+172 http request GET https://registry.npmjs.org/cjson
+173 verbose request uri https://registry.npmjs.org/jsdoc
+174 verbose request no auth needed
+175 info attempt registry request try #1 at 17:18:52
+176 http request GET https://registry.npmjs.org/jsdoc
+177 verbose request uri https://registry.npmjs.org/canonical-json
+178 verbose request no auth needed
+179 info attempt registry request try #1 at 17:18:52
+180 http request GET https://registry.npmjs.org/canonical-json
+181 verbose request uri https://registry.npmjs.org/ejs
+182 verbose request no auth needed
+183 info attempt registry request try #1 at 17:18:52
+184 http request GET https://registry.npmjs.org/ejs
+185 verbose request uri https://registry.npmjs.org/colors
+186 verbose request no auth needed
+187 info attempt registry request try #1 at 17:18:52
+188 verbose etag "DU9ZY4WIQ12US8BFH2D729HZA"
+189 http request GET https://registry.npmjs.org/colors
+190 verbose request uri https://registry.npmjs.org/underscore
+191 verbose request no auth needed
+192 info attempt registry request try #1 at 17:18:52
+193 verbose etag "B5SXQWQV0THW3FJ7GWR1G1D2"
+194 http request GET https://registry.npmjs.org/underscore
+195 http 304 https://registry.npmjs.org/colors
+196 silly get cb [ 304,
+196 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+196 silly get     server: 'Apache',
+196 silly get     via: '1.1 varnish',
+196 silly get     'last-modified': 'Fri, 10 Apr 2015 21:18:03 GMT',
+196 silly get     'cache-control': 'max-age=60',
+196 silly get     etag: '"DU9ZY4WIQ12US8BFH2D729HZA"',
+196 silly get     age: '55',
+196 silly get     'x-served-by': 'cache-iad2139-IAD',
+196 silly get     'x-cache': 'HIT',
+196 silly get     'x-cache-hits': '3',
+196 silly get     'x-timer': 'S1428700732.252043,VS0,VE0',
+196 silly get     vary: 'Accept',
+196 silly get     'content-length': '0',
+196 silly get     'keep-alive': 'timeout=10, max=50',
+196 silly get     connection: 'Keep-Alive' } ]
+197 verbose etag https://registry.npmjs.org/colors from cache
+198 verbose get saving colors to /home/parene/.npm/registry.npmjs.org/colors/.cache.json
+199 http 200 https://registry.npmjs.org/canonical-json
+200 silly get cb [ 200,
+200 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+200 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+200 silly get     etag: '"DL4UBO3E89F8VUQY46GUF6PS0"',
+200 silly get     'content-type': 'application/json',
+200 silly get     'cache-control': 'max-age=60',
+200 silly get     'content-length': '4709',
+200 silly get     'accept-ranges': 'bytes',
+200 silly get     via: '1.1 varnish',
+200 silly get     age: '45',
+200 silly get     'x-served-by': 'cache-iad2145-IAD',
+200 silly get     'x-cache': 'HIT',
+200 silly get     'x-cache-hits': '1',
+200 silly get     'x-timer': 'S1428700732.252553,VS0,VE0',
+200 silly get     vary: 'Accept',
+200 silly get     'keep-alive': 'timeout=10, max=50',
+200 silly get     connection: 'Keep-Alive' } ]
+201 verbose get saving canonical-json to /home/parene/.npm/registry.npmjs.org/canonical-json/.cache.json
+202 http 200 https://registry.npmjs.org/cjson
+203 silly get cb [ 200,
+203 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+203 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+203 silly get     etag: '"3J41Q2AER7N61C6KYPBGG2UFZ"',
+203 silly get     'content-type': 'application/json',
+203 silly get     'cache-control': 'max-age=60',
+203 silly get     'content-length': '29672',
+203 silly get     'accept-ranges': 'bytes',
+203 silly get     via: '1.1 varnish',
+203 silly get     age: '26',
+203 silly get     'x-served-by': 'cache-iad2130-IAD',
+203 silly get     'x-cache': 'HIT',
+203 silly get     'x-cache-hits': '1',
+203 silly get     'x-timer': 'S1428700732.244479,VS0,VE0',
+203 silly get     vary: 'Accept',
+203 silly get     'keep-alive': 'timeout=10, max=50',
+203 silly get     connection: 'Keep-Alive' } ]
+204 verbose get saving cjson to /home/parene/.npm/registry.npmjs.org/cjson/.cache.json
+205 silly addNameRange number 2 { name: 'canonical-json',
+205 silly addNameRange   range: '>=0.0.0 <0.1.0',
+205 silly addNameRange   hasData: true }
+206 silly addNameRange versions [ 'canonical-json', [ '0.0.1', '0.0.3', '0.0.4' ] ]
+207 verbose addNamed canonical-json@0.0.4
+208 silly addNamed semver.valid 0.0.4
+209 silly addNamed semver.validRange 0.0.4
+210 silly mapToRegistry name canonical-json
+211 silly mapToRegistry using default registry
+212 silly mapToRegistry registry https://registry.npmjs.org/
+213 silly mapToRegistry uri https://registry.npmjs.org/canonical-json
+214 verbose addRemoteTarball https://registry.npmjs.org/canonical-json/-/canonical-json-0.0.4.tgz not in flight; adding
+215 verbose addRemoteTarball [ 'https://registry.npmjs.org/canonical-json/-/canonical-json-0.0.4.tgz',
+215 verbose addRemoteTarball   '6579c072c3db5c477ec41dc978fbf2b8f41074a3' ]
+216 silly addNameRange number 2 { name: 'cjson', range: '>=0.3.0 <0.4.0', hasData: true }
+217 silly addNameRange versions [ 'cjson',
+217 silly addNameRange   [ '0.0.1',
+217 silly addNameRange     '0.0.2',
+217 silly addNameRange     '0.0.3',
+217 silly addNameRange     '0.0.4',
+217 silly addNameRange     '0.0.5',
+217 silly addNameRange     '0.0.6',
+217 silly addNameRange     '0.1.0',
+217 silly addNameRange     '0.2.0',
+217 silly addNameRange     '0.2.1',
+217 silly addNameRange     '0.3.0' ] ]
+218 verbose addNamed cjson@0.3.0
+219 silly addNamed semver.valid 0.3.0
+220 silly addNamed semver.validRange 0.3.0
+221 silly mapToRegistry name cjson
+222 silly mapToRegistry using default registry
+223 silly mapToRegistry registry https://registry.npmjs.org/
+224 silly mapToRegistry uri https://registry.npmjs.org/cjson
+225 verbose addRemoteTarball https://registry.npmjs.org/cjson/-/cjson-0.3.0.tgz not in flight; adding
+226 verbose addRemoteTarball [ 'https://registry.npmjs.org/cjson/-/cjson-0.3.0.tgz',
+226 verbose addRemoteTarball   'e6439b90703d312ff6e2224097bea92ce3d02a14' ]
+227 info retry fetch attempt 1 at 17:18:52
+228 info attempt registry request try #1 at 17:18:52
+229 http fetch GET https://registry.npmjs.org/canonical-json/-/canonical-json-0.0.4.tgz
+230 info retry fetch attempt 1 at 17:18:52
+231 info attempt registry request try #1 at 17:18:52
+232 http fetch GET https://registry.npmjs.org/cjson/-/cjson-0.3.0.tgz
+233 http 200 https://registry.npmjs.org/ejs
+234 silly get cb [ 200,
+234 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+234 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+234 silly get     etag: '"46IEDUAIH1Q2CB43KJM06JOGZ"',
+234 silly get     'content-type': 'application/json',
+234 silly get     'cache-control': 'max-age=60',
+234 silly get     'content-length': '45016',
+234 silly get     'accept-ranges': 'bytes',
+234 silly get     via: '1.1 varnish',
+234 silly get     age: '0',
+234 silly get     'x-served-by': 'cache-iad2141-IAD',
+234 silly get     'x-cache': 'HIT',
+234 silly get     'x-cache-hits': '1',
+234 silly get     'x-timer': 'S1428700732.255465,VS0,VE12',
+234 silly get     vary: 'Accept',
+234 silly get     'keep-alive': 'timeout=10, max=50',
+234 silly get     connection: 'Keep-Alive' } ]
+235 verbose get saving ejs to /home/parene/.npm/registry.npmjs.org/ejs/.cache.json
+236 silly addNameRange number 2 { name: 'ejs', range: '>=0.8.0 <0.9.0', hasData: true }
+237 silly addNameRange versions [ 'ejs',
+237 silly addNameRange   [ '0.0.1',
+237 silly addNameRange     '0.0.2',
+237 silly addNameRange     '0.0.3',
+237 silly addNameRange     '0.0.4',
+237 silly addNameRange     '0.1.0',
+237 silly addNameRange     '0.2.0',
+237 silly addNameRange     '0.2.1',
+237 silly addNameRange     '0.3.0',
+237 silly addNameRange     '0.3.1',
+237 silly addNameRange     '0.4.0',
+237 silly addNameRange     '0.4.1',
+237 silly addNameRange     '0.4.2',
+237 silly addNameRange     '0.4.3',
+237 silly addNameRange     '0.5.0',
+237 silly addNameRange     '0.6.0',
+237 silly addNameRange     '0.6.1',
+237 silly addNameRange     '0.7.0',
+237 silly addNameRange     '0.7.1',
+237 silly addNameRange     '0.7.2',
+237 silly addNameRange     '0.8.0',
+237 silly addNameRange     '0.8.1',
+237 silly addNameRange     '0.8.2',
+237 silly addNameRange     '0.8.3',
+237 silly addNameRange     '0.8.4',
+237 silly addNameRange     '0.8.5',
+237 silly addNameRange     '0.8.6',
+237 silly addNameRange     '0.8.8',
+237 silly addNameRange     '1.0.0',
+237 silly addNameRange     '2.0.2',
+237 silly addNameRange     '2.0.3',
+237 silly addNameRange     '2.0.4',
+237 silly addNameRange     '2.0.5',
+237 silly addNameRange     '2.0.6',
+237 silly addNameRange     '2.0.7',
+237 silly addNameRange     '2.0.8',
+237 silly addNameRange     '2.1.1',
+237 silly addNameRange     '2.1.2',
+237 silly addNameRange     '2.1.3',
+237 silly addNameRange     '2.1.4',
+237 silly addNameRange     '2.2.1',
+237 silly addNameRange     '2.2.2',
+237 silly addNameRange     '2.2.3',
+237 silly addNameRange     '2.2.4',
+237 silly addNameRange     '2.3.1' ] ]
+238 verbose addNamed ejs@0.8.8
+239 silly addNamed semver.valid 0.8.8
+240 silly addNamed semver.validRange 0.8.8
+241 silly mapToRegistry name ejs
+242 silly mapToRegistry using default registry
+243 silly mapToRegistry registry https://registry.npmjs.org/
+244 silly mapToRegistry uri https://registry.npmjs.org/ejs
+245 verbose addRemoteTarball https://registry.npmjs.org/ejs/-/ejs-0.8.8.tgz not in flight; adding
+246 verbose addRemoteTarball [ 'https://registry.npmjs.org/ejs/-/ejs-0.8.8.tgz',
+246 verbose addRemoteTarball   'ffdc56dcc35d02926dd50ad13439bbc54061d598' ]
+247 info retry fetch attempt 1 at 17:18:52
+248 info attempt registry request try #1 at 17:18:52
+249 http fetch GET https://registry.npmjs.org/ejs/-/ejs-0.8.8.tgz
+250 http 200 https://registry.npmjs.org/underscore
+251 silly get cb [ 200,
+251 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+251 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+251 silly get     etag: '"BZ7JZ88IAOYT3FOZGHXWY3R52"',
+251 silly get     'content-type': 'application/json',
+251 silly get     'cache-control': 'max-age=60',
+251 silly get     'content-length': '40395',
+251 silly get     'accept-ranges': 'bytes',
+251 silly get     via: '1.1 varnish',
+251 silly get     age: '49',
+251 silly get     'x-served-by': 'cache-iad2147-IAD',
+251 silly get     'x-cache': 'HIT',
+251 silly get     'x-cache-hits': '3',
+251 silly get     'x-timer': 'S1428700732.325836,VS0,VE0',
+251 silly get     vary: 'Accept',
+251 silly get     'keep-alive': 'timeout=10, max=50',
+251 silly get     connection: 'Keep-Alive' } ]
+252 verbose get saving underscore to /home/parene/.npm/registry.npmjs.org/underscore/.cache.json
+253 http fetch 200 https://registry.npmjs.org/canonical-json/-/canonical-json-0.0.4.tgz
+254 http fetch 200 https://registry.npmjs.org/cjson/-/cjson-0.3.0.tgz
+255 silly fetchAndShaCheck shasum 6579c072c3db5c477ec41dc978fbf2b8f41074a3
+256 silly fetchAndShaCheck shasum e6439b90703d312ff6e2224097bea92ce3d02a14
+257 verbose addTmpTarball /tmp/npm-10097-8450c0f8/registry.npmjs.org/canonical-json/-/canonical-json-0.0.4.tgz not in flight; adding
+258 verbose addTmpTarball already have metadata; skipping unpack for canonical-json@0.0.4
+259 verbose addTmpTarball /tmp/npm-10097-8450c0f8/registry.npmjs.org/cjson/-/cjson-0.3.0.tgz not in flight; adding
+260 verbose addTmpTarball already have metadata; skipping unpack for cjson@0.3.0
+261 http 200 https://registry.npmjs.org/jsdoc
+262 silly get cb [ 200,
+262 silly get   { date: 'Fri, 10 Apr 2015 21:18:52 GMT',
+262 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+262 silly get     etag: '"1VNVK56MZ3CMLFFUTQGI8S1JN"',
+262 silly get     'content-type': 'application/json',
+262 silly get     'cache-control': 'max-age=60',
+262 silly get     'content-length': '36090',
+262 silly get     'accept-ranges': 'bytes',
+262 silly get     via: '1.1 varnish',
+262 silly get     age: '0',
+262 silly get     'x-served-by': 'cache-iad2133-IAD',
+262 silly get     'x-cache': 'HIT',
+262 silly get     'x-cache-hits': '1',
+262 silly get     'x-timer': 'S1428700732.249033,VS0,VE88',
+262 silly get     vary: 'Accept',
+262 silly get     'keep-alive': 'timeout=10, max=50',
+262 silly get     connection: 'Keep-Alive' } ]
+263 verbose get saving jsdoc to /home/parene/.npm/registry.npmjs.org/jsdoc/.cache.json
+264 silly addNameRange number 2 { name: 'jsdoc', range: '>=3.3.0 <3.4.0', hasData: true }
+265 silly addNameRange versions [ 'jsdoc',
+265 silly addNameRange   [ '0.0.0',
+265 silly addNameRange     '3.2.0-dev',
+265 silly addNameRange     '3.2.0',
+265 silly addNameRange     '3.2.1',
+265 silly addNameRange     '3.2.2',
+265 silly addNameRange     '3.3.0-alpha1',
+265 silly addNameRange     '3.3.0-alpha2',
+265 silly addNameRange     '3.3.0-alpha3',
+265 silly addNameRange     '3.3.0-alpha4',
+265 silly addNameRange     '3.3.0-alpha5',
+265 silly addNameRange     '3.3.0-alpha7',
+265 silly addNameRange     '3.3.0-alpha8',
+265 silly addNameRange     '3.3.0-alpha9',
+265 silly addNameRange     '3.3.0-alpha10',
+265 silly addNameRange     '3.3.0-alpha11',
+265 silly addNameRange     '3.3.0-alpha12',
+265 silly addNameRange     '3.3.0-alpha13',
+265 silly addNameRange     '3.3.0-beta1',
+265 silly addNameRange     '3.3.0-beta2',
+265 silly addNameRange     '3.3.0-beta3' ] ]
+266 silly cache afterAdd canonical-json@0.0.4
+267 verbose afterAdd /home/parene/.npm/canonical-json/0.0.4/package/package.json not in flight; writing
+268 silly cache afterAdd cjson@0.3.0
+269 verbose afterAdd /home/parene/.npm/cjson/0.3.0/package/package.json not in flight; writing
+270 verbose afterAdd /home/parene/.npm/canonical-json/0.0.4/package/package.json written
+271 verbose afterAdd /home/parene/.npm/cjson/0.3.0/package/package.json written
+272 http fetch 200 https://registry.npmjs.org/ejs/-/ejs-0.8.8.tgz
+273 silly fetchAndShaCheck shasum ffdc56dcc35d02926dd50ad13439bbc54061d598
+274 verbose addTmpTarball /tmp/npm-10097-8450c0f8/registry.npmjs.org/ejs/-/ejs-0.8.8.tgz not in flight; adding
+275 verbose addTmpTarball already have metadata; skipping unpack for ejs@0.8.8
+276 silly cache afterAdd ejs@0.8.8
+277 verbose afterAdd /home/parene/.npm/ejs/0.8.8/package/package.json not in flight; writing
+278 verbose afterAdd /home/parene/.npm/ejs/0.8.8/package/package.json written
+279 silly addNameRange number 2 { name: 'colors', range: '>=0.6.0 <0.7.0', hasData: true }
+280 silly addNameRange versions [ 'colors',
+280 silly addNameRange   [ '0.3.0',
+280 silly addNameRange     '0.5.0',
+280 silly addNameRange     '0.5.1',
+280 silly addNameRange     '0.6.0',
+280 silly addNameRange     '0.6.0-1',
+280 silly addNameRange     '0.6.1',
+280 silly addNameRange     '0.6.2',
+280 silly addNameRange     '1.0.0',
+280 silly addNameRange     '1.0.1',
+280 silly addNameRange     '1.0.2',
+280 silly addNameRange     '1.0.3' ] ]
+281 verbose addNamed colors@0.6.2
+282 silly addNamed semver.valid 0.6.2
+283 silly addNamed semver.validRange 0.6.2
+284 silly cache afterAdd colors@0.6.2
+285 verbose afterAdd /home/parene/.npm/colors/0.6.2/package/package.json not in flight; writing
+286 silly addNameRange number 2 { name: 'underscore', range: '>=1.8.0 <1.9.0', hasData: true }
+287 silly addNameRange versions [ 'underscore',
+287 silly addNameRange   [ '1.0.3',
+287 silly addNameRange     '1.0.4',
+287 silly addNameRange     '1.1.0',
+287 silly addNameRange     '1.1.1',
+287 silly addNameRange     '1.1.2',
+287 silly addNameRange     '1.1.3',
+287 silly addNameRange     '1.1.4',
+287 silly addNameRange     '1.1.5',
+287 silly addNameRange     '1.1.6',
+287 silly addNameRange     '1.1.7',
+287 silly addNameRange     '1.2.0',
+287 silly addNameRange     '1.2.1',
+287 silly addNameRange     '1.2.2',
+287 silly addNameRange     '1.2.3',
+287 silly addNameRange     '1.2.4',
+287 silly addNameRange     '1.3.0',
+287 silly addNameRange     '1.3.1',
+287 silly addNameRange     '1.3.2',
+287 silly addNameRange     '1.3.3',
+287 silly addNameRange     '1.4.0',
+287 silly addNameRange     '1.4.1',
+287 silly addNameRange     '1.4.2',
+287 silly addNameRange     '1.4.3',
+287 silly addNameRange     '1.4.4',
+287 silly addNameRange     '1.5.0',
+287 silly addNameRange     '1.5.1',
+287 silly addNameRange     '1.5.2',
+287 silly addNameRange     '1.6.0',
+287 silly addNameRange     '1.7.0',
+287 silly addNameRange     '1.8.0',
+287 silly addNameRange     '1.8.1',
+287 silly addNameRange     '1.8.2',
+287 silly addNameRange     '1.8.3' ] ]
+288 verbose addNamed underscore@1.8.3
+289 silly addNamed semver.valid 1.8.3
+290 silly addNamed semver.validRange 1.8.3
+291 silly mapToRegistry name underscore
+292 silly mapToRegistry using default registry
+293 silly mapToRegistry registry https://registry.npmjs.org/
+294 silly mapToRegistry uri https://registry.npmjs.org/underscore
+295 verbose addRemoteTarball https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz not in flight; adding
+296 verbose addRemoteTarball [ 'https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz',
+296 verbose addRemoteTarball   '4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022' ]
+297 info retry fetch attempt 1 at 17:18:52
+298 info attempt registry request try #1 at 17:18:52
+299 http fetch GET https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz
+300 http fetch 200 https://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz
+301 silly fetchAndShaCheck shasum 4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022
+302 verbose addTmpTarball /tmp/npm-10097-8450c0f8/registry.npmjs.org/underscore/-/underscore-1.8.3.tgz not in flight; adding
+303 verbose addTmpTarball already have metadata; skipping unpack for underscore@1.8.3
+304 silly cache afterAdd underscore@1.8.3
+305 verbose afterAdd /home/parene/.npm/underscore/1.8.3/package/package.json not in flight; writing
+306 verbose afterAdd /home/parene/.npm/underscore/1.8.3/package/package.json written
+307 verbose afterAdd /home/parene/.npm/colors/0.6.2/package/package.json written
+308 verbose about to build /usr/local/lib/node_modules/meteor-jsdoc
+309 verbose unlock done using /home/parene/.npm/_locks/meteor-jsdoc-d5770bc65862f6d6.lock for /usr/local/lib/node_modules/meteor-jsdoc
+310 verbose stack Error: No compatible version found: jsdoc@'>=3.3.0 <3.4.0'
+310 verbose stack Valid install targets:
+310 verbose stack ["0.0.0","3.2.0-dev","3.2.0","3.2.1","3.2.2","3.3.0-alpha1","3.3.0-alpha2","3.3.0-alpha3","3.3.0-alpha4","3.3.0-alpha5","3.3.0-alpha7","3.3.0-alpha8","3.3.0-alpha9","3.3.0-alpha10","3.3.0-alpha11","3.3.0-alpha12","3.3.0-alpha13","3.3.0-beta1","3.3.0-beta2","3.3.0-beta3"]
+310 verbose stack
+310 verbose stack     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:259:12)
+310 verbose stack     at next (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:238:17)
+310 verbose stack     at setData (/usr/local/lib/node_modules/npm/lib/cache/add-named.js:215:5)
+310 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+310 verbose stack     at f (/usr/local/lib/node_modules/npm/node_modules/once/once.js:17:25)
+310 verbose stack     at saved (/usr/local/lib/node_modules/npm/lib/cache/caching-client.js:173:7)
+310 verbose stack     at FSReqWrap.oncomplete (fs.js:99:15)
+311 verbose cwd /home/parene/Documents/DriveSafe/git-repo/DriveSafe
+312 error Linux 3.13.0-46-generic
+313 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "meteor-jsdoc"
+314 error node v0.12.0
+315 error npm  v2.5.1
+316 error code ETARGET
+317 error notarget No compatible version found: jsdoc@'>=3.3.0 <3.4.0'
+317 error notarget Valid install targets:
+317 error notarget ["0.0.0","3.2.0-dev","3.2.0","3.2.1","3.2.2","3.3.0-alpha1","3.3.0-alpha2","3.3.0-alpha3","3.3.0-alpha4","3.3.0-alpha5","3.3.0-alpha7","3.3.0-alpha8","3.3.0-alpha9","3.3.0-alpha10","3.3.0-alpha11","3.3.0-alpha12","3.3.0-alpha13","3.3.0-beta1","3.3.0-beta2","3.3.0-beta3"]
+317 error notarget
+317 error notarget This is most likely not a problem with npm itself.
+317 error notarget In most cases you or one of your dependencies are requesting
+317 error notarget a package version that doesn't exist.
+318 verbose exit [ 1, true ]
+319 verbose unbuild lib/node_modules/meteor-jsdoc
+320 info preuninstall meteor-jsdoc@0.2.3
+321 info uninstall meteor-jsdoc@0.2.3
+322 verbose unbuild rmStuff meteor-jsdoc@0.2.3 from /usr/local/lib/node_modules
+323 verbose gentlyRm verifying that /usr/local is managed by npm
+324 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+325 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+326 silly isManaged /usr/local/bin is inside /usr/local
+327 silly gentlyRm /usr/local is managed by npm
+328 silly gentlyRm /usr/local/bin/meteor-jsdoc is under /usr/local
+329 verbose gentlyRm vacuuming /usr/local/bin/meteor-jsdoc up to /usr/local
+330 info postuninstall meteor-jsdoc@0.2.3
+331 verbose gentlyRm vacuuming /usr/local/lib/node_modules/meteor-jsdoc
+332 silly gentlyRm purging /usr/local/lib/node_modules/meteor-jsdoc
+333 silly gentlyRm quitting because other entries in /usr/local/lib/node_modules
