@@ -68,6 +68,16 @@ Template.riderDashboard.rendered = function () {
 Template.riderDashboard.helpers({
   errorMessage : function () {
     return pageSession.get("errorMessage");
+  },
+  ridePending : function() {
+    return Rides.findOne({user: Meteor.userId()});
   }
 });
+
+Template.riderDashboard.events({
+  'click .cancelRide' :function () {
+    Rides.findOne({user: Meteor.userId()}).delete();
+  }
+
+  });
 

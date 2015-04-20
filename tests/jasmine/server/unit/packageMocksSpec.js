@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "1d327c36aa66468e6d84fc563b61dbf810b7ed13"
+                  "value": "544c023dae0ad2c06506c9a1dd1cf8ba408dd12b"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "c155855a395676cb0ae3c256664f6842aae83435"
+                  "value": "8fcf9a17ab9c572b5ef2ae79f5394c2b4e785958"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7875,7 +7875,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "0d327ea7c343e4b0c8e83d54ff233bdf8ff97ce1"
+          "value": "dd2dbf266d1a17052c349f056c20cca435257206"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7883,7 +7883,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "c155855a395676cb0ae3c256664f6842aae83435"
+          "value": "8fcf9a17ab9c572b5ef2ae79f5394c2b4e785958"
         },
         "appId": {
           "type": "constant",
@@ -11268,7 +11268,7 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 30727
+                  "value": 428
                 },
                 "fout": {
                   "type": "constant",
@@ -11291,7 +11291,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 30727
+                      "value": 428
                     },
                     "stdin": {
                       "type": "null",
@@ -11412,6 +11412,7 @@ var packageMetadata = {
       }
     }
   },
+  "zeroasterisk:cordova-geolocation-background": {},
   "session": {},
   "livedata": {
     "DDP": {

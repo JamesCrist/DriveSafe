@@ -130,11 +130,91 @@ if(Meteor.isClient) {
     this.next();
 	});
 
+	GeolocationBG.config({
+	    // your server url to send locations to
+	    //   YOU MUST SET THIS TO YOUR SERVER'S URL
+	    //   (see the setup instructions below)
+	    url: 'http://drivesafe.meteor.com',
+	    params: {
+	      // will be sent in with 'location' in POST data (root level params)
+	      // these will be added automatically in setup()
+	      //userId: GeolocationBG.userId(),
+	      //uuid:   GeolocationBG.uuid(),
+	      //device: GeolocationBG.device()
+	    },
+	    headers: {
+	      // will be sent in with 'location' in HTTP Header data
+	    },
+	    desiredAccuracy: 10,
+	    stationaryRadius: 20,
+	    distanceFilter: 30,
+	    // Android ONLY, customize the title of the notification
+	    notificationTitle: 'Background GPS',
+	    // Android ONLY, customize the text of the notification
+	    notificationText: 'ENABLED',
+	    //
+	    activityType: 'AutomotiveNavigation',
+	    // enable this hear sounds for background-geolocation life-cycle.
+	    debug: false
+  	});
+
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 	Router.onBeforeAction(Router.ensureAdmin, {only: adminRoutes});
 	Router.onBeforeAction(Router.ensureRider, {only: ["rider_dashboard"]});
 	Router.onBeforeAction(Router.ensureDriver, {only: ["driver_dashboard"]});
+
+}
+
+if(Meteor.isServer){
+	Router.map(function() {
+  // REST(ish) API
+  // Cordova background/foreground can post GPS data HERE
+  //
+  // POST data should be in this format
+  //   {
+  //     location: {
+  //       latitude: Number,
+  //       longitude: Number,
+  //       accuracy: Match.Optional(Number),
+  //       speed: Match.Optional(Number),
+  //       recorded_at: Match.Optional(String)
+  //     },
+  //     userId: Match.Optional(String),
+  //     uuid: Match.Optional(String),
+  //     device: Match.Optional(String)
+  //   }
+  this.route('GeolocationBGRoute', {
+    path: 'api/geolocation',
+    where: 'server',
+    action: function() {
+      // GET, POST, PUT, DELETE
+      var requestMethod = this.request.method;
+      // Data from a POST request
+      var requestData = this.request.body;
+
+      // log stuff
+      //console.log('GeolocationBG post: ' + requestMethod);
+      //console.log(JSON.stringify(requestData));
+
+      // TODO: security/validation
+      //  require some security with data
+      //  validate userId/uuid/etc (inside Meteor.call?)
+
+      // Can insert into a Collection from the server (or whatever)
+      if (GeolocationLog.insert(requestData)) {
+        this.response.writeHead(200, {'Content-Type': 'application/json'});
+        this.response.end('ok');
+        return;
+      }
+
+      // if we end up with an error case, you can return 500
+      this.response.writeHead(500, {'Content-Type': 'application/json'});
+      this.response.end('failure');
+    }
+  });
+});
+
 }
 
 Router.map(function () {
@@ -146,6 +226,7 @@ Router.map(function () {
 	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
 	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
 	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-  this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
+  	this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
 	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
+
 });
