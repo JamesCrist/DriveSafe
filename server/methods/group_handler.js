@@ -1,8 +1,8 @@
 Meteor.methods({
   // Join a group, given the group key.
-  joinGroup : function (groupKey) {
+  joinGroup : function (groupName, groupKey) {
     // Find the group to join.
-    var group = Groups.findOne({ _id : groupKey });
+    var group = Groups.findOne({ name : groupName, key : groupKey });
     if(!group) {
       throw new Meteor.Error('group cannot be found, key may be incorrect');
     }

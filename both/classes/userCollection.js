@@ -54,9 +54,9 @@ User.prototype = {
       }
     });
   } ,
-  createGroup : function (newGroupName , callback) {
+  createGroup : function (newGroupName , newGroupKey , callback) {
     // Create a new group object
-    var newGroup = new Group(null, newGroupName, null, null, null, null);
+    var newGroup = new Group(null, newGroupName, null, null, null, null, newGroupKey);
     var that = this;
     newGroup.save(function(err, groupId) {
       if (!err) {
@@ -66,10 +66,10 @@ User.prototype = {
       callback.call(that, err, groupId);
     });
   } ,
-  joinGroup : function (groupKey , callback) {
+  joinGroup : function (groupName , groupKey , callback) {
     // Call the server side function to add the current user to a group.
     // This is done server side to improve efficiency and security.
-    Meteor.call("joinGroup" , groupKey , function (err) {
+    Meteor.call("joinGroup" , groupName , groupKey , function (err) {
       if(!err) {
         this.setGroup(groupKey);
       }

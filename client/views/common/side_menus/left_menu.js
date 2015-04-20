@@ -10,36 +10,58 @@ Template.leftMenu.events({
     }
   } ,
   'click #joinGroupButton' : function (event , template) {
-    IonPopup.prompt({
+    IonPopup.show({
       title : 'Join Group' ,
-      template : 'Please enter secret group key. Group admins can give these to you.' ,
-      okText : 'Join' ,
-      inputType : 'text' ,
-      inputPlaceholder : 'group key' ,
-      onOk : function (event , response) {
-        Meteor.user().joinGroup(response , function (error) {
-          if(error) {
-            console.log(error);
-          } else {
+      template : '<span id="inputDirections">' + 'Please enter group name and password' + '</span>' + '<input type="text" placeholder="group name" name="namePrompt" >' 
+      + '<input type="text" placeholder="group password" name="keyPrompt" >'  ,
+      buttons : [
+        {
+          text : 'Join' ,
+          type : 'button-positive' ,
+          onTap : function (e , template) {
+            // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
+            var nameVal = $(template.firstNode).find('[name=namePrompt]').val();
+            var keyVal  = $(template.firstNode).find('[name=keyPrompt]').val();
+
+            Meteor.user().joinGroup(nameVal , keyVal , function (err) {
+              if(err) {
+                // $(template.firstNode).find("#inputDirections").append(error.message);
+                $(template.firstNode).find("#inputDirections").html(err.message);
+                console.log(err.message);
+                e.preventDefault();
+              } else {
+                // Reload the dashboard to fix bug
+                // of map position icon not showing up.
+                IonPopup.close();
+              }
+            });
+          }
+        } ,
+        {
+          text : 'Cancel' ,
+          type : 'button-positive' ,
+          onTap : function (e) {
             IonPopup.close();
           }
-        });
-      }
+        } ]
     });
+
   } ,
   'click #createGroupButton' : function (event , template) {
     IonPopup.show({
       title : 'Create Group' ,
-      template : '<span id="inputDirections">' + 'Please enter group name' + '</span>' + '<input type="text" placeholder="group name" name="prompt" >' ,
+      template : '<span id="inputDirections">' + 'Please enter group name and password' + '</span>' + '<input type="text" placeholder="group name" name="namePrompt" >' 
+      + '<input type="text" placeholder="group password" name="keyPrompt" >'  ,
       buttons : [
         {
           text : 'Create' ,
           type : 'button-positive' ,
           onTap : function (e , template) {
             // template ='<span>' + 'Please enter a new group name' + '</span>' +'<input type="text" placeholder="group name" name="prompt" >';
-            var inputVal = $(template.firstNode).find('[name=prompt]').val();
+            var nameVal = $(template.firstNode).find('[name=namePrompt]').val();
+            var keyVal  = $(template.firstNode).find('[name=keyPrompt]').val();
 
-            Meteor.user().createGroup(inputVal , function (err) {
+            Meteor.user().createGroup(nameVal , keyVal , function (err) {
               if(err) {
                 // $(template.firstNode).find("#inputDirections").append(error.message);
                 $(template.firstNode).find("#inputDirections").html(err.message);
@@ -85,12 +107,5 @@ Template.leftMenu.events({
         console.log(err.message);
       }
     });
-    GeolocationBG.start();
-  }
-});
-
-Template.leftMenu.helpers({
-  ridePending: function() {
-    return Rides.findOne({user: Meteor.userId()});
   }
 });
