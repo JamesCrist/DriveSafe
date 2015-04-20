@@ -3,6 +3,10 @@ var pageSession = new ReactiveDict();
 pageSession.set("errorMessage" , "");
 
 Template.riderDashboard.rendered = function () {
+  if (Meteor.isCordova) {
+    GeolocationBG.start();
+  }
+
   var that = this;
 
   GoogleMaps.init(
@@ -63,6 +67,12 @@ Template.riderDashboard.rendered = function () {
       LiveMaps.addMarkersToMap(map , cursorsArray);
     }
   );
+};
+
+Template.riderDashboard.destroyed = function() {
+  if (Meteor.isCordova) {
+    GeolocationBG.stop();
+  }
 };
 
 Template.riderDashboard.helpers({

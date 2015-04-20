@@ -138,24 +138,18 @@ if(Meteor.isClient) {
 
 }
 
-if(Meteor.isServer){
-	Router.map(function() {
-  // REST(ish) API
-  // Cordova background/foreground can post GPS data HERE
-  //
-  // POST data should be in this format
-  //   {
-  //     location: {
-  //       latitude: Number,
-  //       longitude: Number,
-  //       accuracy: Match.Optional(Number),
-  //       speed: Match.Optional(Number),
-  //       recorded_at: Match.Optional(String)
-  //     },
-  //     userId: Match.Optional(String),
-  //     uuid: Match.Optional(String),
-  //     device: Match.Optional(String)
-  //   }
+Router.map(function () {
+	
+	this.route("login", {path: "/", controller: "LoginController"});
+	this.route("register", {path: "/register", controller: "RegisterController"});
+	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
+	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
+	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
+	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
+	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
+  this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
+	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
+
   this.route('GeolocationBGRoute', {
     path: 'api/geolocation',
     where: 'server',
@@ -171,10 +165,11 @@ if(Meteor.isServer){
 
       //  require some security with data
       //  validate userId/uuid/etc (inside Meteor.call?)
-			console.log(requestData);
+      console.log(requestData);
 
       // Can insert into a Collection from the server (or whatever)
-      if (Users.findOne(requestData.userId).updateLocation(requestData.location.latitude, requestData.location.longitude)) {
+      if (Users.findOne(requestData.userId) && requestData.location) {
+        Users.findOne(requestData.userId).updateLocation(requestData.location.latitude, requestData.location.longitude);
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end('ok');
         return;
@@ -185,20 +180,5 @@ if(Meteor.isServer){
       this.response.end('failure');
     }
   });
-});
-
-}
-
-Router.map(function () {
-	
-	this.route("login", {path: "/", controller: "LoginController"});
-	this.route("register", {path: "/register", controller: "RegisterController"});
-	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
-	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
-	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
-	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
-	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-  	this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
-	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
 
 });
