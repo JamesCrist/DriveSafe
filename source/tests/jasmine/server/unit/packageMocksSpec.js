@@ -1,3 +1,4 @@
+// goal: read JSON metadata for packages and create the mocks
 // DEPENDS ON GLOBAL OBJECT: 'ComponentMocker'
 
 var packageMetadata = {
@@ -7085,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "c4f053d0d6cb43d067e227d65a0c1dfd3e170271"
+                  "value": "de4a6631be7aaf8ca2f114e63ab80a9574ff4672"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "af6957351f2647bd464c15cf320189a9253c1bd8"
+                  "value": "fedc2549b8c30aeecb7060ec73b9a13432b618c9"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7874,7 +7875,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "5ed4fd6a946e89c14fa47319519d0ee7734c44ba"
+          "value": "a4d39e30dcc5ee88d4cb0da47d3c355ee1fd6df5"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7882,7 +7883,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "af6957351f2647bd464c15cf320189a9253c1bd8"
+          "value": "fedc2549b8c30aeecb7060ec73b9a13432b618c9"
         },
         "appId": {
           "type": "constant",
@@ -11263,11 +11264,11 @@ var packageMetadata = {
                 },
                 "appPath": {
                   "type": "constant",
-                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe"
+                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe/source"
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 29818
+                  "value": 26038
                 },
                 "fout": {
                   "type": "constant",
@@ -11290,7 +11291,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 29818
+                      "value": 26038
                     },
                     "stdin": {
                       "type": "null",
@@ -11663,10 +11664,44 @@ var packageMetadata = {
   }
 }
 var globalContext = (typeof global !== 'undefined') ? global : window
+var originalContext = []
 
-for (var packageName in packageMetadata) {
-  for (var packageExportName in packageMetadata[packageName]) {
-    var packageExport = packageMetadata[packageName][packageExportName]
-    globalContext[packageExportName] = ComponentMocker.generateFromMetadata(packageExport)
+/*
+originalContext = [
+  {
+    context: window,
+    propertyName: 'Meteor',
+    value: {}
+  }
+]
+*/
+
+function _saveOriginal(context, propertyName) {
+  originalContext.push({
+    context: context,
+    propertyName: propertyName,
+    value: context[propertyName]
+  })
+}
+
+function _restoreOriginal(original) {
+  original.context[original.propertyName] = original.value
+}
+
+function restoreOriginals() {
+  originalContext.forEach(_restoreOriginal)
+  originalContext = []
+}
+
+function loadMocks() {
+  for (var packageName in packageMetadata) {
+    for (var packageExportName in packageMetadata[packageName]) {
+      _saveOriginal(globalContext, packageExportName)
+      var packageExport = packageMetadata[packageName][packageExportName]
+      globalContext[packageExportName] = ComponentMocker.generateFromMetadata(packageExport)
+    }
   }
 }
+
+beforeEach(loadMocks)
+afterEach(restoreOriginals)
