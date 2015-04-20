@@ -13,6 +13,7 @@ meteor
 
 A demo of the current master build can be seen here: http://drivesafe.meteor.com
 
-To show docs, go to source folder, run meteor-jsdoc build 
-then run meteor-jsdoc start
+To update the documentation, run ./update_document.py
+To show the documentation, go to docs folder, and run metoer meteor --port 3333
+Then it will show up in the http://localhost:3333/
 
