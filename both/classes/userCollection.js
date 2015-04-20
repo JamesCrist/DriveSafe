@@ -41,7 +41,7 @@ User.prototype = {
     var that = this;
     // If user does not have a group already, then just update the user in the database.
     if (!this.getGroup()) {
-      Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false}}, callback);
+      Users.update(that._id, {$set: {'profile.group': null, 'profile.isAdmin': false, 'profile.isDriver': false}}, callback);
       return;
     }
     this.getGroup().removeMember(this.getId(), function(err, res) {
@@ -51,6 +51,7 @@ User.prototype = {
         // No error, so update this user's current group.
         that.setGroup(null);
         that.setIsAdmin(false);
+        that.setIsDriver(false);
       }
     });
   } ,
@@ -67,11 +68,15 @@ User.prototype = {
     });
   } ,
   joinGroup : function (groupName , groupKey , callback) {
+    if (this.getGroup()) {
+      throw new Meteor.Error("User is already in group! Leave current group first");
+    }
     // Call the server side function to add the current user to a group.
     // This is done server side to improve efficiency and security.
-    Meteor.call("joinGroup" , groupName , groupKey , function (err) {
+    Meteor.call("joinGroup" , groupName , groupKey , function (err, res) {
       if(!err) {
-        this.setGroup(groupKey);
+        console.log(res);
+        this.setGroup(res);
       }
       callback(err);
     }.bind(this));
@@ -145,10 +150,10 @@ if(Meteor.isServer) {
 
   Users.allow({
     'insert': function (userId,doc) {
-      return !(userId === doc._id || Users.findOne(userId).isAdmin());
+      return (userId === doc._id || Users.findOne(userId).isAdmin());
     },
     'update': function(userId, doc) {
-      return !(userId === doc._id || Users.findOne(userId).isAdmin());
+      return (userId === doc._id || Users.findOne(userId).isAdmin());
     }
   });
 }
