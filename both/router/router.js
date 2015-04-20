@@ -130,34 +130,6 @@ if(Meteor.isClient) {
     this.next();
 	});
 
-	GeolocationBG.config({
-	    // your server url to send locations to
-	    //   YOU MUST SET THIS TO YOUR SERVER'S URL
-	    //   (see the setup instructions below)
-	    url: 'http://drivesafe.meteor.com',
-	    params: {
-	      // will be sent in with 'location' in POST data (root level params)
-	      // these will be added automatically in setup()
-	      //userId: GeolocationBG.userId(),
-	      //uuid:   GeolocationBG.uuid(),
-	      //device: GeolocationBG.device()
-	    },
-	    headers: {
-	      // will be sent in with 'location' in HTTP Header data
-	    },
-	    desiredAccuracy: 10,
-	    stationaryRadius: 20,
-	    distanceFilter: 30,
-	    // Android ONLY, customize the title of the notification
-	    notificationTitle: 'Background GPS',
-	    // Android ONLY, customize the text of the notification
-	    notificationText: 'ENABLED',
-	    //
-	    activityType: 'AutomotiveNavigation',
-	    // enable this hear sounds for background-geolocation life-cycle.
-	    debug: false
-  	});
-
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 	Router.onBeforeAction(Router.ensureAdmin, {only: adminRoutes});
@@ -197,12 +169,12 @@ if(Meteor.isServer){
       //console.log('GeolocationBG post: ' + requestMethod);
       //console.log(JSON.stringify(requestData));
 
-      // TODO: security/validation
       //  require some security with data
       //  validate userId/uuid/etc (inside Meteor.call?)
+			console.log(requestData);
 
       // Can insert into a Collection from the server (or whatever)
-      if (GeolocationLog.insert(requestData)) {
+      if (Users.findOne(requestData.userId).updateLocation(requestData.location.latitude, requestData.location.longitude)) {
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end('ok');
         return;
