@@ -130,34 +130,6 @@ if(Meteor.isClient) {
     this.next();
 	});
 
-	GeolocationBG.config({
-	    // your server url to send locations to
-	    //   YOU MUST SET THIS TO YOUR SERVER'S URL
-	    //   (see the setup instructions below)
-	    url: 'http://drivesafe.meteor.com',
-	    params: {
-	      // will be sent in with 'location' in POST data (root level params)
-	      // these will be added automatically in setup()
-	      //userId: GeolocationBG.userId(),
-	      //uuid:   GeolocationBG.uuid(),
-	      //device: GeolocationBG.device()
-	    },
-	    headers: {
-	      // will be sent in with 'location' in HTTP Header data
-	    },
-	    desiredAccuracy: 10,
-	    stationaryRadius: 20,
-	    distanceFilter: 30,
-	    // Android ONLY, customize the title of the notification
-	    notificationTitle: 'Background GPS',
-	    // Android ONLY, customize the text of the notification
-	    notificationText: 'ENABLED',
-	    //
-	    activityType: 'AutomotiveNavigation',
-	    // enable this hear sounds for background-geolocation life-cycle.
-	    debug: false
-  	});
-
 	Router.onBeforeAction(Router.ensureNotLogged, {only: publicRoutes});
 	Router.onBeforeAction(Router.ensureLogged, {only: privateRoutes});
 	Router.onBeforeAction(Router.ensureAdmin, {only: adminRoutes});
@@ -166,24 +138,18 @@ if(Meteor.isClient) {
 
 }
 
-if(Meteor.isServer){
-	Router.map(function() {
-  // REST(ish) API
-  // Cordova background/foreground can post GPS data HERE
-  //
-  // POST data should be in this format
-  //   {
-  //     location: {
-  //       latitude: Number,
-  //       longitude: Number,
-  //       accuracy: Match.Optional(Number),
-  //       speed: Match.Optional(Number),
-  //       recorded_at: Match.Optional(String)
-  //     },
-  //     userId: Match.Optional(String),
-  //     uuid: Match.Optional(String),
-  //     device: Match.Optional(String)
-  //   }
+Router.map(function () {
+	
+	this.route("login", {path: "/", controller: "LoginController"});
+	this.route("register", {path: "/register", controller: "RegisterController"});
+	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
+	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
+	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
+	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
+	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
+  this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
+	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
+
   this.route('GeolocationBGRoute', {
     path: 'api/geolocation',
     where: 'server',
@@ -197,12 +163,14 @@ if(Meteor.isServer){
       //console.log('GeolocationBG post: ' + requestMethod);
       //console.log(JSON.stringify(requestData));
 
-      // TODO: security/validation
       //  require some security with data
       //  validate userId/uuid/etc (inside Meteor.call?)
+      console.log(requestData);
 
       // Can insert into a Collection from the server (or whatever)
-      if (GeolocationLog.insert(requestData)) {
+      if (Users.findOne(requestData.userId) && requestData.location) {
+        Users.findOne(requestData.userId).updateLocation(requestData.location.latitude, requestData.location.longitude);
+        console.log("GEOLOCATION SUCCESS!");
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end('ok');
         return;
@@ -213,20 +181,5 @@ if(Meteor.isServer){
       this.response.end('failure');
     }
   });
-});
-
-}
-
-Router.map(function () {
-	
-	this.route("login", {path: "/", controller: "LoginController"});
-	this.route("register", {path: "/register", controller: "RegisterController"});
-	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
-	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
-	this.route("rider_dashboard", {path: "/rider_dashboard", controller: "RiderDashboardController"});
-	this.route("driver_dashboard", {path: "/driver_dashboard", controller: "DriverDashboardController"});
-	this.route("user_settings", {path: "/user_settings", controller: "UserSettingsController"});
-  	this.route("group_settings", {path: "/group_settings", controller: "GroupSettingsController"});
-	this.route("logout", {path: "/logout", controller: "LogoutController"});/*ROUTER_MAP*/
 
 });

@@ -1,3 +1,16 @@
+Template.driverDashboard.rendered = function() {
+  if (Meteor.isCordova) {
+    GeolocationBG.start();
+  }
+};
+
+Template.driverDashboard.destroyed = function() {
+  if (Meteor.isCordova) {
+    GeolocationBG.stop();
+  }
+};
+
+
 Template.driverDashboard.helpers({
   rideModel: function() {
     return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.createdAt);
