@@ -1,0 +1,54 @@
+<template name = "riderDashboard">
+    {{#contentFor "headerButtonLeft"}}
+        <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-more-vertical'}}
+            {{else}}
+                {{> ionIcon icon='navicon'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-right" data-ion-menu-toggle="right">
+            {{#if isAndroid}}
+                {{> ionIcon icon='android-settings'}}
+            {{else}}
+                {{> ionIcon icon='ios-gear'}}
+            {{/if}}
+        </button>
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        {{#if group}}
+            <h1 class="title"> {{group.name}} </h1>
+        {{else}}
+            <h1 class="title"> DriveSafe </h1>
+        {{/if}}
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#if errorMessage}}
+                <div class="alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+            {{/if}}
+            <div id="map-canvas" class="map-canvas"></div>
+        {{/ionContent}}
+    {{/ionView}}
+    {{#if group }}
+        {{#if ridePending}}
+            {{#ionFooterBar class="bar-assertive cancelRide"}}
+                <h1 class="title">Cancel Ride</h1>
+            {{/ionFooterBar}}
+        {{else}}
+            {{#ionFooterBar class="bar-energized requestRide"}}
+                <h1 class="title" data-ion-modal="request_modal">Request Ride!</h1>
+            {{/ionFooterBar}}
+        {{/if}}
+    {{else}}
+        {{#ionFooterBar class="bar-assertive"}}
+            <h1 class="title">You must join a group to request a ride</h1>
+        {{/ionFooterBar}}
+    {{/if}}
+</template>

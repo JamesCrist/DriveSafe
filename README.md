@@ -12,3 +12,7 @@ meteor
 ```
 
 A demo of the current master build can be seen here: http://drivesafe.meteor.com
+
+To show docs, go to source folder, run meteor-jsdoc build 
+then run meteor-jsdoc start
+
