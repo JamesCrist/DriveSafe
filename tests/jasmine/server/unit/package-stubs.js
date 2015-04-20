@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "43cfa16c2047cba0acf8a28f9e54fd4dd59db941"
+                  "value": "1d327c36aa66468e6d84fc563b61dbf810b7ed13"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "20c3da7d4bd0355ed43b54da3ee2ff2545f3a0db"
+                  "value": "c155855a395676cb0ae3c256664f6842aae83435"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7874,7 +7874,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "f18643594d1fa85a31763378d23c06afa0bb5d3f"
+          "value": "0d327ea7c343e4b0c8e83d54ff233bdf8ff97ce1"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7882,7 +7882,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "20c3da7d4bd0355ed43b54da3ee2ff2545f3a0db"
+          "value": "c155855a395676cb0ae3c256664f6842aae83435"
         },
         "appId": {
           "type": "constant",
@@ -8191,30 +8191,6 @@ var packageMetadata = {
     },
     "AccountsTest": {
       "type": "undefined"
-    }
-  },
-  "email": {
-    "Email": {
-      "type": "object",
-      "members": {
-        "send": {
-          "type": "function"
-        }
-      }
-    },
-    "EmailTest": {
-      "type": "object",
-      "members": {
-        "overrideOutputStream": {
-          "type": "function"
-        },
-        "restoreOutputStream": {
-          "type": "function"
-        },
-        "hookSend": {
-          "type": "function"
-        }
-      }
     }
   },
   "spiderable": {
@@ -9419,6 +9395,30 @@ var packageMetadata = {
               "ref": 4
             }
           }
+        }
+      }
+    }
+  },
+  "email": {
+    "Email": {
+      "type": "object",
+      "members": {
+        "send": {
+          "type": "function"
+        }
+      }
+    },
+    "EmailTest": {
+      "type": "object",
+      "members": {
+        "overrideOutputStream": {
+          "type": "function"
+        },
+        "restoreOutputStream": {
+          "type": "function"
+        },
+        "hookSend": {
+          "type": "function"
         }
       }
     }
@@ -11263,11 +11263,11 @@ var packageMetadata = {
                 },
                 "appPath": {
                   "type": "constant",
-                  "value": "/home/parene/Documents/DriveSafe/git-repo/DriveSafe"
+                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe"
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 6022
+                  "value": 30727
                 },
                 "fout": {
                   "type": "constant",
@@ -11290,7 +11290,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 6022
+                      "value": 30727
                     },
                     "stdin": {
                       "type": "null",
