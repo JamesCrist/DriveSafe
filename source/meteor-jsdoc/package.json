@@ -1,0 +1,36 @@
+{
+  "name": "meteor-jsdoc",
+  "version": "0.2.3",
+  "description": "Automated JSDoc generation for Meteor projects with a Meteor server to output the docs.",
+  "dependencies": {
+    "ejs": "0.8.x",
+    "cjson": "0.3.x",
+    "colors": "0.6.x",
+    "jsdoc": "3.3.x",
+    "canonical-json": "0.0.x",
+    "underscore": "1.8.x"
+  },
+  "bin": {
+    "meteor-jsdoc": "./bin/meteor-jsdoc"
+  },
+  "author": {
+    "name": "Fabien Blanchard",
+    "email": "fabienb4.b4soft@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fabienb4/meteor-jsdoc.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fabienb4/meteor-jsdoc/issues"
+  },
+  "homepage": "https://github.com/fabienb4/meteor-jsdoc",
+  "readme": "# Meteor JSDoc\n\n#### Automated JSDoc generation for Meteor projects\n\nMeteor JSDoc is a command line tool which will help with generating documentation for your Meteor project. The result? A website like [Meteor Docs](http://docs.meteor.com/#/full/).\n\n**Table of Contents**\n\n- [Features](#features)\n- [Installation](#installation)\n- [Initializing a project](#initializing-a-project)\n- [Config file](#config-file)\n- [Adding documentation to your project](#adding-documentation-to-your-project)\n- [Building the docs](#building-the-docs)\n- [Starting the Meteor server](#starting-the-meteor-server)\n- [Stopping the Meteor server](#stopping-the-meteor-server)\n- [Updating](#updating)\n\n### Features\n\n* Based on the scripts & templates from Meteor own docs.\n* The generated docs are used as data by a Meteor app which displays a nicely formatted documentation for your app (like the [Meteor Docs](http://docs.meteor.com/#/full/)) at `http://localhost/3333/` (configurable).\n* A configuration file allows project based configuration, avoiding problem of _port already in use_.\n* Markdown supported in `@summary`, `@example` & description in `@param`.\n\n### Installation\n\n    npm install -g meteor-jsdoc\n\n### Initializing a project\n\n    meteor create myproject\n    cd myproject\n    meteor-jsdoc init\n\nThis will create a config file in your Meteor project directory:\n`jsdoc.json`.\n\n### Config file\n\n```js\n{\n  // Meteor project path\n  \"projectPath\": \"~/myproject\",\n  // Project docs path\n  \"docsPath\": \"~/myproject-docs\",\n  // Project docs Meteor server port\n  \"meteorPort\": 3333,\n  // Copy the Meteor docs server before building the docs (required for the first build)\n  // Setting this to false after the first build allows you to customize the Meteor docs server\n  // without seeing your changes overridden the next time you build the docs.\n  \"initMeteor\": true\n}\n```\n\n`<projectPath>` and `<docsPath>` have to be two separate folders, or you will end up with a Meteor server inside a Meteor server.\n\n\"~\" can be used to specify your home directory.\n\nWhen using `meteor-jsdoc build` for the first time, it requires the `initMeteor` setting to be true, otherwise, only the data files will be copied, and you won't be able to start the docs server (there will be none).\n\n### Adding documentation to your project\n\nSome examples from the `mongo` package:\n\n> The `@summary` tag is required for the docs to be generated properly. Any method docs without it won't be processed by `meteor-jsdoc`.\n\n```js\n/**\n * @summary Constructor for a Collection\n * @locus Anywhere\n * @instancename collection\n * @class\n * @param {String} name The name of the collection.  If null, creates an unmanaged (unsynchronized) local collection.\n * @param {Object} [options]\n * @param {Object} options.connection The server connection that will manage this collection. Uses the default connection if not specified.  Pass the return value of calling [`DDP.connect`](#ddp_connect) to specify a different server. Pass `null` to specify no connection. Unmanaged (`name` is null) collections cannot specify a connection.\n * @param {String} options.idGeneration The method of generating the `_id` fields of new documents in this collection.  Possible values:\n - **`'STRING'`**: random strings\n - **`'MONGO'`**:  random [`Mongo.ObjectID`](#mongo_object_id) values\nThe default id generation technique is `'STRING'`.\n * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.\n */\nMongo.Collection = function (name, options) {\n  /** ... **/\n};\n```\n\n```js\n/**\n * @summary Find the documents in a collection that match the selector.\n * @locus Anywhere\n * @method find\n * @memberOf Mongo.Collection\n * @instance\n * @param {MongoSelector} [selector] A query describing the documents to find\n * @param {Object} [options]\n * @param {MongoSortSpecifier} options.sort Sort order (default: natural order)\n * @param {Number} options.skip Number of results to skip at the beginning\n * @param {Number} options.limit Maximum number of results to return\n * @param {MongoFieldSpecifier} options.fields Dictionary of fields to return or exclude.\n * @param {Boolean} options.reactive (Client only) Default `true`; pass `false` to disable reactivity\n * @param {Function} options.transform Overrides `transform` on the  [`Collection`](#collections) for this cursor.  Pass `null` to disable transformation.\n * @returns {Mongo.Cursor}\n */\nfind: function (/* selector, options */) {\n  /** ... **/\n}\n```\n\n### Building the docs\n\n    meteor-jsdoc build\n\nThis will copy a basic Meteor server (`v1.0.3.1\n`) to the `<docsPath>` directory.\nAnd then build the documentation for `<projectPath>` in `<docsPath>/client/data`.\n\n### Starting the Meteor server\n\nFrom the `<projectPath>` folder you have two options:\n\nFirst:\n\n    meteor-jsdoc start\n\nThis will automatically start the Meteor server in `<docsPath>` in the background. **The default address is: `http://localhost:3333/`**. The `<meteorPort>` option in `jsdoc.json` allows you to change the port.\n\nSecond:\n\n    cd <docsPath>\n    meteor\n\nThis will start Meteor as usual with the possibility to `ctrl+c` when you want to stop it.\n\n### Stopping the Meteor server\n\nIf you started the Meteor server for the docs using `meteor-jsdoc start`, and want to stop it, the following command (to run from the `<projectPath>` folder) is available:\n\n    meteor-jsdoc stop\n\nThis will stop the Meteor server associated with `<docsPath>` and `<meteorPort>`.\n\n### Updating\n\nTo update `meteor-jsdoc` to the latest version, just type:\n\n    npm update meteor-jsdoc -g\n\nYou should try and keep `meteor-jsdoc` up to date in order to keep up with the latest Meteor changes.\n\n\n[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/fabienb4/)\n",
+  "readmeFilename": "README.md",
+  "_id": "meteor-jsdoc@0.2.3",
+  "scripts": {},
+  "_shasum": "f0c4ec7e12dcae0b9834af2318af315e75919240",
+  "_from": "../../Users/weilu/Downloads/meteor-jsdoc-master",
+  "_resolved": "file:../../Users/weilu/Downloads/meteor-jsdoc-master"
+}
