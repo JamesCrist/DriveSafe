@@ -1,12 +1,12 @@
 // Create Groups MongoDB collection
 Groups = new Meteor.Collection("groups", {
   transform: function(doc) {
-    return new Group(doc._id, doc.name, doc.admin, doc.members, doc.drivers, doc.queue);
+    return new Group(doc._id, doc.name, doc.admin, doc.members, doc.drivers, doc.queue, doc.key);
   }
 });
 
 // A Group class that takes a document in its constructor
-Group = function (id, name, admin, members, drivers, queue) {
+Group = function (id, name, admin, members, drivers, queue, key) {
   this._id = id;
   this._name = name;
   // If admin is not defined, define admin to be the current
@@ -30,10 +30,13 @@ Group = function (id, name, admin, members, drivers, queue) {
     drivers = [];
   }
   this._drivers = drivers;
+  // If queue is null or undefined, make it an empty array
   if (!queue) {
     queue = [];
   }
   this._queue = queue;
+  // Set key to DB ID
+  this._key = key;
 };
 
 Group.prototype = {
@@ -58,6 +61,9 @@ Group.prototype = {
   get queue() {
     return this._queue;
   },
+  get key() {
+    return this._key;
+  },
   set admin(value) {
     this._admin = value;
   },
@@ -67,6 +73,10 @@ Group.prototype = {
   set drivers(value) {
     this._drivers = value;
   },
+  set key(value) {
+    this._key = value;
+  },
+
   save: function(callback) {
     if (!this.name) {
       throw new Meteor.Error("Name is not defined!");
@@ -84,11 +94,16 @@ Group.prototype = {
       throw new Meteor.Error("Drivers must be defined!");
     }
 
+    if (!this.key) {
+      throw new Meteor.Error("Key must be defined!")
+    }
+
     var doc = {
       admin: this.admin,
       members: this.members,
       drivers: this.drivers,
-      queue: this.queue
+      queue: this.queue,
+      key: this.key
     };
 
     // If this group already exists, then modify it.
@@ -116,6 +131,7 @@ Group.prototype = {
       });
     }
   },
+
   delete: function(callback) {
     if (!Meteor.user().isAdmin()) {
       throw new Meteor.Error("Access Denied!");
@@ -126,6 +142,7 @@ Group.prototype = {
     }
     Groups.remove(this.id, callback);
   },
+
   forceDelete: function(callback) {
     var that = this;
 
@@ -151,6 +168,7 @@ Group.prototype = {
       }
     });
   },
+
   membersModel: function() {
     var members = [];
     for (var member in this.members) {
@@ -158,6 +176,7 @@ Group.prototype = {
     }
     return members;
   },
+
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
       var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
@@ -187,6 +206,7 @@ Group.prototype = {
       this.delete(callback);
     }
   },
+
   addMember: function(memberId, callback) {
     if (!memberId) {
       var error = new Meteor.Error("MemberId to add cannot be null!");
@@ -204,6 +224,7 @@ Group.prototype = {
 
     this.save(callback);
   },
+
   changeAdmin: function(newAdmin, callback) {
     if (!newAdmin) {
       var error = new Meteor.Error("New admin must be defined!");
@@ -218,6 +239,7 @@ Group.prototype = {
     this._admin = newAdmin.getId();
     this.save(callback);
   },
+
   addDriver: function(driver, callback) {
     if (!driver) {
       throw new Meteor.Error("Driver is not defined!");
@@ -239,6 +261,7 @@ Group.prototype = {
       throw new Meteor.Error("User is already a driver for this group!");
     }
   },
+
   removeDriver: function(driver, callback) {
     if (!driver) {
       throw new Meteor.Error("Driver is not defined!");
@@ -254,6 +277,7 @@ Group.prototype = {
       throw new Meteor.Error("User is not a driver of this group!");
     }
   },
+
   addRideToQueue: function(ride, callback) {
     if (!ride) {
       throw new Meteor.Error("Ride is not defined!");
@@ -267,6 +291,21 @@ Group.prototype = {
       throw new Meteor.Error("Ride is already in queue!");
     }
     this.queue.push(ride.id);
+    this.save(callback);
+  },
+
+  changeKey: function(newKey, callback) {
+    if (!newKey) {
+      var error = new Meteor.Error("New key is not defined!");
+      callback.call(this, error, null);
+      return;
+    }
+    if (newKey.length <= 6) {
+      var error = new Meteor.Error("New key must be at least 6 characters");
+      callback.call(this, error, null);
+      return;
+    }
+    this._key = newKey;
     this.save(callback);
   }
 };
