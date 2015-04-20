@@ -64,11 +64,13 @@ Handlebars.registerHelper('group', function() {
   return Groups.findOne();
 });
 
-// Update the user's location every second.
-Meteor.setInterval(function() {
-  if(Meteor.user() && Geolocation.latLng()) {
-    var location = Geolocation.latLng();
-    Meteor.user().updateLocation(location.lat, location.lng);
-  }
-}, 1000);
+if (!Meteor.isCordova) {
+  // Update the user's location every second.
+  Meteor.setInterval(function () {
+    if(Meteor.user() && Geolocation.latLng()) {
+      var location = Geolocation.latLng();
+      Meteor.user().updateLocation(location.lat , location.lng);
+    }
+  } , 1000);
+}
 

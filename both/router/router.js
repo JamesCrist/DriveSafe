@@ -170,6 +170,7 @@ Router.map(function () {
       // Can insert into a Collection from the server (or whatever)
       if (Users.findOne(requestData.userId) && requestData.location) {
         Users.findOne(requestData.userId).updateLocation(requestData.location.latitude, requestData.location.longitude);
+        console.log("GEOLOCATION SUCCESS!");
         this.response.writeHead(200, {'Content-Type': 'application/json'});
         this.response.end('ok');
         return;
