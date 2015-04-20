@@ -76,8 +76,11 @@ Template.riderDashboard.helpers({
 
 Template.riderDashboard.events({
   'click .cancelRide' :function () {
-    Rides.findOne({user: Meteor.userId()}).delete();
+    Rides.findOne({user: Meteor.userId()}).cancel(function(err, res) {
+      if (err) {
+        alert(err.message);
+      }
+    });
   }
-
-  });
+});
 

@@ -106,6 +106,8 @@ Group.prototype = {
       key: this.key
     };
 
+    console.log(doc);
+
     // If this group already exists, then modify it.
     if (this.id) {
       Groups.update(this.id, {$set: doc}, callback);
@@ -293,7 +295,6 @@ Group.prototype = {
     this.queue.push(ride.id);
     this.save(callback);
   },
-
   changeKey: function(newKey, callback) {
     if (!newKey) {
       var error = new Meteor.Error("New key is not defined!");
@@ -307,6 +308,26 @@ Group.prototype = {
     }
     this._key = newKey;
     this.save(callback);
+  },
+  removeRideFromQueue: function(rideId, callback) {
+    if (this.queue.length === 0) {
+      throw new Meteor.Error("Queue is already empty!");
+    }
+    if (!rideId) {
+      throw new Meteor.Error("Ride must be defined!");
+    }
+    // Remove ride from queue.
+    var newQueue = this.queue;
+    var index = newQueue.indexOf(rideId);
+    if(index >= 0) {
+      newQueue.splice(index , 1);
+      this._queue = newQueue;
+      this.save(callback);
+    } else {
+      var error = new Meteor.Error("Could not find ride to remove!");
+      console.log(error);
+      callback.call(this, error, null);
+    }
   }
 };
 

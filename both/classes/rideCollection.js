@@ -95,6 +95,20 @@ Ride.prototype = {
   },
   delete: function(callback) {
     Rides.remove(this.id, callback);
+  },
+  cancel: function(callback) {
+    if (!this.group) {
+      throw new Meteor.Error("group not defined!");
+    }
+    var that  = this;
+    console.log(Groups.findOne(this.group));
+    Groups.findOne(this.group).removeRideFromQueue(this.id, function(err, res) {
+      if (err) {
+        throw err;
+      }
+      that.delete(callback);
+    });
+
   }
 };
 
