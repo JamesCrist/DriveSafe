@@ -13,6 +13,11 @@ The default id generation technique is `'STRING'`.
  * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.
  */
 
+/**
+ * @summary Creates a collection of groups in the MongoDB
+ * @locus Anywhere
+ * @type {Meteor.Collection}
+ */
 // Create Groups MongoDB collection
 Groups = new Meteor.Collection("groups", {
   transform: function(doc) {
@@ -20,12 +25,23 @@ Groups = new Meteor.Collection("groups", {
   }
 });
 
+/**
+ * @summary Represents a group as a class. The constructor takes a document.
+ * @locus Anywhere
+ * @param id - The ID of the group.
+ * @param name - The name of the group.
+ * @param admin - The user who administrates the group.
+ * @param members - An array of the members of the group.
+ * @param drivers - An array of the current drivers of the group.
+ * @param queue - An array of the current ride requests in the group.
+ * @param key - The password to join the group.
+ * @constructor
+ */
 // A Group class that takes a document in its constructor
 Group = function (id, name, admin, members, drivers, queue, key) {
   this._id = id;
   this._name = name;
-  // If admin is not defined, define admin to be the current
-  // user.
+  // If admin is not defined, define admin to be the current user.
   if (!admin) {
     admin = Meteor.userId();
   }
@@ -54,6 +70,10 @@ Group = function (id, name, admin, members, drivers, queue, key) {
   this._key = key;
 };
 
+/**
+ * @summary The methods for the group class.
+ * @locus Anywhere
+ */
 Group.prototype = {
   get id() {
     // readonly
@@ -92,6 +112,11 @@ Group.prototype = {
     this._key = value;
   },
 
+  /**
+   * @summary Saving functionality for the group instance.
+   * @param callback
+   * @function
+   */
   save: function(callback) {
     if (!this.name) {
       throw new Meteor.Error("Name is not defined!");
@@ -149,6 +174,11 @@ Group.prototype = {
     }
   },
 
+  /**
+   * @summary Deletes a group instance with an empty members array.
+   * @param callback
+   * @function
+   */
   delete: function(callback) {
     if (!Meteor.user().isAdmin()) {
       throw new Meteor.Error("Access Denied!");
@@ -160,6 +190,11 @@ Group.prototype = {
     Groups.remove(this.id, callback);
   },
 
+  /**
+   * @summary Deletes a group instance after removing all members.
+   * @param callback
+   * @function
+   */
   forceDelete: function(callback) {
     var that = this;
 
@@ -186,6 +221,11 @@ Group.prototype = {
     });
   },
 
+  /**
+   * @summary Returns the array of members in the group.
+   * @function
+   * @returns {Array}
+   */
   membersModel: function() {
     var members = [];
     for (var member in this.members) {
@@ -194,6 +234,12 @@ Group.prototype = {
     return members;
   },
 
+  /**
+   * @summary Remove specific member from group member array.
+   * @param memberId
+   * @param callback
+   * @function
+   */
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
       var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
@@ -202,7 +248,7 @@ Group.prototype = {
       return;
     }
 
-    // Remove user from list of members for this group.
+    // Remove user from array of members for this group.
     var newMembers = this.members;
     var index = newMembers.indexOf(memberId);
     if(index >= 0) {
@@ -224,6 +270,12 @@ Group.prototype = {
     }
   },
 
+  /**
+   * @summary Add specific member to group member array
+   * @param memberId
+   * @param callback
+   * @function
+   */
   addMember: function(memberId, callback) {
     if (!memberId) {
       var error = new Meteor.Error("MemberId to add cannot be null!");
@@ -242,6 +294,12 @@ Group.prototype = {
     this.save(callback);
   },
 
+  /**
+   * @summary Change group admin to specified user
+   * @param newAdmin
+   * @param callback
+   * @function
+   */
   changeAdmin: function(newAdmin, callback) {
     if (!newAdmin) {
       var error = new Meteor.Error("New admin must be defined!");
@@ -257,6 +315,12 @@ Group.prototype = {
     this.save(callback);
   },
 
+  /**
+   * @summary Add driver to group driver array.
+   * @param driver
+   * @param callback
+   * @function
+   */
   addDriver: function(driver, callback) {
     if (!driver) {
       throw new Meteor.Error("Driver is not defined!");
@@ -267,7 +331,7 @@ Group.prototype = {
       throw new Meteor.Error("User must already be a member to become a driver!");
     }
 
-    // Add user to list of drivers for this group.
+    // Add user to array of drivers for this group.
     index = this.drivers.indexOf(driver.getId());
     var newDrivers = this.drivers;
     if(index < 0) {
@@ -279,11 +343,17 @@ Group.prototype = {
     }
   },
 
+  /**
+   * @summary Remove driver from group driver array
+   * @param driver
+   * @param callback
+   * @function
+   */
   removeDriver: function(driver, callback) {
     if (!driver) {
       throw new Meteor.Error("Driver is not defined!");
     }
-    // Remove user from list of members for this group.
+    // Remove user from array of members for this group.
     var index = this.drivers.indexOf(driver.getId());
     var newDrivers = this.drivers;
     if(index >= 0) {
@@ -295,6 +365,12 @@ Group.prototype = {
     }
   },
 
+  /**
+   * @summary Add ride to group ride queue
+   * @param ride
+   * @param callback
+   * @function
+   */
   addRideToQueue: function(ride, callback) {
     if (!ride) {
       throw new Meteor.Error("Ride is not defined!");
@@ -310,6 +386,13 @@ Group.prototype = {
     this.queue.push(ride.id);
     this.save(callback);
   },
+
+  /**
+   * @summary Change group key to new specified key
+   * @param newKey
+   * @param callback
+   * @function
+   */
   changeKey: function(newKey, callback) {
     if (!newKey) {
       var error = new Meteor.Error("New key is not defined!");
@@ -324,6 +407,13 @@ Group.prototype = {
     this._key = newKey;
     this.save(callback);
   },
+
+  /**
+   * @summary Remove ride from group ride queue
+   * @param rideId
+   * @param callback
+   * @function
+   */
   removeRideFromQueue: function(rideId, callback) {
     if (this.queue.length === 0) {
       throw new Meteor.Error("Queue is already empty!");

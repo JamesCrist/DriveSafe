@@ -13,7 +13,11 @@ The default id generation technique is `'STRING'`.
  * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.
  */
 
-// Create Drivers MongoDB collection
+/**
+ * @summary Creates a collection of drivers in the MongoDB
+ * @locus Anywhere
+ * @type {Meteor.Collection}
+ */
 Drivers = new Meteor.Collection("drivers" , {
   transform : function (doc) {
     return new Driver(doc._id , doc.group , doc.user , doc.currentRide);
@@ -21,7 +25,15 @@ Drivers = new Meteor.Collection("drivers" , {
 });
 
 
-
+/**
+ * @summary Represents a driver.
+ * @locus Anywhere
+ * @param id
+ * @param group
+ * @param user
+ * @param currentRide
+ * @constructor
+ */
 // A Driver class that takes a document in its constructor
 Driver = function (id , group , user , currentRide) {
   this._id = id;
@@ -36,6 +48,10 @@ Driver = function (id , group , user , currentRide) {
   this._currentRide = currentRide;
 };
 
+/**
+ * @summary The methods for the driver class.
+ * @locus Anywhere
+ */
 Driver.prototype = {
   get id() {
     // readonly
@@ -54,6 +70,12 @@ Driver.prototype = {
   set currentRide(value) {
     this._currentRide = value;
   } ,
+
+  /**
+   * @summary Saving functionality for the driver instance
+   * @param callback
+   * @function
+   */
   save : function (callback) {
     if(!this.user) {
       throw new Meteor.Error("Driver must be attached to a user!");
@@ -87,6 +109,12 @@ Driver.prototype = {
       });
     }
   } ,
+
+  /**
+   * @summary Delete functionality for the driver instance
+   * @param callback
+   * @function
+   */
   delete : function (callback) {
     // Only the user that this driver represents or admins can delete drivers.
     if(this.user != Meteor.userId() && !Meteor.user().isAdmin()) {
@@ -99,6 +127,12 @@ Driver.prototype = {
 
     Drivers.remove(this.id , callback);
   } ,
+
+  /**
+   * @summary Revoke a user's driver status if they are not currently giving a ride.
+   * @param callback
+   * @function
+   */
   stopDriving : function (callback) {
     if(this.currentRide) {
       throw new Meteor.Error("Cannot stop driving while ride is in progress!");
