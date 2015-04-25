@@ -1,3 +1,8 @@
+/**
+ * @summary Create a collection of rides in the MongoDB
+ * @locus Anywhere
+ * @type {Meteor.Collection}
+ */
 // Create Ride MongoDB collection
 Rides = new Meteor.Collection("rides", {
   transform: function(doc) {
@@ -5,6 +10,16 @@ Rides = new Meteor.Collection("rides", {
   }
 });
 
+/**
+ * @summary Represents a ride.
+ * @param id
+ * @param user
+ * @param group
+ * @param pickupLoc
+ * @param destLoc
+ * @param createdAt
+ * @constructor
+ */
 // A Ride class that takes a document in its constructor
 Ride = function (id, user, group, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
   this._id = id;
@@ -23,6 +38,10 @@ Ride = function (id, user, group, pickupLoc, destLoc, pickupAdd, destAdd, create
   this._createdAt = createdAt;
 };
 
+/**
+ * @summary The methods for the ride class.
+ * @locus Anywhere
+ */
 Ride.prototype = {
   get id() {
     // readonly
@@ -65,6 +84,12 @@ Ride.prototype = {
   set destAdd(value) {
     this._destAdd = value;
   },
+
+  /**
+   * @summary Saving functionality for the ride instance.
+   * @param callback
+   * @function
+   */
   save: function(callback) {
     if (!this.user) {
       throw new Meteor.Error("User is not defined!");
@@ -108,9 +133,21 @@ Ride.prototype = {
       });
     }
   },
+
+  /**
+   * @summary Delete functionality for the ride instance.
+   * @param callback
+   * @function
+   */
   delete: function(callback) {
     Rides.remove(this.id, callback);
   },
+
+  /**
+   * @summary Cancel a ride that has been requested.
+   * @param callback
+   * @function
+   */
   cancel: function(callback) {
     if (!this.group) {
       throw new Meteor.Error("group not defined!");

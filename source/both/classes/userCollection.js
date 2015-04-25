@@ -4,10 +4,18 @@ Meteor.users._transform = function (doc) {
   return _.extend(newInstance , doc);
 };
 
-
+/**
+ * @summary Represents a user.
+ * @locus Anywhere
+ * @constructor
+ */
 User = function () {
 };
 
+/**
+ * @summary The methods for the user class.
+ * @locus Anywhere
+ */
 User.prototype = {
   getName : function () {
     return this.profile.name;
@@ -36,6 +44,12 @@ User.prototype = {
     this.profile.group = newGroupId;
     Users.update(this.getId() , { $set : { 'profile.group' : newGroupId } });
   } ,
+
+  /**
+   * @summary Remove user from current group.
+   * @param callback
+   * @function
+   */
   leaveGroup : function (callback) {
     // Call the group's remove member function
     var that = this;
@@ -55,6 +69,14 @@ User.prototype = {
       }
     });
   } ,
+
+  /**
+   * @summary Create a new group and become the admin of that group.
+   * @param newGroupName
+   * @param newGroupKey
+   * @param callback
+   * @function
+   */
   createGroup : function (newGroupName , newGroupKey , callback) {
     // Create a new group object
     var newGroup = new Group(null, newGroupName, null, null, null, null, newGroupKey);
@@ -67,6 +89,14 @@ User.prototype = {
       callback.call(that, err, groupId);
     });
   } ,
+
+  /**
+   * @summary Join an already existing group using the group name and key.
+   * @param groupName
+   * @param groupKey
+   * @param callback
+   * @function
+   */
   joinGroup : function (groupName , groupKey , callback) {
     if (this.getGroup()) {
       throw new Meteor.Error("User is already in group! Leave current group first");
@@ -81,9 +111,12 @@ User.prototype = {
       callback(err);
     }.bind(this));
   } ,
-  getGroup : function () {
-    return Groups.findOne(this.profile.group);
-  } ,
+
+  /**
+   * @summary Become admin of current group.
+   * @param callback
+   * @function
+   */
   becomeAdmin: function (callback) {
     var oldAdmin = Users.findOne(this.getGroup().admin);
     var that = this;
@@ -95,6 +128,12 @@ User.prototype = {
       callback.call(that, err, res);
     })
   } ,
+
+  /**
+   * @summary Become driver of current group.
+   * @param callback
+   * @function
+   */
   becomeDriver : function (callback) {
     if(!this.getGroup()) {
       var error = new Meteor.Error("User must be in a group to become a driver!");
@@ -117,6 +156,12 @@ User.prototype = {
       }
     });
   } ,
+
+  /**
+   * @summary Revoke driver status of user.
+   * @param callback
+   * @function
+   */
   stopDriving : function (callback) {
     if(!this.getGroup()) {
       var error = new Meteor.Error("User's group could not be found!");
@@ -131,6 +176,13 @@ User.prototype = {
       callback.call(that, err, res);
     });
   } ,
+
+  /**
+   * @summary Set location of user.
+   * @param lat
+   * @param lng
+   * @function
+   */
   updateLocation : function (lat , lng) {
     Users.update(this.getId() , {
       $set : {
@@ -138,9 +190,18 @@ User.prototype = {
       }
     });
   },
+
+  /**
+   * @function
+   * @returns {number}
+   */
   getLat : function() {
     return Users.findOne(this.getId()).profile.location.lat;
   },
+  /**
+   * @function
+   * @returns {number}
+   */
   getLng : function() {
     return Users.findOne(this.getId()).profile.location.lng;
   }
