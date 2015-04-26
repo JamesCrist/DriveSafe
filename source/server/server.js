@@ -20,7 +20,7 @@
  * @locus Server
  * @method createUserAccount
  * @memberOf Meteor.methods
- * @instance
+ * @function
  * @param {Object} options
  * @param {String} options.username
  * @param {String} options.email
@@ -34,7 +34,7 @@
  * @locus Server
  * @method updateUserAccount
  * @memberOf Meteor.methods
- * @instance
+ * @function
  * @param {Object} options
  * @param {String} options.username
  * @param {String} options.email
@@ -49,7 +49,7 @@
  * @locus Server
  * @method sendMail
  * @memberOf Meteor.methods
- * @instance
+ * @function
  * @param {Object} options
  * @param {String} options.username
  * @param {String} options.email
