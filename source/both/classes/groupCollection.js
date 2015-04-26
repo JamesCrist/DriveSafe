@@ -116,6 +116,7 @@ Group.prototype = {
    * @summary Saving functionality for the group instance.
    * @param callback
    * @function
+   * @memberOf Group
    */
   save: function(callback) {
     if (!this.name) {
@@ -178,6 +179,7 @@ Group.prototype = {
    * @summary Deletes a group instance with an empty members array.
    * @param callback
    * @function
+   * @memberOf Group
    */
   delete: function(callback) {
     if (!Meteor.user().isAdmin()) {
@@ -194,6 +196,7 @@ Group.prototype = {
    * @summary Deletes a group instance after removing all members.
    * @param callback
    * @function
+   * @memberOf Group
    */
   forceDelete: function(callback) {
     var that = this;
@@ -224,6 +227,7 @@ Group.prototype = {
   /**
    * @summary Returns the array of members in the group.
    * @function
+   * @memberOf Group
    * @returns {Array}
    */
   membersModel: function() {
@@ -239,6 +243,7 @@ Group.prototype = {
    * @param memberId
    * @param callback
    * @function
+   * @memberOf Group
    */
   removeMember: function(memberId, callback) {
     if (this.admin == memberId && this.members.length > 1) {
@@ -275,6 +280,7 @@ Group.prototype = {
    * @param memberId
    * @param callback
    * @function
+   * @memberOf Group
    */
   addMember: function(memberId, callback) {
     if (!memberId) {
@@ -299,6 +305,7 @@ Group.prototype = {
    * @param newAdmin
    * @param callback
    * @function
+   * @memberOf Group
    */
   changeAdmin: function(newAdmin, callback) {
     if (!newAdmin) {
@@ -320,6 +327,7 @@ Group.prototype = {
    * @param driver
    * @param callback
    * @function
+   * @memberOf Group
    */
   addDriver: function(driver, callback) {
     if (!driver) {
@@ -348,6 +356,7 @@ Group.prototype = {
    * @param driver
    * @param callback
    * @function
+   * @memberOf Group
    */
   removeDriver: function(driver, callback) {
     if (!driver) {
@@ -370,6 +379,7 @@ Group.prototype = {
    * @param ride
    * @param callback
    * @function
+   * @memberOf Group
    */
   addRideToQueue: function(ride, callback) {
     if (!ride) {
@@ -392,6 +402,7 @@ Group.prototype = {
    * @param newKey
    * @param callback
    * @function
+   * @memberOf Group
    */
   changeKey: function(newKey, callback) {
     if (!newKey) {
@@ -413,6 +424,7 @@ Group.prototype = {
    * @param rideId
    * @param callback
    * @function
+   * @memberOf Group
    */
   removeRideFromQueue: function(rideId, callback) {
     if (this.queue.length === 0) {
