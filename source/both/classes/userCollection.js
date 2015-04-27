@@ -24,6 +24,9 @@ User.prototype = {
   isDriver : function () {
     return this.profile.isDriver;
   } ,
+  getDriverId : function () {
+    return this.profile.driverId;
+  } ,
   setIsDriver : function (isDriver) {
     this.profile.isDriver = true;
     Users.update(this.getId() , { $set : { 'profile.isDriver' : isDriver } });
@@ -35,6 +38,10 @@ User.prototype = {
   setGroup : function (newGroupId) {
     this.profile.group = newGroupId;
     Users.update(this.getId() , { $set : { 'profile.group' : newGroupId } });
+  } ,
+  setDriverId: function(driverId) {
+    this.profile.driverId = driverId;
+    Users.update(this.getId() , { $set : { 'profile.driverId' : driverId } });
   } ,
   leaveGroup : function (callback) {
     // Call the group's remove member function
@@ -108,6 +115,7 @@ User.prototype = {
         driver.save(function(err, res) {
           if (!err) {
             that.setIsDriver(true);
+            that.setDriverId(res);
           }
           callback.call(that, err, res);
         });
@@ -127,6 +135,7 @@ User.prototype = {
     this.getGroup().removeDriver(this, function(err, res) {
       if (!err) {
         that.setIsDriver(false);
+        that.setDriverId(null);
       }
       callback.call(that, err, res);
     });

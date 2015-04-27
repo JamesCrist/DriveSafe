@@ -59,6 +59,35 @@
  * @returns {none}
  */
 
+Meteor.startup(function() {
+	Rides.find().observeChanges({
+		added: function(id, fields) {
+      console.log("RIDE ADDED!");
+      var ride = Rides.findOne(id);
+      if (!ride) {
+        console.log("ERROR: Ride not found!");
+        return;
+      }
+      var group = Groups.findOne(ride.group);
+      if (!group) {
+        console.log("ERROR: Group that ride belongs to not found!");
+      }
+      // If the queue is empty, and there are drivers
+      if (group.queue.length == 0 && group.drivers.length > 0) {
+        for (var index = 0; index < group.drivers.length; ++index) {
+          var driver = Drivers.findOne(Users.findOne(group.drivers[index]).getDriverId());
+          if (!driver.currentRide) {
+            ride.assignTo(driver);
+            return;
+          }
+        }
+      }
+		}
+	})
+});
+
+
+
 Meteor.methods({
 	"createUserAccount": function(options) {
 

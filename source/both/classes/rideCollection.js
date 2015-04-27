@@ -108,7 +108,13 @@ Ride.prototype = {
       }
       that.delete(callback);
     });
-
+  },
+  assignTo: function(driver) {
+    if (driver.currentRide) {
+      throw Meteor.Error("Ride cannot be assigned to driver who already has a ride!");
+    }
+    driver.currentRide = this.id;
+    driver.save();
   }
 };
 
