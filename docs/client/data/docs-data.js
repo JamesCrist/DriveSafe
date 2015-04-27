@@ -23,9 +23,9 @@ DocsData = {
     "scope": "global",
     "summary": "Represents a driver."
   },
-  "Driver#delete": {
+  "Driver.delete": {
     "kind": "function",
-    "longname": "Driver#delete",
+    "longname": "Driver.delete",
     "memberof": "Driver",
     "name": "delete",
     "options": [],
@@ -34,12 +34,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Delete functionality for the driver instance"
   },
-  "Driver#save": {
+  "Driver.save": {
     "kind": "function",
-    "longname": "Driver#save",
+    "longname": "Driver.save",
     "memberof": "Driver",
     "name": "save",
     "options": [],
@@ -48,12 +48,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Saving functionality for the driver instance"
   },
-  "Driver#stopDriving": {
+  "Driver.stopDriving": {
     "kind": "function",
-    "longname": "Driver#stopDriving",
+    "longname": "Driver.stopDriving",
     "memberof": "Driver",
     "name": "stopDriving",
     "options": [],
@@ -62,7 +62,7 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Revoke a user's driver status if they are not currently giving a ride."
   },
   "Drivers": {
@@ -671,101 +671,6 @@ DocsData = {
     "scope": "static",
     "summary": "This is a description of the updateUserAccount function."
   },
-  "Mongo.Collectionaa#findaa": {
-    "kind": "function",
-    "locus": "Anywhere",
-    "longname": "Mongo.Collectionaa#findaa",
-    "memberof": "Mongo.Collectionaa",
-    "name": "findaa",
-    "options": [
-      {
-        "description": "<p>Sort order (default: natural order)</p>",
-        "name": "sort",
-        "type": {
-          "names": [
-            "MongoSortSpecifier"
-          ]
-        }
-      },
-      {
-        "description": "<p>Number of results to skip at the beginning</p>",
-        "name": "skip",
-        "type": {
-          "names": [
-            "Number"
-          ]
-        }
-      },
-      {
-        "description": "<p>Maximum number of results to return</p>",
-        "name": "limit",
-        "type": {
-          "names": [
-            "Number"
-          ]
-        }
-      },
-      {
-        "description": "<p>Dictionary of fields to return or exclude.</p>",
-        "name": "fields",
-        "type": {
-          "names": [
-            "MongoFieldSpecifier"
-          ]
-        }
-      },
-      {
-        "description": "<p>(Client only) Default <code>true</code>; pass <code>false</code> to disable reactivity</p>",
-        "name": "reactive",
-        "type": {
-          "names": [
-            "Boolean"
-          ]
-        }
-      },
-      {
-        "description": "<p>Overrides <code>transform</code> on the  <a href=\"#collections\"><code>Collection</code></a> for this cursor.  Pass <code>null</code> to disable transformation.</p>",
-        "name": "transform",
-        "type": {
-          "names": [
-            "function"
-          ]
-        }
-      }
-    ],
-    "params": [
-      {
-        "description": "<p>A query describing the documents to find</p>",
-        "name": "selector",
-        "optional": true,
-        "type": {
-          "names": [
-            "MongoSelector"
-          ]
-        }
-      },
-      {
-        "name": "options",
-        "optional": true,
-        "type": {
-          "names": [
-            "Object"
-          ]
-        }
-      }
-    ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "Mongo.Cursor"
-          ]
-        }
-      }
-    ],
-    "scope": "instance",
-    "summary": "Findee the documents in a collection that match the selector."
-  },
   "Ride": {
     "kind": "class",
     "longname": "Ride",
@@ -794,9 +699,9 @@ DocsData = {
     "scope": "global",
     "summary": "Represents a ride."
   },
-  "Ride#cancel": {
+  "Ride.cancel": {
     "kind": "function",
-    "longname": "Ride#cancel",
+    "longname": "Ride.cancel",
     "memberof": "Ride",
     "name": "cancel",
     "options": [],
@@ -805,12 +710,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Cancel a ride that has been requested."
   },
-  "Ride#delete": {
+  "Ride.delete": {
     "kind": "function",
-    "longname": "Ride#delete",
+    "longname": "Ride.delete",
     "memberof": "Ride",
     "name": "delete",
     "options": [],
@@ -819,12 +724,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Delete functionality for the ride instance."
   },
-  "Ride#save": {
+  "Ride.save": {
     "kind": "function",
-    "longname": "Ride#save",
+    "longname": "Ride.save",
     "memberof": "Ride",
     "name": "save",
     "options": [],
@@ -833,7 +738,7 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Saving functionality for the ride instance."
   },
   "Rides": {
@@ -1037,9 +942,9 @@ DocsData = {
     "scope": "global",
     "summary": "Represents a user."
   },
-  "User#becomeAdmin": {
+  "User.becomeAdmin": {
     "kind": "function",
-    "longname": "User#becomeAdmin",
+    "longname": "User.becomeAdmin",
     "memberof": "User",
     "name": "becomeAdmin",
     "options": [],
@@ -1048,12 +953,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Become admin of current group."
   },
-  "User#becomeDriver": {
+  "User.becomeDriver": {
     "kind": "function",
-    "longname": "User#becomeDriver",
+    "longname": "User.becomeDriver",
     "memberof": "User",
     "name": "becomeDriver",
     "options": [],
@@ -1062,12 +967,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Become driver of current group."
   },
-  "User#createGroup": {
+  "User.createGroup": {
     "kind": "function",
-    "longname": "User#createGroup",
+    "longname": "User.createGroup",
     "memberof": "User",
     "name": "createGroup",
     "options": [],
@@ -1082,12 +987,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Create a new group and become the admin of that group."
   },
-  "User#joinGroup": {
+  "User.joinGroup": {
     "kind": "function",
-    "longname": "User#joinGroup",
+    "longname": "User.joinGroup",
     "memberof": "User",
     "name": "joinGroup",
     "options": [],
@@ -1102,12 +1007,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Join an already existing group using the group name and key."
   },
-  "User#leaveGroup": {
+  "User.leaveGroup": {
     "kind": "function",
-    "longname": "User#leaveGroup",
+    "longname": "User.leaveGroup",
     "memberof": "User",
     "name": "leaveGroup",
     "options": [],
@@ -1116,12 +1021,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Remove user from current group."
   },
-  "User#stopDriving": {
+  "User.stopDriving": {
     "kind": "function",
-    "longname": "User#stopDriving",
+    "longname": "User.stopDriving",
     "memberof": "User",
     "name": "stopDriving",
     "options": [],
@@ -1130,12 +1035,12 @@ DocsData = {
         "name": "callback"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Revoke driver status of user."
   },
-  "User#updateLocation": {
+  "User.updateLocation": {
     "kind": "function",
-    "longname": "User#updateLocation",
+    "longname": "User.updateLocation",
     "memberof": "User",
     "name": "updateLocation",
     "options": [],
@@ -1147,7 +1052,7 @@ DocsData = {
         "name": "lng"
       }
     ],
-    "scope": "instance",
+    "scope": "static",
     "summary": "Set location of user."
   },
   "isValidEmail": {
