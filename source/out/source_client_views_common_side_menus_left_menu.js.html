@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: source/client/views/common/side_menus/left_menu.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: source/client/views/common/side_menus/left_menu.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>Template.leftMenu.events({
+  /**
+   * @summary Sends logout request upon clicking logout button
+   * @locus Client
+   * @method click #logoutButton
+   * @memberOf Template.leftMenu.events
+   * @instance
+   */
+   "click #logoutButton" : function () {
+    Router.go("/logout");
+  } ,
+  /**
+   * @summary Opens dashboard menu based on current user role
+   * @locus Client
+   * @method click #dashboardButton
+   * @memberOf Template.leftMenu.events
+   * @instance
+   */
+  "click #dashboardButton" : function () {
+    if (Meteor.user().isDriver()) {
+      Router.go("/driver_dashboard");
+    } else {
+      Router.go("/rider_dashboard");
+    }
+  } ,
+  /**
+   * @summary Opens join group dialog window and makes sure that the group code is valid.
+   * @locus Client
+   * @method click #joinGroupButton
+   * @memberOf Template.leftMenu.events
+   * @instance
+   * @param {Event} event
+   * @param {Meteor.Template} template
+   */
+  'click #joinGroupButton' : function (event , template) {
+    IonPopup.show({
+      title : 'Join Group' ,
+      template : '&lt;span id="inputDirections">' + 'Please enter group name and password' + '&lt;/span>' + '&lt;input type="text" placeholder="group name" name="namePrompt" >' +
+      '&lt;input type="text" placeholder="group password" name="keyPrompt" >' ,
+      buttons : [
+        {
+          text : 'Join' ,
+          type : 'button-positive' ,
+          onTap : function (e , template) {
+            var nameVal = $(template.firstNode).find('[name=namePrompt]').val();
+            var keyVal  = $(template.firstNode).find('[name=keyPrompt]').val();
+
+            // Try joining the group.
+            Meteor.user().joinGroup(nameVal , keyVal , function (err) {
+              // If there was an error:
+              if(err) {
+                // Output error and ask user to try again.
+                $(template.firstNode).find("#inputDirections").html(err.message);
+                console.log(err.message);
+                e.preventDefault();
+              } else {
+                // User joined successfully.
+                // Reload the dashboard to fix bug of map position icon not showing up.
+                IonPopup.close();
+              }
+            });
+          }
+        } ,
+        {
+          text : 'Cancel' ,
+          type : 'button-positive' ,
+          onTap : function (e) {
+            IonPopup.close();
+          }
+        } ]
+    });
+  } ,
+  /**
+   * @summary Opens create group dialog window and makes sure that the group name is not already in use.
+   * @locus Client
+   * @method click #createGroupButton
+   * @memberOf Template.leftMenu.events
+   * @instance
+   * @param {Event} event
+   * @param {Meteor.Template} template
+   */
+  'click #createGroupButton' : function (event , template) {
+    IonPopup.show({
+      title : 'Create Group' ,
+      template : '&lt;span id="inputDirections">' + 'Please enter group name and password' + '&lt;/span>' + '&lt;input type="text" placeholder="group name" name="namePrompt" >' +
+      '&lt;input type="text" placeholder="group password" name="keyPrompt" >'  ,
+      buttons : [
+        {
+          text : 'Create' ,
+          type : 'button-positive' ,
+          onTap : function (e , template) {
+            var nameVal = $(template.firstNode).find('[name=namePrompt]').val();
+            var keyVal  = $(template.firstNode).find('[name=keyPrompt]').val();
+
+            Meteor.user().createGroup(nameVal , keyVal , function (err) {
+              if(err) {
+                $(template.firstNode).find("#inputDirections").html(err.message);
+                console.log(err.message);
+                e.preventDefault();
+              } else {
+                // Reload the dashboard to fix bug
+                // of map position icon not showing up.
+                IonPopup.close();
+              }
+            });
+          }
+        } ,
+        {
+          text : 'Cancel' ,
+          type : 'button-positive' ,
+          onTap : function (e) {
+            IonPopup.close();
+          }
+        } ]
+    });
+  } ,
+  /**
+   * @summary Leaves the group that the user is currently a member of.
+   * @locus Client
+   * @method click #leaveGroup
+   * @memberOf Template.leftMenu.events
+   * @instance
+   * @param {Event} event
+   * @param {Meteor.Template} template
+   */
+  'click #leaveGroup' : function (event , template) {
+    IonPopup.confirm({
+      title : 'Are you sure?' ,
+      template : 'You will no longer have access to drivers for this group' ,
+      onOk : function () {
+        Meteor.user().leaveGroup(function (err) {
+          if(err) {
+            console.log(err.message);
+          } else {
+            Router.go("/rider_dashboard");
+          }
+        });
+      }
+    });
+  } ,
+  /**
+   * @summary Changes the user designation to become a driver.
+   * @locus Client
+   * @method click #becomeDriverButton
+   * @memberOf Template.leftMenu.events
+   * @instance
+   * @param {Event} event
+   * @param {Meteor.Template} template
+   */
+  'click #becomeDriverButton' : function (event , template) {
+    Meteor.user().becomeDriver(function (err) {
+      if(err) {
+        console.log(err.message);
+      }
+    });
+  }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Driver.html">Driver</a></li><li><a href="Group.html">Group</a></li><li><a href="Ride.html">Ride</a></li><li><a href="User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Drivers">Drivers</a></li><li><a href="global.html#Groups">Groups</a></li><li><a href="global.html#isValidEmail">isValidEmail</a></li><li><a href="global.html#publish">publish</a></li><li><a href="global.html#Rides">Rides</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Mon Apr 27 2015 18:26:23 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
