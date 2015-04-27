@@ -1,39 +1,42 @@
 this.GroupSettingsController = RouteController.extend({
-  template: "GroupSettings",
+  template : "GroupSettings" ,
 
-  yieldTemplates: {
+  yieldTemplates : {
     /*YIELD_TEMPLATES*/
-  },
+  } ,
 
-  onBeforeAction: function() {
+  onBeforeAction : function () {
     /*BEFORE_FUNCTION*/
     this.next();
-  },
+  } ,
 
-  action: function() {
-    if(this.isReady()) { this.render(); } else { this.render("loading"); }
+  action : function () {
+    if(this.isReady()) {
+      this.render();
+    } else {
+      this.render("loading");
+    }
     /*ACTION_FUNCTION*/
-  },
+  } ,
 
-  isReady: function() {
+  isReady : function () {
 
 
-    var subs = [
-    ];
+    var subs = [];
     var ready = true;
-    _.each(subs, function(sub) {
+    _.each(subs , function (sub) {
       if(!sub.ready())
         ready = false;
     });
     return ready;
-  },
-  waitOn: function() {
-    return Meteor.subscribe("groups", {admin: Meteor.userId()});
-  },
-  data: function() {
+  } ,
+  waitOn : function () {
+    return Meteor.subscribe("groups" , { admin : Meteor.userId() });
+  } ,
+  data : function () {
     return Groups.findOne();
-  },
+  } ,
 
-  onAfterAction: function() {
+  onAfterAction : function () {
   }
 });

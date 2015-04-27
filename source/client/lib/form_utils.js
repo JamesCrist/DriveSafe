@@ -1,4 +1,4 @@
-this.isValidEmail = function(value) {
+this.isValidEmail = function (value) {
   var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   if(filter.test(value)) {
     return true;
@@ -6,13 +6,13 @@ this.isValidEmail = function(value) {
   return false;
 };
 
-this.isValidPassword = function(value, min_length) {
+this.isValidPassword = function (value , min_length) {
   if(!value || value === "" || value.length < min_length)
     return false;
   return true;
 };
 
-this.isValidIPv4 = function(value) {
+this.isValidIPv4 = function (value) {
   var filter = /^(\d{1,3}\.){3}(\d{1,3})$|^(0x[\da-fA-F]{2}\.){3}(0x[\da-fA-F]{2})$|^(0[0-3][0-7]{2}\.){3}(0[0-3][0-7]{2})|^0x[\da-fA-F]{8}$|^[0-4]\d{9}$|^0[0-3]\d{10}$/;
   if(filter.test(value)) {
     return true;
@@ -20,7 +20,7 @@ this.isValidIPv4 = function(value) {
   return false;
 }
 
-this.isValidIPv6 = function(value) {
+this.isValidIPv6 = function (value) {
   var filter = /^([\da-fA-F]{1,4}:){7}([\da-fA-F]{1,4})$/;
   if(filter.test(value)) {
     return true;
@@ -28,33 +28,33 @@ this.isValidIPv6 = function(value) {
   return false;
 }
 
-this.isValidIP = function(value) {
+this.isValidIP = function (value) {
   if(isValidIPv4(value) || isValidIPv6(value)) {
     return true;
   }
   return false;
 };
 
-this.timeToSeconds = function(timeStr, timeFormat) {
+this.timeToSeconds = function (timeStr , timeFormat) {
   var t = timeStr || "12:00 am";
   var tf = timeFormat || "h:mm a";
-  var m = moment.utc("01/01/1970 " + t, "MM/DD/YYYY " + tf);
+  var m = moment.utc("01/01/1970 " + t , "MM/DD/YYYY " + tf);
   if(!m.isValid()) {
     return null;
   }
   return m.unix();
 };
 
-this.secondsToTime = function(seconds, timeFormat) {
+this.secondsToTime = function (seconds , timeFormat) {
   var s = seconds || 0;
   var tf = timeFormat || "h:mm a";
   return moment.unix(s).utc().format(tf);
 };
 
-this.validateForm = function(formObject, validationCallback, errorCallback, submitCallback) {
+this.validateForm = function (formObject , validationCallback , errorCallback , submitCallback) {
   var values = {};
   var error = false;
-  formObject.find("input,select,textarea").each(function() {
+  formObject.find("input,select,textarea").each(function () {
     var skipValue = false;
     var inputObject = $(this);
     var formGroup = inputObject.closest(".form-group");
@@ -128,7 +128,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
         var req = checkboxContainer.attr("data-required");
         if(req) {
           var atLeastOneChecked = false;
-          checkboxContainer.find("input[type='checkbox']").each(function() {
+          checkboxContainer.find("input[type='checkbox']").each(function () {
             if($(this).is(":checked")) atLeastOneChecked = true;
           });
           if(!atLeastOneChecked) {
@@ -170,8 +170,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
       }
 
       // Check Float, also Min and Max value
-      if(dataType == "FLOAT")
-      {
+      if(dataType == "FLOAT") {
         var floatValue = parseFloat(fieldValue);
         if(isNaN(floatValue)) {
           validationError(labelText + ": Invalid value entered");
@@ -218,7 +217,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
       }
 
       if(dataType == "ARRAY") {
-        var newValue = values[fieldName] ? values[fieldName] : [];
+        var newValue = values[ fieldName ] ? values[ fieldName ] : [];
         if(fieldValue) {
           newValue.push(fieldValue);
         }
@@ -231,7 +230,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
         if(fieldValue == "") {
           fieldValue = null;
         }
-        var seconds = timeToSeconds(fieldValue, dataFormat);
+        var seconds = timeToSeconds(fieldValue , dataFormat);
         if(isNaN(parseInt(seconds))) {
           validationError(labelText + ": Invalid value entered.");
           return false;
@@ -243,7 +242,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
         if(fieldValue == "") {
           fieldValue = null;
         } else {
-          var date = moment(fieldValue, dataFormat);
+          var date = moment(fieldValue , dataFormat);
           if(!date.isValid()) {
             validationError(labelText + ": Invalid value entered." + (dataFormat ? " Date is expected in format \"" + dataFormat + "\"" : ""));
             return false;
@@ -254,14 +253,14 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
 
       // Custom validation
       if(validationCallback) {
-        var errorMessage = validationCallback(fieldName, fieldValue);
+        var errorMessage = validationCallback(fieldName , fieldValue);
         if(errorMessage) {
           validationError(errorMessage);
           return false;
         }
       }
 
-      values[fieldName] = fieldValue;
+      values[ fieldName ] = fieldValue;
     }
   });
 
@@ -274,7 +273,7 @@ this.validateForm = function(formObject, validationCallback, errorCallback, subm
     submitCallback(values);
 };
 
-Handlebars.registerHelper("itemIsChecked", function(desiredValue, itemValue) {
+Handlebars.registerHelper("itemIsChecked" , function (desiredValue , itemValue) {
   if(!desiredValue && !itemValue) return "";
 
   if(_.isArray(desiredValue))
@@ -283,7 +282,7 @@ Handlebars.registerHelper("itemIsChecked", function(desiredValue, itemValue) {
   return desiredValue == itemValue ? "checked" : "";
 });
 
-Handlebars.registerHelper("optionIsSelected", function(desiredValue, itemValue) {
+Handlebars.registerHelper("optionIsSelected" , function (desiredValue , itemValue) {
   if(!desiredValue && !itemValue) return "";
 
   if(_.isArray(desiredValue))

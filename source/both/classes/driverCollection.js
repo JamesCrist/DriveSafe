@@ -9,7 +9,7 @@
  * @param {String} options.idGeneration The method of generating the `_id` fields of new documents in this collection.  Possible values:
  - **`'STRING'`**: random strings
  - **`'MONGO'`**:  random [`Mongo.ObjectID`](#mongo_object_id) values
-The default id generation technique is `'STRING'`.
+ The default id generation technique is `'STRING'`.
  * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.
  */
 
@@ -19,7 +19,6 @@ Drivers = new Meteor.Collection("drivers" , {
     return new Driver(doc._id , doc.group , doc.user , doc.currentRide);
   }
 });
-
 
 
 // A Driver class that takes a document in its constructor

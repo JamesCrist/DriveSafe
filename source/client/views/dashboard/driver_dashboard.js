@@ -1,42 +1,42 @@
-Template.driverDashboard.rendered = function() {
-  if (Meteor.isCordova) {
+Template.driverDashboard.rendered = function () {
+  if(Meteor.isCordova) {
     GeolocationBG.start();
   }
 };
 
-Template.driverDashboard.destroyed = function() {
-  if (Meteor.isCordova) {
+Template.driverDashboard.destroyed = function () {
+  if(Meteor.isCordova) {
     GeolocationBG.stop();
   }
 };
 
 
 Template.driverDashboard.helpers({
-  rideModel: function() {
-    return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.createdAt);
-  },
-  getRideUser: function() {
+  rideModel : function () {
+    return new Ride(this.id , this.user , this.group , this.pending , this.pickupLoc , this.destLoc , this.createdAt);
+  } ,
+  getRideUser : function () {
     return Users.findOne(this.user).getName();
-  },
-  getRideCreatedTime: function() {
+  } ,
+  getRideCreatedTime : function () {
     return moment(this.createdAt).fromNow();
-  },
-  ridesAvailable: function() {
+  } ,
+  ridesAvailable : function () {
     return this.rides.count() > 0;
   }
 });
 
 
 Template.driverDashboard.events({
-  'click .stopDriving': function(event, template) {
-    template.data.driver.stopDriving(function(err) {
-      if (err) {
+  'click .stopDriving' : function (event , template) {
+    template.data.driver.stopDriving(function (err) {
+      if(err) {
         console.log(err.message);
       }
     });
   } ,
-  'click .navigation-button': function(event, template) {
-    if (Meteor.isCordova) {
+  'click .navigation-button' : function (event , template) {
+    if(Meteor.isCordova) {
       launchnavigator.navigate(
         [ this.pickupLoc.k , this.pickupLoc.D ] ,
         null ,

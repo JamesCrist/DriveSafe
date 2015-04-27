@@ -1,5 +1,5 @@
 Template.request_modal.rendered = function () {
-  Deps.autorun(function() {
+  Deps.autorun(function () {
     if(Drivers.find().count()) {
 
       var pickupInput = document.getElementById('pickup-input');
@@ -14,7 +14,7 @@ Template.request_modal.rendered = function () {
 };
 
 Template.request_modal.helpers({
-  driversAvailable: function() {
+  driversAvailable : function () {
     return Drivers.find().count();
   }
 });
@@ -33,13 +33,13 @@ Template.request_modal.events({
     var value1 = $.trim($("#dest-input").val());
     if(value1.length > 0) {
       userDestLocation = (dest_autocomplete.getPlace()).geometry.location;
-      var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, userPickupLocation , userDestLocation, Date.now());
-      ride.save(function(err, res) {
-        if (err) {
+      var ride = new Ride(null , Meteor.userId() , Groups.findOne().id , null , true , userPickupLocation , userDestLocation , Date.now());
+      ride.save(function (err , res) {
+        if(err) {
           alert(err.message);
         } else {
-          Groups.findOne().addRideToQueue(ride, function(err, res) {
-            if (err) {
+          Groups.findOne().addRideToQueue(ride , function (err , res) {
+            if(err) {
               alert(err.message);
             } else {
               pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
