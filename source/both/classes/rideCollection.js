@@ -69,10 +69,6 @@ Ride.prototype = {
       throw new Meteor.Error("User is not defined!");
     }
 
-    if(Rides.findOne({ user : this.user })) {
-      throw new Meteor.Error("User has already requested a ride!");
-    }
-
     if(!this.pickupLoc) {
       throw new Meteor.Error("Pickup location is not defined!");
     }
@@ -133,6 +129,9 @@ Ride.prototype = {
     if(driver.currentRide) {
       throw Meteor.Error("Ride cannot be assigned to driver who already has a ride!");
     }
+    this.driver = driver.id;
+    this.pending = false;
+    this.save();
     driver.currentRide = this.id;
     driver.save();
   }

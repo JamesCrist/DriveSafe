@@ -78,7 +78,6 @@ Meteor.startup(function () {
           var driver = Drivers.findOne(Users.findOne(group.drivers[ index ]).getDriverId());
           if(!driver.currentRide) {
             ride.assignTo(driver);
-            ride.pending = false;
             ride.save();
             return;
           }

@@ -339,9 +339,7 @@ Group.prototype = {
       this._queue = newQueue;
       this.save(callback);
     } else {
-      var error = new Meteor.Error("Could not find ride to remove!");
-      console.log(error);
-      callback.call(this , error , null);
+      callback.call(this , null , null);
     }
   }
 };
