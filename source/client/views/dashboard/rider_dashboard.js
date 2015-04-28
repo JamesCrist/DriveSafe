@@ -39,6 +39,15 @@ Template.riderDashboard.rendered = function () {
       });
       pickupMarker.setVisible(false);
       destMarker.setVisible(false);
+      var pickupInput = /** @type {HTMLInputElement} */(
+      document.getElementById('pickup-input'));
+      var destInput = document.getElementById('dest-input');
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(pickupInput);
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(destInput);
+      dest_autocomplete = new google.maps.places.Autocomplete(destInput);
+      pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
+      pickup_autocomplete.bindTo('bounds' , map);
+      dest_autocomplete.bindTo('bounds' , map);
       // Create a new array to hold the cursors.
       var cursorsArray = [];
       // If user is in a group, then display all the drivers for that group also.
@@ -91,6 +100,58 @@ Template.riderDashboard.events({
         alert(err.message);
       }
     });
+  },
+  'click .requestRide' : function () {
+    //TODO CHECK IF LOCATIONS VALID
+    var userPickupLocation , userDestLocation, userPickupAddress , userDestAddress;
+    var value = $.trim($("#pickup-input").val());
+    if(value.length > 0) {
+      var pPlace = pickup_autocomplete.getPlace();
+      userPickupLocation = pPlace.geometry.location;
+     userPickupAddress = pPlace.name + '\n'+ pPlace.formatted_address;
+    }
+    else {
+      userPickupLocation = new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng());
+      var geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLat());
+      geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[1]) {
+            userPickupAddress = results[1].formatted_address;
+          } else {
+            alert('No results found');
+          }
+        } else {
+          alert('Geocoder failed due to: ' + status);
+        }
+      });
+    }
+    var value1 = $.trim($("#dest-input").val());
+    if(value1.length > 0) {
+      var dPlace = dest_autocomplete.getPlace();
+      userDestLocation = dPlace.geometry.location;
+      userDestAddress = dPlace.name + dPlace.formatted_address;
+      var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
+      console.log(ride);
+      ride.save(function(err, res) {
+        if (err) {
+          alert(err.message);
+        } else {
+          pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
+          destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
+          pickupMarker.setVisible(true);
+          destMarker.setVisible(true);
+
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend(pickupMarker.getPosition());
+          bounds.extend(destMarker.getPosition());
+          map.fitBounds(bounds);
+        }
+      });
+    } else {
+      alert('Please input a drop off location to request a ride!');
+    }
   }
 });
+
 

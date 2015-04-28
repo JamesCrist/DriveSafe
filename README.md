@@ -13,6 +13,8 @@ meteor					# install dependencies and run
 
 A demo of the current master build can be seen here: http://drivesafe.meteor.com
 
+Are you a developer? Documentation for our source can be seen here: http://docs.drivesafe.meteor.com
+
 ---
 
 To update and show the documentation, follow these instructions:

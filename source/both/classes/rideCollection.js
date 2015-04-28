@@ -1,12 +1,13 @@
 // Create Ride MongoDB collection
 Rides = new Meteor.Collection("rides" , {
   transform : function (doc) {
-    return new Ride(doc._id , doc.user , doc.group , doc.driver , doc.pending , doc.pickupLoc , doc.destLoc , doc.createdAt);
+    return new Ride(doc._id , doc.user , doc.group , doc.driver , doc.pending , doc.pickupLoc ,
+      doc.destLoc , doc.pickupAdd, doc.destAdd, doc.createdAt);
   }
 });
 
 // A Ride class that takes a document in its constructor
-Ride = function (id , user , group , driver , pending , pickupLoc , destLoc , createdAt) {
+Ride = function (id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
   this._id = id;
   if(!user) {
     user = Meteor.userId();
@@ -20,6 +21,8 @@ Ride = function (id , user , group , driver , pending , pickupLoc , destLoc , cr
   this._pending = pending;
   this._pickupLoc = pickupLoc;
   this._destLoc = destLoc;
+  this._pickupAdd = pickupAdd;
+  this._destAdd = destAdd;
   this._createdAt = createdAt;
 };
 
@@ -43,6 +46,13 @@ Ride.prototype = {
   get destLoc() {
     return this._destLoc;
   } ,
+  get pickupAdd() {
+    // readonly
+    return this._pickupAdd;
+  } ,
+  get destAdd() {
+    return this._destAdd;
+  } ,
   get createdAt() {
     return this._createdAt;
   } ,
@@ -64,8 +74,14 @@ Ride.prototype = {
   set driver(value) {
     this._driver = value;
   } ,
-  save : function (callback) {
-    if(!this.user) {
+  set pickupAdd(value) {
+    this._pickupAdd = value;
+  },
+  set destAdd(value) {
+    this._destAdd = value;
+  },
+  save: function(callback) {
+    if (!this.user) {
       throw new Meteor.Error("User is not defined!");
     }
 
@@ -80,6 +96,8 @@ Ride.prototype = {
     var doc = {
       pickupLoc : this.pickupLoc ,
       destLoc : this.destLoc ,
+      destAdd : this.destAdd ,
+      pickupAdd: this.pickupAdd ,
       pending : this.pending ,
       driver : this.driver
     };
@@ -118,12 +136,20 @@ Ride.prototype = {
     }
     var that = this;
     console.log(Groups.findOne(this.group));
-    Groups.findOne(this.group).removeRideFromQueue(this.id , function (err , res) {
-      if(err) {
-        throw err;
-      }
+    if (this.pending) {
+      Groups.findOne(this.group).removeRideFromQueue(this.id , function (err , res) {
+        if(err) {
+          throw err;
+        }
+        that.delete(callback);
+      });
+    } else {
+      var driver = Drivers.findOne(this.driver);
+      driver.currentRide = null;
+      console.log(driver);
+      driver.save();
       that.delete(callback);
-    });
+    }
   } ,
   assignTo : function (driver) {
     if(driver.currentRide) {
@@ -146,10 +172,10 @@ if(Meteor.isServer) {
       return !Users.findOne(userId).isDriver() && doc.user === userId;
     } ,
     'update' : function (userId , doc) {
-      return doc.user === userId;
-    } ,
+      return doc.user === userId || Users.findOne(userId).isDriver();
+    },
     'remove' : function (userId , doc) {
-      return doc.user === userId;
+      return doc.user === userId || Users.findOne(userId).isDriver();
     }
   });
 }

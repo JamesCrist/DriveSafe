@@ -82,6 +82,11 @@ Meteor.startup(function () {
             return;
           }
         }
+        group.addRideToQueue(ride , function (err , res) {
+          if(err) {
+            console.log(err.message);
+          }
+        });
       }
     }
   })

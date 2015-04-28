@@ -120,7 +120,7 @@ if(Meteor.isServer) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
     } ,
     'update' : function (userId , doc) {
-      return (userId === doc.user || Users.findOne(userId).isAdmin());
+      return true;
     } ,
     'remove' : function (userId , doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
