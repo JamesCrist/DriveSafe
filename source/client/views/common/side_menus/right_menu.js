@@ -4,7 +4,7 @@ Template.rightMenu.events({
    * @summary Opens the user settings dashboard window.
    * @locus Client
    * @method click #accountSettings
-   * @memberOf Template.rightMenu.events
+   * @memberOf rightMenu.events
    * @function
    */
   'click #accountSettings': function() {
@@ -14,7 +14,7 @@ Template.rightMenu.events({
    * @summary Opens the group settings dashboard window.
    * @locus Client
    * @method click #groupSettings
-   * @memberOf Template.rightMenu.events
+   * @memberOf rightMenu.events
    * @function
    */
   'click #groupSettings': function() {
