@@ -11,9 +11,9 @@
                         Please sign up
                     </h2>
                     {{#if errorMessage}}
-                    <div class="alert alert-warning">
-                        {{errorMessage}}
-                    </div>
+                        <div class="alert alert-warning">
+                            {{errorMessage}}
+                        </div>
                     {{else}}
                         {{#if successMessage}}
                             <div class="alert alert-success">
@@ -21,7 +21,8 @@
                             </div>
                         {{/if}}
                     {{/if}}
-                    <input id="register_name" type="text" class="form-control" placeholder="Your full name" required autofocus>
+                    <input id="register_name" type="text" class="form-control" placeholder="Your full name" required
+                           autofocus>
                     <input id="register_email" type="text" class="form-control" placeholder="Email address" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
                         Sign up

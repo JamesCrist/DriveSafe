@@ -1,42 +1,45 @@
 this.UserSettingsController = RouteController.extend({
-	template: "UserSettings",
+  template : "UserSettings" ,
 
-	yieldTemplates: {
-		/*YIELD_TEMPLATES*/
-	},
+  yieldTemplates : {
+    /*YIELD_TEMPLATES*/
+  } ,
 
-	onBeforeAction: function() {
-		/*BEFORE_FUNCTION*/
-		this.next();
-	},
+  onBeforeAction : function () {
+    /*BEFORE_FUNCTION*/
+    this.next();
+  } ,
 
-	action: function() {
-    if(this.isReady()) { this.render(); } else { this.render("loading"); }
-		/*ACTION_FUNCTION*/
-	},
+  action : function () {
+    if(this.isReady()) {
+      this.render();
+    } else {
+      this.render("loading");
+    }
+    /*ACTION_FUNCTION*/
+  } ,
 
-	isReady: function() {
-		
+  isReady : function () {
 
-		var subs = [
-		];
-		var ready = true;
-		_.each(subs, function(sub) {
-			if(!sub.ready())
-				ready = false;
-		});
-		return ready;
-	},
 
-	data: function() {
-		
+    var subs = [];
+    var ready = true;
+    _.each(subs , function (sub) {
+      if(!sub.ready())
+        ready = false;
+    });
+    return ready;
+  } ,
 
-		return {
-			params: this.params || {}
-		};
-		/*DATA_FUNCTION*/
-	},
+  data : function () {
 
-	onAfterAction: function() {
-	}
+
+    return {
+      params : this.params || {}
+    };
+    /*DATA_FUNCTION*/
+  } ,
+
+  onAfterAction : function () {
+  }
 });

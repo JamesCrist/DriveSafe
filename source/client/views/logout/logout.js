@@ -1,7 +1,3 @@
-Template.Logout.events({
-	
-});
+Template.Logout.events({});
 
-Template.Logout.helpers({
-	
-});
+Template.Logout.helpers({});

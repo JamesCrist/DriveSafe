@@ -1,9 +1,9 @@
-Template.loading.rendered = function() {
+Template.loading.rendered = function () {
   IonLoading.show({
-    backdrop: false
+    backdrop : false
   });
 };
 
-Template.loading.destroyed = function() {
+Template.loading.destroyed = function () {
   IonLoading.hide();
 };
