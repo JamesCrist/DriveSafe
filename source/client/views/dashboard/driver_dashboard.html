@@ -35,26 +35,34 @@
                             <div class="item">
                                 <h2>{{getRideUser}}</h2>
                             </div>
+                            {{#if firstRide}}
+                                <div class="item item-body">
+                                        <button class="button button-outline button-positive navigation-button" id="pickup-navigation-button">
+                                            Take Me To Pickup Location
+                                        </button>
+                                        
+                                        <button class="button button-outline button-positive navigation-button" id="dest-navigation-button" style="display:none;">
+                                            Take Me To Drop off Location
+                                        </button>
 
-                            <div class="item item-body">
-                                    <button class="button button-outline button-positive navigation-button">
-                                        Take Me To Pickup Location
-                                    </button>
-                                <p>
-                                    <a href="#" class="subdued">{{getRideCreatedTime}}</a>
-                                </p>
-                            </div>
+                                        <button class="button button-outline button-positive navigation-button" id="confirm-dropoff-button" style="display:none;">
+                                            Passengers have been dropped off!
+                                        </button>
+                                    <p>
+                                        <a href="#" class="subdued">{{getRideCreatedTime}}</a>
+                                    </p>
+                                </div>
 
-                            <div class="item tabs tabs-secondary tabs-icon-left">
-                                <div class="tab-item">
-                                    <i class="icon ion-thumbsdown"></i>
-                                    Deny Ride
+                                <div class="item tabs tabs-secondary tabs-icon-left">
+                                    <div class="tab-item">
+                                        <i class="icon ion-thumbsdown"></i>
+                                        Deny Ride
+                                    </div>
                                 </div>
-                                <div class="tab-item">
-                                    <i class="icon ion-thumbsup"></i>
-                                    Picked Up!
-                                </div>
-                            </div>
+                            {{/if}}
+                            <!--<div class="item">
+                                <h2>{{getPickupAddress}}</h2>
+                            </div> -->
                         </div>
                     {{/with}}
                 {{/each}}

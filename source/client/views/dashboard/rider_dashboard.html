@@ -34,6 +34,9 @@
                 </div>
             {{/if}}
             <div id="map-canvas" class="map-canvas"></div>
+            <input id="pickup-input" class="controls" type="text" placeholder="Your location" >
+            <input id="dest-input" class="controls" type="text"
+            placeholder="Enter a destination">
         {{/ionContent}}
     {{/ionView}}
     {{#if group }}
@@ -43,7 +46,7 @@
             {{/ionFooterBar}}
         {{else}}
             {{#ionFooterBar class="bar-energized requestRide"}}
-                <h1 class="title" data-ion-modal="request_modal">Request Ride!</h1>
+                <h1 class="title">Request Ride!</h1>
             {{/ionFooterBar}}
         {{/if}}
     {{else}}

@@ -6,7 +6,7 @@ Rides = new Meteor.Collection("rides", {
 });
 
 // A Ride class that takes a document in its constructor
-Ride = function (id, user, group, pickupLoc, destLoc, createdAt) {
+Ride = function (id, user, group, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
   this._id = id;
   if (!user) {
     user = Meteor.userId();
@@ -18,6 +18,8 @@ Ride = function (id, user, group, pickupLoc, destLoc, createdAt) {
   this._group = group;
   this._pickupLoc = pickupLoc;
   this._destLoc = destLoc;
+  this._pickupAdd = pickupAdd;
+  this._destAdd = destAdd;
   this._createdAt = createdAt;
 };
 
@@ -41,6 +43,13 @@ Ride.prototype = {
   get destLoc() {
     return this._destLoc;
   },
+  get pickupAdd() {
+    // readonly
+    return this._pickupLoc;
+  },
+  get destAdd() {
+    return this._destLoc;
+  },
   get createdAt() {
     return this._createdAt;
   },
@@ -49,6 +58,12 @@ Ride.prototype = {
   },
   set destLoc(value) {
     this._destLoc = value;
+  },
+  set pickupAdd(value) {
+    this._pickupAdd = value;
+  },
+  set destAdd(value) {
+    this._destAdd = value;
   },
   save: function(callback) {
     if (!this.user) {
@@ -121,10 +136,10 @@ if(Meteor.isServer) {
       return !Users.findOne(userId).isDriver() && doc.user === userId;
     } ,
     'update' : function (userId , doc) {
-      return doc.user === userId;
+      return doc.user === userId || Users.findOne(userId).isDriver();
     },
     'remove' : function (userId , doc) {
-      return doc.user === userId;
+      return doc.user === userId || Users.findOne(userId).isDriver();
     }
   });
 }

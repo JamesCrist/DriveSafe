@@ -7085,7 +7085,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "de4a6631be7aaf8ca2f114e63ab80a9574ff4672"
+                  "value": "d7a8ab31dfd4bd3dd4a9f8cc7d8f9844365e93b0"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7100,7 +7100,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "fedc2549b8c30aeecb7060ec73b9a13432b618c9"
+                  "value": "c58e4d37d04f9277d6c4f04e98a855da870e9afc"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7874,7 +7874,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "a4d39e30dcc5ee88d4cb0da47d3c355ee1fd6df5"
+          "value": "3a805c0a2f0981140f88df236935ca9f2c98cfcb"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7882,7 +7882,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "fedc2549b8c30aeecb7060ec73b9a13432b618c9"
+          "value": "c58e4d37d04f9277d6c4f04e98a855da870e9afc"
         },
         "appId": {
           "type": "constant",
@@ -9643,13 +9643,7 @@ var packageMetadata = {
               }
             },
             "rename": {
-              "type": "function",
-              "members": {
-                "displayName": {
-                  "type": "constant",
-                  "value": "rename"
-                }
-              }
+              "type": "function"
             },
             "realpath": {
               "type": "function",
@@ -9802,7 +9796,7 @@ var packageMetadata = {
             },
             "pathOsDelimiter": {
               "type": "constant",
-              "value": ":"
+              "value": ";"
             },
             "convertToStandardPath": {
               "type": "function"
@@ -11263,15 +11257,15 @@ var packageMetadata = {
                 },
                 "appPath": {
                   "type": "constant",
-                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe/source"
+                  "value": "C:\\Users\\taboak\\DriveSafe\\DriveSafe\\source"
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 26038
+                  "value": 1136
                 },
                 "fout": {
                   "type": "constant",
-                  "value": 28
+                  "value": 4
                 },
                 "child": {
                   "type": "object",
@@ -11290,7 +11284,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 26038
+                      "value": 1136
                     },
                     "stdin": {
                       "type": "null",
