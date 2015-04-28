@@ -1,9 +1,22 @@
+/**
+ * @summary Renders the driver dashboard template on the screen.
+ * @locus Client
+ * @method rendered
+ * @memberOf driverDashboard
+ * @function
+ * */
 Template.driverDashboard.rendered = function() {
   if (Meteor.isCordova) {
     GeolocationBG.start();
   }
 };
-
+/**
+ * @summary Removes the driver dashboard template from the screen.
+ * @locus Client
+ * @method destroyed
+ * @memberOf driverDashboard
+ * @function
+ * */
 Template.driverDashboard.destroyed = function() {
   if (Meteor.isCordova) {
     GeolocationBG.stop();
@@ -12,6 +25,13 @@ Template.driverDashboard.destroyed = function() {
 
 
 Template.driverDashboard.helpers({
+  /**
+   * @summary Creates a new Ride.
+   * @locus Client
+   * @method rideModel
+   * @memberOf driverDashboard.helpers
+   * @function
+   * */
   rideModel: function() {
     return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.createdAt);
   },
