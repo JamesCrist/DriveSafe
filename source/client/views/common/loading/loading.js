@@ -3,7 +3,7 @@
  * @locus Client
  * @method rendered
  * @memberOf Template.loading
- * @instance
+ * @function
  * */
 Template.loading.rendered = function() {
   IonLoading.show({
@@ -16,7 +16,7 @@ Template.loading.rendered = function() {
  * @locus Client
  * @method destroyed
  * @memberOf Template.loading
- * @instance
+ * @function
  */
 Template.loading.destroyed = function() {
   IonLoading.hide();
