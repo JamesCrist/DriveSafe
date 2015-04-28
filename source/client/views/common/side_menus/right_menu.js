@@ -5,7 +5,7 @@ Template.rightMenu.events({
    * @locus Client
    * @method click #accountSettings
    * @memberOf Template.rightMenu.events
-   * @instance
+   * @function
    */
   'click #accountSettings': function() {
     Router.go("/user_settings");
@@ -15,7 +15,7 @@ Template.rightMenu.events({
    * @locus Client
    * @method click #groupSettings
    * @memberOf Template.rightMenu.events
-   * @instance
+   * @function
    */
   'click #groupSettings': function() {
     Router.go("/group_settings");

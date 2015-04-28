@@ -4,7 +4,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #logoutButton
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    */
    "click #logoutButton" : function () {
     Router.go("/logout");
@@ -14,7 +14,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #dashboardButton
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    */
   "click #dashboardButton" : function () {
     if (Meteor.user().isDriver()) {
@@ -28,7 +28,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #joinGroupButton
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    * @param {Event} event
    * @param {Meteor.Template} template
    */
@@ -75,7 +75,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #createGroupButton
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    * @param {Event} event
    * @param {Meteor.Template} template
    */
@@ -119,7 +119,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #leaveGroup
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    * @param {Event} event
    * @param {Meteor.Template} template
    */
@@ -143,7 +143,7 @@ Template.leftMenu.events({
    * @locus Client
    * @method click #becomeDriverButton
    * @memberOf Template.leftMenu.events
-   * @instance
+   * @function
    * @param {Event} event
    * @param {Meteor.Template} template
    */
