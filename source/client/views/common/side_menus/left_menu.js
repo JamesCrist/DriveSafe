@@ -3,7 +3,7 @@ Template.leftMenu.events({
    * @summary Sends logout request upon clicking logout button
    * @locus Client
    * @method click #logoutButton
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    */
    "click #logoutButton" : function () {
@@ -13,7 +13,7 @@ Template.leftMenu.events({
    * @summary Opens dashboard menu based on current user role
    * @locus Client
    * @method click #dashboardButton
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    */
   "click #dashboardButton" : function () {
@@ -27,7 +27,7 @@ Template.leftMenu.events({
    * @summary Opens join group dialog window and makes sure that the group code is valid.
    * @locus Client
    * @method click #joinGroupButton
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    * @param {Event} event
    * @param {Meteor.Template} template
@@ -74,7 +74,7 @@ Template.leftMenu.events({
    * @summary Opens create group dialog window and makes sure that the group name is not already in use.
    * @locus Client
    * @method click #createGroupButton
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    * @param {Event} event
    * @param {Meteor.Template} template
@@ -118,7 +118,7 @@ Template.leftMenu.events({
    * @summary Leaves the group that the user is currently a member of.
    * @locus Client
    * @method click #leaveGroup
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    * @param {Event} event
    * @param {Meteor.Template} template
@@ -142,7 +142,7 @@ Template.leftMenu.events({
    * @summary Changes the user designation to become a driver.
    * @locus Client
    * @method click #becomeDriverButton
-   * @memberOf Template.leftMenu.events
+   * @memberOf leftMenu.events
    * @function
    * @param {Event} event
    * @param {Meteor.Template} template

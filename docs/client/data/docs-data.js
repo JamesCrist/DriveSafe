@@ -754,184 +754,6 @@ DocsData = {
       ]
     }
   },
-  "Template.leftMenu.events#click #becomeDriverButton": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #becomeDriverButton",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "becomeDriverButton",
-    "options": [],
-    "params": [
-      {
-        "name": "event",
-        "type": {
-          "names": [
-            "Event"
-          ]
-        }
-      },
-      {
-        "name": "template",
-        "type": {
-          "names": [
-            "Meteor.Template"
-          ]
-        }
-      }
-    ],
-    "scope": "instance",
-    "summary": "Changes the user designation to become a driver."
-  },
-  "Template.leftMenu.events#click #createGroupButton": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #createGroupButton",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "createGroupButton",
-    "options": [],
-    "params": [
-      {
-        "name": "event",
-        "type": {
-          "names": [
-            "Event"
-          ]
-        }
-      },
-      {
-        "name": "template",
-        "type": {
-          "names": [
-            "Meteor.Template"
-          ]
-        }
-      }
-    ],
-    "scope": "instance",
-    "summary": "Opens create group dialog window and makes sure that the group name is not already in use."
-  },
-  "Template.leftMenu.events#click #dashboardButton": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #dashboardButton",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "dashboardButton",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Opens dashboard menu based on current user role"
-  },
-  "Template.leftMenu.events#click #joinGroupButton": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #joinGroupButton",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "joinGroupButton",
-    "options": [],
-    "params": [
-      {
-        "name": "event",
-        "type": {
-          "names": [
-            "Event"
-          ]
-        }
-      },
-      {
-        "name": "template",
-        "type": {
-          "names": [
-            "Meteor.Template"
-          ]
-        }
-      }
-    ],
-    "scope": "instance",
-    "summary": "Opens join group dialog window and makes sure that the group code is valid."
-  },
-  "Template.leftMenu.events#click #leaveGroup": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #leaveGroup",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "leaveGroup",
-    "options": [],
-    "params": [
-      {
-        "name": "event",
-        "type": {
-          "names": [
-            "Event"
-          ]
-        }
-      },
-      {
-        "name": "template",
-        "type": {
-          "names": [
-            "Meteor.Template"
-          ]
-        }
-      }
-    ],
-    "scope": "instance",
-    "summary": "Leaves the group that the user is currently a member of."
-  },
-  "Template.leftMenu.events#click #logoutButton": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.leftMenu.events#click #logoutButton",
-    "memberof": "Template.leftMenu.events#click ",
-    "name": "logoutButton",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Sends logout request upon clicking logout button"
-  },
-  "Template.loading#destroyed": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.loading#destroyed",
-    "memberof": "Template.loading",
-    "name": "destroyed",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Removes the loading template from the screen"
-  },
-  "Template.loading#rendered": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.loading#rendered",
-    "memberof": "Template.loading",
-    "name": "rendered",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Renders the loading template on the screen"
-  },
-  "Template.rightMenu.events#click #accountSettings": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.rightMenu.events#click #accountSettings",
-    "memberof": "Template.rightMenu.events#click ",
-    "name": "accountSettings",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Opens the user settings dashboard window."
-  },
-  "Template.rightMenu.events#click #groupSettings": {
-    "kind": "function",
-    "locus": "Client",
-    "longname": "Template.rightMenu.events#click #groupSettings",
-    "memberof": "Template.rightMenu.events#click ",
-    "name": "groupSettings",
-    "options": [],
-    "params": [],
-    "scope": "instance",
-    "summary": "Opens the group settings dashboard window."
-  },
   "User": {
     "kind": "class",
     "locus": "Anywhere",
@@ -1055,6 +877,39 @@ DocsData = {
     "scope": "static",
     "summary": "Set location of user."
   },
+  "driverDashboard.destroyed": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.destroyed",
+    "memberof": "driverDashboard",
+    "name": "destroyed",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Removes the driver dashboard template from the screen"
+  },
+  "driverDashboard.helpers.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.rendered",
+    "memberof": "driverDashboard.helpers",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the driver dashboard template on the screen"
+  },
+  "driverDashboard.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.rendered",
+    "memberof": "driverDashboard",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the driver dashboard template on the screen"
+  },
   "isValidEmail": {
     "kind": "function",
     "longname": "isValidEmail",
@@ -1063,5 +918,183 @@ DocsData = {
     "params": [],
     "scope": "global",
     "summary": "Automatically generated utilities."
+  },
+  "leftMenu.events.click #becomeDriverButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #becomeDriverButton",
+    "memberof": "leftMenu.events.click ",
+    "name": "becomeDriverButton",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.Template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Changes the user designation to become a driver."
+  },
+  "leftMenu.events.click #createGroupButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #createGroupButton",
+    "memberof": "leftMenu.events.click ",
+    "name": "createGroupButton",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.Template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Opens create group dialog window and makes sure that the group name is not already in use."
+  },
+  "leftMenu.events.click #dashboardButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #dashboardButton",
+    "memberof": "leftMenu.events.click ",
+    "name": "dashboardButton",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Opens dashboard menu based on current user role"
+  },
+  "leftMenu.events.click #joinGroupButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #joinGroupButton",
+    "memberof": "leftMenu.events.click ",
+    "name": "joinGroupButton",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.Template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Opens join group dialog window and makes sure that the group code is valid."
+  },
+  "leftMenu.events.click #leaveGroup": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #leaveGroup",
+    "memberof": "leftMenu.events.click ",
+    "name": "leaveGroup",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.Template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Leaves the group that the user is currently a member of."
+  },
+  "leftMenu.events.click #logoutButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "leftMenu.events.click #logoutButton",
+    "memberof": "leftMenu.events.click ",
+    "name": "logoutButton",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Sends logout request upon clicking logout button"
+  },
+  "loading.destroyed": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "loading.destroyed",
+    "memberof": "loading",
+    "name": "destroyed",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Removes the loading template from the screen"
+  },
+  "loading.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "loading.rendered",
+    "memberof": "loading",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the loading template on the screen"
+  },
+  "rightMenu.events.click #accountSettings": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "rightMenu.events.click #accountSettings",
+    "memberof": "rightMenu.events.click ",
+    "name": "accountSettings",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Opens the user settings dashboard window."
+  },
+  "rightMenu.events.click #groupSettings": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "rightMenu.events.click #groupSettings",
+    "memberof": "rightMenu.events.click ",
+    "name": "groupSettings",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Opens the group settings dashboard window."
   }
 };
