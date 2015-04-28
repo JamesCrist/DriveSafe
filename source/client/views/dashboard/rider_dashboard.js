@@ -108,29 +108,16 @@ Template.riderDashboard.events({
     if(value.length > 0) {
       var pPlace = pickup_autocomplete.getPlace();
       userPickupLocation = pPlace.geometry.location;
-     userPickupAddress = pPlace.name + '\n'+ pPlace.formatted_address;
+     userPickupAddress = pPlace.name + " " + pPlace.formatted_address;
     }
     else {
       userPickupLocation = new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng());
-      var geocoder = new google.maps.Geocoder();
-      var latlng = new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLat());
-      geocoder.geocode({'latLng': latlng}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          if (results[1]) {
-            userPickupAddress = results[1].formatted_address;
-          } else {
-            alert('No results found');
-          }
-        } else {
-          alert('Geocoder failed due to: ' + status);
-        }
-      });
     }
     var value1 = $.trim($("#dest-input").val());
     if(value1.length > 0) {
       var dPlace = dest_autocomplete.getPlace();
       userDestLocation = dPlace.geometry.location;
-      userDestAddress = dPlace.name + dPlace.formatted_address;
+      userDestAddress = dPlace.name + " " + dPlace.formatted_address;
       var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
       console.log(ride);
       ride.save(function(err, res) {

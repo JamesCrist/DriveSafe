@@ -13,7 +13,7 @@ Template.driverDashboard.destroyed = function() {
 
 Template.driverDashboard.helpers({
   rideModel: function() {
-    return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.createdAt);
+    return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.pickupAdd, this.destAdd, this.createdAt);
   },
   getRideUser: function() {
     return Users.findOne(this.user).getName();
@@ -26,21 +26,13 @@ Template.driverDashboard.helpers({
   },
   firstRide: function(){
     return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
+  },
+  getPickupAddress: function(){
+    return this.pickupAdd;
+  },
+  getDestAddress: function(){
+    return this.destAdd;
   }
-  /*getPickupAddress: function(){
-    var latlng = new google.maps.LatLng(this.pickupLoc.k, this.pickupLoc.D);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          return results[1].formatted_address;
-        } else {
-          alert('No results found');
-        }
-      } else {
-        alert('Geocoder failed due to: ' + status);
-      }
-    });
-  }*/
 });
 
 

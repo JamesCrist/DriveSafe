@@ -60,9 +60,15 @@
                                     </div>
                                 </div>
                             {{/if}}
-                            <!--<div class="item">
-                                <h2>{{getPickupAddress}}</h2>
-                            </div> -->
+                            if(getPickupAddress){
+                                <div class="item">
+                                    <h3>{{getPickupAddress}}</h3>
+                                </div> 
+                                }
+                                <div class="item">
+                                <h3>{{getDestAddress}}</h3>
+                                </div>
+                            
                         </div>
                     {{/with}}
                 {{/each}}
