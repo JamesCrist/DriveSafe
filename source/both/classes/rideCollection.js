@@ -1,21 +1,24 @@
 // Create Ride MongoDB collection
-Rides = new Meteor.Collection("rides", {
-  transform: function(doc) {
-    return new Ride(doc._id, doc.user, doc.group, doc.pickupLoc, doc.destLoc, doc.createdAt);
+Rides = new Meteor.Collection("rides" , {
+  transform : function (doc) {
+    return new Ride(doc._id , doc.user , doc.group , doc.driver , doc.pending , doc.pickupLoc ,
+      doc.destLoc , doc.pickupAdd, doc.destAdd, doc.createdAt);
   }
 });
 
 // A Ride class that takes a document in its constructor
-Ride = function (id, user, group, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
+Ride = function (id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
   this._id = id;
-  if (!user) {
+  if(!user) {
     user = Meteor.userId();
   }
-  if (!group) {
+  if(!group) {
     group = Meteor.user().getGroup().id;
   }
   this._user = user;
   this._group = group;
+  this._driver = driver;
+  this._pending = pending;
   this._pickupLoc = pickupLoc;
   this._destLoc = destLoc;
   this._pickupAdd = pickupAdd;
@@ -27,38 +30,50 @@ Ride.prototype = {
   get id() {
     // readonly
     return this._id;
-  },
+  } ,
   get user() {
     // readonly
     return this._user;
-  },
+  } ,
   get group() {
     // readonly
     return this._group;
-  },
+  } ,
   get pickupLoc() {
     // readonly
     return this._pickupLoc;
-  },
+  } ,
   get destLoc() {
     return this._destLoc;
-  },
+  } ,
   get pickupAdd() {
     // readonly
-    return this._pickupLoc;
-  },
+    return this._pickupAdd;
+  } ,
   get destAdd() {
-    return this._destLoc;
-  },
+    return this._destAdd;
+  } ,
   get createdAt() {
     return this._createdAt;
-  },
+  } ,
+  get pending() {
+    return this._pending;
+  } ,
+  get driver() {
+    return this._driver;
+  } ,
   set pickupLoc(value) {
     this._pickupLoc = value;
-  },
+  } ,
   set destLoc(value) {
     this._destLoc = value;
-  },
+  } ,
+  set pending(value) {
+    this._pending = value;
+  } ,
+  set driver(value) {
+    this._driver = value;
+  } ,
   set pickupAdd(value) {
     this._pickupAdd = value;
   },
@@ -70,32 +85,36 @@ Ride.prototype = {
       throw new Meteor.Error("User is not defined!");
     }
 
-    if (Rides.findOne({user: this.user})) {
-      throw new Meteor.Error("User has already requested a ride!");
-    }
-
-    if (!this.pickupLoc) {
+    if(!this.pickupLoc) {
       throw new Meteor.Error("Pickup location is not defined!");
     }
 
-    if (!this.destLoc) {
+    if(!this.destLoc) {
       throw new Meteor.Error("Destination location is not defined!");
     }
 
     var doc = {
-      pickupLoc: this.pickupLoc,
-      destLoc: this.destLoc
+      pickupLoc : this.pickupLoc ,
+      destLoc : this.destLoc ,
+      destAdd : this.destAdd ,
+      pickupAdd: this.pickupAdd ,
+      pending : this.pending ,
+      driver : this.driver
     };
 
     // If this ride already exists, then modify it.
-    if (this.id) {
-      Rides.update(this.id, {$set: doc}, callback);
+    if(this.id) {
+      Rides.update(this.id , { $set : doc } , callback);
       // Else, create a new ride.
     } else {
       doc.user = this.user;
       doc.group = this.group;
       doc.createdAt = Date.now();
       console.log(doc.createdAt);
+
+      if(!this.pending) {
+        doc.pending = true;
+      }
 
       // remember the context, since in callback it's changed
       var that = this;
@@ -107,23 +126,40 @@ Ride.prototype = {
         }
       });
     }
-  },
-  delete: function(callback) {
-    Rides.remove(this.id, callback);
-  },
-  cancel: function(callback) {
-    if (!this.group) {
+  } ,
+  delete : function (callback) {
+    Rides.remove(this.id , callback);
+  } ,
+  cancel : function (callback) {
+    if(!this.group) {
       throw new Meteor.Error("group not defined!");
     }
-    var that  = this;
+    var that = this;
     console.log(Groups.findOne(this.group));
-    Groups.findOne(this.group).removeRideFromQueue(this.id, function(err, res) {
-      if (err) {
-        throw err;
-      }
+    if (this.pending) {
+      Groups.findOne(this.group).removeRideFromQueue(this.id , function (err , res) {
+        if(err) {
+          throw err;
+        }
+        that.delete(callback);
+      });
+    } else {
+      var driver = Drivers.findOne(this.driver);
+      driver.currentRide = null;
+      console.log(driver);
+      driver.save();
       that.delete(callback);
-    });
-
+    }
+  } ,
+  assignTo : function (driver) {
+    if(driver.currentRide) {
+      throw Meteor.Error("Ride cannot be assigned to driver who already has a ride!");
+    }
+    this.driver = driver.id;
+    this.pending = false;
+    this.save();
+    driver.currentRide = this.id;
+    driver.save();
   }
 };
 

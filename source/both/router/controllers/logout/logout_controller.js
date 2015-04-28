@@ -1,60 +1,59 @@
 this.LogoutController = RouteController.extend({
-	template: "Logout",
+  template : "Logout" ,
 
-	yieldTemplates: {
-		/*YIELD_TEMPLATES*/
-	},
+  yieldTemplates : {
+    /*YIELD_TEMPLATES*/
+  } ,
 
-	onBeforeAction: function() {
+  onBeforeAction : function () {
     IonPopup.confirm({
-      title: 'Are you sure?',
-      template: 'Do you <strong>really</strong> want to logout?',
-      onOk: function() {
-				// If user is a driver, then make him/her stop driving driving before logging out,
-				// else he/she may still get requests.
-				if (Meteor.user().profile.isDriver) {
-					Meteor.call("stopDriving", function(err) {
-						if (!err) {
-							Meteor.logout();
-						}
-					});
-				} else {
-					Meteor.logout();
-				}
-      },
-      onCancel: function() {
+      title : 'Are you sure?' ,
+      template : 'Do you <strong>really</strong> want to logout?' ,
+      onOk : function () {
+        // If user is a driver, then make him/her stop driving driving before logging out,
+        // else he/she may still get requests.
+        if(Meteor.user().profile.isDriver) {
+          Meteor.call("stopDriving" , function (err) {
+            if(!err) {
+              Meteor.logout();
+            }
+          });
+        } else {
+          Meteor.logout();
+        }
+      } ,
+      onCancel : function () {
         Router.go("/dashboard");
       }
     });
-	},
+  } ,
 
-	action: function() {
-		App.logout();
-		/*ACTION_FUNCTION*/
-	},
+  action : function () {
+    App.logout();
+    /*ACTION_FUNCTION*/
+  } ,
 
-	isReady: function() {
-		
+  isReady : function () {
 
-		var subs = [
-		];
-		var ready = true;
-		_.each(subs, function(sub) {
-			if(!sub.ready())
-				ready = false;
-		});
-		return ready;
-	},
 
-	data: function() {
-		
+    var subs = [];
+    var ready = true;
+    _.each(subs , function (sub) {
+      if(!sub.ready())
+        ready = false;
+    });
+    return ready;
+  } ,
 
-		return {
-			params: this.params || {}
-		};
-		/*DATA_FUNCTION*/
-	},
+  data : function () {
 
-	onAfterAction: function() {
-	}
+
+    return {
+      params : this.params || {}
+    };
+    /*DATA_FUNCTION*/
+  } ,
+
+  onAfterAction : function () {
+  }
 });

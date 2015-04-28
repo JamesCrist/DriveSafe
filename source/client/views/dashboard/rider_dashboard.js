@@ -137,25 +137,18 @@ Template.riderDashboard.events({
         if (err) {
           alert(err.message);
         } else {
-          Groups.findOne().addRideToQueue(ride, function(err, res) {
-            if (err) {
-              alert(err.message);
-            } else {
-              pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
-              destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
-              pickupMarker.setVisible(true);
-              destMarker.setVisible(true);
+          pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
+          destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
+          pickupMarker.setVisible(true);
+          destMarker.setVisible(true);
 
-              var bounds = new google.maps.LatLngBounds();
-              bounds.extend(pickupMarker.getPosition());
-              bounds.extend(destMarker.getPosition());
-              map.fitBounds(bounds);
-            }
-          });
+          var bounds = new google.maps.LatLngBounds();
+          bounds.extend(pickupMarker.getPosition());
+          bounds.extend(destMarker.getPosition());
+          map.fitBounds(bounds);
         }
       });
-    }
-    else {
+    } else {
       alert('Please input a drop off location to request a ride!');
     }
   }
