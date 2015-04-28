@@ -7,13 +7,22 @@ To run the app, you must first install Meteor: https://www.meteor.com/install
 
 ```
 git clone https://github.com/michael-han/DriveSafe.git
-cd DriveSafe
-meteor
+cd DriveSafe/source		# change folder to source code
+meteor					# install dependencies and run
 ```
 
 A demo of the current master build can be seen here: http://drivesafe.meteor.com
 
-To update the documentation, run ./update_document.py
-To show the documentation, go to docs folder, and run metoer meteor --port 3333
-Then it will show up in the http://localhost:3333/
+Are you a developer? Documentation for our source can be seen here: http://docs.drivesafe.meteor.com
 
+---
+
+To update and show the documentation, follow these instructions:
+
+```
+./update_document.py		# update documentation
+cd docs						# change to docs folder
+meteor --port 3333			# run jsdoc server on port 3333
+```
+
+The server for the documentation should be found at http://localhost:3333
