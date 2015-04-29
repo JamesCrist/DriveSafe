@@ -14,7 +14,7 @@ Template.Login.rendered = function () {
 };
 
 /**
- * @summary Sets an empty error message once a user is created.
+ * @summary Sets an empty error message once a user is logged in.
  * @locus Client
  * @method created
  * @memberOf Login

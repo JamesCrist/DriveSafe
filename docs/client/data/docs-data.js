@@ -570,7 +570,7 @@ DocsData = {
     "options": [],
     "params": [],
     "scope": "static",
-    "summary": "Sets an empty error message once a user is created."
+    "summary": "Sets an empty error message once a user is logged in."
   },
   "Login.events.submit #login_form": {
     "kind": "function",
@@ -975,6 +975,77 @@ DocsData = {
     ],
     "scope": "static",
     "summary": "This is a description of the updateUserAccount function."
+  },
+  "Register.created": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Register.created",
+    "memberof": "Register",
+    "name": "created",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Sets an empty error and success message once a user is created."
+  },
+  "Register.events.submit #register_form": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Register.events.submit #register_form",
+    "memberof": "Register.events.submit ",
+    "name": "register_form",
+    "options": [],
+    "params": [
+      {
+        "name": "e",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "t",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Checks to make sure that the login credentials are valid and then creates user."
+  },
+  "Register.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Register.helpers.errorMessage",
+    "memberof": "Register.helpers",
+    "name": "errorMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>successMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Fetches the current success message."
+  },
+  "Register.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Register.rendered",
+    "memberof": "Register",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the register screen."
   },
   "Ride": {
     "kind": "class",
