@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "33e77165f3337c0b80dd2c5e147243f6515e67dd"
+                  "value": "b61772f4bf47a33175b4c6a03edff8ed7cc619c5"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "6abdfdd45d22cf7e5e2ac64b241fa14f1291ad5a"
+                  "value": "cbba110619ba0370367f6270a66d36c16653129f"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7879,11 +7879,11 @@ var packageMetadata = {
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "906d4bd004047a34ef8465ceba2fdb8da3377dc7"
+          "value": "cb29d5ca5c44b26e9dfcb8342ad4e248758662c6"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "6abdfdd45d22cf7e5e2ac64b241fa14f1291ad5a"
+          "value": "cbba110619ba0370367f6270a66d36c16653129f"
         },
         "appId": {
           "type": "constant",
@@ -11264,15 +11264,15 @@ var packageMetadata = {
                 },
                 "appPath": {
                   "type": "constant",
-                  "value": "/home/silval/Google Drive/School Work/SDD(Private)/DriveSafe/source"
+                  "value": "/Users/weilu/sdd/DriveSafe/source"
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 27540
+                  "value": 9453
                 },
                 "fout": {
                   "type": "constant",
-                  "value": 28
+                  "value": 31
                 },
                 "child": {
                   "type": "object",
@@ -11291,7 +11291,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 27540
+                      "value": 9453
                     },
                     "stdin": {
                       "type": "null",
