@@ -444,6 +444,13 @@ Group.prototype = {
       callback.call(this, null, null);
     }
   },
+
+  /**
+   * @summary Remove all rides from group ride queue
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   removeAllFromQueue: function (callback) {
     if (this.queue.length === 0) {
       throw new Meteor.Error("Queue is already empty!");
