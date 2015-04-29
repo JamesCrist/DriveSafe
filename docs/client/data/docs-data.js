@@ -886,18 +886,249 @@ DocsData = {
     "options": [],
     "params": [],
     "scope": "static",
-    "summary": "Removes the driver dashboard template from the screen"
+    "summary": "Removes the driver dashboard template from the screen."
   },
-  "driverDashboard.helpers.rendered": {
+  "driverDashboard.events.click #confirm-dropoff-button": {
     "kind": "function",
     "locus": "Client",
-    "longname": "driverDashboard.helpers.rendered",
+    "longname": "driverDashboard.events.click #confirm-dropoff-button",
+    "memberof": "driverDashboard.events.click ",
+    "name": "confirm-dropoff-button",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Confirms that the Rider has been dropped off successfully."
+  },
+  "driverDashboard.events.click #dest-navigation-button": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.events.click #dest-navigation-button",
+    "memberof": "driverDashboard.events.click ",
+    "name": "dest-navigation-button",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Launches navigation to the navigation location."
+  },
+  "driverDashboard.events.click #pickup-navigation-button": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.events.click #pickup-navigation-button",
+    "memberof": "driverDashboard.events.click ",
+    "name": "pickup-navigation-button",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Launches navigation to the pickup location."
+  },
+  "driverDashboard.events.click .stopDriving": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.events.click .stopDriving",
+    "memberof": "driverDashboard.events.click ",
+    "name": "stopDriving",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Returns the first Ride in the queue."
+  },
+  "driverDashboard.events.click .tab-item": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.events.click .tab-item",
+    "memberof": "driverDashboard.events.click ",
+    "name": "tab-item",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "template",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Confirms when clicking on a menu item in the side tab."
+  },
+  "driverDashboard.helpers.firstRide": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.firstRide",
     "memberof": "driverDashboard.helpers",
-    "name": "rendered",
+    "name": "firstRide",
     "options": [],
     "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Ride"
+          ]
+        }
+      }
+    ],
     "scope": "static",
-    "summary": "Renders the driver dashboard template on the screen"
+    "summary": "Returns the first Ride in the queue."
+  },
+  "driverDashboard.helpers.getRideCreatedTime": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.getRideCreatedTime",
+    "memberof": "driverDashboard.helpers",
+    "name": "getRideCreatedTime",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>Moment.js object</p>",
+        "type": {
+          "names": [
+            "Moment"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Gets the time at which the ride was created."
+  },
+  "driverDashboard.helpers.getRideUser": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.getRideUser",
+    "memberof": "driverDashboard.helpers",
+    "name": "getRideUser",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Gets the name of the user that requested the ride.."
+  },
+  "driverDashboard.helpers.rideModel": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.rideModel",
+    "memberof": "driverDashboard.helpers",
+    "name": "rideModel",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Ride"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Creates a new Ride."
+  },
+  "driverDashboard.helpers.ridesAvailable": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "driverDashboard.helpers.ridesAvailable",
+    "memberof": "driverDashboard.helpers",
+    "name": "ridesAvailable",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>true or false</p>",
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Determines whether or not there are any rides in the current queue."
   },
   "driverDashboard.rendered": {
     "kind": "function",
@@ -908,7 +1139,7 @@ DocsData = {
     "options": [],
     "params": [],
     "scope": "static",
-    "summary": "Renders the driver dashboard template on the screen"
+    "summary": "Renders the driver dashboard template on the screen."
   },
   "isValidEmail": {
     "kind": "function",
