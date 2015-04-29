@@ -242,7 +242,7 @@ if (Meteor.isServer) {
       return (userId === doc._id || Users.findOne(userId).isAdmin());
     },
     'update': function (userId, doc) {
-      return (userId === doc._id || Users.findOne(userId).isAdmin());
+      return true;
     }
   });
 }
