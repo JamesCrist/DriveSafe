@@ -2,6 +2,13 @@ var pageSession = new ReactiveDict();
 
 pageSession.set("errorMessage" , "");
 
+/**
+ * @summary Renders the rider dashboard on the screen.
+ * @locus Client
+ * @method rendered
+ * @memberOf riderDashboard
+ * @function
+ * */
 Template.riderDashboard.rendered = function () {
   if (Meteor.isCordova) {
     GeolocationBG.start();
@@ -78,6 +85,13 @@ Template.riderDashboard.rendered = function () {
   );
 };
 
+/**
+ * @summary Removes the rider dashboard from the screen.
+ * @locus Client
+ * @method destroyed
+ * @memberOf riderDashboard
+ * @function
+ * */
 Template.riderDashboard.destroyed = function() {
   if (Meteor.isCordova) {
     GeolocationBG.stop();
@@ -85,15 +99,38 @@ Template.riderDashboard.destroyed = function() {
 };
 
 Template.riderDashboard.helpers({
+  /**
+   * @summary Returns the current error message.
+   * @locus Client
+   * @method errorMessage
+   * @memberOf riderDashboard.helpers
+   * @function
+   * @return {String} errorMessage
+   * */
   errorMessage : function () {
     return pageSession.get("errorMessage");
   },
+  /**
+   * @summary Determines whether or not there is a ride pending.
+   * @locus Client
+   * @method ridePending
+   * @memberOf riderDashboard.helpers
+   * @function
+   * @return {Ride}
+   * */
   ridePending : function() {
     return Rides.findOne({user: Meteor.userId()});
   }
 });
 
 Template.riderDashboard.events({
+  /**
+   * @summary Cancels the current ride.
+   * @locus Client
+   * @method click .cancelRide
+   * @memberOf riderDashboard.events
+   * @function
+   * */
   'click .cancelRide' :function () {
     Rides.findOne({user: Meteor.userId()}).cancel(function(err, res) {
       if (err) {
@@ -101,6 +138,13 @@ Template.riderDashboard.events({
       }
     });
   },
+  /**
+   * @summary Request a ride and send to an available driver.
+   * @locus Client
+   * @method click .requestRide
+   * @memberOf riderDashboard.events
+   * @function
+   * */
   'click .requestRide' : function () {
     //TODO CHECK IF LOCATIONS VALID
     var userPickupLocation , userDestLocation, userPickupAddress , userDestAddress;

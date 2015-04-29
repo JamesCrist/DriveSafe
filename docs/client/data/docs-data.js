@@ -249,6 +249,20 @@ DocsData = {
     "scope": "static",
     "summary": "Returns the array of members in the group."
   },
+  "Group.removeAllFromQueue": {
+    "kind": "function",
+    "longname": "Group.removeAllFromQueue",
+    "memberof": "Group",
+    "name": "removeAllFromQueue",
+    "options": [],
+    "params": [
+      {
+        "name": "callback"
+      }
+    ],
+    "scope": "static",
+    "summary": "Remove all rides from group ride queue"
+  },
   "Group.removeDriver": {
     "kind": "function",
     "longname": "Group.removeDriver",
@@ -698,6 +712,20 @@ DocsData = {
     ],
     "scope": "global",
     "summary": "Represents a ride."
+  },
+  "Ride.assignTo": {
+    "kind": "function",
+    "longname": "Ride.assignTo",
+    "memberof": "Ride",
+    "name": "assignTo",
+    "options": [],
+    "params": [
+      {
+        "name": "driver"
+      }
+    ],
+    "scope": "static",
+    "summary": "Assign a ride to a driver"
   },
   "Ride.cancel": {
     "kind": "function",
@@ -1306,48 +1334,79 @@ DocsData = {
     "scope": "static",
     "summary": "Renders the loading template on the screen"
   },
-  "request_modal.events.click #submit_button": {
+  "riderDashboard.destroyed": {
     "kind": "function",
     "locus": "Client",
-    "longname": "request_modal.events.click #submit_button",
-    "memberof": "request_modal.events.click ",
-    "name": "submit_button",
+    "longname": "riderDashboard.destroyed",
+    "memberof": "riderDashboard",
+    "name": "destroyed",
     "options": [],
     "params": [],
-    "scope": "instance",
-    "summary": "Submits the ride request to the relevant driver.."
+    "scope": "static",
+    "summary": "Removes the rider dashboard from the screen."
   },
-  "request_modal.helpers.driversAvailable": {
+  "riderDashboard.events.click .cancelRide": {
     "kind": "function",
     "locus": "Client",
-    "longname": "request_modal.helpers.driversAvailable",
-    "memberof": "request_modal.helpers",
-    "name": "driversAvailable",
+    "longname": "riderDashboard.events.click .cancelRide",
+    "memberof": "riderDashboard.events.click ",
+    "name": "cancelRide",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Cancels the current ride."
+  },
+  "riderDashboard.events.click .requestRide": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.events.click .requestRide",
+    "memberof": "riderDashboard.events.click ",
+    "name": "requestRide",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Request a ride and send to an available driver."
+  },
+  "riderDashboard.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.helpers.errorMessage",
+    "memberof": "riderDashboard.helpers",
+    "name": "errorMessage",
     "options": [],
     "params": [],
     "returns": [
       {
-        "description": "<p>number of drivers</p>",
+        "description": "<p>errorMessage</p>",
         "type": {
           "names": [
-            "Integer"
+            "String"
           ]
         }
       }
     ],
     "scope": "static",
-    "summary": "Checks if there are any drivers available."
+    "summary": "Returns the current error message."
   },
-  "request_modal.rendered": {
+  "riderDashboard.helpers.ridePending": {
     "kind": "function",
     "locus": "Client",
-    "longname": "request_modal.rendered",
-    "memberof": "request_modal",
-    "name": "rendered",
+    "longname": "riderDashboard.helpers.ridePending",
+    "memberof": "riderDashboard.helpers",
+    "name": "ridePending",
     "options": [],
     "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Ride"
+          ]
+        }
+      }
+    ],
     "scope": "static",
-    "summary": "Renders the screen after a user requests a ride."
+    "summary": "Determines whether or not there is a ride pending."
   },
   "riderDashboard.rendered": {
     "kind": "function",
@@ -1358,7 +1417,7 @@ DocsData = {
     "options": [],
     "params": [],
     "scope": "static",
-    "summary": "Launches navigation to the pickup location."
+    "summary": "Renders the rider dashboard on the screen."
   },
   "rightMenu.events.click #accountSettings": {
     "kind": "function",
