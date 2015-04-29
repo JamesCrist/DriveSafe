@@ -6,12 +6,14 @@ describe("Group" , function () {
       callback(null , "1");
     });
 
-    var group = new Group(null , "Group 1" , "1" , null , null);
+    var group = new Group(null , "Group 1" , "1" , null , null, null, "12345");
 
     expect(group.name).toBe("Group 1");
     expect(group.admin).toBe("1");
     expect(group.members).toEqual([ "1" ]);
     expect(group.drivers).toEqual([]);
+    expect(group.queue).toEqual([]);
+    expect(group.key).toBe("12345");
 
     group.save();
 
@@ -22,7 +24,9 @@ describe("Group" , function () {
       name : "Group 1" ,
       admin : "1" ,
       members : [ "1" ] ,
-      drivers : []
+      drivers : [] ,
+      queue: [] ,
+      key: "12345"
     } , jasmine.any(Function));
   });
 });
