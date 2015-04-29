@@ -1,64 +1,3 @@
-/**
- * @summary Findee the documents in a collection that match the selector.
- * @locus Anywhere
- * @method findaa
- * @memberOf Mongo.Collectionaa
- * @instance
- * @param {MongoSelector} [selector] A query describing the documents to find
- * @param {Object} [options]
- * @param {MongoSortSpecifier} options.sort Sort order (default: natural order)
- * @param {Number} options.skip Number of results to skip at the beginning
- * @param {Number} options.limit Maximum number of results to return
- * @param {MongoFieldSpecifier} options.fields Dictionary of fields to return or exclude.
- * @param {Boolean} options.reactive (Client only) Default `true`; pass `false` to disable reactivity
- * @param {Function} options.transform Overrides `transform` on the  [`Collection`](#collections) for this cursor.  Pass `null` to disable transformation.
- * @returns {Mongo.Cursor}
- */
-
-/**
- * @summary This is a description of the createUserAccount function.
- * @locus Server
- * @method createUserAccount
- * @memberOf Meteor.methods
- * @instance
- * @param {Object} options
- * @param {String} options.username
- * @param {String} options.email
- * @param {String} options.password
- * @param {String} options.profile
- * @returns {userOptions}
- */
-
-/**
- * @summary This is a description of the updateUserAccount function.
- * @locus Server
- * @method updateUserAccount
- * @memberOf Meteor.methods
- * @instance
- * @param {Object} options
- * @param {String} options.username
- * @param {String} options.email
- * @param {String} options.password
- * @param {String} options.profile
- * @param {String} options.roles
- * @returns {none}
- */
-
-/**
- * @summary This is a description of the sendMail function.
- * @locus Server
- * @method sendMail
- * @memberOf Meteor.methods
- * @instance
- * @param {Object} options
- * @param {String} options.username
- * @param {String} options.email
- * @param {String} options.password
- * @param {String} options.profile
- * @param {String} options.roles
- * @returns {none}
- */
-
 Meteor.startup(function () {
   Rides.find().observeChanges({
     added : function (id , fields) {
@@ -100,6 +39,18 @@ Meteor.startup(function () {
 
 
 Meteor.methods({
+  /**
+   * @summary Creates a new user account in the database.
+   * @locus Server
+   * @method createUserAccount
+   * @memberOf Meteor.methods
+   * @function
+   * @param {Object} options
+   * @param {String} options.username
+   * @param {String} options.email
+   * @param {String} options.password
+   * @param {String} options.profile
+   */
   "createUserAccount" : function (options) {
 
     var userOptions = {};
@@ -112,6 +63,20 @@ Meteor.methods({
 
     Accounts.createUser(userOptions);
   } ,
+
+  /**
+   * @summary Updates the desired user account with the options provided.
+   * @locus Server
+   * @method updateUserAccount
+   * @memberOf Meteor.methods
+   * @function
+   * @param {Object} options
+   * @param {String} options.username
+   * @param {String} options.email
+   * @param {String} options.password
+   * @param {String} options.profile
+   * @param {String} options.roles
+   */
   "updateUserAccount" : function (userId , options) {
     var userOptions = {};
     if(options.username) userOptions.username = options.username;
@@ -143,6 +108,19 @@ Meteor.methods({
     }
   } ,
 
+  /**
+   * @summary Sends an email using the provided options.
+   * @locus Server
+   * @method sendMail
+   * @memberOf Meteor.methods
+   * @function
+   * @param {Object} options
+   * @param {String} options.username
+   * @param {String} options.email
+   * @param {String} options.password
+   * @param {String} options.profile
+   * @param {String} options.roles
+   */
   "sendMail" : function (options) {
     this.unblock();
 
