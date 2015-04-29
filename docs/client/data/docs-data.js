@@ -561,6 +561,77 @@ DocsData = {
       ]
     }
   },
+  "Login.created": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Login.created",
+    "memberof": "Login",
+    "name": "created",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Sets an empty error message once a user is created."
+  },
+  "Login.events.submit #login_form": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Login.events.submit #login_form",
+    "memberof": "Login.events.submit ",
+    "name": "login_form",
+    "options": [],
+    "params": [
+      {
+        "name": "e",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "t",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Checks to make sure that the login credentials are correct and then logs in user."
+  },
+  "Login.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Login.helpers.errorMessage",
+    "memberof": "Login.helpers",
+    "name": "errorMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>errorMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Fetches the current error message."
+  },
+  "Login.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "Login.rendered",
+    "memberof": "Login",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the login screen."
+  },
   "Meteor.methods.changeAdmin": {
     "kind": "function",
     "locus": "Server",
