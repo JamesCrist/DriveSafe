@@ -345,7 +345,7 @@ Group.prototype = {
         callback.call(this , error , null);
       return;
     }
-    if(newKey.length <= 6) {
+    if(newKey.length < 6) {
       var error = new Meteor.Error("New key must be at least 6 characters");
       if (callback)
         callback.call(this , error , null);

@@ -258,5 +258,19 @@ describe("Group" , function () {
         expect(group.queue).toEqual([]);
       });
     });
+
+    describe("editing the group key", function() {
+
+      it("should be able to change the group key", function() {
+        expect(group.key).toBe("12345");
+
+        group.changeKey("123456", function(err, res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+
+        expect(group.key).toBe("123456");
+      });
+    });
   });
 });
