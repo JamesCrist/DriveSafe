@@ -1,7 +1,7 @@
 var pageSession = new ReactiveDict();
 
-pageSession.set("errorMessage" , "");
-pageSession.set("successMessage" , "");
+pageSession.set("errorMessage", "");
+pageSession.set("successMessage", "");
 
 Template.Register.rendered = function () {
 
@@ -9,12 +9,12 @@ Template.Register.rendered = function () {
 };
 
 Template.Register.created = function () {
-  pageSession.set("errorMessage" , "");
-  pageSession.set("successMessage" , "");
+  pageSession.set("errorMessage", "");
+  pageSession.set("successMessage", "");
 };
 
 Template.Register.events({
-  'submit #register_form' : function (e , t) {
+  'submit #register_form': function (e, t) {
     e.preventDefault();
 
     var submit_button = $(t.find(":submit"));
@@ -23,27 +23,27 @@ Template.Register.events({
     var register_email = t.find('#register_email').value.trim();
 
     // check name
-    if(register_name === "") {
-      pageSession.set("errorMessage" , "Please enter your name.");
+    if (register_name === "") {
+      pageSession.set("errorMessage", "Please enter your name.");
       t.find('#register_name').focus();
       return false;
     }
 
     // check email
-    if(!isValidEmail(register_email)) {
-      pageSession.set("errorMessage" , "Please enter valid e-mail address.");
+    if (!isValidEmail(register_email)) {
+      pageSession.set("errorMessage", "Please enter valid e-mail address.");
       t.find('#register_email').focus();
       return false;
     }
 
     submit_button.button("loading");
-    Meteor.call("createNewUser" , register_email , register_name , function (err , password) {
+    Meteor.call("createNewUser", register_email, register_name, function (err, password) {
       submit_button.button("reset");
-      if(err) {
-        pageSession.set("errorMessage" , err.message);
+      if (err) {
+        pageSession.set("errorMessage", err.message);
       } else {
-        pageSession.set("errorMessage" , "");
-        pageSession.set("successMessage" , "Success! Please check your email for your password");
+        pageSession.set("errorMessage", "");
+        pageSession.set("successMessage", "Success! Please check your email for your password");
         // FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION
         alert("Your password is: " + password + "\n**FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION");
       }
@@ -54,10 +54,10 @@ Template.Register.events({
 });
 
 Template.Register.helpers({
-  errorMessage : function () {
+  errorMessage: function () {
     return pageSession.get("errorMessage");
-  } ,
-  successMessage : function () {
+  },
+  successMessage: function () {
     return pageSession.get("successMessage");
   }
 
