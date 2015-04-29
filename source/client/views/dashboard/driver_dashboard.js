@@ -25,23 +25,18 @@ Template.driverDashboard.helpers({
   ridesAvailable : function () {
     return this.rides.count() > 0;
   } ,
-  firstRide : function () {
-    return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
+  currentRide : function () {
+    return !(this.pending);
+  },
+  getPickupAddress: function(){
+    return this.pickupAdd;
+  },
+  isPickupAddress: function(){
+    return (this.pickupAdd === undefined);
+  },
+  getDestAddress: function(){
+    return this.destAdd;
   }
-  /*getPickupAddress: function(){
-   var latlng = new google.maps.LatLng(this.pickupLoc.k, this.pickupLoc.D);
-   geocoder.geocode({'latLng': latlng}, function(results, status) {
-   if (status == google.maps.GeocoderStatus.OK) {
-   if (results[1]) {
-   return results[1].formatted_address;
-   } else {
-   alert('No results found');
-   }
-   } else {
-   alert('Geocoder failed due to: ' + status);
-   }
-   });
-   }*/
 });
 
 

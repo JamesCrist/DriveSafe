@@ -35,8 +35,15 @@
                         <div class="list card">
                             <div class="item">
                                 <h2>{{getRideUser}}</h2>
+                                <h4>Pickup</h4>
+                                {{#if isPickupAddress}}
+                                <h4>Their Current Location</h4>
+                                {{/if}}
+                                <h4>{{getPickupAddress}}</h4>
+                                <h4>Destination</h4>
+                                <h4>{{getDestAddress}}</h4>
                             </div>
-                            {{#if firstRide}}
+                            {{#if currentRide}}
                                 <div class="item item-body">
                                         <button class="button button-outline button-positive navigation-button" id="pickup-navigation-button">
                                             Take Me To Pickup Location
@@ -61,9 +68,6 @@
                                     </div>
                                 </div>
                             {{/if}}
-                            <!--<div class="item">
-                                <h2>{{getPickupAddress}}</h2>
-                            </div> -->
                         </div>
                     {{/with}}
                 {{/each}}
