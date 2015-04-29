@@ -80,18 +80,19 @@ Template.driverDashboard.helpers({
   },
   getDestAddress: function () {
     return this.destAdd;
-    /**
-     * @summary Returns the first Ride in the queue.
-     * @locus Client
-     * @method firstRide
-     * @memberOf driverDashboard.helpers
-     * @function
-     * @return {Ride}
-     * */
-    firstRide: function () {
-      return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
-    }
-  });
+  },
+  /**
+   * @summary Returns the first Ride in the queue.
+   * @locus Client
+   * @method firstRide
+   * @memberOf driverDashboard.helpers
+   * @function
+   * @return {Ride}
+   * */
+  firstRide: function () {
+    return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
+  }
+});
 
 
 Template.driverDashboard.events({

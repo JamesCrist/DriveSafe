@@ -406,8 +406,6 @@ Group.prototype = {
    */
   changeKey: function (newKey, callback) {
     if (!newKey) {
-    >>>>>>>
-      comment
       var error = new Meteor.Error("New key is not defined!");
       callback.call(this, error, null);
       return;
