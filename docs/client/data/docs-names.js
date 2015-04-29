@@ -60,6 +60,10 @@ DocsNames = [
   "leftMenu.events.click #logoutButton",
   "loading.destroyed",
   "loading.rendered",
+  "request_modal.events.click #submit_button",
+  "request_modal.helpers.driversAvailable",
+  "request_modal.rendered",
+  "riderDashboard.rendered",
   "rightMenu.events.click #accountSettings",
   "rightMenu.events.click #groupSettings"
 ];

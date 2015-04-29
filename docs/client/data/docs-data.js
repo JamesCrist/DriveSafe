@@ -1306,6 +1306,60 @@ DocsData = {
     "scope": "static",
     "summary": "Renders the loading template on the screen"
   },
+  "request_modal.events.click #submit_button": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "request_modal.events.click #submit_button",
+    "memberof": "request_modal.events.click ",
+    "name": "submit_button",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Submits the ride request to the relevant driver.."
+  },
+  "request_modal.helpers.driversAvailable": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "request_modal.helpers.driversAvailable",
+    "memberof": "request_modal.helpers",
+    "name": "driversAvailable",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>number of drivers</p>",
+        "type": {
+          "names": [
+            "Integer"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Checks if there are any drivers available."
+  },
+  "request_modal.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "request_modal.rendered",
+    "memberof": "request_modal",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the screen after a user requests a ride."
+  },
+  "riderDashboard.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.rendered",
+    "memberof": "riderDashboard",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Launches navigation to the pickup location."
+  },
   "rightMenu.events.click #accountSettings": {
     "kind": "function",
     "locus": "Client",
