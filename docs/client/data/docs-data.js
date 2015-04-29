@@ -65,6 +65,91 @@ DocsData = {
     "scope": "static",
     "summary": "Revoke a user's driver status if they are not currently giving a ride."
   },
+  "DriverDashboardController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "DriverDashboardController",
+    "name": "DriverDashboardController",
+    "scope": "global",
+    "summary": "The controller for the Driver Dashboard."
+  },
+  "DriverDashboardController.action": {
+    "kind": "function",
+    "longname": "DriverDashboardController.action",
+    "memberof": "DriverDashboardController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders page when ready."
+  },
+  "DriverDashboardController.data": {
+    "kind": "function",
+    "longname": "DriverDashboardController.data",
+    "memberof": "DriverDashboardController",
+    "name": "data",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Passes ride and driver information from the group."
+  },
+  "DriverDashboardController.isReady": {
+    "kind": "function",
+    "longname": "DriverDashboardController.isReady",
+    "memberof": "DriverDashboardController",
+    "name": "isReady",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Boolean"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Checks that geolocation is not empty before rendering."
+  },
+  "DriverDashboardController.onBeforeAction": {
+    "kind": "function",
+    "longname": "DriverDashboardController.onBeforeAction",
+    "memberof": "DriverDashboardController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
+  },
+  "DriverDashboardController.waitOn": {
+    "kind": "function",
+    "longname": "DriverDashboardController.waitOn",
+    "memberof": "DriverDashboardController",
+    "name": "waitOn",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Array"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Waits for ride and driver information from the group."
+  },
   "Drivers": {
     "kind": "member",
     "locus": "Anywhere",
@@ -186,6 +271,34 @@ DocsData = {
     "params": [],
     "scope": "static",
     "summary": "Displays the forgot password dialog on the screen."
+  },
+  "ForgotPasswordController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "ForgotPasswordController",
+    "name": "ForgotPasswordController",
+    "scope": "global",
+    "summary": "The controller for the Forgot Password interface."
+  },
+  "ForgotPasswordController.action": {
+    "kind": "function",
+    "longname": "ForgotPasswordController.action",
+    "memberof": "ForgotPasswordController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render page."
+  },
+  "ForgotPasswordController.onBeforeAction": {
+    "kind": "function",
+    "longname": "ForgotPasswordController.onBeforeAction",
+    "memberof": "ForgotPasswordController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
   },
   "Group": {
     "kind": "class",
@@ -548,6 +661,72 @@ DocsData = {
     "scope": "static",
     "summary": "Gets the current group."
   },
+  "GroupSettingsController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "GroupSettingsController",
+    "name": "GroupSettingsController",
+    "scope": "global",
+    "summary": "The controller for the Group Settings page."
+  },
+  "GroupSettingsController.action": {
+    "kind": "function",
+    "longname": "GroupSettingsController.action",
+    "memberof": "GroupSettingsController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render page."
+  },
+  "GroupSettingsController.data": {
+    "kind": "function",
+    "longname": "GroupSettingsController.data",
+    "memberof": "GroupSettingsController",
+    "name": "data",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "*"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Returns group information."
+  },
+  "GroupSettingsController.onBeforeAction": {
+    "kind": "function",
+    "longname": "GroupSettingsController.onBeforeAction",
+    "memberof": "GroupSettingsController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
+  },
+  "GroupSettingsController.waitOn": {
+    "kind": "function",
+    "longname": "GroupSettingsController.waitOn",
+    "memberof": "GroupSettingsController",
+    "name": "waitOn",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "any"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Waits for group information."
+  },
   "Groups": {
     "kind": "member",
     "locus": "Anywhere",
@@ -631,6 +810,62 @@ DocsData = {
     "params": [],
     "scope": "static",
     "summary": "Renders the login screen."
+  },
+  "LoginController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "LoginController",
+    "name": "LoginController",
+    "scope": "global",
+    "summary": "Controller for the Login screen."
+  },
+  "LoginController.action": {
+    "kind": "function",
+    "longname": "LoginController.action",
+    "memberof": "LoginController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render page when ready."
+  },
+  "LoginController.onBeforeAction": {
+    "kind": "function",
+    "longname": "LoginController.onBeforeAction",
+    "memberof": "LoginController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
+  },
+  "LogoutController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "LogoutController",
+    "name": "LogoutController",
+    "scope": "global",
+    "summary": "Controller for the logout view."
+  },
+  "LogoutController.action": {
+    "kind": "function",
+    "longname": "LogoutController.action",
+    "memberof": "LogoutController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "The user logs out."
+  },
+  "LogoutController.onBeforeAction": {
+    "kind": "function",
+    "longname": "LogoutController.onBeforeAction",
+    "memberof": "LogoutController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Checks that the user does want to logout, also checks if they are a driver."
   },
   "Meteor.methods.changeAdmin": {
     "kind": "function",
@@ -1003,6 +1238,34 @@ DocsData = {
     "scope": "static",
     "summary": "Renders the register screen."
   },
+  "RegisterController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "RegisterController",
+    "name": "RegisterController",
+    "scope": "global",
+    "summary": "Controller for register view."
+  },
+  "RegisterController.action": {
+    "kind": "function",
+    "longname": "RegisterController.action",
+    "memberof": "RegisterController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render the page."
+  },
+  "RegisterController.onBeforeAction": {
+    "kind": "function",
+    "longname": "RegisterController.onBeforeAction",
+    "memberof": "RegisterController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
+  },
   "ResetPassword.events.submit #reset_password_form": {
     "kind": "function",
     "locus": "Client",
@@ -1034,6 +1297,34 @@ DocsData = {
     ],
     "scope": "static",
     "summary": "Fetches the current error message."
+  },
+  "ResetPasswordController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "ResetPasswordController",
+    "name": "ResetPasswordController",
+    "scope": "global",
+    "summary": "Controller for the Reset Password view"
+  },
+  "ResetPasswordController.action": {
+    "kind": "function",
+    "longname": "ResetPasswordController.action",
+    "memberof": "ResetPasswordController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render the page."
+  },
+  "ResetPasswordController.onBeforeAction": {
+    "kind": "function",
+    "longname": "ResetPasswordController.onBeforeAction",
+    "memberof": "ResetPasswordController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
   },
   "Ride": {
     "kind": "class",
@@ -1118,6 +1409,91 @@ DocsData = {
     ],
     "scope": "static",
     "summary": "Saving functionality for the ride instance."
+  },
+  "RiderDashboardController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "RiderDashboardController",
+    "name": "RiderDashboardController",
+    "scope": "global",
+    "summary": "Controller for Rider Dashboard view."
+  },
+  "RiderDashboardController.action": {
+    "kind": "function",
+    "longname": "RiderDashboardController.action",
+    "memberof": "RiderDashboardController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render the page when ready."
+  },
+  "RiderDashboardController.data": {
+    "kind": "function",
+    "longname": "RiderDashboardController.data",
+    "memberof": "RiderDashboardController",
+    "name": "data",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Return group and user data."
+  },
+  "RiderDashboardController.isReady": {
+    "kind": "function",
+    "longname": "RiderDashboardController.isReady",
+    "memberof": "RiderDashboardController",
+    "name": "isReady",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "boolean"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Check if the geolocation is null."
+  },
+  "RiderDashboardController.onBeforeAction": {
+    "kind": "function",
+    "longname": "RiderDashboardController.onBeforeAction",
+    "memberof": "RiderDashboardController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
+  },
+  "RiderDashboardController.waitOn": {
+    "kind": "function",
+    "longname": "RiderDashboardController.waitOn",
+    "memberof": "RiderDashboardController",
+    "name": "waitOn",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "any"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Wait for group and user data to arrive."
   },
   "Rides": {
     "kind": "member",
@@ -1329,6 +1705,34 @@ DocsData = {
     "params": [],
     "scope": "static",
     "summary": "Renders the change password screen."
+  },
+  "UserSettingsController": {
+    "kind": "member",
+    "locus": "Client",
+    "longname": "UserSettingsController",
+    "name": "UserSettingsController",
+    "scope": "global",
+    "summary": "Controller for the User Settings view."
+  },
+  "UserSettingsController.action": {
+    "kind": "function",
+    "longname": "UserSettingsController.action",
+    "memberof": "UserSettingsController",
+    "name": "action",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Render the page."
+  },
+  "UserSettingsController.onBeforeAction": {
+    "kind": "function",
+    "longname": "UserSettingsController.onBeforeAction",
+    "memberof": "UserSettingsController",
+    "name": "onBeforeAction",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Go on to action."
   },
   "driverDashboard.destroyed": {
     "kind": "function",

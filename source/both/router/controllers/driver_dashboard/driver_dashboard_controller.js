@@ -35,17 +35,17 @@ this.DriverDashboardController = RouteController.extend({
    * @summary Checks that geolocation is not empty before rendering.
    * @function
    * @memberOf DriverDashboardController
-   * @returns {boolean}
+   * @returns {Boolean}
    */
   isReady : function () {
-    return Geolocation.latLng() != null;
+    return Geolocation.latLng() !== null;
   } ,
 
   /**
    * @summary Waits for ride and driver information from the group.
    * @function
    * @memberOf DriverDashboardController
-   * @returns {*[]}
+   * @returns {Array}
    */
   waitOn : function () {
     return [ Meteor.subscribe("rides") , Meteor.subscribe("drivers") ];
