@@ -1,11 +1,6 @@
-Template.notFound.rendered = function() {
-	
+Template.notFound.rendered = function () {
 };
 
-Template.notFound.events({
+Template.notFound.events({});
 
-});
-
-Template.notFound.helpers({
-
-});
+Template.notFound.helpers({});

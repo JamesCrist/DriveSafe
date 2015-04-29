@@ -5,7 +5,7 @@
  * @memberOf loading
  * @function
  * */
-Template.loading.rendered = function() {
+Template.loading.rendered = function () {
   IonLoading.show({
     backdrop: false
   });
@@ -18,6 +18,6 @@ Template.loading.rendered = function() {
  * @memberOf loading
  * @function
  */
-Template.loading.destroyed = function() {
+Template.loading.destroyed = function () {
   IonLoading.hide();
 };

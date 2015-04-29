@@ -44,7 +44,8 @@ Meteor.methods({
         location: {lat: 0, lng: 0},
         group: null,
         isAdmin: false,
-        isDriver: false
+        isDriver: false,
+        driverId: null
       }
     });
     // Send the user an email with the password.

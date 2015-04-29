@@ -9,7 +9,7 @@
  * @param {String} options.idGeneration The method of generating the `_id` fields of new documents in this collection.  Possible values:
  - **`'STRING'`**: random strings
  - **`'MONGO'`**:  random [`Mongo.ObjectID`](#mongo_object_id) values
-The default id generation technique is `'STRING'`.
+ The default id generation technique is `'STRING'`.
  * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.
  */
 
@@ -18,12 +18,11 @@ The default id generation technique is `'STRING'`.
  * @locus Anywhere
  * @type {Meteor.Collection}
  */
-Drivers = new Meteor.Collection("drivers" , {
-  transform : function (doc) {
-    return new Driver(doc._id , doc.group , doc.user , doc.currentRide);
+Drivers = new Meteor.Collection("drivers", {
+  transform: function (doc) {
+    return new Driver(doc._id, doc.group, doc.user, doc.currentRide);
   }
 });
-
 
 /**
  * @summary Represents a driver.
@@ -35,12 +34,12 @@ Drivers = new Meteor.Collection("drivers" , {
  * @constructor
  */
 // A Driver class that takes a document in its constructor
-Driver = function (id , group , user , currentRide) {
+Driver = function (id, group, user, currentRide) {
   this._id = id;
-  if(!user) {
+  if (!user) {
     user = Meteor.userId();
   }
-  if(!group && Meteor.user()) {
+  if (!group && Meteor.user()) {
     group = Meteor.user().profile.group;
   }
   this._group = group;
@@ -56,20 +55,20 @@ Driver.prototype = {
   get id() {
     // readonly
     return this._id;
-  } ,
+  },
   get user() {
     // readonly
     return this._user;
-  } ,
+  },
   get group() {
     return this._group;
-  } ,
+  },
   get currentRide() {
     return this._currentRide;
-  } ,
+  },
   set currentRide(value) {
     this._currentRide = value;
-  } ,
+  },
 
   /**
    * @summary Saving functionality for the driver instance
@@ -77,22 +76,22 @@ Driver.prototype = {
    * @function
    * @memberOf Driver
    */
-  save : function (callback) {
-    if(!this.user) {
+  save: function (callback) {
+    if (!this.user) {
       throw new Meteor.Error("Driver must be attached to a user!");
     }
 
-    if(!this.group) {
+    if (!this.group) {
       throw new Meteor.Error("Driver must be attached to a group!");
     }
 
     var doc = {
-      currentRide : this.currentRide
+      currentRide: this.currentRide
     };
 
     // If this group already exists, then modify it.
-    if(this.id) {
-      Drivers.update(this.id , { $set : doc } , callback);
+    if (this.id) {
+      Drivers.update(this.id, {$set: doc}, callback);
       // Else, create a new group.
     } else {
       doc.user = this.user;
@@ -101,15 +100,15 @@ Driver.prototype = {
       // remember the context, since in callback it's changed
       var that = this;
 
-      Drivers.insert(doc , function (error , result) {
+      Drivers.insert(doc, function (error, result) {
         that._id = result;
 
-        if(callback != null) {
-          callback.call(that , error , result);
+        if (callback != null) {
+          callback.call(that, error, result);
         }
       });
     }
-  } ,
+  },
 
   /**
    * @summary Delete functionality for the driver instance
@@ -117,18 +116,18 @@ Driver.prototype = {
    * @function
    * @memberOf Driver
    */
-  delete : function (callback) {
+  delete: function (callback) {
     // Only the user that this driver represents or admins can delete drivers.
-    if(this.user != Meteor.userId() && !Meteor.user().isAdmin()) {
+    if (this.user != Meteor.userId() && !Meteor.user().isAdmin()) {
       throw new Meteor.Error("Access Denied!");
     }
 
-    if(this.currentRide) {
+    if (this.currentRide) {
       throw new Meteor.Error("Driver is currently giving a ride!");
     }
 
-    Drivers.remove(this.id , callback);
-  } ,
+    Drivers.remove(this.id, callback);
+  },
 
   /**
    * @summary Revoke a user's driver status if they are not currently giving a ride.
@@ -136,31 +135,31 @@ Driver.prototype = {
    * @function
    * @memberOf Driver
    */
-  stopDriving : function (callback) {
-    if(this.currentRide) {
+  stopDriving: function (callback) {
+    if (this.currentRide) {
       throw new Meteor.Error("Cannot stop driving while ride is in progress!");
     }
     var that = this;
-    Users.findOne(this.user).stopDriving(function (err , res) {
-      if(!err) {
+    Users.findOne(this.user).stopDriving(function (err, res) {
+      if (!err) {
         that.delete(callback);
       } else {
-        callback.call(that , err , res);
+        callback.call(that, err, res);
       }
     });
   }
 };
 
-if(Meteor.isServer) {
+if (Meteor.isServer) {
 
   Drivers.allow({
-    'insert' : function (userId , doc) {
+    'insert': function (userId, doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
-    } ,
-    'update' : function (userId , doc) {
-      return (userId === doc.user || Users.findOne(userId).isAdmin());
-    } ,
-    'remove' : function (userId , doc) {
+    },
+    'update': function (userId, doc) {
+      return true;
+    },
+    'remove': function (userId, doc) {
       return (userId === doc.user || Users.findOne(userId).isAdmin());
     }
   });

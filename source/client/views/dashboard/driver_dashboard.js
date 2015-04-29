@@ -5,7 +5,7 @@
  * @memberOf driverDashboard
  * @function
  * */
-Template.driverDashboard.rendered = function() {
+Template.driverDashboard.rendered = function () {
   if (Meteor.isCordova) {
     GeolocationBG.start();
   }
@@ -17,12 +17,11 @@ Template.driverDashboard.rendered = function() {
  * @memberOf driverDashboard
  * @function
  * */
-Template.driverDashboard.destroyed = function() {
+Template.driverDashboard.destroyed = function () {
   if (Meteor.isCordova) {
     GeolocationBG.stop();
   }
 };
-
 
 Template.driverDashboard.helpers({
   /**
@@ -33,8 +32,9 @@ Template.driverDashboard.helpers({
    * @function
    * @return {Ride}
    * */
-  rideModel: function() {
-    return new Ride(this.id, this.user, this.group, this.pickupLoc, this.destLoc, this.createdAt);
+  rideModel: function () {
+    return new Ride(this.id, this.user, this.group, this.driver, this.pending, this.pickupLoc, this.destLoc,
+      this.pickupAdd, this.destAdd, this.createdAt);
   },
   /**
    * @summary Gets the name of the user that requested the ride..
@@ -44,7 +44,7 @@ Template.driverDashboard.helpers({
    * @return {String}
    * @function
    * */
-  getRideUser: function() {
+  getRideUser: function () {
     return Users.findOne(this.user).getName();
   },
   /**
@@ -55,7 +55,7 @@ Template.driverDashboard.helpers({
    * @function
    * @return {Moment} Moment.js object
    * */
-  getRideCreatedTime: function() {
+  getRideCreatedTime: function () {
     return moment(this.createdAt).fromNow();
   },
   /**
@@ -66,73 +66,70 @@ Template.driverDashboard.helpers({
    * @function
    * @return {Boolean} true or false
    * */
-  ridesAvailable: function() {
+  ridesAvailable: function () {
     return this.rides.count() > 0;
   },
-  /**
-   * @summary Returns the first Ride in the queue.
-   * @locus Client
-   * @method firstRide
-   * @memberOf driverDashboard.helpers
-   * @function
-   * @return {Ride}
-   * */
-  firstRide: function(){
-    return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
-  }
-  /*getPickupAddress: function(){
-    var latlng = new google.maps.LatLng(this.pickupLoc.k, this.pickupLoc.D);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          return results[1].formatted_address;
-        } else {
-          alert('No results found');
-        }
-      } else {
-        alert('Geocoder failed due to: ' + status);
-      }
-    });
-  }*/
-});
+  currentRide: function () {
+    return !(this.pending);
+  },
+  getPickupAddress: function () {
+    return this.pickupAdd;
+  },
+  isPickupAddress: function () {
+    return (this.pickupAdd === undefined);
+  },
+  getDestAddress: function () {
+    return this.destAdd;
+    /**
+     * @summary Returns the first Ride in the queue.
+     * @locus Client
+     * @method firstRide
+     * @memberOf driverDashboard.helpers
+     * @function
+     * @return {Ride}
+     * */
+    firstRide: function () {
+      return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
+    }
+  });
 
 
 Template.driverDashboard.events({
   /**
-    * @summary Returns the first Ride in the queue.
-    * @locus Client
-    * @method click .stopDriving
-    * @memberOf driverDashboard.events
-    * @function
-    * @param {Event} event
-    * @param {Meteor.template} template
-    * */
-  'click .stopDriving': function(event, template) {
-    template.data.driver.stopDriving(function(err) {
+   * @summary Returns the first Ride in the queue.
+   * @locus Client
+   * @method click .stopDriving
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+  'click .stopDriving': function (event, template) {
+    template.data.driver.stopDriving(function (err) {
       if (err) {
         console.log(err.message);
       }
     });
-  } ,
+  },
   /**
-    * @summary Launches navigation to the pickup location.
-    * @locus Client
-    * @method click #pickup-navigation-button
-    * @memberOf driverDashboard.events
-    * @function
-    * @param {Event} event
-    * @param {Meteor.template} template
-    * */
-  'click #pickup-navigation-button': function(event, template) {
+   * @summary Launches navigation to the pickup location.
+   * @locus Client
+   * @method click #pickup-navigation-button
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+  'click #pickup-navigation-button': function (event, template) {
     if (Meteor.isCordova) {
       launchnavigator.navigate(
-        [ this.pickupLoc.k , this.pickupLoc.D ] ,
-        null ,
+        [this.pickupLoc.k, this.pickupLoc.D],
+        null,
         function () {
           // Do stuff here if opening is successful!
           $("#pickup-navigation-button").remove();
           $("#dest-navigation-button").show();
-        } ,
+        },
         function (error) {
           // Do stuff here if error happens!
           alert("Plugin error: " + error);
@@ -144,24 +141,24 @@ Template.driverDashboard.events({
     $("#dest-navigation-button").show();
   },
   /**
-    * @summary Launches navigation to the navigation location.
-    * @locus Client
-    * @method click #dest-navigation-button
-    * @memberOf driverDashboard.events
-    * @function
-    * @param {Event} event
-    * @param {Meteor.template} template
-    * */
-  'click #dest-navigation-button': function(event, template) {
+   * @summary Launches navigation to the navigation location.
+   * @locus Client
+   * @method click #dest-navigation-button
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+  'click #dest-navigation-button': function (event, template) {
     if (Meteor.isCordova) {
       launchnavigator.navigate(
-        [ this.destLoc.k , this.destLoc.D ] ,
-        null ,
+        [this.destLoc.k, this.destLoc.D],
+        null,
         function () {
           // Do stuff here if opening is successful!
           $("#dest-navigation-button").remove();
           $("#confirm-dropoff-button").show();
-        } ,
+        },
         function (error) {
           // Do stuff here if error happens!
           alert("Plugin error: " + error);
@@ -173,32 +170,32 @@ Template.driverDashboard.events({
     $("#confirm-dropoff-button").show();
   },
   /**
-    * @summary Confirms that the Rider has been dropped off successfully.
-    * @locus Client
-    * @method click #confirm-dropoff-button
-    * @memberOf driverDashboard.events
-    * @function
-    * @param {Event} event
-    * @param {Meteor.template} template
-    * */
-  'click #confirm-dropoff-button': function(event, template) {
-    this.cancel(function(err, res) {
+   * @summary Confirms that the Rider has been dropped off successfully.
+   * @locus Client
+   * @method click #confirm-dropoff-button
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+  'click #confirm-dropoff-button': function (event, template) {
+    this.cancel(function (err, res) {
       if (err) {
         alert(err.message);
       }
     });
   },
   /**
-    * @summary Confirms when clicking on a menu item in the side tab.
-    * @locus Client
-    * @method click .tab-item
-    * @memberOf driverDashboard.events
-    * @function
-    * @param {Event} event
-    * @param {Meteor.template} template
-    * */
-  'click .tab-item': function(event, template) {
-    this.cancel(function(err, res) {
+   * @summary Confirms when clicking on a menu item in the side tab.
+   * @locus Client
+   * @method click .tab-item
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+  'click .tab-item': function (event, template) {
+    this.cancel(function (err, res) {
       if (err) {
         alert(err.message);
       }

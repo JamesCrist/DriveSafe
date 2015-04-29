@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "d7a8ab31dfd4bd3dd4a9f8cc7d8f9844365e93b0"
+                  "value": "4ede61d794e2fb6ce90b352d7d8f71abc989a835"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "c58e4d37d04f9277d6c4f04e98a855da870e9afc"
+                  "value": "09446e19fd068b22b05bf18d0d6252ca3811e35c"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7875,7 +7875,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "3a805c0a2f0981140f88df236935ca9f2c98cfcb"
+          "value": "731be7c55aee5fec9fc13dfdc22613f5163ff32b"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7883,7 +7883,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "c58e4d37d04f9277d6c4f04e98a855da870e9afc"
+          "value": "09446e19fd068b22b05bf18d0d6252ca3811e35c"
         },
         "appId": {
           "type": "constant",
@@ -11262,84 +11262,7 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 1136
-                },
-                "fout": {
-                  "type": "constant",
-                  "value": 4
-                },
-                "child": {
-                  "type": "object",
-                  "members": {
-                    "domain": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "signalCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "exitCode": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "pid": {
-                      "type": "constant",
-                      "value": 1136
-                    },
-                    "stdin": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdout": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stderr": {
-                      "type": "null",
-                      "value": null
-                    },
-                    "stdio": {
-                      "type": "array"
-                    },
-                    "spawn": {
-                      "type": "function"
-                    },
-                    "kill": {
-                      "type": "function"
-                    },
-                    "ref": {
-                      "type": "function"
-                    },
-                    "unref": {
-                      "type": "function"
-                    },
-                    "setMaxListeners": {
-                      "type": "function"
-                    },
-                    "emit": {
-                      "type": "function"
-                    },
-                    "addListener": {
-                      "type": "function",
-                      "refID": 17
-                    },
-                    "on": {
-                      "ref": 17
-                    },
-                    "once": {
-                      "type": "function"
-                    },
-                    "removeListener": {
-                      "type": "function"
-                    },
-                    "removeAllListeners": {
-                      "type": "function"
-                    },
-                    "listeners": {
-                      "type": "function"
-                    }
-                  }
+                  "value": 7064
                 },
                 "getTaskName": {
                   "type": "function"
