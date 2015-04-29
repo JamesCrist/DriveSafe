@@ -1,3 +1,10 @@
+/**
+ * @summary Renders the screen after a user requests a ride.
+ * @locus Client
+ * @method rendered
+ * @memberOf request_modal
+ * @function
+ * */
 Template.request_modal.rendered = function () {
   Deps.autorun(function() {
     if(Drivers.find().count()) {
@@ -12,20 +19,37 @@ Template.request_modal.rendered = function () {
 };
 
 Template.request_modal.helpers({
+  /**
+   * @summary Checks if there are any drivers available.
+   * @locus Client
+   * @method driversAvailable
+   * @memberOf request_modal.helpers
+   * @return {Integer} number of drivers
+   * @function
+   * */
   driversAvailable: function() {
     return Drivers.find().count();
   }
 });
 
 Template.request_modal.events({
+  /**
+   * @summary Submits the ride request to the relevant driver..
+   * @locus Client
+   * @method click #submit_button
+   * @memberOf request_modal.events
+   * @function
+   * */
   'click #submit_button' : function () {
     //TODO CHECK IF LOCATIONS VALID
     var userPickupLocation , userDestLocation, userPickupAddress , userDestAddress;
     var value = $.trim($("#pickup-input").val());
+    // Check to make sure something was input into the form
     if(value.length > 0) {
       userPickupLocation = (pickup_autocomplete.getPlace()).geometry.location;
-     userPickupAddress = (pickup_autocomplete.getPlace()).formatted_address;
+      userPickupAddress = (pickup_autocomplete.getPlace()).formatted_address;
     }
+    // Otherwise, fetch the user's current location
     else {
       userPickupLocation = new google.maps.LatLng(Meteor.user().getLat() , Meteor.user().getLng());
       var geocoder = new google.maps.Geocoder();
@@ -42,7 +66,10 @@ Template.request_modal.events({
         }
       });
     }
+
+    // Get the desired destination
     var value1 = $.trim($("#dest-input").val());
+    // Check to make sure something was input.
     if(value1.length > 0) {
       userDestLocation = (dest_autocomplete.getPlace()).geometry.location;
       userDestAddress = (dest_autocomplete.getPlace()).formatted_address;
@@ -76,6 +103,3 @@ Template.request_modal.events({
     }
   }
 });
-
-
-
