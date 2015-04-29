@@ -152,10 +152,12 @@ Group.prototype = {
   delete : function (callback) {
     if(!Meteor.user().isAdmin()) {
       callback.call(this, new Meteor.Error("Access Denied!"), null);
+      return;
     }
 
     if(this.members && this.members.length > 1) {
       callback.call(this, new Meteor.Error("Group has members!"), null);
+      return;
     }
     Groups.remove(this.id , callback);
   } ,
@@ -259,12 +261,15 @@ Group.prototype = {
 
   addDriver : function (driver , callback) {
     if(!driver) {
-      throw new Meteor.Error("Driver is not defined!");
+      callback.call(this, new Meteor.Error("Driver is not defined!"), null);
+      return;
     }
     // Check to make sure the driver is already a member of the group.
     var index = this.members.indexOf(driver.getId());
+    console.log("HOWDY! " + index);
     if(index < 0) {
-      throw new Meteor.Error("User must already be a member to become a driver!");
+      callback.call(this, new Meteor.Error("User must already be a member to become a driver!"), null);
+      return;
     }
 
     // Add user to list of drivers for this group.
@@ -275,7 +280,7 @@ Group.prototype = {
       this._drivers = newDrivers;
       this.save(callback);
     } else {
-      throw new Meteor.Error("User is already a driver for this group!");
+      callback.call(this, new Meteor.Error("User is already a driver for this group!"), null);
     }
   } ,
 

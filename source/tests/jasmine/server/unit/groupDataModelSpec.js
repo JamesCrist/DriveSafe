@@ -147,4 +147,29 @@ describe("Group" , function () {
     });
   });
 
+  it("should be able to add drivers" , function() {
+    group.save();
+    expect(group.id).toBe("1");
+
+    var newDriver = {
+      _id : '321' ,
+      profile : {
+        name : "test" ,
+        location : { lat : 0 , lng : 0 } ,
+        group : null ,
+        isAdmin : false ,
+        driverId : null
+      }
+    };
+    newDriver = _.extend(new User(), newDriver);
+
+    expect(group.members).toEqual(["123"]);
+
+    group.addDriver(newDriver, function(err, res) {
+      expect(err).not.toBe(null);
+      expect(res).toBe(null);
+    });
+
+
+  });
 });
