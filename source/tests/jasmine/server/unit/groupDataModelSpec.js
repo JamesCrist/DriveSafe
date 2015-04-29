@@ -14,7 +14,7 @@ describe("Group" , function () {
         driverId : null
       }
     };
-    fakeUser = _.extend(new User(), fakeUser);
+    fakeUser = _.extend(new User() , fakeUser);
     spyOn(Meteor , 'user').and.returnValue(fakeUser);
     spyOn(Meteor , 'userId').and.returnValue(fakeUser._id);
 
@@ -62,121 +62,137 @@ describe("Group" , function () {
     } , jasmine.any(Function));
   });
 
-
-  it("should be able to add members to group" , function () {
-    group.save();
-    expect(group.id).toBe("1");
-
-    group.addMember("321" , function (err , res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
+  describe("methods", function() {
+    beforeEach(function () {
+      group.save();
     });
 
-    // The group should have "321" as a member now.
-    expect(group.members).toEqual([ "123" , "321" ]);
-  });
+    describe("updating members" , function () {
 
-  it("should not allow member to be added to a group if already in group" , function () {
-    group.save();
-    expect(group.id).toBe("1");
+      it("should be able to add members to group" , function () {
+        group.addMember("321" , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
 
-    // Try to add the admin again, and check to make sure an error was thrown
-    group.addMember("123" , function (err, res) {
-      expect(err).not.toBe(null);
-      expect(res).toBe(null);
-    });
-  });
+        // The group should have "321" as a member now.
+        expect(group.members).toEqual([ "123" , "321" ]);
+      });
 
-  it("should be able to remove members from group" , function () {
-    group.save();
-    expect(group.id).toBe("1");
+      it("should not allow member to be added to a group if already in group" , function () {
 
-    group.addMember("321" , function (err , res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
-    });
-    expect(group.members).toEqual([ "123" , "321" ]);
+        // Try to add the admin again, and check to make sure an error was thrown
+        group.addMember("123" , function (err , res) {
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
+      });
 
-    // Remove the member we just added.
-    group.removeMember("321", function(err, res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
-    });
-  });
+      it("should be able to remove members from group" , function () {
 
-  it("when last member is removed the delete method should be called" , function () {
-    group.save();
-    expect(group.id).toBe("1");
+        group.addMember("321" , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+        expect(group.members).toEqual([ "123" , "321" ]);
 
-    // Remove the member we just added.
-    group.removeMember("123", function(err, res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
-    });
+        // Remove the member we just added.
+        group.removeMember("321" , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+      });
 
-    expect(Groups.remove).toHaveBeenCalledWith("1" , jasmine.any(Function));
-  });
+      it("when last member is removed the delete method should be called" , function () {
 
-  it("should be able to change admin for a group" , function () {
-    group.save();
-    expect(group.id).toBe("1");
+        // Remove the member we just added.
+        group.removeMember("123" , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
 
-    var newAdmin = {
-      _id : '321' ,
-      profile : {
-        name : "test" ,
-        location : { lat : 0 , lng : 0 } ,
-        group : null ,
-        isAdmin : false ,
-        driverId : null
-      }
-    };
-    newAdmin = _.extend(new User(), newAdmin);
-
-    // Changing admin should not work since the new admin is not a member of the group.
-    group.changeAdmin(newAdmin, function(err, res) {
-      expect(err).not.toBe(null);
-      expect(res).toBe(null);
+        expect(Groups.remove).toHaveBeenCalledWith("1" , jasmine.any(Function));
+      });
     });
 
-    group.addMember(newAdmin.getId());
+    describe("changing admins" , function () {
 
-    group.changeAdmin(newAdmin, function(err, res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
-    });
-  });
+      it("should be able to change admin for a group" , function () {
 
-  it("should be able to add drivers" , function() {
-    group.save();
-    expect(group.id).toBe("1");
+        var newAdmin = {
+          _id : '321' ,
+          profile : {
+            name : "test" ,
+            location : { lat : 0 , lng : 0 } ,
+            group : null ,
+            isAdmin : false ,
+            driverId : null
+          }
+        };
+        newAdmin = _.extend(new User() , newAdmin);
 
-    var newDriver = {
-      _id : '321' ,
-      profile : {
-        name : "test" ,
-        location : { lat : 0 , lng : 0 } ,
-        group : null ,
-        isAdmin : false ,
-        driverId : null
-      }
-    };
-    newDriver = _.extend(new User(), newDriver);
+        // Changing admin should not work since the new admin is not a member of the group.
+        group.changeAdmin(newAdmin , function (err , res) {
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
 
-    expect(group.members).toEqual(["123"]);
+        group.addMember(newAdmin.getId());
 
-    group.addDriver(newDriver, function(err, res) {
-      expect(err).not.toBe(null);
-      expect(res).toBe(null);
-    });
-
-    group.addMember(newDriver.getId());
-
-    group.addDriver(newDriver, function(err, res) {
-      expect(err).toBe(null);
-      expect(res).toBe("1");
+        group.changeAdmin(newAdmin , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+      });
     });
 
+    describe("editing drivers" , function () {
+      var driver = null;
+      beforeEach(function() {
+        driver = {
+          _id : '321' ,
+          profile : {
+            name : "test" ,
+            location : { lat : 0 , lng : 0 } ,
+            group : null ,
+            isAdmin : false ,
+            driverId : null
+          }
+        };
+        driver = _.extend(new User() , driver);
+      });
 
+      it("should be able to add drivers" , function () {
+        expect(group.members).toEqual([ "123" ]);
+
+        group.addDriver(driver , function (err , res) {
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
+
+        group.addMember(driver.getId());
+
+        group.addDriver(driver , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+      });
+
+      it("should be able to remove drivers from the group" , function () {
+        group.removeDriver(driver , function (err , res) {
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
+
+        group.addMember(driver);
+        group.addDriver(driver);
+
+        group.removeDriver(driver, function(err, res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+
+      });
+    });
   });
 });

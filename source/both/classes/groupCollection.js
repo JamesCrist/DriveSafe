@@ -135,7 +135,8 @@ Group.prototype = {
 
       Meteor.call("nameIsAvailable" , this.name , function (availabilityError) {
         if(availabilityError) {
-          callback.call(that , new Meteor.Error("Name is not available!") , null);
+          if (callback)
+            callback.call(that , new Meteor.Error("Name is not available!") , null);
         } else {
           Groups.insert(doc , function (error , result) {
             that._id = result;
@@ -151,12 +152,14 @@ Group.prototype = {
 
   delete : function (callback) {
     if(!Meteor.user().isAdmin()) {
-      callback.call(this, new Meteor.Error("Access Denied!"), null);
+      if (callback)
+        callback.call(this, new Meteor.Error("Access Denied!"), null);
       return;
     }
 
     if(this.members && this.members.length > 1) {
-      callback.call(this, new Meteor.Error("Group has members!"), null);
+      if (callback)
+        callback.call(this, new Meteor.Error("Group has members!"), null);
       return;
     }
     Groups.remove(this.id , callback);
@@ -172,7 +175,8 @@ Group.prototype = {
       Users.findOne(this.members[ member ]).leaveGroup(function (err , res) {
         if(err) {
           console.log(err);
-          callback.call(that , err , res);
+          if (callback)
+            callback.call(that , err , res);
           return;
         }
       });
@@ -180,7 +184,8 @@ Group.prototype = {
     Users.findOne(this.admin).leaveGroup(function (err , res) {
       if(err) {
         console.log(err);
-        callback.call(that , err , res);
+        if (callback)
+          callback.call(that , err , res);
         return;
       } else {
         that.delete(callback);
@@ -200,7 +205,8 @@ Group.prototype = {
     if(this.admin == memberId && this.members.length > 1) {
       var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
       console.log(error);
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
 
@@ -213,7 +219,8 @@ Group.prototype = {
     } else {
       var error = new Meteor.Error("Could not find member to remove!");
       console.log(error);
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
 
@@ -229,12 +236,14 @@ Group.prototype = {
   addMember : function (memberId , callback) {
     if(!memberId) {
       var error = new Meteor.Error("MemberId to add cannot be null!");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     if(this.members.indexOf(memberId) >= 0) {
       var error = new Meteor.Error("User is already in the group!");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     var newMembers = this.members;
@@ -247,12 +256,14 @@ Group.prototype = {
   changeAdmin : function (newAdmin , callback) {
     if(!newAdmin) {
       var error = new Meteor.Error("New admin must be defined!");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     if(this.members.indexOf(newAdmin.getId()) < 0) {
       var error = new Meteor.Error("User must be in group already to be made admin!");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     this._admin = newAdmin.getId();
@@ -261,14 +272,16 @@ Group.prototype = {
 
   addDriver : function (driver , callback) {
     if(!driver) {
-      callback.call(this, new Meteor.Error("Driver is not defined!"), null);
+      if (callback)
+        callback.call(this, new Meteor.Error("Driver is not defined!"), null);
       return;
     }
     // Check to make sure the driver is already a member of the group.
     var index = this.members.indexOf(driver.getId());
     console.log("HOWDY! " + index);
     if(index < 0) {
-      callback.call(this, new Meteor.Error("User must already be a member to become a driver!"), null);
+      if (callback)
+        callback.call(this, new Meteor.Error("User must already be a member to become a driver!"), null);
       return;
     }
 
@@ -280,13 +293,16 @@ Group.prototype = {
       this._drivers = newDrivers;
       this.save(callback);
     } else {
-      callback.call(this, new Meteor.Error("User is already a driver for this group!"), null);
+      if (callback)
+        callback.call(this, new Meteor.Error("User is already a driver for this group!"), null);
     }
   } ,
 
   removeDriver : function (driver , callback) {
     if(!driver) {
-      throw new Meteor.Error("Driver is not defined!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Driver is not defined!"), null);
+      return;
     }
     // Remove user from list of members for this group.
     var index = this.drivers.indexOf(driver.getId());
@@ -296,7 +312,8 @@ Group.prototype = {
       this._drivers = newDrivers;
       this.save(callback);
     } else {
-      throw new Meteor.Error("User is not a driver of this group!");
+      if (callback)
+        callback.call(this, new Meteor.Error("User is not a driver of this group!"), null);
     }
   } ,
 
@@ -318,12 +335,14 @@ Group.prototype = {
   changeKey : function (newKey , callback) {
     if(!newKey) {
       var error = new Meteor.Error("New key is not defined!");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     if(newKey.length <= 6) {
       var error = new Meteor.Error("New key must be at least 6 characters");
-      callback.call(this , error , null);
+      if (callback)
+        callback.call(this , error , null);
       return;
     }
     this._key = newKey;
@@ -344,7 +363,8 @@ Group.prototype = {
       this._queue = newQueue;
       this.save(callback);
     } else {
-      callback.call(this , null , null);
+      if (callback)
+        callback.call(this , null , null);
     }
   },
   removeAllFromQueue : function (callback) {
