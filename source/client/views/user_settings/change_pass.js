@@ -3,17 +3,37 @@ var pageSession = new ReactiveDict();
 pageSession.set("errorMessage", "");
 pageSession.set("infoMessage", "");
 
+/**
+ * @summary Renders the change password screen.
+ * @locus Client
+ * @method rendered
+ * @memberOf UserSettingsChangePass
+ * @function
+ * */
 Template.UserSettingsChangePass.rendered = function () {
-
   $("input[autofocus]").focus();
 };
 
+/**
+ * @summary Sets an empty error and info message once the form is rendered.
+ * @locus Client
+ * @method created
+ * @memberOf UserSettingsChangePass
+ * @function
+ * */
 Template.UserSettingsChangePass.created = function () {
   pageSession.set("errorMessage", "");
   pageSession.set("infoMessage", "");
 };
 
 Template.UserSettingsChangePass.events({
+  /**
+   * @summary Checks to see if the old password is correct and then resets the password.
+   * @locus Client
+   * @method submit #change_pass_form
+   * @memberOf UserSettingsChangePass.events
+   * @function
+   * */
   'submit #change_pass_form': function (e, t) {
     e.preventDefault();
 
@@ -70,9 +90,25 @@ Template.UserSettingsChangePass.events({
 });
 
 Template.UserSettingsChangePass.helpers({
+  /**
+   * @summary Fetches the current error message.
+   * @locus Client
+   * @method errorMessage
+   * @memberOf UserSettingsChangePass.helpers
+   * @function
+   * @return {String} errorMessage
+   * */
   errorMessage: function () {
     return pageSession.get("errorMessage");
   },
+  /**
+   * @summary Fetches the current info message.
+   * @locus Client
+   * @method infoMessage
+   * @memberOf UserSettingsChangePass.helpers
+   * @function
+   * @return {String} infoMessage
+   * */
   infoMessage: function () {
     return pageSession.get("infoMessage");
   }

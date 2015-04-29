@@ -77,7 +77,7 @@ Template.Register.events({
 
 Template.Register.helpers({
   /**
-   * @summary Fetches the current success message.
+   * @summary Fetches the current error message.
    * @locus Client
    * @method errorMessage
    * @memberOf Register.helpers

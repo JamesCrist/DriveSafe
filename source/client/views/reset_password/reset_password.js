@@ -7,7 +7,13 @@ Template.ResetPassword.rendered = function () {
 };
 
 Template.ResetPassword.events({
-  // change password
+  /**
+   * @summary Submits the reset password form after error checking.
+   * @locus Client
+   * @method submit #reset_password_form
+   * @memberOf ResetPassword.events
+   * @function
+   * */
   'submit #reset_password_form': function (e, t) {
     e.preventDefault();
 
@@ -44,6 +50,14 @@ Template.ResetPassword.events({
 });
 
 Template.ResetPassword.helpers({
+  /**
+   * @summary Fetches the current error message.
+   * @locus Client
+   * @method errorMessage
+   * @memberOf ResetPassword.helpers
+   * @function
+   * @return {String} errorMessage
+   * */
   errorMessage: function () {
     return pageSession.get("errorMessage");
   }

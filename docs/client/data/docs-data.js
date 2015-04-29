@@ -1047,6 +1047,38 @@ DocsData = {
     "scope": "static",
     "summary": "Renders the register screen."
   },
+  "ResetPassword.events.submit #reset_password_form": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ResetPassword.events.submit #reset_password_form",
+    "memberof": "ResetPassword.events.submit ",
+    "name": "reset_password_form",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Submits the reset password form after error checking."
+  },
+  "ResetPassword.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ResetPassword.helpers.errorMessage",
+    "memberof": "ResetPassword.helpers",
+    "name": "errorMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>errorMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Fetches the current error message."
+  },
   "Ride": {
     "kind": "class",
     "longname": "Ride",
@@ -1266,6 +1298,81 @@ DocsData = {
     ],
     "scope": "static",
     "summary": "Set location of user."
+  },
+  "UserSettingsChangePass.created": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "UserSettingsChangePass.created",
+    "memberof": "UserSettingsChangePass",
+    "name": "created",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Sets an empty error and info message once the form is rendered."
+  },
+  "UserSettingsChangePass.events.submit #change_pass_form": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "UserSettingsChangePass.events.submit #change_pass_form",
+    "memberof": "UserSettingsChangePass.events.submit ",
+    "name": "change_pass_form",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Checks to see if the old password is correct and then resets the password."
+  },
+  "UserSettingsChangePass.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "UserSettingsChangePass.helpers.errorMessage",
+    "memberof": "UserSettingsChangePass.helpers",
+    "name": "errorMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>errorMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Fetches the current error message."
+  },
+  "UserSettingsChangePass.helpers.infoMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "UserSettingsChangePass.helpers.infoMessage",
+    "memberof": "UserSettingsChangePass.helpers",
+    "name": "infoMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>infoMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Fetches the current info message."
+  },
+  "UserSettingsChangePass.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "UserSettingsChangePass.rendered",
+    "memberof": "UserSettingsChangePass",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Renders the change password screen."
   },
   "driverDashboard.destroyed": {
     "kind": "function",
