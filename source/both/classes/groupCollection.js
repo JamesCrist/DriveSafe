@@ -319,15 +319,21 @@ Group.prototype = {
 
   addRideToQueue : function (ride , callback) {
     if(!ride) {
-      throw new Meteor.Error("Ride is not defined!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Ride is not defined!"), null);
+      return;
     }
     if(!ride.id) {
-      throw new Meteor.Error("Ride id is not defined!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Ride id is not defined!"), null);
+      return;
     }
 
     var index = this.queue.indexOf(ride.id);
     if(index >= 0) {
-      throw new Meteor.Error("Ride is already in queue!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Ride is already in queue!"), null);
+      return;
     }
     this.queue.push(ride.id);
     this.save(callback);
@@ -350,10 +356,14 @@ Group.prototype = {
   } ,
   removeRideFromQueue : function (rideId , callback) {
     if(this.queue.length === 0) {
-      throw new Meteor.Error("Queue is already empty!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Queue is already empty!"), null);
+      return;
     }
     if(!rideId) {
-      throw new Meteor.Error("Ride must be defined!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Ride must be defined!"), null);
+      return;
     }
     // Remove ride from queue.
     var newQueue = this.queue;
@@ -369,7 +379,9 @@ Group.prototype = {
   },
   removeAllFromQueue : function (callback) {
     if(this.queue.length === 0) {
-      throw new Meteor.Error("Queue is already empty!");
+      if (callback)
+        callback.call(this, new Meteor.Error("Queue is already empty!"), null);
+      return;
     }
     var newQueue = this.queue;
     newQueue.splice(0, newQueue.length);

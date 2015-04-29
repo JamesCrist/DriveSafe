@@ -62,7 +62,7 @@ describe("Group" , function () {
     } , jasmine.any(Function));
   });
 
-  describe("methods", function() {
+  describe("methods" , function () {
     beforeEach(function () {
       group.save();
     });
@@ -86,6 +86,9 @@ describe("Group" , function () {
           expect(err).not.toBe(null);
           expect(res).toBe(null);
         });
+
+        expect(group.members).toEqual([ "123" ]);
+
       });
 
       it("should be able to remove members from group" , function () {
@@ -101,6 +104,8 @@ describe("Group" , function () {
           expect(err).toBe(null);
           expect(res).toBe("1");
         });
+
+        expect(group.members).toEqual([ "123" ]);
       });
 
       it("when last member is removed the delete method should be called" , function () {
@@ -143,12 +148,14 @@ describe("Group" , function () {
           expect(err).toBe(null);
           expect(res).toBe("1");
         });
+
+        expect(group.admin).toBe(newAdmin.getId());
       });
     });
 
     describe("editing drivers" , function () {
       var driver = null;
-      beforeEach(function() {
+      beforeEach(function () {
         driver = {
           _id : '321' ,
           profile : {
@@ -170,12 +177,16 @@ describe("Group" , function () {
           expect(res).toBe(null);
         });
 
+        expect(group.drivers).toEqual([]);
+
         group.addMember(driver.getId());
 
         group.addDriver(driver , function (err , res) {
           expect(err).toBe(null);
           expect(res).toBe("1");
         });
+
+        expect(group.drivers).toEqual([ "321" ]);
       });
 
       it("should be able to remove drivers from the group" , function () {
@@ -184,14 +195,49 @@ describe("Group" , function () {
           expect(res).toBe(null);
         });
 
-        group.addMember(driver);
+        group.addMember(driver.getId());
         group.addDriver(driver);
 
-        group.removeDriver(driver, function(err, res) {
+        expect(group.drivers).toEqual([ "321" ]);
+
+        group.removeDriver(driver , function (err , res) {
           expect(err).toBe(null);
           expect(res).toBe("1");
         });
 
+        expect(group.drivers).toEqual([]);
+      });
+    });
+
+    describe("editing the queue" , function () {
+      var ride = null;
+      beforeEach(function () {
+        ride = new Ride('1' , 'Ride 1' , 'Group 1' , 'Driver 1' , true , 'a' , 'a' , 'pickupAdd' , 'destAdd' , null);
+      });
+
+      it("should be able to add rides to queue" , function () {
+        expect(group.queue).toEqual([]);
+
+        group.addRideToQueue(ride , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe("1");
+        });
+
+        expect(group.queue).toEqual([ "1" ]);
+      });
+
+      it("should not be able to add a ride to the queue twice" , function () {
+        group.addRideToQueue(ride);
+
+        expect(group.queue).toEqual([ "1" ]);
+
+        group.addRideToQueue(ride , function (err , res) {
+          // Expect that there is an error thrown
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
+
+        expect(group.queue).toEqual([ "1" ]);
       });
     });
   });
