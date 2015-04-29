@@ -239,6 +239,24 @@ describe("Group" , function () {
 
         expect(group.queue).toEqual([ "1" ]);
       });
+
+      it("should be able to remove ride from queue" , function () {
+        // Trying to remove a ride thats not in the queue should yield an error.
+        group.removeRideFromQueue(ride.id , function (err , res) {
+          expect(err).not.toBe(null);
+          expect(res).toBe(null);
+        });
+
+        group.addRideToQueue(ride);
+        expect(group.queue).toEqual([ "1" ]);
+
+        group.removeRideFromQueue(ride.id , function (err , res) {
+          expect(err).toBe(null);
+          expect(res).toBe('1');
+        });
+
+        expect(group.queue).toEqual([]);
+      });
     });
   });
 });
