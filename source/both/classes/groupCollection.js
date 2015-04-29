@@ -13,6 +13,11 @@
  * @param {Function} options.transform An optional transformation function. Documents will be passed through this function before being returned from `fetch` or `findOne`, and before being passed to callbacks of `observe`, `map`, `forEach`, `allow`, and `deny`. Transforms are *not* applied for the callbacks of `observeChanges` or to cursors returned from publish functions.
  */
 
+/**
+ * @summary Creates a collection of groups in the MongoDB
+ * @locus Anywhere
+ * @type {Meteor.Collection}
+ */
 // Create Groups MongoDB collection
 Groups = new Meteor.Collection("groups" , {
   transform : function (doc) {
@@ -20,12 +25,23 @@ Groups = new Meteor.Collection("groups" , {
   }
 });
 
+/**
+ * @summary Represents a group as a class. The constructor takes a document.
+ * @locus Anywhere
+ * @param id - The ID of the group.
+ * @param name - The name of the group.
+ * @param admin - The user who administrates the group.
+ * @param members - An array of the members of the group.
+ * @param drivers - An array of the current drivers of the group.
+ * @param queue - An array of the current ride requests in the group.
+ * @param key - The password to join the group.
+ * @constructor
+ */
 // A Group class that takes a document in its constructor
 Group = function (id , name , admin , members , drivers , queue , key) {
   this._id = id;
   this._name = name;
-  // If admin is not defined, define admin to be the current
-  // user.
+  // If admin is not defined, define admin to be the current user.
   if(!admin) {
     admin = Meteor.userId();
   }
@@ -54,6 +70,10 @@ Group = function (id , name , admin , members , drivers , queue , key) {
   this._key = key;
 };
 
+/**
+ * @summary The methods for the group class.
+ * @locus Anywhere
+ */
 Group.prototype = {
   get id() {
     // readonly
@@ -92,6 +112,12 @@ Group.prototype = {
     this._key = value;
   } ,
 
+  /**
+   * @summary Saving functionality for the group instance.
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   save : function (callback) {
     if(!this.name) {
       throw new Meteor.Error("Name is not defined!");
@@ -135,7 +161,7 @@ Group.prototype = {
 
       Meteor.call("nameIsAvailable" , this.name , function (availabilityError) {
         if(availabilityError) {
-          if (callback)
+          if(callback)
             callback.call(that , new Meteor.Error("Name is not available!") , null);
         } else {
           Groups.insert(doc , function (error , result) {
@@ -150,21 +176,33 @@ Group.prototype = {
     }
   } ,
 
+  /**
+   * @summary Deletes a group instance with an empty members array.
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   delete : function (callback) {
     if(!Meteor.user().isAdmin()) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Access Denied!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Access Denied!") , null);
       return;
     }
 
     if(this.members && this.members.length > 1) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Group has members!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Group has members!") , null);
       return;
     }
     Groups.remove(this.id , callback);
   } ,
 
+  /**
+   * @summary Deletes a group instance after removing all members.
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   forceDelete : function (callback) {
     var that = this;
 
@@ -175,7 +213,7 @@ Group.prototype = {
       Users.findOne(this.members[ member ]).leaveGroup(function (err , res) {
         if(err) {
           console.log(err);
-          if (callback)
+          if(callback)
             callback.call(that , err , res);
           return;
         }
@@ -184,7 +222,7 @@ Group.prototype = {
     Users.findOne(this.admin).leaveGroup(function (err , res) {
       if(err) {
         console.log(err);
-        if (callback)
+        if(callback)
           callback.call(that , err , res);
         return;
       } else {
@@ -193,6 +231,12 @@ Group.prototype = {
     });
   } ,
 
+  /**
+   * @summary Returns the array of members in the group.
+   * @function
+   * @memberOf Group
+   * @returns {Array}
+   */
   membersModel : function () {
     var members = [];
     for(var member in this.members) {
@@ -201,16 +245,23 @@ Group.prototype = {
     return members;
   } ,
 
+  /**
+   * @summary Remove specific member from group member array.
+   * @param memberId
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   removeMember : function (memberId , callback) {
     if(this.admin == memberId && this.members.length > 1) {
       var error = new Meteor.Error('Admin cannot leave while there are still others in a group!');
       console.log(error);
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
 
-    // Remove user from list of members for this group.
+    // Remove user from array of members for this group.
     var newMembers = this.members;
     var index = newMembers.indexOf(memberId);
     if(index >= 0) {
@@ -219,7 +270,7 @@ Group.prototype = {
     } else {
       var error = new Meteor.Error("Could not find member to remove!");
       console.log(error);
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
@@ -233,16 +284,23 @@ Group.prototype = {
     }
   } ,
 
+  /**
+   * @summary Add specific member to group member array
+   * @param memberId
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   addMember : function (memberId , callback) {
     if(!memberId) {
       var error = new Meteor.Error("MemberId to add cannot be null!");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
     if(this.members.indexOf(memberId) >= 0) {
       var error = new Meteor.Error("User is already in the group!");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
@@ -253,39 +311,52 @@ Group.prototype = {
     this.save(callback);
   } ,
 
+  /**
+   * @summary Change group admin to specified user
+   * @param newAdmin
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   changeAdmin : function (newAdmin , callback) {
     if(!newAdmin) {
       var error = new Meteor.Error("New admin must be defined!");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
     if(this.members.indexOf(newAdmin.getId()) < 0) {
       var error = new Meteor.Error("User must be in group already to be made admin!");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
     this._admin = newAdmin.getId();
     this.save(callback);
   } ,
-
+  /**
+   * @summary Add driver to group driver array.
+   * @param driver
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   addDriver : function (driver , callback) {
     if(!driver) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Driver is not defined!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Driver is not defined!") , null);
       return;
     }
     // Check to make sure the driver is already a member of the group.
     var index = this.members.indexOf(driver.getId());
     console.log("HOWDY! " + index);
     if(index < 0) {
-      if (callback)
-        callback.call(this, new Meteor.Error("User must already be a member to become a driver!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("User must already be a member to become a driver!") , null);
       return;
     }
 
-    // Add user to list of drivers for this group.
+    // Add user to array of drivers for this group.
     index = this.drivers.indexOf(driver.getId());
     var newDrivers = this.drivers;
     if(index < 0) {
@@ -293,18 +364,24 @@ Group.prototype = {
       this._drivers = newDrivers;
       this.save(callback);
     } else {
-      if (callback)
-        callback.call(this, new Meteor.Error("User is already a driver for this group!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("User is already a driver for this group!") , null);
     }
   } ,
-
+  /**
+   * @summary Remove driver from group driver array
+   * @param driver
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   removeDriver : function (driver , callback) {
     if(!driver) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Driver is not defined!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Driver is not defined!") , null);
       return;
     }
-    // Remove user from list of members for this group.
+    // Remove user from array of members for this group.
     var index = this.drivers.indexOf(driver.getId());
     var newDrivers = this.drivers;
     if(index >= 0) {
@@ -312,57 +389,78 @@ Group.prototype = {
       this._drivers = newDrivers;
       this.save(callback);
     } else {
-      if (callback)
-        callback.call(this, new Meteor.Error("User is not a driver of this group!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("User is not a driver of this group!") , null);
     }
   } ,
-
+  /**
+   * @summary Add ride to group ride queue
+   * @param ride
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   addRideToQueue : function (ride , callback) {
     if(!ride) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Ride is not defined!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Ride is not defined!") , null);
       return;
     }
     if(!ride.id) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Ride id is not defined!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Ride id is not defined!") , null);
       return;
     }
 
     var index = this.queue.indexOf(ride.id);
     if(index >= 0) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Ride is already in queue!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Ride is already in queue!") , null);
       return;
     }
     this.queue.push(ride.id);
     this.save(callback);
   } ,
+
+  /**
+   * @summary Change group key to new specified key
+   * @param newKey
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   changeKey : function (newKey , callback) {
     if(!newKey) {
       var error = new Meteor.Error("New key is not defined!");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
     if(newKey.length < 6) {
       var error = new Meteor.Error("New key must be at least 6 characters");
-      if (callback)
+      if(callback)
         callback.call(this , error , null);
       return;
     }
     this._key = newKey;
     this.save(callback);
   } ,
+  /**
+   * @summary Remove ride from group ride queue
+   * @param rideId
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   removeRideFromQueue : function (rideId , callback) {
     if(this.queue.length === 0) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Queue is already empty!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Queue is already empty!") , null);
       return;
     }
     if(!rideId) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Ride must be defined!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Ride must be defined!") , null);
       return;
     }
     // Remove ride from queue.
@@ -373,18 +471,24 @@ Group.prototype = {
       this._queue = newQueue;
       this.save(callback);
     } else {
-      if (callback)
+      if(callback)
         callback.call(this , null , null);
     }
-  },
+  } ,
+  /**
+   * @summary Remove all rides from group ride queue
+   * @param callback
+   * @function
+   * @memberOf Group
+   */
   removeAllFromQueue : function (callback) {
     if(this.queue.length === 0) {
-      if (callback)
-        callback.call(this, new Meteor.Error("Queue is already empty!"), null);
+      if(callback)
+        callback.call(this , new Meteor.Error("Queue is already empty!") , null);
       return;
     }
     var newQueue = this.queue;
-    newQueue.splice(0, newQueue.length);
+    newQueue.splice(0 , newQueue.length);
     this._queue = newQueue;
     this.save(callback);
   }
