@@ -649,17 +649,8 @@ DocsData = {
         }
       }
     ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "none"
-          ]
-        }
-      }
-    ],
     "scope": "static",
-    "summary": "This is a description of the changeAdmin function."
+    "summary": "Changes the admin of the desired group."
   },
   "Meteor.methods.createNewUser": {
     "kind": "function",
@@ -690,15 +681,16 @@ DocsData = {
     ],
     "returns": [
       {
+        "description": "<p>password The user's temporary password</p>",
         "type": {
           "names": [
-            "password"
+            "String"
           ]
         }
       }
     ],
     "scope": "static",
-    "summary": "This is a description of the createNewUser function."
+    "summary": "Creates a new user in the database."
   },
   "Meteor.methods.createUserAccount": {
     "kind": "function",
@@ -750,17 +742,8 @@ DocsData = {
         }
       }
     ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "userOptions"
-          ]
-        }
-      }
-    ],
     "scope": "static",
-    "summary": "This is a description of the createUserAccount function."
+    "summary": "Creates a new user account in the database."
   },
   "Meteor.methods.joinGroup": {
     "kind": "function",
@@ -797,7 +780,7 @@ DocsData = {
       }
     ],
     "scope": "static",
-    "summary": "This is a description of the joinGroup function."
+    "summary": "Adds the current user to the group using the group key."
   },
   "Meteor.methods.removeMember": {
     "kind": "function",
@@ -819,22 +802,13 @@ DocsData = {
         "name": "group",
         "type": {
           "names": [
-            "Object"
-          ]
-        }
-      }
-    ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "group.id"
+            "Group"
           ]
         }
       }
     ],
     "scope": "static",
-    "summary": "This is a description of the removeMember function."
+    "summary": "Removes a member from the database."
   },
   "Meteor.methods.sendMail": {
     "kind": "function",
@@ -894,17 +868,8 @@ DocsData = {
         }
       }
     ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "none"
-          ]
-        }
-      }
-    ],
     "scope": "static",
-    "summary": "This is a description of the sendMail function."
+    "summary": "Sends an email using the provided options."
   },
   "Meteor.methods.updateUserAccount": {
     "kind": "function",
@@ -964,17 +929,8 @@ DocsData = {
         }
       }
     ],
-    "returns": [
-      {
-        "type": {
-          "names": [
-            "none"
-          ]
-        }
-      }
-    ],
     "scope": "static",
-    "summary": "This is a description of the updateUserAccount function."
+    "summary": "Updates the desired user account with the options provided."
   },
   "Register.created": {
     "kind": "function",
