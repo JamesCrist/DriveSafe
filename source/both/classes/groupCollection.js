@@ -341,6 +341,15 @@ Group.prototype = {
     } else {
       callback.call(this , null , null);
     }
+  },
+  removeAllFromQueue : function (callback) {
+    if(this.queue.length === 0) {
+      throw new Meteor.Error("Queue is already empty!");
+    }
+    var newQueue = this.queue;
+    newQueue.splice(0, newQueue.length);
+    this._queue = newQueue;
+    this.save(callback);
   }
 };
 

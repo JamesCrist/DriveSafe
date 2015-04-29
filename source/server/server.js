@@ -72,6 +72,12 @@ Meteor.startup(function () {
       if(!group) {
         console.log("ERROR: Group that ride belongs to not found!");
       }
+      
+      console.log("RIDES:" + group.queue.length);
+      
+      if(group.drivers.length > 0) {
+          console.log("MORE THAN ONE DRIVER IN GROUP");
+      }
       // If the queue is empty, and there are drivers
       if(group.queue.length == 0 && group.drivers.length > 0) {
         for(var index = 0 ; index < group.drivers.length ; ++index) {

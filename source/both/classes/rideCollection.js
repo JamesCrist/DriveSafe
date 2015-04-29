@@ -148,6 +148,14 @@ Ride.prototype = {
       driver.currentRide = null;
       console.log(driver);
       driver.save();
+      //assign next ride to driver
+      if(Groups.findOne().queue.length > 0){
+        //get the first ride in queue
+        var ride = Rides.findOne(Groups.findOne().queue[0]);
+        ride.assignTo(driver);
+        ride.save();
+        Groups.findOne().removeRideFromQueue(ride.id);
+      }
       that.delete(callback);
     }
   } ,

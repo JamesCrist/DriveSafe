@@ -25,11 +25,14 @@ Template.driverDashboard.helpers({
   ridesAvailable : function () {
     return this.rides.count() > 0;
   } ,
-  firstRide : function () {
-    return (Groups.findOne(this.group)).queue.indexOf(this.id) === 0;
+  currentRide : function () {
+    return !(this.pending);
   },
   getPickupAddress: function(){
     return this.pickupAdd;
+  },
+  isPickupAddress: function(){
+    return (this.pickupAdd === undefined);
   },
   getDestAddress: function(){
     return this.destAdd;

@@ -118,7 +118,8 @@ Template.riderDashboard.events({
       var dPlace = dest_autocomplete.getPlace();
       userDestLocation = dPlace.geometry.location;
       userDestAddress = dPlace.name + " " + dPlace.formatted_address;
-      var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
+      var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, null, true, 
+        userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
       console.log(ride);
       ride.save(function(err, res) {
         if (err) {
