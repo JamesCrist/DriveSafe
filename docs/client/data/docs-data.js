@@ -78,6 +78,115 @@ DocsData = {
       ]
     }
   },
+  "ForgotPassword.events.click #reset_password_sent": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ForgotPassword.events.click #reset_password_sent",
+    "memberof": "ForgotPassword.events.click ",
+    "name": "reset_password_sent",
+    "options": [],
+    "params": [
+      {
+        "name": "e",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "t",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Displays OK box after password email is sent.."
+  },
+  "ForgotPassword.events.submit #forgot_password_form": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ForgotPassword.events.submit #forgot_password_form",
+    "memberof": "ForgotPassword.events.submit ",
+    "name": "forgot_password_form",
+    "options": [],
+    "params": [
+      {
+        "name": "e",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      },
+      {
+        "name": "t",
+        "type": {
+          "names": [
+            "Meteor.template"
+          ]
+        }
+      }
+    ],
+    "scope": "instance",
+    "summary": "Sends the reset password link to the user."
+  },
+  "ForgotPassword.helpers.errorMessage": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ForgotPassword.helpers.errorMessage",
+    "memberof": "ForgotPassword.helpers",
+    "name": "errorMessage",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>errorMessage</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Gets the current error message."
+  },
+  "ForgotPassword.helpers.resetPasswordSent": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ForgotPassword.helpers.resetPasswordSent",
+    "memberof": "ForgotPassword.helpers",
+    "name": "resetPasswordSent",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "description": "<p>resetPasswordSent</p>",
+        "type": {
+          "names": [
+            "String"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Checks to see if the reset password email has been sent.."
+  },
+  "ForgotPassword.rendered": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "ForgotPassword.rendered",
+    "memberof": "ForgotPassword",
+    "name": "rendered",
+    "options": [],
+    "params": [],
+    "scope": "static",
+    "summary": "Displays the forgot password dialog on the screen."
+  },
   "Group": {
     "kind": "class",
     "locus": "Anywhere",
