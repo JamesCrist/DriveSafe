@@ -437,6 +437,117 @@ DocsData = {
     "scope": "static",
     "summary": "Saving functionality for the group instance."
   },
+  "GroupSettings.events.click #deleteGroupButton": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.events.click #deleteGroupButton",
+    "memberof": "GroupSettings.events.click ",
+    "name": "deleteGroupButton",
+    "options": [],
+    "params": [],
+    "scope": "instance",
+    "summary": "Deletes the group."
+  },
+  "GroupSettings.events.click .changeKey": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.events.click .changeKey",
+    "memberof": "GroupSettings.events.click ",
+    "name": "changeKey",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Allows the user to change the group key for the group they are in."
+  },
+  "GroupSettings.events.click .makeAdmin": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.events.click .makeAdmin",
+    "memberof": "GroupSettings.events.click ",
+    "name": "makeAdmin",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Makes the selected user the admin of the group."
+  },
+  "GroupSettings.events.click .removeMember": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.events.click .removeMember",
+    "memberof": "GroupSettings.events.click ",
+    "name": "removeMember",
+    "options": [],
+    "params": [
+      {
+        "name": "event",
+        "type": {
+          "names": [
+            "Event"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Removes a member from the group."
+  },
+  "GroupSettings.helpers.groupMembers": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.helpers.groupMembers",
+    "memberof": "GroupSettings.helpers",
+    "name": "groupMembers",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Members"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Gets the members in the current group."
+  },
+  "GroupSettings.helpers.groupModel": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "GroupSettings.helpers.groupModel",
+    "memberof": "GroupSettings.helpers",
+    "name": "groupModel",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "Group"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Gets the current group."
+  },
   "Groups": {
     "kind": "member",
     "locus": "Anywhere",
