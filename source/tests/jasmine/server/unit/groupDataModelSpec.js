@@ -1,6 +1,6 @@
 "use strict";
 describe("Group" , function () {
-  it("should be created with admin, name, members, and drivers" , function () {
+  it("should be created with admin, name, members, drivers, queue, and key" , function () {
     spyOn(Groups , "insert").and.callFake(function (doc , callback) {
       // simulate async return of id = "1";
       callback(null , "1");
