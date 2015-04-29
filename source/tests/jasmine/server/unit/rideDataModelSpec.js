@@ -5,15 +5,15 @@ describe("Ride" , function () {
       // simulate async return of id = "1";
       callback(null , "1");
     });
-    spyOn(Date,"now").and.callFake(function(){
+    spyOn(Date , "now").and.callFake(function () {
       return 123
     });
 //id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd, destAdd, createdAt
-    var ride = new Ride(null,'Ride 1','Group 1','Driver 1',true,'a','a','pickupAdd','destAdd',null);
+    var ride = new Ride(null , 'Ride 1' , 'Group 1' , 'Driver 1' , true , 'a' , 'a' , 'pickupAdd' , 'destAdd' , null);
 
     expect(ride.user).toBe("Ride 1");
     expect(ride.group).toBe("Group 1");
-    expect(ride.driver).toBe("Driver 1"); 
+    expect(ride.driver).toBe("Driver 1");
     expect(ride.pending).toBe(true);
     expect(ride.pickupLoc).toBe('a');
     expect(ride.destLoc).toBe('a');
