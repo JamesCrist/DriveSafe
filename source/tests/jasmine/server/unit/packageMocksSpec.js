@@ -7086,7 +7086,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "33e77165f3337c0b80dd2c5e147243f6515e67dd"
+                  "value": "2c45808b64c19b69bd3d821a04827f76a1645858"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7101,7 +7101,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "6abdfdd45d22cf7e5e2ac64b241fa14f1291ad5a"
+                  "value": "0af2b2c870bc6289107c963104751257f783c2bc"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7875,7 +7875,7 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "8aa9aa23742deaf53fffc96ebfcfdb01bc03b72c"
+          "value": "9d05b4772f53ae552440afcbd6bd67d2561ca79c"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
@@ -7883,7 +7883,7 @@ var packageMetadata = {
         },
         "autoupdateVersionCordova": {
           "type": "constant",
-          "value": "6abdfdd45d22cf7e5e2ac64b241fa14f1291ad5a"
+          "value": "0af2b2c870bc6289107c963104751257f783c2bc"
         },
         "appId": {
           "type": "constant",
@@ -11268,7 +11268,7 @@ var packageMetadata = {
                 },
                 "pid": {
                   "type": "constant",
-                  "value": 30316
+                  "value": 32168
                 },
                 "fout": {
                   "type": "constant",
@@ -11291,7 +11291,7 @@ var packageMetadata = {
                     },
                     "pid": {
                       "type": "constant",
-                      "value": 30316
+                      "value": 32168
                     },
                     "stdin": {
                       "type": "null",

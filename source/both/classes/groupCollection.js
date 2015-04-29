@@ -151,11 +151,11 @@ Group.prototype = {
 
   delete : function (callback) {
     if(!Meteor.user().isAdmin()) {
-      throw new Meteor.Error("Access Denied!");
+      callback.call(this, new Meteor.Error("Access Denied!"), null);
     }
 
     if(this.members && this.members.length > 1) {
-      throw new Meteor.Error("Group has members!");
+      callback.call(this, new Meteor.Error("Group has members!"), null);
     }
     Groups.remove(this.id , callback);
   } ,

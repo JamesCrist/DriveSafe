@@ -14,7 +14,8 @@ describe("Group" , function () {
         driverId : null
       }
     };
-    spyOn(Meteor , 'user').and.returnValue(_.extend(new User(), fakeUser));
+    fakeUser = _.extend(new User(), fakeUser);
+    spyOn(Meteor , 'user').and.returnValue(fakeUser);
     spyOn(Meteor , 'userId').and.returnValue(fakeUser._id);
 
     group = new Group(null , "Group 1" , "123" , null , null , null , "12345");
@@ -114,6 +115,36 @@ describe("Group" , function () {
     });
 
     expect(Groups.remove).toHaveBeenCalledWith("1" , jasmine.any(Function));
+  });
+
+  it("should be able to change admin for a group" , function () {
+    group.save();
+    expect(group.id).toBe("1");
+
+    var newAdmin = {
+      _id : '321' ,
+      profile : {
+        name : "test" ,
+        location : { lat : 0 , lng : 0 } ,
+        group : null ,
+        isAdmin : false ,
+        driverId : null
+      }
+    };
+    newAdmin = _.extend(new User(), newAdmin);
+
+    // Changing admin should not work since the new admin is not a member of the group.
+    group.changeAdmin(newAdmin, function(err, res) {
+      expect(err).not.toBe(null);
+      expect(res).toBe(null);
+    });
+
+    group.addMember(newAdmin.getId());
+
+    group.changeAdmin(newAdmin, function(err, res) {
+      expect(err).toBe(null);
+      expect(res).toBe("1");
+    });
   });
 
 });
