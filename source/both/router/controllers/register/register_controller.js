@@ -1,3 +1,7 @@
+/**
+ * @summary Controller for register view.
+ * @locus Client
+ */
 this.RegisterController = RouteController.extend({
   template : "Register" ,
 
@@ -5,41 +9,22 @@ this.RegisterController = RouteController.extend({
     /*YIELD_TEMPLATES*/
   } ,
 
+  /**
+   * @summary Go on to action.
+   * @function
+   * @memberOf RegisterController
+   */
   onBeforeAction : function () {
-    /*BEFORE_FUNCTION*/
     this.next();
   } ,
 
+  /**
+   * @summary Render the page.
+   * @function
+   * @memberOf RegisterController
+   */
   action : function () {
-    if(this.isReady()) {
-      this.render();
-    } else {
-      this.render("loading");
-    }
-    /*ACTION_FUNCTION*/
-  } ,
-
-  isReady : function () {
-
-
-    var subs = [];
-    var ready = true;
-    _.each(subs , function (sub) {
-      if(!sub.ready())
-        ready = false;
-    });
-    return ready;
-  } ,
-
-  data : function () {
-
-
-    return {
-      params : this.params || {}
-    };
-    /*DATA_FUNCTION*/
-  } ,
-
-  onAfterAction : function () {
+    this.render();
   }
+
 });

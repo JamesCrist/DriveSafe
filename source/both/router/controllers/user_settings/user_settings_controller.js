@@ -1,3 +1,7 @@
+/**
+ * @summary Controller for the User Settings view.
+ * @locus Client
+ */
 this.UserSettingsController = RouteController.extend({
   template : "UserSettings" ,
 
@@ -5,41 +9,22 @@ this.UserSettingsController = RouteController.extend({
     /*YIELD_TEMPLATES*/
   } ,
 
+  /**
+   * @summary Go on to action.
+   * @function
+   * @memberOf UserSettingsController
+   */
   onBeforeAction : function () {
-    /*BEFORE_FUNCTION*/
     this.next();
   } ,
 
+  /**
+   * @summary Render the page.
+   * @function
+   * @memberOf UserSettingsController
+   */
   action : function () {
-    if(this.isReady()) {
-      this.render();
-    } else {
-      this.render("loading");
-    }
-    /*ACTION_FUNCTION*/
-  } ,
-
-  isReady : function () {
-
-
-    var subs = [];
-    var ready = true;
-    _.each(subs , function (sub) {
-      if(!sub.ready())
-        ready = false;
-    });
-    return ready;
-  } ,
-
-  data : function () {
-
-
-    return {
-      params : this.params || {}
-    };
-    /*DATA_FUNCTION*/
-  } ,
-
-  onAfterAction : function () {
+    this.render();
   }
+
 });
