@@ -170,6 +170,13 @@ describe("Group" , function () {
       expect(res).toBe(null);
     });
 
+    group.addMember(newDriver.getId());
+
+    group.addDriver(newDriver, function(err, res) {
+      expect(err).toBe(null);
+      expect(res).toBe("1");
+    });
+
 
   });
 });
