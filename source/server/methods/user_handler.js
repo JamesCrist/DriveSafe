@@ -25,7 +25,7 @@
  * @locus Server
  * @method createNewUser
  * @memberOf Meteor.methods
- * @instance
+ * @createNewUser
  * @param {String} email A string of user's email
  * @param {String} name The name of the user
  * @returns {password}

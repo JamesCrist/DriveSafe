@@ -5,10 +5,10 @@
  * @locus Server
  * @method joinGroup
  * @memberOf Meteor.methods
- * @instance
  * @param {String} groupName
  * @param {String} groupKey
  * @returns {group.id}
+ * @function
  */
 
 /**
@@ -16,7 +16,7 @@
  * @locus Server
  * @method changeAdmin
  * @memberOf Meteor.methods
- * @instance
+ * @function
  * @param {String} newAdmin
  * @returns {none}
  */
@@ -26,7 +26,7 @@
  * @locus Server
  * @method removeMember
  * @memberOf Meteor.methods
- * @instance
+ * @function
  * @param {String} memberToRemove
  * @param {Object} group
  * @returns {group.id}
