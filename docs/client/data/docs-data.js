@@ -2217,12 +2217,12 @@ DocsData = {
     "scope": "static",
     "summary": "Returns the current error message."
   },
-  "riderDashboard.helpers.ridePending": {
+  "riderDashboard.helpers.isRidePending": {
     "kind": "function",
     "locus": "Client",
-    "longname": "riderDashboard.helpers.ridePending",
+    "longname": "riderDashboard.helpers.isRidePending",
     "memberof": "riderDashboard.helpers",
-    "name": "ridePending",
+    "name": "isRidePending",
     "options": [],
     "params": [],
     "returns": [
@@ -2236,6 +2236,66 @@ DocsData = {
     ],
     "scope": "static",
     "summary": "Determines whether or not there is a ride pending."
+  },
+  "riderDashboard.helpers.noDrivers": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.helpers.noDrivers",
+    "memberof": "riderDashboard.helpers",
+    "name": "noDrivers",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "bool"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "Determines if there are any drivers for the group."
+  },
+  "riderDashboard.helpers.noRide": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.helpers.noRide",
+    "memberof": "riderDashboard.helpers",
+    "name": "noRide",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "void"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "If user does not have a ride, removes markers from map."
+  },
+  "riderDashboard.helpers.ridePending": {
+    "kind": "function",
+    "locus": "Client",
+    "longname": "riderDashboard.helpers.ridePending",
+    "memberof": "riderDashboard.helpers",
+    "name": "ridePending",
+    "options": [],
+    "params": [],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "void"
+          ]
+        }
+      }
+    ],
+    "scope": "static",
+    "summary": "places markers on map uf ride is pending."
   },
   "riderDashboard.rendered": {
     "kind": "function",
