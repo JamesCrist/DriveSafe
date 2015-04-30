@@ -350,7 +350,7 @@ Group.prototype = {
     newQueue.splice(0, newQueue.length);
     this._queue = newQueue;
     this.save(callback);
-  }
+  },
 };
 
 if(Meteor.isServer) {

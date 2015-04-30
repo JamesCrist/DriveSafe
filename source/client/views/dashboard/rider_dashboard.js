@@ -39,11 +39,12 @@ Template.riderDashboard.rendered = function () {
       });
       pickupMarker.setVisible(false);
       destMarker.setVisible(false);
-      var pickupInput = /** @type {HTMLInputElement} */(
-      document.getElementById('pickup-input'));
+      var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
+      var partySize= document.getElementById('party-size');
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(pickupInput);
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(destInput);
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(partySize);
       dest_autocomplete = new google.maps.places.Autocomplete(destInput);
       pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
       pickup_autocomplete.bindTo('bounds' , map);
@@ -90,16 +91,18 @@ Template.riderDashboard.helpers({
   },
   ridePending : function() {
     return Rides.findOne({user: Meteor.userId()});
+  },
+  noDrivers : function(){
+    group = Groups.findOne({members: Meteor.userId()});
+    return (group.drivers.length === 0);
   }
 });
 
 Template.riderDashboard.events({
   'click .cancelRide' :function () {
-    Rides.findOne({user: Meteor.userId()}).cancel(function(err, res) {
-      if (err) {
-        alert(err.message);
-      }
-    });
+    console.log("CANCEL RIDE");
+    console.log(Rides.findOne({user: Meteor.userId()}));
+    Rides.findOne({user: Meteor.userId()}).cancel();
   },
   'click .requestRide' : function () {
     //TODO CHECK IF LOCATIONS VALID
@@ -115,29 +118,44 @@ Template.riderDashboard.events({
     }
     var value1 = $.trim($("#dest-input").val());
     if(value1.length > 0) {
-      var dPlace = dest_autocomplete.getPlace();
-      userDestLocation = dPlace.geometry.location;
-      userDestAddress = dPlace.name + " " + dPlace.formatted_address;
-      var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, null, true, 
-        userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
-      console.log(ride);
-      ride.save(function(err, res) {
-        if (err) {
-          alert(err.message);
-        } else {
-          pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
-          destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
-          pickupMarker.setVisible(true);
-          destMarker.setVisible(true);
+      var partySize= document.getElementById('party-size');
+      var value2 = $.trim($("#party-size").val());
+      if(value2.length > 0 && !isNaN(partySize.value)){
+        var dPlace = dest_autocomplete.getPlace();
+        userDestLocation = dPlace.geometry.location;
+        userDestAddress = dPlace.name + " " + dPlace.formatted_address;
+        var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, null, true, 
+          userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
+        console.log(ride);
+        ride.save(function(err, res) {
+          if (err) {
+            alert(err.message);
+          } else {
+            pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
+            destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
+            pickupMarker.setVisible(true);
+            destMarker.setVisible(true);
 
-          var bounds = new google.maps.LatLngBounds();
-          bounds.extend(pickupMarker.getPosition());
-          bounds.extend(destMarker.getPosition());
-          map.fitBounds(bounds);
-        }
-      });
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(pickupMarker.getPosition());
+            bounds.extend(destMarker.getPosition());
+            map.fitBounds(bounds);
+          }
+        });
+      }
+      else {
+        IonPopup.alert({
+          title : 'Invalid party size entered' ,
+          template : 'Please input a valid number of people in your group to request a ride!' ,
+          okText : 'Okay'
+        });
+      }
     } else {
-      alert('Please input a drop off location to request a ride!');
+      IonPopup.alert({
+        title : 'No destination entered' ,
+        template : 'Please input a drop off location to request a ride!' ,
+        okText : 'Okay'
+      });
     }
   }
 });

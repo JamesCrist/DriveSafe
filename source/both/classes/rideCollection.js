@@ -131,11 +131,11 @@ Ride.prototype = {
     Rides.remove(this.id , callback);
   } ,
   cancel : function (callback) {
+    console.log("IN CANCEL");
     if(!this.group) {
       throw new Meteor.Error("group not defined!");
     }
     var that = this;
-    console.log(Groups.findOne(this.group));
     if (this.pending) {
       Groups.findOne(this.group).removeRideFromQueue(this.id , function (err , res) {
         if(err) {
@@ -146,18 +146,21 @@ Ride.prototype = {
     } else {
       var driver = Drivers.findOne(this.driver);
       driver.currentRide = null;
-      console.log(driver);
       driver.save();
       //assign next ride to driver
-      if(Groups.findOne().queue.length > 0){
+      var queue = Groups.findOne(this.group).queue;
+      if(queue.length > 0){
+
         //get the first ride in queue
-        var ride = Rides.findOne(Groups.findOne().queue[0]);
+        var ride = Rides.findOne(queue[0]);
         ride.assignTo(driver);
         ride.save();
-        Groups.findOne().removeRideFromQueue(ride.id);
+        Groups.findOne(this.group).removeRideFromQueue(ride.id);
       }
       that.delete(callback);
     }
+    pickupMarker.setVisible(false);
+    destMarker.setVisible(false);
   } ,
   assignTo : function (driver) {
     if(driver.currentRide) {
@@ -180,7 +183,7 @@ if(Meteor.isServer) {
       return !Users.findOne(userId).isDriver() && doc.user === userId;
     } ,
     'update' : function (userId , doc) {
-      return doc.user === userId || Users.findOne(userId).isDriver();
+      return (doc.user === userId || Users.findOne(userId).isDriver()) || (doc.user !== userId);
     },
     'remove' : function (userId , doc) {
       return doc.user === userId || Users.findOne(userId).isDriver();

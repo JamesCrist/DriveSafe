@@ -35,19 +35,25 @@
             {{/if}}
             <div id="map-canvas" class="map-canvas"></div>
             <input id="pickup-input" class="controls" type="text" placeholder="Your location" >
-            <input id="dest-input" class="controls" type="text"
-            placeholder="Enter a destination">
+            <input id="dest-input" class="controls" type="text" placeholder="Enter a destination">
+            <input id="party-size" class="controls" type="text" placeholder="Enter your party size">
         {{/ionContent}}
     {{/ionView}}
     {{#if group }}
-        {{#if ridePending}}
-            {{#ionFooterBar class="bar-assertive cancelRide"}}
-                <h1 class="title">Cancel Ride</h1>
+        {{#if noDrivers}}
+            {{#ionFooterBar class="bar-assertive noDrivers"}}
+                <h1 class="title">There are no drivers for your group</h1>
             {{/ionFooterBar}}
         {{else}}
-            {{#ionFooterBar class="bar-energized requestRide"}}
-                <h1 class="title">Request Ride!</h1>
-            {{/ionFooterBar}}
+            {{#if ridePending}}
+                {{#ionFooterBar class="bar-assertive cancelRide"}}
+                    <h1 class="title">Cancel Ride</h1>
+                {{/ionFooterBar}}
+            {{else}}
+                {{#ionFooterBar class="bar-energized requestRide"}}
+                    <h1 class="title">Request Ride!</h1>
+                {{/ionFooterBar}}
+            {{/if}}
         {{/if}}
     {{else}}
         {{#ionFooterBar class="bar-assertive"}}

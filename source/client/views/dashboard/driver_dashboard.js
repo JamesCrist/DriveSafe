@@ -25,8 +25,17 @@ Template.driverDashboard.helpers({
   ridesAvailable : function () {
     return this.rides.count() > 0;
   } ,
+  rideInQueue : function () {
+    return (this.pending);
+  },
+  emptyQueue : function () {
+    var queue = Groups.findOne(this.group).queue;
+    var driver = UI._templateInstance().data.driver;
+    return (queue.length === 0 && driver.currentRide === null);
+  },
   currentRide : function () {
-    return !(this.pending);
+    var driver = UI._templateInstance().data.driver.id;
+    return (!(this.pending) && (this.driver == driver));
   },
   getPickupAddress: function(){
     return this.pickupAdd;
@@ -89,11 +98,9 @@ Template.driverDashboard.events({
     $("#confirm-dropoff-button").show();
   } ,
   'click #confirm-dropoff-button' : function (event , template) {
-    this.cancel(function (err , res) {
-      if(err) {
-        alert(err.message);
-      }
-    });
+    console.log("CONFIRM DROP OFF");
+    console.log(this);
+    this.cancel();
   } ,
   'click .tab-item' : function (event , template) {
     this.cancel(function (err , res) {

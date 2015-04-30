@@ -72,12 +72,6 @@ Meteor.startup(function () {
       if(!group) {
         console.log("ERROR: Group that ride belongs to not found!");
       }
-      
-      console.log("RIDES:" + group.queue.length);
-      
-      if(group.drivers.length > 0) {
-          console.log("MORE THAN ONE DRIVER IN GROUP");
-      }
       // If the queue is empty, and there are drivers
       if(group.queue.length == 0 && group.drivers.length > 0) {
         for(var index = 0 ; index < group.drivers.length ; ++index) {
@@ -93,6 +87,27 @@ Meteor.startup(function () {
             console.log(err.message);
           }
         });
+      }
+    }
+  }),
+  Drivers.find().observeChanges({
+    added : function (id , fields) {
+      console.log("RIDE ADDED!");
+      var driver = Drivers.findOne(id);
+      if(!driver) {
+        console.log("ERROR: Ride not found!");
+        return;
+      }
+      var group = Groups.findOne(driver.group);
+      if(!group) {
+        console.log("ERROR: Group that driver belongs to not found!");
+      }
+      // If the queue is empty, and there are drivers
+      if(group.queue.length > 0) {
+        ride = Rides.findOne(group.queue[0])
+        ride.assignTo(driver);
+        ride.save();
+        return;
       }
     }
   })
