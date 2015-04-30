@@ -68,9 +68,18 @@ Template.driverDashboard.helpers({
    * */
   ridesAvailable: function () {
     return this.rides.count() > 0;
+  } ,
+  rideInQueue : function () {
+    return (this.pending);
   },
-  currentRide: function () {
-    return !(this.pending);
+  emptyQueue : function () {
+    var queue = Groups.findOne(this.group).queue;
+    var driver = UI._templateInstance().data.driver;
+    return (queue.length === 0 && driver.currentRide === null);
+  },
+  currentRide : function () {
+    var driver = UI._templateInstance().data.driver.id;
+    return (!(this.pending) && (this.driver == driver));
   },
   getPickupAddress: function () {
     return this.pickupAdd;
@@ -169,7 +178,7 @@ Template.driverDashboard.events({
     }
     $("#dest-navigation-button").remove();
     $("#confirm-dropoff-button").show();
-  },
+  } ,
   /**
    * @summary Confirms that the Rider has been dropped off successfully.
    * @locus Client
