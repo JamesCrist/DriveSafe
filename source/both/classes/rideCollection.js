@@ -197,8 +197,6 @@ Ride.prototype = {
       }
       that.delete(callback);
     }
-    pickupMarker.setVisible(false);
-    destMarker.setVisible(false);
   } ,
 
   /**

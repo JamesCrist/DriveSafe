@@ -1,7 +1,6 @@
 Meteor.startup(function () {
   Rides.find().observeChanges({
     added : function (id , fields) {
-      console.log("RIDE ADDED!");
       var ride = Rides.findOne(id);
       if(!ride) {
         console.log("ERROR: Ride not found!");
@@ -31,10 +30,9 @@ Meteor.startup(function () {
   }),
   Drivers.find().observeChanges({
     added : function (id , fields) {
-      console.log("RIDE ADDED!");
       var driver = Drivers.findOne(id);
       if(!driver) {
-        console.log("ERROR: Ride not found!");
+        console.log("ERROR: Driver not found!");
         return;
       }
       var group = Groups.findOne(driver.group);

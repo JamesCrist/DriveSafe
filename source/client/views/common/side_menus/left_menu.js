@@ -148,10 +148,19 @@ Template.leftMenu.events({
    * @param {Meteor.Template} template
    */
   'click #becomeDriverButton' : function (event , template) {
-    Meteor.user().becomeDriver(function (err) {
-      if(err) {
-        console.log(err.message);
-      }
-    });
+    if (Rides.findOne({user: Meteor.userId()})){
+      IonPopup.alert({
+        title : 'Cannot become driver when you have a ride pending' ,
+        template : 'Please cancel your ride to become a driver' ,
+        okText : 'Okay'
+      });
+    }
+    else{
+      Meteor.user().becomeDriver(function (err) {
+        if(err) {
+          console.log(err.message);
+        }
+      });
+    }
   }
 });

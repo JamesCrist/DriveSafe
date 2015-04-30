@@ -44,8 +44,6 @@ Template.riderDashboard.rendered = function () {
         map: map,
         title: 'Drop off'
       });
-      pickupMarker.setVisible(false);
-      destMarker.setVisible(false);
       var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
       var partySize= document.getElementById('party-size');
@@ -120,11 +118,34 @@ Template.riderDashboard.helpers({
    * @return {Ride}
    * */
   ridePending: function () {
+    pickupMarker.setVisible(true);
+    destMarker.setVisible(true);
     return Rides.findOne({user: Meteor.userId()});
   },
+  /**
+   * @summary Determines if there are any drivers for the group.
+   * @locus Client
+   * @method noDrivers
+   * @memberOf riderDashboard.helpers
+   * @function
+   * @return {bool}
+   * */
   noDrivers : function(){
     group = Groups.findOne({members: Meteor.userId()});
     return (group.drivers.length === 0);
+  },
+  /**
+   * @summary If user does not have a ride, removes markers from map.
+   * @locus Client
+   * @method noRide
+   * @memberOf riderDashboard.helpers
+   * @function
+   * @return {void}
+   * */
+  noRide: function () {
+    pickupMarker.setVisible(false);
+    destMarker.setVisible(false);
+    return;
   }
 });
 
