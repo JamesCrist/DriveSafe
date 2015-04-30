@@ -64,6 +64,14 @@ Handlebars.registerHelper('group', function () {
   return Groups.findOne();
 });
 
+Handlebars.registerHelper('formClass', function() {
+  var className = "container";
+  if (!Meteor.isCordova) {
+    className += " tabs-content";
+  }
+  return className;
+});
+
 if (!Meteor.isCordova) {
   // Update the user's location every second.
   Meteor.setInterval(function () {
