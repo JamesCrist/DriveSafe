@@ -41,11 +41,13 @@
     {{/ionView}}
     {{#if group }}
         {{#if noDrivers}}
+            {{noRide}}
             {{#ionFooterBar class="bar-assertive noDrivers"}}
                 <h1 class="title">There are no drivers for your group</h1>
             {{/ionFooterBar}}
         {{else}}
-            {{#if ridePending}}
+            {{#if isRidePending}}
+                {{ridePending}}
                 {{#ionFooterBar class="bar-assertive cancelRide"}}
                     <h1 class="title">Cancel Ride</h1>
                 {{/ionFooterBar}}
@@ -57,6 +59,7 @@
             {{/if}}
         {{/if}}
     {{else}}
+        {{noRide}}
         {{#ionFooterBar class="bar-assertive"}}
             <h1 class="title">You must join a group to request a ride</h1>
         {{/ionFooterBar}}

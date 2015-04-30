@@ -44,6 +44,8 @@ Template.riderDashboard.rendered = function () {
         map: map,
         title: 'Drop off'
       });
+      pickupMarker.setVisible(false);
+      destMarker.setVisible(false);
       var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
       var partySize= document.getElementById('party-size');
@@ -112,15 +114,35 @@ Template.riderDashboard.helpers({
   /**
    * @summary Determines whether or not there is a ride pending.
    * @locus Client
-   * @method ridePending
+   * @method isRidePending
    * @memberOf riderDashboard.helpers
    * @function
    * @return {Ride}
    * */
+  isRidePending: function () {
+    return Rides.findOne({user: Meteor.userId()});
+  },
+  /**
+   * @summary places markers on map uf ride is pending.
+   * @locus Client
+   * @method ridePending
+   * @memberOf riderDashboard.helpers
+   * @function
+   * @return {void}
+   * */
   ridePending: function () {
+    var ride = Rides.findOne({user: Meteor.userId()});
+    console.log("MARKERS");
+    console.log(ride);
+    pickupMarker.setPosition(new google.maps.LatLng((ride.pickupLoc).A , (ride.pickupLoc).F));
+    destMarker.setPosition(new google.maps.LatLng((ride.destLoc).A , (ride.destLoc).F));
     pickupMarker.setVisible(true);
     destMarker.setVisible(true);
-    return Rides.findOne({user: Meteor.userId()});
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(pickupMarker.getPosition());
+    bounds.extend(destMarker.getPosition());
+    map.fitBounds(bounds);
+    return ;
   },
   /**
    * @summary Determines if there are any drivers for the group.
