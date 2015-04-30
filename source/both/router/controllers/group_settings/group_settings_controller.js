@@ -1,3 +1,7 @@
+/**
+ * @summary The controller for the Group Settings page.
+ * @locus Client
+ */
 this.GroupSettingsController = RouteController.extend({
   template : "GroupSettings" ,
 
@@ -5,38 +9,43 @@ this.GroupSettingsController = RouteController.extend({
     /*YIELD_TEMPLATES*/
   } ,
 
+  /**
+   * @summary Go on to action.
+   * @function
+   * @memberOf GroupSettingsController
+   */
   onBeforeAction : function () {
-    /*BEFORE_FUNCTION*/
     this.next();
   } ,
 
+  /**
+   * @summary Render page.
+   * @function
+   * @memberOf GroupSettingsController
+   */
   action : function () {
-    if(this.isReady()) {
-      this.render();
-    } else {
-      this.render("loading");
-    }
-    /*ACTION_FUNCTION*/
+    this.render();
   } ,
 
-  isReady : function () {
 
-
-    var subs = [];
-    var ready = true;
-    _.each(subs , function (sub) {
-      if(!sub.ready())
-        ready = false;
-    });
-    return ready;
-  } ,
+  /**
+   * @summary Waits for group information.
+   * @function
+   * @memberOf GroupSettingsController
+   * @returns {any}
+   */
   waitOn : function () {
     return Meteor.subscribe("groups" , { admin : Meteor.userId() });
   } ,
+
+  /**
+   * @summary Returns group information.
+   * @function
+   * @memberOf GroupSettingsController
+   * @returns {*}
+   */
   data : function () {
     return Groups.findOne();
-  } ,
-
-  onAfterAction : function () {
   }
+
 });

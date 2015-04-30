@@ -1,3 +1,5 @@
 .DS_Store
 .idea/
 .idea/workspace.xml
+source/tests/jasmine/server/unit/package-stubs.js
+source/tests/jasmine/server/unit/packageMocksSpec.js
