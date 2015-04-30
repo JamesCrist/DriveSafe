@@ -133,7 +133,7 @@ Template.driverDashboard.events({
   'click #pickup-navigation-button': function (event, template) {
     if (Meteor.isCordova) {
       launchnavigator.navigate(
-        [this.pickupLoc.k, this.pickupLoc.D],
+        [this.pickupLoc.A, this.pickupLoc.F],
         null,
         function () {
           // Do stuff here if opening is successful!
@@ -162,7 +162,7 @@ Template.driverDashboard.events({
   'click #dest-navigation-button': function (event, template) {
     if (Meteor.isCordova) {
       launchnavigator.navigate(
-        [this.destLoc.k, this.destLoc.D],
+        [this.destLoc.A, this.destLoc.F],
         null,
         function () {
           // Do stuff here if opening is successful!
