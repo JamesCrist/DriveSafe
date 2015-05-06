@@ -15,7 +15,7 @@ Template.riderDashboard.rendered = function () {
   }
 
   var that = this;
-
+  console.log("SHIT'S RENDERED");
   GoogleMaps.init(
     {libraries: 'places'},
     function () {
@@ -131,17 +131,8 @@ Template.riderDashboard.helpers({
    * @return {void}
    * */
   ridePending: function () {
-    var ride = Rides.findOne({user: Meteor.userId()});
-    console.log("MARKERS");
-    console.log(ride);
-    pickupMarker.setPosition(new google.maps.LatLng((ride.pickupLoc).A , (ride.pickupLoc).F));
-    destMarker.setPosition(new google.maps.LatLng((ride.destLoc).A , (ride.destLoc).F));
     pickupMarker.setVisible(true);
     destMarker.setVisible(true);
-    var bounds = new google.maps.LatLngBounds();
-    bounds.extend(pickupMarker.getPosition());
-    bounds.extend(destMarker.getPosition());
-    map.fitBounds(bounds);
     return ;
   },
   /**
