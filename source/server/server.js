@@ -27,7 +27,7 @@ Meteor.startup(function () {
         });
       }
     }
-  }),
+  });
   Drivers.find().observeChanges({
     added : function (id , fields) {
       var driver = Drivers.findOne(id);
@@ -41,13 +41,19 @@ Meteor.startup(function () {
       }
       // If the queue is empty, and there are drivers
       if(group.queue.length > 0) {
-        ride = Rides.findOne(group.queue[0])
+        ride = Rides.findOne(group.queue[0]);
         ride.assignTo(driver);
+        Groups.findOne(ride.group).removeRideFromQueue(ride.id, function (err, res) {
+          if (err) {
+            throw err;
+          }
+          that.delete(callback);
+        });
         ride.save();
         return;
       }
     }
-  })
+  });
 });
 
 
