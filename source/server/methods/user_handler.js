@@ -32,6 +32,5 @@ Meteor.methods({
       subject: "Your DriveSafe Temporary Password",
       text: "Your temporary password is: " + password
     });
-    return password; // FOR DEVELOPMENT PURPOSES ONLY! REMOVE BEFORE PRODUCTION
   }
 });

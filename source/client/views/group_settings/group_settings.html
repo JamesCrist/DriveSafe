@@ -46,20 +46,21 @@
                                 {{#each groupMembers}}
                                     <div class="item" id="{{_id}}">
                                         <div class="row">
-                                            <div class="col col-50">
+                                            <div class="col col-100">
                                                 {{ profile.name }} <br/> {{ profile.email }}
                                                 {{#if profile.isDriver }}
                                                     <br/> DRIVER
                                                 {{/if}}
-
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             {{#unless profile.isAdmin}}
-                                                <div class="col">
+                                                <div class="col col-50">
                                                     <button class="button button-outline button-positive makeAdmin">
                                                         Make Admin
                                                     </button>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-50">
                                                     <button class="button button-outline button-assertive removeMember">
                                                         Remove User
                                                     </button>
