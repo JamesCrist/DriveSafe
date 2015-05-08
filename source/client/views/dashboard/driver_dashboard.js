@@ -92,6 +92,9 @@ Template.driverDashboard.helpers({
   getDestAddress: function () {
     return this.destAdd;
   },
+  imageNotAdded : function () {
+    return $('.noRides').length === 0;
+  } ,
   /**
    * @summary Returns the first Ride in the queue.
    * @locus Client
