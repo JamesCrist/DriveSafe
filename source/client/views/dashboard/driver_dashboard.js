@@ -79,6 +79,8 @@ Template.driverDashboard.helpers({
   },
   currentRide : function () {
     var driver = UI._templateInstance().data.driver.id;
+    console.log(driver);
+    console.log(this);
     return (!(this.pending) && (this.driver == driver));
   },
   getPickupAddress: function () {

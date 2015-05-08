@@ -205,15 +205,17 @@ Ride.prototype = {
    * @function
    * @memberOf Ride
    */
-  assignTo: function (driver) {
+  assignTo: function (driver, callback) {
     if (driver.currentRide) {
       throw Meteor.Error("Ride cannot be assigned to driver who already has a ride!");
     }
     this.driver = driver.id;
     this.pending = false;
     this.save();
+    var group = Groups.findOne(driver.group);
     driver.currentRide = this.id;
     driver.save();
+    group.removeRideFromQueue(this.id, callback);
   }
 };
 

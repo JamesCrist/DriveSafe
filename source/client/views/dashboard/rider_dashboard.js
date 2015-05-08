@@ -1,5 +1,7 @@
 var pageSession = new ReactiveDict();
 
+var rideExists = new ReactiveVar(false);
+
 pageSession.set("errorMessage", "");
 
 /**
@@ -15,7 +17,6 @@ Template.riderDashboard.rendered = function () {
   }
 
   var that = this;
-  console.log("SHIT'S RENDERED");
   GoogleMaps.init(
     {libraries: 'places'},
     function () {
@@ -34,18 +35,20 @@ Template.riderDashboard.rendered = function () {
       Tracker.autorun(function () {
         map.setCenter(new google.maps.LatLng(that.data.user.getLat(), that.data.user.getLng()));
       });
+      
       pickupMarker = new google.maps.Marker({
         position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
-        map: map,
-        title: 'Pick Up'
-      });
-      destMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
-        map: map,
-        title: 'Drop off'
-      });
-      pickupMarker.setVisible(false);
-      destMarker.setVisible(false);
+          map: map,
+          title: 'Pick Up'
+          });
+          destMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
+            map: map,
+            title: 'Drop off'
+          });
+        pickupMarker.setVisible(false);
+        destMarker.setVisible(false);
+      
       var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
       var partySize= document.getElementById('party-size');
@@ -71,6 +74,14 @@ Template.riderDashboard.rendered = function () {
           };
         }
       });
+      var ride = Rides.findOne({user: Meteor.userId()});
+      if(ride){
+        pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
+        destMarker.setPosition(new google.maps.LatLng(ride.destLoc.A, ride.destLoc.F));
+        pickupMarker.setVisible(true);
+        destMarker.setVisible(true);
+
+      }
       cursorsArray.push({
         cursor: Users.find(Meteor.userId()),
         transform: function (document) {
@@ -131,6 +142,10 @@ Template.riderDashboard.helpers({
    * @return {void}
    * */
   ridePending: function () {
+    if (rideExists.get()) {
+      return;
+    }
+    rideExists.set(true);
     pickupMarker.setVisible(true);
     destMarker.setVisible(true);
     return ;
@@ -156,6 +171,10 @@ Template.riderDashboard.helpers({
    * @return {void}
    * */
   noRide: function () {
+    if (!rideExists.get()) {
+      return;
+    }
+    rideExists.set(false);
     pickupMarker.setVisible(false);
     destMarker.setVisible(false);
     return;
@@ -204,10 +223,9 @@ Template.riderDashboard.events({
         var dPlace = dest_autocomplete.getPlace();
         userDestLocation = dPlace.geometry.location;
         userDestAddress = dPlace.name + " " + dPlace.formatted_address;
-        var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, null, true, 
-          userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
-        console.log(ride);
-        ride.save(function(err, res) {
+
+        Meteor.call('requestRide', Groups.findOne().id, userPickupLocation, userDestLocation, userPickupAddress,
+          userDestAddress, function(err, res) {
           if (err) {
             alert(err.message);
           } else {
@@ -221,8 +239,7 @@ Template.riderDashboard.events({
             map.fitBounds(bounds);
           }
         });
-      }
-      else {
+      } else {
         IonPopup.alert({
           title : 'Invalid party size entered' ,
           template : 'Please input a valid number of people in your group to request a ride!' ,
