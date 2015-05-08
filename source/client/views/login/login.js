@@ -39,7 +39,7 @@ Template.Login.events({
 
     var submit_button = $(t.find(":submit"));
 
-    var login_email = t.find('#login_email').value.trim();
+    var login_email = t.find('#login_email').value.trim().toLowerCase();
     var login_password = t.find('#login_password').value;
 
     // check email

@@ -29,7 +29,7 @@ Template.ForgotPassword.events({
     e.preventDefault();
 
     var submit_button = $(t.find(":submit"));
-    var reset_email = t.find('#reset_email').value.trim();
+    var reset_email = t.find('#reset_email').value.trim().toLowerCase();
 
     // Check to see if the email is valid
     if (!isValidEmail(reset_email)) {

@@ -42,7 +42,7 @@ Template.Register.events({
     var submit_button = $(t.find(":submit"));
 
     var register_name = t.find('#register_name').value.trim();
-    var register_email = t.find('#register_email').value.trim();
+    var register_email = t.find('#register_email').value.trim().toLowerCase();
 
     // check name
     if (register_name === "") {
