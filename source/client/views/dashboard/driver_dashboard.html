@@ -69,7 +69,9 @@
                             </div>
                         {{else}}
                             {{#if emptyQueue}}
-                                <img src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
+                                {{#if imageNotAdded}}
+                                    <img class="noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
+                                {{/if}}
                             {{/if}}
                             {{#if rideInQueue}}
                                 <div class="list card">
@@ -95,7 +97,7 @@
                     {{/with}}
                 {{/each}}
             {{else}}
-                <img src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
+                <img class= "noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
             {{/if}}
         {{/ionContent}}
     {{/ionView}}
