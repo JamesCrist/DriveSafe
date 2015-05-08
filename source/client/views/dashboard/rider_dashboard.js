@@ -35,18 +35,51 @@ Template.riderDashboard.rendered = function () {
       Tracker.autorun(function () {
         map.setCenter(new google.maps.LatLng(that.data.user.getLat(), that.data.user.getLng()));
       });
+      
       pickupMarker = new google.maps.Marker({
         position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
-        map: map,
-        title: 'Pick Up'
-      });
-      destMarker = new google.maps.Marker({
+          map: map,
+          title: 'Pick Up'
+          });
+          destMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
+            map: map,
+            title: 'Drop off'
+          });
+        pickupMarker.setVisible(false);
+        destMarker.setVisible(false);
+      /*if(ride){
+        console.log("YOU HAVE A RIDE YAY");
+         pickupMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(ride.pickupLoc.lat, ride.pickupLoc.lng),
+          map: map,
+          title: 'Pick Up'
+        });
+        destMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(ride.destLoc.lat, ride.destLoc.lng),
+          map: map,
+          title: 'Drop off'
+        });
+        pickupMarker.setVisible(true);
+        destMarker.setVisible(true);
+        console.log(ride.pickupLoc.lat + " " + ride.pickupLoc.lat);
+      }
+      else{
+        console.log("YOU DONT HAVE A RIDE FUCK");
+        pickupMarker = new google.maps.Marker({
         position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
-        map: map,
-        title: 'Drop off'
-      });
-      pickupMarker.setVisible(false);
-      destMarker.setVisible(false);
+          map: map,
+          title: 'Pick Up'
+          });
+          destMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng()),
+            map: map,
+            title: 'Drop off'
+          });
+        pickupMarker.setVisible(false);
+        destMarker.setVisible(false);
+      }*/
+      
       var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
       var partySize= document.getElementById('party-size');
@@ -72,6 +105,16 @@ Template.riderDashboard.rendered = function () {
           };
         }
       });
+      var ride = Rides.findOne({user: Meteor.userId()});
+      if(ride){
+        console.log("YOU HAVE A RIDE POOP");
+        console.log(ride.pickupLoc.F);
+        pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
+        destMarker.setPosition(new google.maps.LatLng(ride.destLoc.A, ride.destLoc.F));
+        pickupMarker.setVisible(true);
+        destMarker.setVisible(true);
+
+      }
       cursorsArray.push({
         cursor: Users.find(Meteor.userId()),
         transform: function (document) {
