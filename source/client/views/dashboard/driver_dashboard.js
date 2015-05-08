@@ -77,6 +77,10 @@ Template.driverDashboard.helpers({
     var driver = UI._templateInstance().data.driver;
     return (queue.length === 0 && driver.currentRide === null);
   },
+  noDriverRide : function () {
+    var driver = UI._templateInstance().data.driver;
+    return !driver.currentRide && Groups.findOne(driver.group).queue.length === 0
+  } ,
   currentRide : function () {
     var driver = UI._templateInstance().data.driver.id;
     console.log(driver);

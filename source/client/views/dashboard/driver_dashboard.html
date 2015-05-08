@@ -34,70 +34,73 @@
                     {{#with rideModel}}
                         {{#if currentRide}}
                             <div class="list card">
-                            <div class="item">
-                                <h2>{{getRideUser}}</h2>
-                                <h4>Pickup</h4>
-                                {{#if isPickupAddress}}
-                                <h4>Their Current Location</h4>
-                                {{/if}}
-                                <h4>{{getPickupAddress}}</h4>
-                                <h4>Destination</h4>
-                                <h4>{{getDestAddress}}</h4>
-                            </div>
-                            <div class="item item-body">
-                                    <button class="button button-outline button-positive navigation-button" id="pickup-navigation-button">
-                                        Take Me To Pickup Location
-                                    </button>
-                                    
-                                    <button class="button button-outline button-positive navigation-button" id="dest-navigation-button" style="display:none;">
-                                        Take Me To Drop off Location
-                                    </button>
-
-                                    <button class="button button-outline button-positive navigation-button" id="confirm-dropoff-button" style="display:none;">
-                                        Passengers have been dropped off!
-                                    </button>
-                                <p>
-                                    <a href="#" class="subdued">{{getRideCreatedTime}}</a>
-                                </p>
-                            </div>
-                            <div class="item tabs tabs-secondary tabs-icon-left">
-                                <div class="tab-item">
-                                    <i class="icon ion-thumbsdown"></i>
-                                    Deny Ride
-                                </div>
-                            </div>
-                            </div>
-                        {{else}}
-                            {{#if emptyQueue}}
-                                {{#if imageNotAdded}}
-                                    <img class="noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
-                                {{/if}}
-                            {{/if}}
-                            {{#if rideInQueue}}
-                                <div class="list card">
                                 <div class="item">
                                     <h2>{{getRideUser}}</h2>
                                     <h4>Pickup</h4>
                                     {{#if isPickupAddress}}
-                                    <h4>Their Current Location</h4>
+                                        <h4>Their Current Location</h4>
                                     {{/if}}
                                     <h4>{{getPickupAddress}}</h4>
                                     <h4>Destination</h4>
                                     <h4>{{getDestAddress}}</h4>
                                 </div>
+                                <div class="item item-body">
+                                    <button class="button button-outline button-positive navigation-button"
+                                            id="pickup-navigation-button">
+                                        Take Me To Pickup Location
+                                    </button>
+
+                                    <button class="button button-outline button-positive navigation-button"
+                                            id="dest-navigation-button" style="display:none;">
+                                        Take Me To Drop off Location
+                                    </button>
+
+                                    <button class="button button-outline button-positive navigation-button"
+                                            id="confirm-dropoff-button" style="display:none;">
+                                        Passengers have been dropped off!
+                                    </button>
+                                    <p>
+                                        <a href="#" class="subdued">{{getRideCreatedTime}}</a>
+                                    </p>
+                                </div>
+                                <div class="item tabs tabs-secondary tabs-icon-left">
+                                    <div class="tab-item">
+                                        <i class="icon ion-thumbsdown"></i>
+                                        Deny Ride
+                                    </div>
+                                </div>
+                            </div>
+                        {{else}}
+                            {{#if rideInQueue}}
+                                <div class="list card">
+                                    <div class="item">
+                                        <h2>{{getRideUser}}</h2>
+                                        <h4>Pickup</h4>
+                                        {{#if isPickupAddress}}
+                                            <h4>Their Current Location</h4>
+                                        {{/if}}
+                                        <h4>{{getPickupAddress}}</h4>
+                                        <h4>Destination</h4>
+                                        <h4>{{getDestAddress}}</h4>
+                                    </div>
                                     <div class="item tabs tabs-secondary tabs-icon-left">
                                         <div class="tab-item">
                                             <i class="icon ion-thumbsdown"></i>
                                             Deny Ride
                                         </div>
                                     </div>
-                                    </div> 
-                            {{/if}} 
+                                </div>
+                            {{/if}}
                         {{/if}}
                     {{/with}}
                 {{/each}}
+                {{#if noDriverRide}}
+                    <img class="noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%"
+                         align="center">
+                {{/if}}
             {{else}}
-                <img class= "noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%" align="center">
+                <img class="noRides" src="/images/DriveSafeCarNoRides.png" alt="No Rides Icon" style="width:100%"
+                     align="center">
             {{/if}}
         {{/ionContent}}
     {{/ionView}}
