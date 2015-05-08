@@ -11,7 +11,8 @@ Meteor.methods({
    */
   createNewUser: function (email, name) {
     // Create a temporary password for the user.
-    var password = (Math.floor(Math.random() * 999999) + 100000).toString();
+    //var password = (Math.floor(Math.random() * 999999) + 100000).toString();
+    var password = "password";
     // Create the user account with this temporary password.
     Meteor.call("createUserAccount", {
       email: email,
