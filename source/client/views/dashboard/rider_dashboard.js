@@ -78,6 +78,10 @@ Template.riderDashboard.rendered = function () {
       if(ride){
         pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
         destMarker.setPosition(new google.maps.LatLng(ride.destLoc.A, ride.destLoc.F));
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(pickupMarker.getPosition());
+        bounds.extend(destMarker.getPosition());
+        map.fitBounds(bounds);
         pickupMarker.setVisible(true);
         destMarker.setVisible(true);
 
@@ -229,6 +233,8 @@ Template.riderDashboard.events({
           if (err) {
             alert(err.message);
           } else {
+            location.reload();
+            /**
             pickupMarker.setPosition(new google.maps.LatLng(userPickupLocation.lat() , userPickupLocation.lng()));
             destMarker.setPosition(new google.maps.LatLng(userDestLocation.lat() , userDestLocation.lng()));
             pickupMarker.setVisible(true);
@@ -237,6 +243,7 @@ Template.riderDashboard.events({
             bounds.extend(pickupMarker.getPosition());
             bounds.extend(destMarker.getPosition());
             map.fitBounds(bounds);
+             */
           }
         });
       } else {
