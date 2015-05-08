@@ -349,7 +349,6 @@ Group.prototype = {
     }
     // Check to make sure the driver is already a member of the group.
     var index = this.members.indexOf(driver.getId());
-    console.log("HOWDY! " + index);
     if(index < 0) {
       if(callback)
         callback.call(this , new Meteor.Error("User must already be a member to become a driver!") , null);
@@ -475,6 +474,18 @@ Group.prototype = {
         callback.call(this , null , null);
     }
   } ,
+
+  popRideFromQueue : function () {
+    var queue = this.queue;
+    if (queue.length === 0) {
+      return null;
+    }
+    var ride = Rides.findOne(queue.shift());
+    this._queue = queue;
+    this.save();
+    return ride;
+  } ,
+
   /**
    * @summary Remove all rides from group ride queue
    * @param callback

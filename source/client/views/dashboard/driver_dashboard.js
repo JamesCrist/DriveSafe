@@ -1,3 +1,6 @@
+var interval = null;
+
+
 /**
  * @summary Renders the driver dashboard template on the screen.
  * @locus Client
@@ -9,6 +12,22 @@ Template.driverDashboard.rendered = function () {
   if (Meteor.isCordova) {
     GeolocationBG.start();
   }
+  var that = this;
+  // Listen for new rides every second.
+  interval = Meteor.setInterval(function() {
+    var driver = that.data.driver;
+    var rides = that.data.rides;
+    if (driver.currentRide) {
+      return;
+    }
+    if (rides.count() == 0) {
+      return;
+    }
+    var group = Groups.findOne(driver.group);
+    var nextRide = group.popRideFromQueue();
+    nextRide.assignTo(driver);
+    nextRide.save();
+  }, 1000);
 };
 /**
  * @summary Removes the driver dashboard template from the screen.
@@ -21,6 +40,8 @@ Template.driverDashboard.destroyed = function () {
   if (Meteor.isCordova) {
     GeolocationBG.stop();
   }
+  if (interval)
+    Meteor.clearInterval(interval);
 };
 
 Template.driverDashboard.helpers({
@@ -79,6 +100,8 @@ Template.driverDashboard.helpers({
   },
   currentRide : function () {
     var driver = UI._templateInstance().data.driver.id;
+    console.log(driver);
+    console.log(this);
     return (!(this.pending) && (this.driver == driver));
   },
   getPickupAddress: function () {

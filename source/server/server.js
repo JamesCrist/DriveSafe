@@ -1,4 +1,5 @@
-Meteor.startup(function () {
+/**
+ Meteor.startup(function () {
   Rides.find().observeChanges({
     added : function (id , fields) {
       var ride = Rides.findOne(id);
@@ -55,7 +56,7 @@ Meteor.startup(function () {
     }
   });
 });
-
+ **/
 
 Meteor.methods({
   /**
@@ -144,6 +145,38 @@ Meteor.methods({
     this.unblock();
 
     Email.send(options);
+  } ,
+  "requestRide" : function (groupId , userPickupLocation , userDestLocation , userPickupAddress ,
+                            userDestAddress , callback) {
+    var ride = new Ride(null, this.userId , groupId, null, true,
+      userPickupLocation , userDestLocation, userPickupAddress ,
+      userDestAddress, Date.now());
+
+    console.log(ride);
+
+    var group = Groups.findOne(groupId);
+
+    if(!group) {
+      throw new Meteor.Error("Group not found!");
+    }
+
+    ride.save(function(err, res) {
+      if (err) {
+        ride.delete();
+        if (callback)
+          callback.call(this, err, res);
+      } else {
+        group.addRideToQueue(ride , function (err , res) {
+          if(callback)
+            callback.call(this , err , res);
+          if(err) {
+            console.log(err.message);
+          } else {
+            console.log("RIDE " + ride.id + " ADDED TO GROUP QUEUE");
+          }
+        });
+      }
+    });
   }
 });
 

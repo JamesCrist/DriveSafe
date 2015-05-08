@@ -1,5 +1,7 @@
 var pageSession = new ReactiveDict();
 
+var rideExists = new ReactiveVar(false);
+
 pageSession.set("errorMessage", "");
 
 /**
@@ -15,7 +17,6 @@ Template.riderDashboard.rendered = function () {
   }
 
   var that = this;
-  console.log("SHIT'S RENDERED");
   GoogleMaps.init(
     {libraries: 'places'},
     function () {
@@ -131,6 +132,10 @@ Template.riderDashboard.helpers({
    * @return {void}
    * */
   ridePending: function () {
+    if (rideExists.get()) {
+      return;
+    }
+    rideExists.set(true);
     pickupMarker.setVisible(true);
     destMarker.setVisible(true);
     return ;
@@ -156,6 +161,10 @@ Template.riderDashboard.helpers({
    * @return {void}
    * */
   noRide: function () {
+    if (!rideExists.get()) {
+      return;
+    }
+    rideExists.set(false);
     pickupMarker.setVisible(false);
     destMarker.setVisible(false);
     return;
@@ -204,10 +213,9 @@ Template.riderDashboard.events({
         var dPlace = dest_autocomplete.getPlace();
         userDestLocation = dPlace.geometry.location;
         userDestAddress = dPlace.name + " " + dPlace.formatted_address;
-        var ride = new Ride(null, Meteor.userId() , Groups.findOne().id, null, true, 
-          userPickupLocation , userDestLocation, userPickupAddress , userDestAddress, Date.now());
-        console.log(ride);
-        ride.save(function(err, res) {
+
+        Meteor.call('requestRide', Groups.findOne().id, userPickupLocation, userDestLocation, userPickupAddress,
+          userDestAddress, function(err, res) {
           if (err) {
             alert(err.message);
           } else {
@@ -221,8 +229,7 @@ Template.riderDashboard.events({
             map.fitBounds(bounds);
           }
         });
-      }
-      else {
+      } else {
         IonPopup.alert({
           title : 'Invalid party size entered' ,
           template : 'Please input a valid number of people in your group to request a ride!' ,
