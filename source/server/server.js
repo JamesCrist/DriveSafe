@@ -58,6 +58,25 @@
 });
  **/
 
+Meteor.startup(function() {
+  Meteor.setInterval(function() {
+    var drivers = Drivers.find();
+    drivers.forEach(function(driver) {
+      // if the driver doesn't currently have a ride.
+      if (!driver.currentRide) {
+        var group = Groups.findOne(driver.group);
+        var queue = group.queue;
+        if (queue.length > 0) {
+          var nextRide = group.popRideFromQueue();
+          nextRide.assignTo(driver);
+          nextRide.save();
+        }
+      }
+    });
+  }, 1000);
+
+});
+
 Meteor.methods({
   /**
    * @summary Creates a new user account in the database.
