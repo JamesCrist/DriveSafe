@@ -1,0 +1,137 @@
+{
+  "format": "web-program-pre1",
+  "manifest": [
+    {
+      "path": "dfb70aa33f3b050c9005bdb702dfbd95e5623e53.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/dfb70aa33f3b050c9005bdb702dfbd95e5623e53.js",
+      "size": 758822,
+      "hash": "dfb70aa33f3b050c9005bdb702dfbd95e5623e53"
+    },
+    {
+      "path": "6cc799f11f40ea3178a2478c48c4dbe18c8d8160.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/6cc799f11f40ea3178a2478c48c4dbe18c8d8160.css?meteor_css_resource=true",
+      "size": 425019,
+      "hash": "6cc799f11f40ea3178a2478c48c4dbe18c8d8160"
+    },
+    {
+      "path": "packages/meteoric_ionicons-sass/fonts/ionicons.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/meteoric_ionicons-sass/fonts/ionicons.eot",
+      "size": 121036,
+      "hash": "72b24f245d6746f63000100742da9406ef850b01"
+    },
+    {
+      "path": "packages/meteoric_ionicons-sass/fonts/ionicons.svg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/meteoric_ionicons-sass/fonts/ionicons.svg",
+      "size": 334283,
+      "hash": "aa56b884945b32444dbcb649852c4a5a2b2d7aff"
+    },
+    {
+      "path": "packages/meteoric_ionicons-sass/fonts/ionicons.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/meteoric_ionicons-sass/fonts/ionicons.ttf",
+      "size": 188724,
+      "hash": "a7f729edc4624182c4274b40ec83f524459978ed"
+    },
+    {
+      "path": "packages/meteoric_ionicons-sass/fonts/ionicons.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/meteoric_ionicons-sass/fonts/ionicons.woff",
+      "size": 68060,
+      "hash": "9ba4bf64c6450f6726dc6542965e46db554f3290"
+    },
+    {
+      "path": "packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
+      "size": 20335,
+      "hash": "f3a9a3b609133c3d21d6b42abbf7f43bd111df72"
+    },
+    {
+      "path": "packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
+      "size": 41280,
+      "hash": "aafafdc09404c4aa4447d7e898a2183def9cc1b1"
+    },
+    {
+      "path": "packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
+      "size": 62926,
+      "hash": "66b1fc67e37d01ee45ca75c4eefb144d2dbe98fa"
+    },
+    {
+      "path": "packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mizzao_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
+      "size": 23320,
+      "hash": "22037a3455914e5662fa51a596677bdb329e2c5c"
+    },
+    {
+      "path": "app/images/DriveSafeCar.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/DriveSafeCar.png",
+      "size": 14280,
+      "hash": "0af28df586c4dfa41f887e9a4a02f7c8b22a2b80"
+    },
+    {
+      "path": "app/images/DriveSafeCarNoRides.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/DriveSafeCarNoRides.png",
+      "size": 19236,
+      "hash": "b0346871023f6c1f559ac56b0ba328480cb235f5"
+    },
+    {
+      "path": "app/images/car.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/car.png",
+      "size": 404,
+      "hash": "117e72e2311fae32eb266bdcf46eedd7db729b42"
+    },
+    {
+      "path": "app/images/person.png",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/images/person.png",
+      "size": 301,
+      "hash": "13772bd1cf5b1200d61d671969d7a455e236704d"
+    },
+    {
+      "path": "head.html",
+      "where": "internal",
+      "type": "head",
+      "hash": "6d3040319d5a4dc37952eaa258f6b9aa13915447"
+    }
+  ]
+}

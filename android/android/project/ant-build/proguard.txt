@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:6
+-keep class com.idoq0hrm1h6ha5yhytu9p.CordovaApp { <init>(...); }
+
+# view AndroidManifest.xml #generated:12
+-keep class com.tenforwardconsulting.cordova.bgloc.LocationUpdateService { <init>(...); }
+
