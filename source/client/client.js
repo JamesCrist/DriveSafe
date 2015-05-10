@@ -16,7 +16,7 @@ Meteor.startup(function () {
       // your server url to send locations to
       //   YOU MUST SET THIS TO YOUR SERVER'S URL
       //   (see the setup instructions below)
-      url: 'http://drivesafe.meteor.com/api/geolocation',
+      url: 'http://drivesafe.party/api/geolocation',
       params: {
         // will be sent in with 'location' in POST data (root level params)
         // these will be added automatically in setup()
@@ -31,9 +31,9 @@ Meteor.startup(function () {
       stationaryRadius: 20,
       distanceFilter: 30,
       // Android ONLY, customize the title of the notification
-      notificationTitle: 'Background GPS',
+      notificationTitle: 'DriveSafe Background GPS',
       // Android ONLY, customize the text of the notification
-      notificationText: 'ENABLED',
+      notificationText: 'enabled',
       //
       activityType: 'AutomotiveNavigation',
       // enable this hear sounds for background-geolocation life-cycle.
