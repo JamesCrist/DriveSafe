@@ -34,7 +34,7 @@ Template.driverDashboard.helpers({
    * */
   rideModel: function () {
     return new Ride(this.id, this.user, this.group, this.driver, this.pending, this.pickupLoc, this.destLoc,
-      this.pickupAdd, this.destAdd, this.createdAt);
+      this.pickupAdd, this.destAdd, this.createdAt, this.partySize, this.notes);
   },
   /**
    * @summary Gets the name of the user that requested the ride..
@@ -95,6 +95,12 @@ Template.driverDashboard.helpers({
   },
   getDestAddress: function () {
     return this.destAdd;
+  },
+  getPartySize: function() {
+	  return this.partySize;
+  },
+  getNotes: function() {
+	  return this.notes;
   },
   imageNotAdded : function () {
     return $('.noRides').length === 0;

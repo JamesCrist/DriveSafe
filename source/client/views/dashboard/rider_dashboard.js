@@ -52,9 +52,11 @@ Template.riderDashboard.rendered = function () {
       var pickupInput = document.getElementById('pickup-input');
       var destInput = document.getElementById('dest-input');
       var partySize= document.getElementById('party-size');
+      var notes= document.getElementById('notes');
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(pickupInput);
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(destInput);
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(partySize);
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(notes);
       dest_autocomplete = new google.maps.places.Autocomplete(destInput);
       pickup_autocomplete = new google.maps.places.Autocomplete(pickupInput);
       pickup_autocomplete.bindTo('bounds', map);
@@ -209,7 +211,11 @@ Template.riderDashboard.events({
    * */
   'click .requestRide': function () {
     //TODO CHECK IF LOCATIONS VALID
-    var userPickupLocation, userDestLocation, userPickupAddress, userDestAddress;
+    var userPickupLocation, userDestLocation, userPickupAddress, userDestAddress, userNotes;
+    userNotes = $.trim($("#notes").val());
+    if (userNotes.length == 0) (
+      userNotes = "N/A";
+    )
     var value = $.trim($("#pickup-input").val());
     if (value.length > 0) {
       var pPlace = pickup_autocomplete.getPlace();
@@ -222,14 +228,14 @@ Template.riderDashboard.events({
     var value1 = $.trim($("#dest-input").val());
     if(value1.length > 0) {
       var partySize= document.getElementById('party-size');
-      var value2 = $.trim($("#party-size").val());
-      if(value2.length > 0 && !isNaN(partySize.value)){
+      var partySizeVal = $.trim($("#party-size").val());
+      if(partySizeVal.length > 0 && !isNaN(partySize.value)){
         var dPlace = dest_autocomplete.getPlace();
         userDestLocation = dPlace.geometry.location;
         userDestAddress = dPlace.name + " " + dPlace.formatted_address;
 
         Meteor.call('requestRide', Groups.findOne().id, userPickupLocation, userDestLocation, userPickupAddress,
-          userDestAddress, function(err, res) {
+          userDestAddress, partySizeVal, userNotes, function(err, res) {
           if (err) {
             alert(err.message);
           } else {

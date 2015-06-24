@@ -7,7 +7,7 @@
 Rides = new Meteor.Collection("rides", {
   transform: function (doc) {
     return new Ride(doc._id, doc.user, doc.group, doc.driver, doc.pending, doc.pickupLoc,
-      doc.destLoc, doc.pickupAdd, doc.destAdd, doc.createdAt);
+      doc.destLoc, doc.pickupAdd, doc.destAdd, doc.createdAt, doc.partySize, doc.notes);
   }
 });
 
@@ -19,10 +19,12 @@ Rides = new Meteor.Collection("rides", {
  * @param pickupLoc
  * @param destLoc
  * @param createdAt
+ * @param partySize
+ * @param notes
  * @constructor
  */
 // A Ride class that takes a document in its constructor
-Ride = function (id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd, destAdd, createdAt) {
+Ride = function (id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd, destAdd, createdAt, partySize, notes) {
   this._id = id;
   if (!user) {
     user = Meteor.userId();
@@ -39,6 +41,8 @@ Ride = function (id, user, group, driver, pending, pickupLoc, destLoc, pickupAdd
   this._pickupAdd = pickupAdd;
   this._destAdd = destAdd;
   this._createdAt = createdAt;
+  this._partySize = partySize;
+  this._notes = notes;
 };
 
 /**
@@ -81,6 +85,12 @@ Ride.prototype = {
   get driver() {
     return this._driver;
   },
+  get partySize() {
+    return this._partySize;
+  },
+  get notes() {
+    return this._notes;
+  },
   set pickupLoc(value) {
     this._pickupLoc = value;
   },
@@ -99,6 +109,13 @@ Ride.prototype = {
   set destAdd(value) {
     this._destAdd = value;
   },
+  set partySize(value) {
+     this._partySize = value;
+  },
+  set notes(value) {
+    this._notes = value;
+  },
+  
 
   /**
    * @summary Saving functionality for the ride instance.
@@ -125,11 +142,14 @@ Ride.prototype = {
       destAdd: this.destAdd,
       pickupAdd: this.pickupAdd,
       pending: this.pending,
-      driver: this.driver
+      driver: this.driver,
+      partySize: this.partySize,
+      notes: this.notes
     };
 
     // If this ride already exists, then modify it.
     if (this.id) {
+
       Rides.update(this.id, {$set: doc}, callback);
       // Else, create a new ride.
     } else {

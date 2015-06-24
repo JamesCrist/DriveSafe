@@ -166,10 +166,10 @@ Meteor.methods({
     Email.send(options);
   } ,
   "requestRide" : function (groupId , userPickupLocation , userDestLocation , userPickupAddress ,
-                            userDestAddress , callback) {
+                            userDestAddress , partySize , notes , callback) {
     var ride = new Ride(null, this.userId , groupId, null, true,
       userPickupLocation , userDestLocation, userPickupAddress ,
-      userDestAddress, Date.now());
+      userDestAddress, Date.now(), partySize, notes);
 
     console.log(ride);
 
