@@ -214,7 +214,7 @@ Template.riderDashboard.events({
     var userPickupLocation, userDestLocation, userPickupAddress, userDestAddress, userNotes;
     userNotes = $.trim($("#notes").val());
     if (userNotes.length == 0) (
-      userNotes = "N/A";
+      userNotes = "N/A"
     )
     var value = $.trim($("#pickup-input").val());
     if (value.length > 0) {
