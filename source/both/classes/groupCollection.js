@@ -21,7 +21,7 @@
 // Create Groups MongoDB collection
 Groups = new Meteor.Collection("groups" , {
   transform : function (doc) {
-    return new Group(doc._id , doc.name , doc.admin , doc.members , doc.drivers , doc.queue , doc.key);
+    return new Group(doc._id , doc.name , doc.admin , doc.members , doc.drivers , doc.queue , doc.key, doc.showDriver);
   }
 });
 
@@ -35,10 +35,11 @@ Groups = new Meteor.Collection("groups" , {
  * @param drivers - An array of the current drivers of the group.
  * @param queue - An array of the current ride requests in the group.
  * @param key - The password to join the group.
+ * @param showDriver - Controls whether driver's location is shown to the group.
  * @constructor
  */
 // A Group class that takes a document in its constructor
-Group = function (id , name , admin , members , drivers , queue , key) {
+Group = function (id , name , admin , members , drivers , queue , key, showDriver) {
   this._id = id;
   this._name = name;
   // If admin is not defined, define admin to be the current user.
@@ -68,6 +69,11 @@ Group = function (id , name , admin , members , drivers , queue , key) {
   this._queue = queue;
   // Set key to DB ID
   this._key = key;
+  // Default to not showing driver to pending riders
+  if(typeof showDriver === "undefined") {
+    showDriver = 0;
+  } 
+  this._showDriver = showDriver;  
 };
 
 /**
@@ -99,6 +105,9 @@ Group.prototype = {
   get key() {
     return this._key;
   } ,
+  get showDriver() {
+     return this._showDriver;
+  } ,
   set admin(value) {
     this._admin = value;
   } ,
@@ -110,6 +119,9 @@ Group.prototype = {
   } ,
   set key(value) {
     this._key = value;
+  } ,
+  set showDriver(value) {
+      this._showDriver = value;
   } ,
 
   /**
@@ -144,7 +156,8 @@ Group.prototype = {
       members : this.members ,
       drivers : this.drivers ,
       queue : this.queue ,
-      key : this.key
+      key : this.key,
+      showDriver : this.showDriver
     };
 
     console.log(doc);
@@ -502,6 +515,24 @@ Group.prototype = {
     newQueue.splice(0 , newQueue.length);
     this._queue = newQueue;
     this.save(callback);
+  } ,
+  
+  /**
+   * @summary Change the state of showDriver
+   * @param 
+   * @function
+   * @memberOf Group
+   */
+  toggleShowDriver : function () {
+    var newVal
+    if(this.showDriver) {
+      newVal = 0;
+    }
+    else {
+      newVal = 1;
+    }
+    this._showDriver = newVal;
+    this.save();
   },
 };
 

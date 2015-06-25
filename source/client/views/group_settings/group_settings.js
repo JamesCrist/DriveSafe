@@ -1,3 +1,10 @@
+Template.GroupSettings.onRendered(function () {
+    // On page load determine if Show Drivers button should be pre-pressed
+	if (Groups.findOne().showDriver) {
+      document.getElementById("showDriver").className = "btn btn-primary active";
+    };
+  });
+
 Template.GroupSettings.helpers({
   /**
    * @summary Gets the current group.
@@ -122,5 +129,14 @@ Template.GroupSettings.events({
         });
       }
     });
+  },
+  'click #showDriver': function () {
+    Groups.findOne().toggleShowDriver();
+    if (Groups.findOne().showDriver == 0) {
+      document.getElementById("showDriver").className = "btn btn-primary";
+    }
+    else {
+      document.getElementById("showDriver").className = "btn btn-primary active";
+    }
   }
 });

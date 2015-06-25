@@ -97,10 +97,10 @@ Template.driverDashboard.helpers({
     return this.destAdd;
   },
   getPartySize: function() {
-	  return this.partySize;
+    return this.partySize;
   },
   getNotes: function() {
-	  return this.notes;
+    return this.notes;
   },
   imageNotAdded : function () {
     return $('.noRides').length === 0;

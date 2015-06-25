@@ -65,17 +65,20 @@ Template.riderDashboard.rendered = function () {
       var cursorsArray = [];
       // If user is in a group, then display all the drivers for that group also.
       // TODO: Change the cursor below after Drivers class is implemented.
-      cursorsArray.push({
-        cursor: Drivers.find({}),
-        transform: function (document) {
-          var user = Users.findOne(document.user);
-          return {
-            title: user.getName(),
-            position: new google.maps.LatLng(user.getLat(), user.getLng()),
-            icon: "/images/car.png"
-          };
-        }
-      });
+      console.log(Groups.findOne().showDriver);
+      if(Meteor.user().isAdmin() || Groups.findOne().showDriver) {
+        cursorsArray.push({
+          cursor: Drivers.find({}),
+            transform: function (document) {
+            var user = Users.findOne(document.user);
+            return {
+              title: user.getName(),
+              position: new google.maps.LatLng(user.getLat(), user.getLng()),
+              icon: "/images/car.png"
+            };
+            }
+        })
+      };
       var ride = Rides.findOne({user: Meteor.userId()});
       if(ride){
         pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
