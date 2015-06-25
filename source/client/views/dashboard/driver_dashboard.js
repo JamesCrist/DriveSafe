@@ -182,7 +182,6 @@ Template.driverDashboard.events({
         function () {
           // Do stuff here if opening is successful!
           $("#dest-navigation-button").remove();
-          $("#confirm-dropoff-button").show();
         },
         function (error) {
           // Do stuff here if error happens!
