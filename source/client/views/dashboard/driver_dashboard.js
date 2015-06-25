@@ -225,5 +225,20 @@ Template.driverDashboard.events({
         alert(err.message);
       }
     });
-  }
+  },
+  /**
+   * @summary Adds ride to current driver
+   * @locus Client
+   * @method click #take-ride
+   * @memberOf driverDashboard.events
+   * @function
+   * @param {Event} event
+   * @param {Meteor.template} template
+   * */
+ 'click #take-ride': function() {
+     console.log("something");
+    var driver = UI._templateInstance().data.driver;
+    this.assignTo(driver);
+    console.log(driver);
+   }
 });

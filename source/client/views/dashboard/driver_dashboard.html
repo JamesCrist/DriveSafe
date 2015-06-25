@@ -79,13 +79,23 @@
                                 <div class="list card">
                                     <div class="item">
                                         <h2>{{getRideUser}}</h2>
-                                        <h4>Pickup</h4>
+                                        <h3>Pickup</h3>
                                         {{#if isPickupAddress}}
                                             <h4>Their Current Location</h4>
                                         {{/if}}
                                         <h4>{{getPickupAddress}}</h4>
-                                        <h4>Destination</h4>
+                                        <h3>Destination</h3>
                                         <h4>{{getDestAddress}}</h4>
+                                        <h3>Party Size</h3>
+                                        <h4>{{getPartySize}}</h4>
+                                        <h3>Notes</h3>
+                                        <h4>{{getNotes}}</h4>
+                                    </div>
+                                    <div class="item item-body">
+                                        <button class="button button-outline button-positive navigation-button"
+                                                id="take-ride">
+                                            Take Ride
+                                        </button>
                                     </div>
                                     <div class="item tabs tabs-secondary tabs-icon-left">
                                         <div class="tab-item">
