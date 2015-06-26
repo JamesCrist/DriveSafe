@@ -50,15 +50,19 @@
                                 </div>
                                 <div class="item item-body">
                                     <span>
-                                        <button class="button button-outline button-positive navigation-button"
-                                                id="pickup-navigation-button">
-                                            Take Me To Pickup Location
-                                        </button>
-
-                                        <button class="button button-outline button-positive navigation-button"
-                                                id="dest-navigation-button" style="display:none;">
-                                            Take Me To Drop off Location
-                                        </button>
+                                        {{#if isPickupLoc}}
+                                            <button class="button button-outline button-positive navigation-button"
+                                                    id="pickup-navigation-button">
+                                                Take Me To Pickup Location
+                                            </button>
+                                        {{/if}}
+                                        
+                                        {{#if isDestLoc}}
+                                            <button class="button button-outline button-positive navigation-button"
+                                                    id="dest-navigation-button">
+                                                Take Me To Drop off Location
+                                            </button>
+                                        {{/if}}
 
                                         <button class="button button-outline button-positive navigation-button"
                                                 id="confirm-dropoff-button">

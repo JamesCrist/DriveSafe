@@ -87,6 +87,9 @@ Template.driverDashboard.helpers({
     console.log(this);
     return (!(this.pending) && (this.driver == driver));
   },
+  isPickupLoc: function () {
+    return (this.pickupLoc != undefined);
+  },
   getPickupAddress: function () {
     return this.pickupAdd;
   },
@@ -95,6 +98,9 @@ Template.driverDashboard.helpers({
   },
   getDestAddress: function () {
     return this.destAdd;
+  },
+  isDestLoc: function () {
+    return (this.destLoc != undefined)  
   },
   getPartySize: function() {
     return this.partySize;
@@ -153,7 +159,6 @@ Template.driverDashboard.events({
         function () {
           // Do stuff here if opening is successful!
           $("#pickup-navigation-button").remove();
-          $("#dest-navigation-button").show();
         },
         function (error) {
           // Do stuff here if error happens!
@@ -163,7 +168,6 @@ Template.driverDashboard.events({
       alert("This only works on phones!");
     }
     $("#pickup-navigation-button").remove();
-    $("#dest-navigation-button").show();
   },
   /**
    * @summary Launches navigation to the navigation location.

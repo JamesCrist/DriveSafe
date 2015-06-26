@@ -127,7 +127,7 @@ Ride.prototype = {
     if (!this.user) {
       throw new Meteor.Error("User is not defined!");
     }
-
+	/*
     if (!this.pickupLoc) {
       throw new Meteor.Error("Pickup location is not defined!");
     }
@@ -135,7 +135,7 @@ Ride.prototype = {
     if (!this.destLoc) {
       throw new Meteor.Error("Destination location is not defined!");
     }
-
+	*/
     var doc = {
       pickupLoc: this.pickupLoc,
       destLoc: this.destLoc,

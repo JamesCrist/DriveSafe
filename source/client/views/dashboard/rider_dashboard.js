@@ -81,15 +81,20 @@ Template.riderDashboard.rendered = function () {
       };
       var ride = Rides.findOne({user: Meteor.userId()});
       if(ride){
-        pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
-        destMarker.setPosition(new google.maps.LatLng(ride.destLoc.A, ride.destLoc.F));
         var bounds = new google.maps.LatLngBounds();
-        bounds.extend(pickupMarker.getPosition());
-        bounds.extend(destMarker.getPosition());
-        map.fitBounds(bounds);
-        pickupMarker.setVisible(true);
-        destMarker.setVisible(true);
-
+        if (ride.pickupLoc != 'undefined') {
+          pickupMarker.setPosition(new google.maps.LatLng(ride.pickupLoc.A, ride.pickupLoc.F));
+          bounds.extend(pickupMarker.getPosition());
+          pickupMarker.setVisible(true);
+        }
+        if (ride.destLoc != 'undefined') {
+          destMarker.setPosition(new google.maps.LatLng(ride.destLoc.A, ride.destLoc.F));
+          bounds.extend(destMarker.getPosition());
+          destMarker.setVisible(true);
+        }
+        if (ride.pickupLoc != 'undefined' || ride.destLoc != 'undefined') {
+          map.fitBounds(bounds);
+        }
       }
       cursorsArray.push({
         cursor: Users.find(Meteor.userId()),
@@ -222,8 +227,14 @@ Template.riderDashboard.events({
     var value = $.trim($("#pickup-input").val());
     if (value.length > 0) {
       var pPlace = pickup_autocomplete.getPlace();
-      userPickupLocation = pPlace.geometry.location;
-      userPickupAddress = pPlace.name + " " + pPlace.formatted_address;
+      if (typeof pPlace === 'undefined') {
+        userPickupLocation = pPlace;
+        userPickupAddress = value;
+      } 
+      else {
+        userPickupLocation = pPlace.geometry.location;
+        userPickupAddress = pPlace.name + " " + pPlace.formatted_address;
+      }
     }
     else {
       userPickupLocation = new google.maps.LatLng(Meteor.user().getLat(), Meteor.user().getLng());
@@ -234,8 +245,15 @@ Template.riderDashboard.events({
       var partySizeVal = $.trim($("#party-size").val());
       if(partySizeVal.length > 0 && !isNaN(partySize.value)){
         var dPlace = dest_autocomplete.getPlace();
-        userDestLocation = dPlace.geometry.location;
-        userDestAddress = dPlace.name + " " + dPlace.formatted_address;
+        if (typeof dPlace === 'undefined') {
+          userDestLocation = dPlace;
+          userDestAddress = value1;
+        } 
+        else {
+          userDestLocation = dPlace.geometry.location;
+          userDestAddress = dPlace.name + " " + dPlace.formatted_address;
+        }
+        
 
         Meteor.call('requestRide', Groups.findOne().id, userPickupLocation, userDestLocation, userPickupAddress,
           userDestAddress, partySizeVal, userNotes, function(err, res) {
